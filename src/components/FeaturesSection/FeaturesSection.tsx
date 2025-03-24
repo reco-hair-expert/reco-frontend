@@ -28,7 +28,7 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
 
         <div className={styles.featuresImgContainer}>
           <Image
-            src="/images/sections/features/recoil-desc.png"
+            src="/images/sections/features/recoil.png"
             alt="recoil"
             fill
             style={{ objectFit: "contain" }}
