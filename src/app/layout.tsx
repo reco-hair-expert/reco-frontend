@@ -1,4 +1,6 @@
 import Header from "@/components/Header/Header"
+import "@/styles/reset.scss"
+import Footer from "@/components/Footer/Footer"
 
 export default function DashboardLayout({
   children,
@@ -10,6 +12,7 @@ export default function DashboardLayout({
       <body>
         <Header />
         <main>{children}</main>
+        <Footer />
       </body>
     </html>
   )
