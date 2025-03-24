@@ -6,7 +6,7 @@ import NavButtons from "@/components/NavButtons/NavButton";
 import NavBar from "../NavBar/NavBar";
 import Link from "next/link";
 import CallButton from "../CallButton/CallButton";
-// import CartButton from "../CartButton/CartButton";
+import CartButton from "../CartButton/CartButton";
 import { phoneNumber } from "@/constants/contacts";
 import BurgerBtn from "../BurgerBtn/BurgerBtn";
 
@@ -38,7 +38,7 @@ const Header = () => {
               <CallButton phoneNumber={phoneNumber} />
             </Link>
             <Link href="/cart" className={styles.cart_btn}>
-              {/* <CartButton /> */}
+              <CartButton cart={[]} />
             </Link>
           </div>
 

@@ -1,19 +1,22 @@
-import Header from "@/components/Header/Header"
-import "@/styles/reset.scss"
-import Footer from "@/components/Footer/Footer"
+import Header from "@/components/Header/Header";
+import Footer from "@/components/Footer/Footer";
+import { CartProvider } from "@/context/CartContext"; 
+import "@/styles/reset.scss";
 
 export default function DashboardLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main>{children}</main>
-        <Footer />
+        <CartProvider> 
+          <Header />
+          <main>{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
-  )
+  );
 }
