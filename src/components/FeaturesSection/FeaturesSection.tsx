@@ -3,7 +3,7 @@ import { FeaturesSectionProps } from "./types/FeaturesSection.types";
 import Image from "next/image";
 import styles from "./FeaturesSection.module.scss";
 // import HighlightText from "../HighLightText/HighLightText";
-// import BackgroundCircles from "../BackgroundCircles/BackgroundCircles";
+import BackgroundCircles from "../BackgroundCircles/BackgroundCircles";
 
 const FeaturesSection = ({ className }: FeaturesSectionProps) => {
   const classes = classNames(styles.featuresSection, className);
@@ -11,7 +11,7 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
   return (
     <section className="container">
       <div className={classes}>
-        {/* <BackgroundCircles className={styles.backgroundCircles} /> */}
+        <BackgroundCircles className={styles.backgroundCircles} />
         <h2>Особливості продукту</h2>
 
         <div className={styles.featuresLeftSide}>
