@@ -12,19 +12,19 @@ const SocialMediaIcon: React.FC<SocialMediaIconProps> = ({
 
   switch (platform) {
     case "instagram":
-      iconSrc = "images/icon/instagram.svg";
+      iconSrc = "/icon/instagram.svg";
       link = "https://www.instagram.com";
       break;
     case "telegram":
-      iconSrc = "images/icon/telegram.svg";
+      iconSrc = "/icon/telegram.svg";
       link = "https://t.me";
       break;
     case "viber":
-      iconSrc = "images/icon/viber.svg";
+      iconSrc = "/icon/viber.svg";
       link = "https://www.viber.com";
       break;
     default:
-      iconSrc = "images/icon/instagram.svg";
+      iconSrc = "/icon/instagram.svg";
       link = "https://www.instagram.com";
   }
 

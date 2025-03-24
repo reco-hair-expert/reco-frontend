@@ -1,19 +1,31 @@
-import { FC } from "react";
+"use client";
+
 import { CartButtonProps } from "./types/CartButton.types";
 import styles from "./CartButton.module.scss";
 import classNames from "classnames";
 import Icon from "@/components/Icon/Icon";
-import { useCartContext } from "@/hooks/useCartContext";
+import { useContext, useMemo, useCallback } from "react";
+import { CartContext } from "@/context/CartContext";
+import { CartItem } from "@/config/types";
 
-const CartButton: FC<CartButtonProps> = ({ className, onClick = () => {} }) => {
-  const { cart } = useCartContext();
-  const totalItems = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+const CartButton = ({ className, onClick }: CartButtonProps) => {
+  const { cartItems } = useContext(CartContext); 
+
+  const totalItems = useMemo(
+    () => cartItems.reduce((sum: number, item: CartItem) => sum + item.quantity, 0),
+    [cartItems]
+  );
+
+  const handleClick = useCallback(() => {
+    if (onClick) onClick();
+  }, [onClick]);
+
   const classes = classNames(styles.button, className, {
-    [styles.disabled]: totalItems === 0
+    [styles.disabled]: totalItems === 0,
   });
 
   return (
-    <button className={classes} onClick={onClick} disabled={totalItems === 0}>
+    <button className={classes} onClick={handleClick} disabled={totalItems === 0}>
       <Icon name="icon-cart" stroke="black" size={25} className={styles.icon} />
       {totalItems > 0 && <span className={styles.badge}>{totalItems}</span>}
     </button>
