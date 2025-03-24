@@ -52,7 +52,7 @@
 // Common style
 .featuresSection {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   font-size: 16px;
@@ -139,41 +139,23 @@
   }
 }
 
-// Image container
-
-.featuresImgContainerWrapper {
-  @media (max-width: $breakpoint-mobile) {
-    width: 100vw;
-    overflow: hidden;
-  }
-}
-
 .featuresImgContainer {
-  &:hover .featuresImg {
-    transform: scale(2.3);
-  }
+  position: absolute;
 
-  @media (max-width: $breakpoint-mobile) {
-    display: block;
-    height: 400px;
-  }
-}
-
-.featuresImg {
-  transform: scale(2.2);
-  pointer-events: none;
-  transition: transform $transition-speed $transition-style;
-  left: 32px;
+  aspect-ratio: 383 / 457;
+  left: 17%;
+  height: 100%;
 
   @media (max-width: $breakpoint-tablet) {
-    left: 24px;
+    left: 13%;
   }
 
   @media (max-width: $breakpoint-mobile) {
     position: relative;
-    top: 50%;
-    transform: translateY(-50%);
     left: 30%;
+    top: 50%;
+    transform: -translateY(50%);
+    height: 400px;
   }
 }
 
@@ -272,7 +254,7 @@
         url(/images/sections/features/bottom-field-mob-2x.png) type("image/png")
           2x
       );
-      bottom: 50px;
+      bottom: 60px;
       right: 0;
       width: 291px;
       height: 160px;
