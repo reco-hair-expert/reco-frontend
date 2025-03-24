@@ -8,13 +8,13 @@ import FeaturesSection from "@/components/FeaturesSection/FeaturesSection";
 
 const MainPage = () => {
   return (
-    <main>
+    <>
       {/* <HeroSection /> */}
       <FeaturesSection />
       {/* <ProductCard products={products} /> */}
       {/* <Insta /> */}
       <FeedbackSection />
-    </main>
+    </>
   );
 };
 
