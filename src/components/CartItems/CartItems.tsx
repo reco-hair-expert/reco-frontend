@@ -10,6 +10,7 @@ const CartItems = () => {
     product: Product;
     size?: string;
     quantity?: number;
+    id?:number;
   }
 
   const { cartItems, removeFromCart, updateCartItemQuantity, addToCart } =
