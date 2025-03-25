@@ -5,13 +5,13 @@ import "@/styles/index.scss";
 
 export default function SummaryPage() {
   return (
-    <main className="container">
+    <section className="container">
       <div className={styles.summaryPage}>
         <div className={styles.summaryContainer}>
           <SummaryForm />
           <SummarySection />
         </div>
       </div>
-    </main>
+    </section>
   );
 }
