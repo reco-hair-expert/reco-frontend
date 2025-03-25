@@ -2,7 +2,7 @@ import classNames from "classnames";
 import { FeaturesSectionProps } from "./types/FeaturesSection.types";
 import Image from "next/image";
 import styles from "./FeaturesSection.module.scss";
-// import HighlightText from "../HighLightText/HighLightText";
+import HighlightText from "../HighLightText/HighLightText";
 import BackgroundCircles from "../BackgroundCircles/BackgroundCircles";
 
 const FeaturesSection = ({ className }: FeaturesSectionProps) => {
@@ -18,7 +18,7 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
           <article className={styles.featuresArticleLeft}>
             <h3>Ефективність</h3>
             <p className={styles.featuresArticleLeftText}>
-              {/* <HighlightText>Ефективність </HighlightText> */}
+              <HighlightText>Ефективність </HighlightText>
               навіть для волосся з 5 ступенем пошкодження
             </p>
           </article>
@@ -40,8 +40,8 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
             <h3>Простота у використанні</h3>
             <p className={styles.featuresArticleRightTopText}>
               Простота у використанні: ідеально підходить як{" "}
-              {/* <HighlightText>для професійних майстрів</HighlightText>, так і
-              <HighlightText> для домашнього догляду</HighlightText> */}
+              <HighlightText>для професійних майстрів</HighlightText>, так і
+              <HighlightText> для домашнього догляду</HighlightText>
             </p>
           </article>
 
@@ -49,9 +49,9 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
             <h3>Комплексний підхід</h3>
             <p className={styles.featuresArticleRightBottomText}>
               Комплексний підхід:
-              {/* <HighlightText>RECO</HighlightText> */}
+              <HighlightText>RECO</HighlightText>
               не лише відновлює, але й забезпечує{" "}
-              {/* <HighlightText>захист, зволоження та живлення</HighlightText>{" "} */}
+              <HighlightText>захист, зволоження та живлення</HighlightText>{" "}
               завдяки лінійці продуктів
             </p>
           </article>

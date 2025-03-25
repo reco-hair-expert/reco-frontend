@@ -9,10 +9,11 @@ import { CartContext } from "@/context/CartContext";
 import { CartItem } from "@/config/types";
 
 const CartButton = ({ className, onClick }: CartButtonProps) => {
-  const { cartItems } = useContext(CartContext); 
+  const { cartItems } = useContext(CartContext);
 
   const totalItems = useMemo(
-    () => cartItems.reduce((sum: number, item: CartItem) => sum + item.quantity, 0),
+    () =>
+      cartItems.reduce((sum: number, item: CartItem) => sum + item.quantity, 0),
     [cartItems]
   );
 
@@ -21,11 +22,15 @@ const CartButton = ({ className, onClick }: CartButtonProps) => {
   }, [onClick]);
 
   const classes = classNames(styles.button, className, {
-    [styles.disabled]: totalItems === 0,
+    [styles.disabled]: totalItems === 0
   });
 
   return (
-    <button className={classes} onClick={handleClick} disabled={totalItems === 0}>
+    <button
+      className={classes}
+      onClick={handleClick}
+      disabled={totalItems === 0}
+    >
       <Icon name="icon-cart" stroke="black" size={25} className={styles.icon} />
       {totalItems > 0 && <span className={styles.badge}>{totalItems}</span>}
     </button>

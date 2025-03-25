@@ -13,7 +13,6 @@ const useDeviceDetection = () => {
       setIsTablet(window.innerWidth > 768 && window.innerWidth <= 1276);
     };
 
-    // Устанавливаем начальное состояние при монтировании
     handleResize();
 
     window.addEventListener("resize", handleResize);

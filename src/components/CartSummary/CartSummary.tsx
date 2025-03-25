@@ -1,26 +1,27 @@
-"use client"; 
+"use client";
 
 import { useMemo } from "react";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import styles from "./CartSummary.module.scss";
 import { useCart } from "@/context/CartContext";
-import { CartItem } from "@/config/types"; 
+import { CartItem } from "@/config/types";
 
 const CartSummary = () => {
   const { cartItems } = useCart();
-  const router = useRouter(); 
+  const router = useRouter();
 
   const total = useMemo(() => {
     return cartItems.reduce((acc: number, item: CartItem) => {
-      const price: number = item.size && item.product.sizes[item.size] !== undefined 
-        ? item.product.sizes[item.size] ?? 0
-        : item.product.price ?? 0;
+      const price: number =
+        item.size && item.product.sizes[item.size] !== undefined
+          ? (item.product.sizes[item.size] ?? 0)
+          : (item.product.price ?? 0);
       return acc + price * (item.quantity || 1);
     }, 0);
   }, [cartItems]);
 
   const handleContinueShopping = () => {
-    router.push("/catalog"); 
+    router.push("/catalog");
   };
 
   return (
@@ -59,10 +60,16 @@ const CartSummary = () => {
           <p>₴{total}</p>
         </div>
       </div>
-      <button className={styles.checkoutButton} onClick={() => router.push("/summary")}>
+      <button
+        className={styles.checkoutButton}
+        onClick={() => router.push("/summary")}
+      >
         ОФОРМИТИ ЗАМОВЛЕННЯ
       </button>
-      <button className={styles.continueShoppingButton} onClick={handleContinueShopping}>
+      <button
+        className={styles.continueShoppingButton}
+        onClick={handleContinueShopping}
+      >
         ПРОДОВЖИТИ ПОКУПКИ
       </button>
     </section>
