@@ -1,6 +1,5 @@
 'use client'
-
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
 import styles from "./ProductCard.module.scss";
@@ -8,7 +7,6 @@ import HighlightText from "../HighLightText/HighLightText";
 import Button from "../Button/Button";
 import ButtonArrow from "../ArowButton/ArowButton";
 import Icon from "../Icon/Icon";
-import Carousel from "react-spring-3d-carousel";
 
 interface ProductCardProps {
   products: Product[];
@@ -20,7 +18,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
-  const [offsetRadius, setOffsetRadius] = useState(2);
   const { addToCart } = useCartContext();
   const currentProduct = products[currentIndex];
 
@@ -28,9 +25,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
 
   useEffect(() => {
     const handleResize = () => {
-      const width = window.innerWidth;
-      setIsMobile(width <= 768);
-      setOffsetRadius(width >= 768 && width <= 1225 ? 4 : 2);
+      setIsMobile(window.innerWidth <= 768);
     };
 
     handleResize();
@@ -39,10 +34,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleNext = () =>
+  const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % products.length);
-  const handlePrev = () =>
+  };
+
+  const handlePrev = () => {
     setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+  };
+
   const handleSizeChange = (size: string) => setSelectedSize(size);
 
   const handleAddToCart = () => {
@@ -63,77 +62,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(currentProduct, selectedSize);
   };
-
-  const slides = useMemo(
-    () =>
-      products.map((product, index) => ({
-        key: index,
-        content: (
-          <div
-            className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
-            key={index}
-          >
-            <img
-              src={product.photo}
-              alt={product.name}
-              className={styles.image}
-            />
-            {product.isNew && <div className={styles.newBadge}>NEW</div>}
-            {product.badgeInfo && (
-              <div className={styles.badgeInfo}>
-                <Icon
-                  name="icon-waves"
-                  size={isMobile ? 24 : 28}
-                  fill="none"
-                  stroke={styles.yellowColor}
-                />
-              </div>
-            )}
-            {index === currentIndex && (
-              <div className={styles.buttonPlace}>
-                {isMobile ? (
-                  <Button
-                    size="m"
-                    variant="primary"
-                    className={styles.addToCart}
-                    onClick={handleAddToCart}
-                    disabled={!selectedSize}
-                  >
-                    ДОДАТИ В КОШИК
-                  </Button>
-                ) : (
-                  <Button
-                    variant="secondary"
-                    size="l"
-                    className={styles.moreButton}
-                  >
-                    <div className={styles.iconContainer}>
-                      <Icon
-                        name="icon-arrow-up-right2"
-                        size={24}
-                        fill="white"
-                        stroke="none"
-                      />
-                    </div>
-                    <span className={styles.moreButtonText}>
-                      БІЛЬШЕ ТОВАРІВ
-                    </span>
-                  </Button>
-                )}
-              </div>
-            )}
-          </div>
-        )
-      })),
-    [products, currentIndex, selectedSize, isMobile]
-  );
-
-  // const swipeHandlers = useSwipeable({
-  //   onSwipedLeft: () => isMobile && handleNext(),
-  //   onSwipedRight: () => isMobile && handlePrev(),
-  //   preventScrollOnSwipe: true,
-  //   trackMouse: true
-  // });
 
   const renderSizes = () => (
     <div className={styles.sizes}>
@@ -175,13 +103,69 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     <section className="container">
       <div className={styles.card}>
         <div className={styles.carousel}>
-          <Carousel
-            slides={slides}
-            goToSlide={currentIndex}
-            offsetRadius={offsetRadius}
-            showNavigation={false}
-            animationConfig={{ tension: 100, friction: 20 }}
-          />
+          <div className={styles.slidesContainer}>
+            {products.map((product, index) => (
+              <div
+                key={product.id}
+                className={`${styles.slide} ${index === currentIndex ? styles.active : ''}`}
+                style={{
+                  transform: `translateX(${(index - currentIndex) * 100}%)`,
+                  opacity: index === currentIndex ? 1 : 0.5
+                }}
+              >
+                <img
+                  src={product.photo}
+                  alt={product.name}
+                  className={styles.image}
+                />
+                {product.isNew && <div className={styles.newBadge}>NEW</div>}
+                {product.badgeInfo && (
+                  <div className={styles.badgeInfo}>
+                    <Icon
+                      name="icon-waves"
+                      size={isMobile ? 24 : 28}
+                      fill="none"
+                      stroke={styles.yellowColor}
+                    />
+                  </div>
+                )}
+                {index === currentIndex && (
+                  <div className={styles.buttonPlace}>
+                    {isMobile ? (
+                      <Button
+                        size="m"
+                        variant="primary"
+                        className={styles.addToCart}
+                        onClick={handleAddToCart}
+                        disabled={!selectedSize}
+                      >
+                        ДОДАТИ В КОШИК
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="secondary"
+                        size="l"
+                        className={styles.moreButton}
+                      >
+                        <div className={styles.iconContainer}>
+                          <Icon
+                            name="icon-arrow-up-right2"
+                            size={24}
+                            fill="white"
+                            stroke="none"
+                          />
+                        </div>
+                        <span className={styles.moreButtonText}>
+                          БІЛЬШЕ ТОВАРІВ
+                        </span>
+                      </Button>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          
           <ButtonArrow
             icon="left"
             onClick={handlePrev}
@@ -193,6 +177,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
             className={styles.arrowRight}
           />
         </div>
+        
         <div className={styles.info}>
           <HighlightText>
             <h2>{currentProduct.name}</h2>
