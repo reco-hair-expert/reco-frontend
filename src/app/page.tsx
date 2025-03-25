@@ -3,8 +3,8 @@ import HeroSection from "@/components/HeroSection/HeroSection";
 import FeedbackSection from "@/components/FeedbackSection/FeedbackSection";
 import FeaturesSection from "@/components/FeaturesSection/FeaturesSection";
 import Insta from "@/components/Insta/Insta";
-// import { ProductCard } from "@/components/ProductCard/ProductCard";
-// import { products } from "@/constants/products";
+import { ProductCard } from "@/components/ProductCard/ProductCard";
+import { products } from "@/constants/products";
 
 const MainPage = () => {
   return (
@@ -16,7 +16,7 @@ const MainPage = () => {
       </Head>
       <HeroSection />
       <FeaturesSection />
-      {/* <ProductCard products={products} /> */}
+      <ProductCard products={products} />
       <Insta />
       <FeedbackSection />
     </>

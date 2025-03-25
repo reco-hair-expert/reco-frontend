@@ -1,11 +1,13 @@
-export const products = [
+import { Product } from "@/types/types";
+
+export const products: Product[] = [
   {
     id: 1,
     name: "RECO",
     photo: "/images/logo/logo-1x.png",
     volume: "Об'єм",
     description:
-      "Інноваційний реконструктор для відновлення сильно пошкодженого волосся. Відновлює дисульфідні та водневі зв’язки, зміцнює структуру, зменшує ламкість. Кремово-масляна структура робить продукт економічним у використанні. Рекомендовано проводити процедуру раз на 3-4 тижні.",
+      "Інноваційний реконструктор для відновлення сильно пошкодженого волосся...",
     sizes: {
       "15 ML": 600,
       "30 ML": 1200,
@@ -13,7 +15,9 @@ export const products = [
       "100 ML": 3240,
       "200 ML": 6000
     },
-    price: 600
+    price: 600,
+    isNew: true,
+    badgeInfo: true
   },
   {
     id: 2,
@@ -28,7 +32,9 @@ export const products = [
       "50 ML": 2160,
       "100 ML": 3960
     },
-    price: 720
+    price: 720,
+    isNew: true,
+    badgeInfo: true
   },
   {
     id: 3,
@@ -41,7 +47,9 @@ export const products = [
       "100 ML": 1560,
       "250 ML": 3120
     },
-    price: 1560
+    price: 1560,
+    isNew: true,
+    badgeInfo: true
   },
   {
     id: 4,
@@ -54,7 +62,9 @@ export const products = [
       "15 ML": 720,
       "30 ML": 1440
     },
-    price: 720
+    price: 720,
+    isNew: true,
+    badgeInfo: true
   },
   {
     id: 5,
@@ -67,7 +77,9 @@ export const products = [
       "100 ML": 1440,
       "250 ML": 2880
     },
-    price: 1440
+    price: 1440,
+    isNew: true,
+    badgeInfo: true
   },
   {
     id: 6,
@@ -80,7 +92,9 @@ export const products = [
       "100 ML": 1080,
       "250 ML": 2160
     },
-    price: 1080
+    price: 1080,
+    isNew: true,
+    badgeInfo: true
   },
   {
     id: 7,
@@ -94,7 +108,9 @@ export const products = [
       "100 ML": 1140,
       "200 ML": 2160
     },
-    price: 600
+    price: 600,
+    isNew: true,
+    badgeInfo: true
   },
   {
     id: 8,
@@ -107,6 +123,8 @@ export const products = [
       "100 ML": 450,
       "250 ML": 900
     },
-    price: 450
+    price: 450,
+    isNew: true,
+    badgeInfo: true
   }
 ];

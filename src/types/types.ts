@@ -1,8 +1,8 @@
 import { StaticImageData } from "next/image";
 
 export type Product = {
-  badgeInfo: string;
-  isNew: string;
+  badgeInfo: boolean;
+  isNew: boolean;
   price: number;
   volume: string;
   id: number;
