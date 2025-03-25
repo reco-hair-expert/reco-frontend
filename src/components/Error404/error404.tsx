@@ -1,7 +1,7 @@
 import styles from "./error404.module.scss";
-import Link from "next/link"; 
+import Link from "next/link";
 import Icon from "@/components/Icon/Icon";
-import Image from "next/image"; 
+import Image from "next/image";
 import BackgroundCircles from "../BackgroundCircles/BackgroundCircles";
 
 const Error404 = () => {

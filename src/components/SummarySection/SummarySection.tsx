@@ -7,8 +7,13 @@ import styles from "./SummarySection.module.scss";
 import { CartItem } from "@/config/types";
 
 const SummarySection = () => {
-  const { cartItems, removeFromCart, updateCartItemQuantity, addToCart, cartTotal } =
-    useCart();
+  const {
+    cartItems,
+    removeFromCart,
+    updateCartItemQuantity,
+    addToCart,
+    cartTotal
+  } = useCart();
 
   const handleIncreaseQuantity = (item: CartItem) => {
     addToCart(item.product, item.size || "");
@@ -16,7 +21,11 @@ const SummarySection = () => {
 
   const handleDecreaseQuantity = (item: CartItem) => {
     if (item.quantity > 1) {
-      updateCartItemQuantity(item.product.id, item.quantity - 1, item.size || "");
+      updateCartItemQuantity(
+        item.product.id,
+        item.quantity - 1,
+        item.size || ""
+      );
     }
   };
 
@@ -29,9 +38,18 @@ const SummarySection = () => {
       ) : (
         <ul className={styles.cartList}>
           {cartItems.map((item) => (
-            <li key={`${item.product.id}-${item.size || "default"}`} className={styles.cartItem}>
+            <li
+              key={`${item.product.id}-${item.size || "default"}`}
+              className={styles.cartItem}
+            >
               <div className={styles.imageContainer}>
-                <Image src={item.product.photo} alt={item.product.name} width={200} height={200} className={styles.image} />
+                <Image
+                  src={item.product.photo}
+                  alt={item.product.name}
+                  width={200}
+                  height={200}
+                  className={styles.image}
+                />
               </div>
               <div className={styles.infoContainer}>
                 <HighlightText>
@@ -42,19 +60,37 @@ const SummarySection = () => {
                     <>
                       <p>{item.size}</p>
                       <p className={styles.price}>
-                        {item.product.sizes?.[item.size] || item.product.price} грн
+                        {item.product.sizes?.[item.size] || item.product.price}{" "}
+                        грн
                       </p>
                     </>
                   )}
                   <div className={styles.quantityControl}>
-                    <button onClick={() => handleDecreaseQuantity(item)} className={styles.quantityButton}>-</button>
+                    <button
+                      onClick={() => handleDecreaseQuantity(item)}
+                      className={styles.quantityButton}
+                    >
+                      -
+                    </button>
                     <p>{item.quantity}</p>
-                    <button onClick={() => handleIncreaseQuantity(item)} className={styles.quantityButton}>+</button>
+                    <button
+                      onClick={() => handleIncreaseQuantity(item)}
+                      className={styles.quantityButton}
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
               </div>
               <div className={styles.removeContainer}>
-                <button onClick={() => removeFromCart(item.product.id, item.size || "")} className={styles.removeItem}>X</button>
+                <button
+                  onClick={() =>
+                    removeFromCart(item.product.id, item.size || "")
+                  }
+                  className={styles.removeItem}
+                >
+                  X
+                </button>
               </div>
             </li>
           ))}
@@ -79,7 +115,10 @@ const SummarySection = () => {
       </div>
 
       <div className={styles.buttonPlaceholder}>
-        <button className={styles.checkoutButton} onClick={() => alert("Замовлення підтверджено!")}>
+        <button
+          className={styles.checkoutButton}
+          onClick={() => alert("Замовлення підтверджено!")}
+        >
           Підтвердити замовлення
         </button>
       </div>

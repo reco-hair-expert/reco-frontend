@@ -1,5 +1,6 @@
-'use client'
+"use client";
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
 import styles from "./ProductCard.module.scss";
@@ -13,26 +14,22 @@ interface ProductCardProps {
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
-  if (!products?.length) return <div>Продукти не знайдені.</div>;
-
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
   const { addToCart } = useCartContext();
-  const currentProduct = products[currentIndex];
 
   useEffect(() => setSelectedSize(null), [currentIndex]);
-
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
     handleResize();
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  if (!products?.length) return <div>Продукти не знайдені.</div>;
+
+  const currentProduct = products[currentIndex];
 
   const handleNext = () => {
     setCurrentIndex((prev) => (prev + 1) % products.length);
@@ -60,7 +57,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
 
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
-    addToCart(currentProduct, selectedSize);
+    addToCart(
+      {
+        ...currentProduct,
+        photo:
+          typeof currentProduct.photo === "string" ? currentProduct.photo : ""
+      },
+      selectedSize
+    );
   };
 
   const renderSizes = () => (
@@ -107,16 +111,19 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
             {products.map((product, index) => (
               <div
                 key={product.id}
-                className={`${styles.slide} ${index === currentIndex ? styles.active : ''}`}
+                className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
                 style={{
                   transform: `translateX(${(index - currentIndex) * 100}%)`,
                   opacity: index === currentIndex ? 1 : 0.5
                 }}
               >
-                <img
+                <Image
                   src={product.photo}
                   alt={product.name}
                   className={styles.image}
+                  width={500}
+                  height={500}
+                  priority={index === currentIndex}
                 />
                 {product.isNew && <div className={styles.newBadge}>NEW</div>}
                 {product.badgeInfo && (
@@ -165,7 +172,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
               </div>
             ))}
           </div>
-          
+
           <ButtonArrow
             icon="left"
             onClick={handlePrev}
@@ -177,7 +184,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
             className={styles.arrowRight}
           />
         </div>
-        
+
         <div className={styles.info}>
           <HighlightText>
             <h2>{currentProduct.name}</h2>

@@ -42,10 +42,11 @@ const BurgerBtn = () => {
         <span></span>
         <span></span>
       </button>
-      {isClient && createPortal(
-        <ModalMenu isOpen={modalIsOpen} onClick={handleClick} />,
-        document.body
-      )}
+      {isClient &&
+        createPortal(
+          <ModalMenu isOpen={modalIsOpen} onClick={handleClick} />,
+          document.body
+        )}
     </>
   );
 };
