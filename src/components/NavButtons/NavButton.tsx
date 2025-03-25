@@ -1,5 +1,5 @@
 import { FC } from "react";
-import Link  from "next/link";
+import Link from "next/link";
 import Button from "../Button/Button";
 import styles from "./NavButtons.module.scss";
 import { NavButtonsProps } from "./types/NavButton.types";

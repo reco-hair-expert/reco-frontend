@@ -1,6 +1,6 @@
 import styles from "./Header.module.scss";
 import "@/styles/index.scss";
-import Image from "next/image";  
+import Image from "next/image";
 import { navigationButtons } from "@/constants/navigationButtons";
 import NavButtons from "@/components/NavButtons/NavButton";
 import NavBar from "../NavBar/NavBar";
@@ -16,11 +16,11 @@ const Header = () => {
       <div className="container">
         <div className={styles.content}>
           <Link href="/" className={styles.logo}>
-          <Image
-              src="/images/logo/logo-1x.png"  // Путь к изображению
+            <Image
+              src="/images/logo/logo-1x.png" // Путь к изображению
               alt="Логотип компании"
-              width={64}  // Указываем ширину
-              height={64}  // Указываем высоту
+              width={64} // Указываем ширину
+              height={64} // Указываем высоту
               sizes="(max-width: 768px) 48px, 48px" // Указываем размер в зависимости от ширины экрана
             />
           </Link>
@@ -42,7 +42,7 @@ const Header = () => {
             </Link>
           </div>
 
-          <BurgerBtn /> 
+          <BurgerBtn />
         </div>
       </div>
     </header>

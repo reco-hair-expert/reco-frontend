@@ -2,7 +2,7 @@ import { FooterButton } from "./types/FooterLink.types";
 import React from "react";
 import classNames from "classnames";
 import styles from "./FooterLink.module.scss";
-import Link  from "next/link"; 
+import Link from "next/link";
 
 const footerButtons: FooterButton[] = [
   { title: "Каталог", link: "/" },

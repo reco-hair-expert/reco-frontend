@@ -1,7 +1,7 @@
-"use client"
-import { Product } from "@/config/types";  
-import { useCart } from "@/context/CartContext";  
-// import HighlightText from "@/components/HighLightText/HighLightText";
+"use client";
+import { Product } from "@/config/types";
+import { useCart } from "@/context/CartContext";
+import HighlightText from "@/components/HighLightText/HighLightText";
 import styles from "./CartItems.module.scss";
 import Image from "next/image";
 
@@ -12,7 +12,8 @@ const CartItems = () => {
     quantity?: number;
   }
 
-  const { cartItems, removeFromCart, updateCartItemQuantity, addToCart } = useCart();
+  const { cartItems, removeFromCart, updateCartItemQuantity, addToCart } =
+    useCart();
 
   const handleIncreaseQuantity = (item: CartItem) => {
     addToCart(item.product, item.size || "");
@@ -20,7 +21,11 @@ const CartItems = () => {
 
   const handleDecreaseQuantity = (item: CartItem) => {
     if (item.quantity && item.quantity > 1) {
-      updateCartItemQuantity(item.product.id, item.quantity - 1, item.size || "");
+      updateCartItemQuantity(
+        item.product.id,
+        item.quantity - 1,
+        item.size || ""
+      );
     }
   };
 
@@ -31,26 +36,29 @@ const CartItems = () => {
       ) : (
         <ul className={styles.cartList}>
           {cartItems.map((item) => (
-            <li key={`${item.product.id}-${item.size}`} className={styles.cartItem}>
+            <li
+              key={`${item.product.id}-${item.size}`}
+              className={styles.cartItem}
+            >
               <div className={styles.imageContainer}>
                 <Image
                   src={item.product.photo}
                   alt={item.product.name}
-                  width={200} 
-                  height={200} 
+                  width={200}
+                  height={200}
                   className={styles.image}
                 />
                 <Image
                   src={item.product.photo}
                   alt={item.product.name}
-                  width={200} 
-                  height={200} 
+                  width={200}
+                  height={200}
                 />
               </div>
               <div className={styles.infoContainer}>
-                {/* <HighlightText> */}
+                <HighlightText>
                   <p className={styles.title}>{item.product.name}</p>
-                {/* </HighlightText> */}
+                </HighlightText>
                 <p className={styles.description}>{item.product.description}</p>
 
                 <div className={styles.controlContainer}>
@@ -81,7 +89,9 @@ const CartItems = () => {
               </div>
               <div className={styles.removeContainer}>
                 <button
-                  onClick={() => removeFromCart(item.product.id, item.size || "")}
+                  onClick={() =>
+                    removeFromCart(item.product.id, item.size || "")
+                  }
                   className={styles.removeItem}
                 >
                   X
