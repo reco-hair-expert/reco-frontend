@@ -110,7 +110,6 @@ export const CartProvider = ({ children }: Props) => {
         cartCount,
       }}
     >
-      <title>Cart</title>
       {children}
     </CartContext.Provider>
   );
