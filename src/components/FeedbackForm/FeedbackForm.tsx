@@ -4,12 +4,11 @@ import { FormInput } from "./types/FeedbackForm.types";
 
 import styles from "./FeedbackForm.module.scss";
 import Icon from "@/components/Icon/Icon";
-// import Button from "@/components/Button/Button";
-import handlePhoneChange from "@/utils/handlePhoneChange";
+import Button from "@/components/Button/Button";
 import { useForm, SubmitHandler } from "react-hook-form";
-// import useDeviceDetection from "@/hooks/useDeviceDetection";
-// import handlePhoneChange from "@/utils/handlePhoneChange";
+import handlePhoneChange from "@/utils/handlePhoneChange";
 import InputLabel from "@/components/InputLabel/InputLabel";
+import useDeviceDetection from "@/context/useDeviceDetection";
 
 const FeedbackForm = () => {
   const {
@@ -20,13 +19,13 @@ const FeedbackForm = () => {
     setValue
   } = useForm<FormInput>();
 
-  // const { isMobile, isTablet } = useDeviceDetection();
+  const { isMobile, isTablet } = useDeviceDetection();
 
-  // const getButtonSize = () => {
-  //   if (isMobile) return "s";
-  //   if (isTablet) return "m";
-  //   return "l";
-  // };
+  const getButtonSize = () => {
+    if (isMobile) return "s";
+    if (isTablet) return "m";
+    return "l";
+  };
 
   const onSubmit: SubmitHandler<FormInput> = (data) => {
     void data;
@@ -93,7 +92,7 @@ const FeedbackForm = () => {
       </div>
 
       <div className={styles.buttonContainer}>
-        {/* <Button
+        <Button
           variant="primary"
           size={getButtonSize()}
           className="feedbackButton"
@@ -108,7 +107,7 @@ const FeedbackForm = () => {
             />
           </div>
           <span className={styles.feedbackButtonText}> НАДІСЛАТИ</span>
-        </Button> */}
+        </Button>
       </div>
     </form>
   );

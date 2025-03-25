@@ -95,7 +95,7 @@
   right: -36px;
 
   &:hover .feedbackImg {
-    transform: scale(1.5);
+    transform: scale(1.7);
   }
 
   @media (max-width: $breakpoint-tablet) {
@@ -108,7 +108,7 @@
 }
 
 .feedbackImg {
-  transform: scale(1.4);
+  transform: scale(1.6);
   object-fit: contain;
   pointer-events: none;
 
