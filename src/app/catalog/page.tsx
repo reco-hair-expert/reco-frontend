@@ -1,7 +1,9 @@
+import { ProductCard } from "@/components/ProductCard/ProductCard";
+import { products } from "@/constants/products";
 
 export default function Catalog() {
     return <div>
-      <h1>CATALOG</h1>
+      <ProductCard products={products} />
     </div>;
   }
   

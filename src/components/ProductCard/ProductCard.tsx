@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, useEffect, useMemo } from "react";
 import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
@@ -7,7 +9,6 @@ import Button from "../Button/Button";
 import ButtonArrow from "../ArowButton/ArowButton";
 import Icon from "../Icon/Icon";
 import Carousel from "react-spring-3d-carousel";
-import { useSwipeable } from "react-swipeable";
 
 interface ProductCardProps {
   products: Product[];
@@ -127,12 +128,12 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     [products, currentIndex, selectedSize, isMobile]
   );
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => isMobile && handleNext(),
-    onSwipedRight: () => isMobile && handlePrev(),
-    preventScrollOnSwipe: true,
-    trackMouse: true
-  });
+  // const swipeHandlers = useSwipeable({
+  //   onSwipedLeft: () => isMobile && handleNext(),
+  //   onSwipedRight: () => isMobile && handlePrev(),
+  //   preventScrollOnSwipe: true,
+  //   trackMouse: true
+  // });
 
   const renderSizes = () => (
     <div className={styles.sizes}>
@@ -171,7 +172,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
   );
 
   return (
-    <section className="container" {...swipeHandlers}>
+    <section className="container">
       <div className={styles.card}>
         <div className={styles.carousel}>
           <Carousel
