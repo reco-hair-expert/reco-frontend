@@ -1,9 +1,10 @@
-import Image from "next/image";
+// import Image from "next/image";
 import styles from "./CatalogCard.module.scss";
 import Link from "next/link";
 import Icon from "../Icon/Icon";
+import { CatalogCardProps } from "./types/CatalogCard.types";
 
-const CatalogCard = ({ perRow }) => {
+const CatalogCard = ({ perRow }: CatalogCardProps) => {
   return (
     <div
       className={styles.card}
