@@ -1,6 +1,6 @@
 import { Product } from "@/config/types";
 
-export type CatalogCardProps = {
-  product: Product;
+export type CatalogCardListProps = {
+  products: Product[];
   perRow: number;
 };

@@ -5,6 +5,7 @@ export type Product = {
   id: number;
   name: string;
   photo: string;
+  photoProduct: string;
   description: string;
   sizes: { [key: string]: number | undefined };
   size?: string;
