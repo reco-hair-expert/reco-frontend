@@ -15,10 +15,7 @@
 @include mobile {
   .container {
     width: 100%;
-    height: 755px;
-    @include mobile {
-      height: 100vh;
-    }
+    height: 100vh;
   }
 }
 
@@ -32,9 +29,9 @@
   position: absolute;
   left: 20px;
   top: 20px;
+
   @include mobile {
     left: 110px;
-    top: 20px;
     font-size: 10px;
     padding: 8px 12px;
   }
@@ -44,12 +41,13 @@
   svg {
     stroke: $yellow-color;
   }
+
   position: absolute;
   right: 20px;
   top: 20px;
+
   @include mobile {
     right: 110px;
-    top: 20px;
   }
 }
 
@@ -58,7 +56,7 @@
   flex-direction: row;
   border-radius: 10px;
   overflow: hidden;
-
+  margin: 20px auto;
   max-width: 1224px;
   height: 512px;
   margin: 20px;
@@ -72,17 +70,23 @@
     height: auto;
     margin: 0 27px;
   }
+
   @include tablet {
     flex-direction: column;
     height: auto;
   }
 }
 
+.slider {
+  display: flex;
+  justify-content: center;
+}
+
 .slide {
   width: 396px;
   height: 512px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border-radius: 20px;
   border: $main-border;
   opacity: 0.8;
@@ -93,20 +97,15 @@
     height: 274px;
     position: static;
   }
+
   @include tablet {
     position: static;
   }
 
   $breakpoint-tablet-plus-one: $breakpoint-tablet + 1;
+
   @media (min-width: $breakpoint-tablet-plus-one) {
     position: absolute;
-  }
-
-  @include mobile {
-    Button {
-      width: 86%;
-      height: 44%;
-    }
   }
 
   .buttonPlace {
@@ -120,20 +119,20 @@
     border-radius: 20px;
     border: $main-border;
     background-color: $black-color;
+
     @include mobile {
       max-width: 50%;
       height: 90px;
       right: 100px;
     }
   }
+
   &.active {
     opacity: 1;
-    background: linear-gradient(
-      149deg,
-      rgba(80, 71, 42, 1) 5%,
-      rgba(43, 41, 32, 1) 50%,
-      rgba(0, 0, 0, 1) 100%
-    );
+    background: linear-gradient(149deg,
+        rgba(80, 71, 42, 1) 5%,
+        rgba(43, 41, 32, 1) 50%,
+        rgba(0, 0, 0, 1) 100%);
   }
 }
 
@@ -142,6 +141,7 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -161,7 +161,7 @@
   background-color: $black-color;
   display: flex;
   justify-content: center;
-  align-items: center;
+
   @include mobile {
     width: 100%;
     height: 300px;
@@ -171,6 +171,7 @@
     width: auto;
     height: 100%;
     object-fit: cover;
+
     @include mobile {
       width: 100%;
       height: auto;
@@ -194,18 +195,17 @@
       opacity: 1;
       cursor: pointer;
       box-sizing: border-box;
+
       @include mobile {
         width: 90%;
         margin: 10px auto;
+        font-size: 14px;
+        padding: 8px;
       }
 
       &:disabled {
         opacity: 0.5;
         cursor: not-allowed;
-      }
-      @include mobile {
-        font-size: 14px;
-        padding: 8px;
       }
     }
   }
@@ -220,6 +220,7 @@
     cursor: pointer;
     font-size: 1.5rem;
     z-index: 2;
+
     @include mobile {
       width: 40px;
       height: 40px;
@@ -228,6 +229,7 @@
 
   .arrowLeft {
     left: 10px;
+
     @include mobile {
       left: 0;
       z-index: 2;
@@ -236,6 +238,7 @@
 
   .arrowRight {
     right: 12px;
+
     @include mobile {
       right: 0;
       z-index: 2;
@@ -269,6 +272,7 @@
   left: 230px;
   top: 37px;
   margin-top: -37px;
+
   @include mobile {
     left: 0;
     top: 0;
@@ -315,6 +319,7 @@
     text-decoration: underline;
     margin: 0;
     text-decoration: none;
+
     @include mobile {
       font-size: 1.3em;
     }
@@ -338,7 +343,7 @@
       color: white;
       cursor: pointer;
       gap: 8px;
-      text-decoration: none;
+
       @include mobile {
         font-size: 0.8rem;
       }

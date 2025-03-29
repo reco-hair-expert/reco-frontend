@@ -4,7 +4,7 @@ export const products: Product[] = [
   {
     id: 1,
     name: "RECO",
-    photo: "/images/logo/logo-1x.png",
+    photo: "/images/sections/features/recoil.png",
     volume: "Об'єм",
     description:
       "Інноваційний реконструктор для відновлення сильно пошкодженого волосся...",

@@ -83,16 +83,16 @@
     align-items: center;
     height: auto;
     padding: 0;
+    gap: 30px;
+
   }
 
   .mainContent {
     flex-direction: column;
-    gap: 0;
   }
 
   .textField {
     max-width: 100%;
-    gap: 0;
   }
 
   .slogan {
@@ -107,6 +107,7 @@
     font-size: 28px;
     text-align: left;
     max-width: 500px;
+    z-index: 10;
   }
 
   .imageContainer {
@@ -124,14 +125,11 @@
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: $breakpoint-mobile) {
-  .heroSection {
-  }
+  .heroSection {}
 
-  .mainContent {
-  }
+  .mainContent {}
 
-  .textField {
-  }
+  .textField {}
 
   .slogan {
     font-weight: 600;
@@ -143,6 +141,7 @@
     font-size: 16px;
     max-width: 290px;
     margin: 0;
+    z-index: 10;
   }
 
   .imageContainer {

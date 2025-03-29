@@ -49,12 +49,6 @@ const CartItems = () => {
                   height={200}
                   className={styles.image}
                 />
-                <Image
-                  src={item.product.photo}
-                  alt={item.product.name}
-                  width={200}
-                  height={200}
-                />
               </div>
               <div className={styles.infoContainer}>
                 <HighlightText>
