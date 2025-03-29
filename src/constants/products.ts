@@ -1,10 +1,11 @@
-import recoLogo from "../assets/images/sections/hero/hero-desc-1x.png";
+import recoLogo from "../../public/images/logo/logo-2x.png";
 
 export const products = [
   {
     id: 1,
     name: "RECO",
     photo: recoLogo,
+    photoProduct: "/images/product.png",
     volume: "Об'єм",
     description:
       "Інноваційний реконструктор для відновлення сильно пошкодженого волосся. Відновлює дисульфідні та водневі зв’язки, зміцнює структуру, зменшує ламкість. Кремово-масляна структура робить продукт економічним у використанні. Рекомендовано проводити процедуру раз на 3-4 тижні.",
@@ -21,6 +22,8 @@ export const products = [
     id: 2,
     name: "HAPPY END",
     photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Засіб для живлення, зволоження та блиску волосся. Робить його м’яким, еластичним, слухняним. Ідеально для пошкоджених кінчиків. Використовується після миття волосся, дія — 20 хвилин.",
@@ -36,6 +39,8 @@ export const products = [
     id: 3,
     name: "REC ON",
     photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Спрей-реконструктор з активною формулою для пористого та ламкого волосся. Зволожує, розгладжує, захищає від зовнішніх факторів.",
@@ -49,6 +54,8 @@ export const products = [
     id: 4,
     name: "RecOil",
     photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Коктейль з натуральних олій, що зволожує, живить, додає блиску та робить волосся слухняним.",
@@ -62,6 +69,8 @@ export const products = [
     id: 5,
     name: "TERMO CONTROL ",
     photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Спрей-термозахист з формулою RECO. Захищає від високих/низьких температур і УФ-променів, зволожує, зменшує пухнастість.",
@@ -75,6 +84,8 @@ export const products = [
     id: 6,
     name: "VOL UP CRAZY",
     photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Спрей для прикореневого об’єму. Надає блиску, зберігає форму, захищає волосся від УФ-впливу.",
@@ -88,6 +99,8 @@ export const products = [
     id: 7,
     name: "EVERY DAY",
     photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Завдяки амінокислотам забезпечує розгладження, м’якість, блиск та живлення волосся. Підходить для щоденного використання, підтримує здоров’я та красу волосся кожного дня.",
@@ -102,6 +115,8 @@ export const products = [
     id: 8,
     name: "SHAMPOO HIDRATING",
     photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Шампунь зволожуючий, що дбайливо очищує волосся, зберігаючи природний баланс вологи.",
