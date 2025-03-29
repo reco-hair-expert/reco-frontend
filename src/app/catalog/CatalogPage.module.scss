@@ -1,0 +1,32 @@
+@use "@/styles/variables.scss" as *;
+@use "@/styles/mixins.scss" as *;
+
+.title {
+  @include text-outline;
+  margin-bottom: 36px;
+}
+
+.productsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 36px;
+}
+
+.productBtn {
+  background-color: $yellow-color;
+  padding: 16px 16px;
+  border-radius: 25px;
+  text-transform: uppercase;
+  margin: 0 auto;
+  display: block;
+}
+
+.recommendationContainer {
+  padding-bottom: 36px;
+}
+
+.recommendationList {
+  display: flex;
+  gap: 20px;
+}
