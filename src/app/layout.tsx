@@ -4,7 +4,9 @@ import { CartProvider } from "@/context/CartContext";
 import { Noto_Sans } from "next/font/google";
 import "@/styles/reset.scss";
 
-const notoSans = Noto_Sans();
+const notoSans = Noto_Sans({
+  subsets: ["cyrillic", "latin"]
+});
 
 export default function DashboardLayout({
   children
