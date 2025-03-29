@@ -30,7 +30,8 @@ export const products: Product[] = [
       "15 ML": 720,
       "30 ML": 1440,
       "50 ML": 2160,
-      "100 ML": 3960
+      "100 ML": 3960,
+      "200 ML": 7200
     },
     price: 720,
     isNew: true,
@@ -38,7 +39,7 @@ export const products: Product[] = [
   },
   {
     id: 3,
-    name: "REC ON",
+    name: "REC ON Booster",
     photo: "/images/logo/logo-1x.png",
     volume: "Об'єм",
     description:
@@ -68,7 +69,7 @@ export const products: Product[] = [
   },
   {
     id: 5,
-    name: "TERMO CONTROL ",
+    name: "TERMO CONTROL",
     photo: "/images/logo/logo-1x.png",
     volume: "Об'єм",
     description:
@@ -121,9 +122,58 @@ export const products: Product[] = [
       "Шампунь зволожуючий, що дбайливо очищує волосся, зберігаючи природний баланс вологи.",
     sizes: {
       "100 ML": 450,
-      "250 ML": 900
+      "250 ML": 900,
+      "1000 ML": 2700
     },
     price: 450,
+    isNew: true,
+    badgeInfo: true
+  },
+  {
+    id: 9,
+    name: "SHAMPOO VOL",
+    photo: "/images/logo/logo-1x.png",
+    volume: "Об'єм",
+    description:
+      "Шампунь для обʼєму, що надає волоссю природний об'єм та зволоження.",
+    sizes: {
+      "100 ML": 450,
+      "250 ML": 900,
+      "1000 ML": 2700
+    },
+    price: 450,
+    isNew: true,
+    badgeInfo: true
+  },
+  {
+    id: 10,
+    name: "CONDITIONER VOL",
+    photo: "/images/logo/logo-1x.png",
+    volume: "Об'єм",
+    description:
+      "Кондиціонер для об’єму, що зволожує, живить та надає блиску.",
+    sizes: {
+      "100 ML": 840,
+      "250 ML": 1700,
+      "1000 ML": 5100
+    },
+    price: 840,
+    isNew: true,
+    badgeInfo: true
+  },
+  {
+    id: 11,
+    name: "DETOX SHAMPOO",
+    photo: "/images/logo/logo-1x.png",
+    volume: "Об'єм",
+    description:
+      "Шампунь детокс для глибокого очищення шкіри голови та волосся.",
+    sizes: {
+      "100 ML": 495,
+      "250 ML": 990,
+      "1000 ML": 2970
+    },
+    price: 495,
     isNew: true,
     badgeInfo: true
   }
