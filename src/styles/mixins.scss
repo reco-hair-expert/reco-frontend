@@ -71,3 +71,11 @@
 @mixin inputIconStar {
   margin-left: auto;
 }
+
+@mixin text-outline($font-size: 48px) {
+  font-size: $font-size;
+  text-transform: uppercase;
+  color: transparent;
+  font-weight: bold;
+  -webkit-text-stroke: 1px $yellow-color;
+}
