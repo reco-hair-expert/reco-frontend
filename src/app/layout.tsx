@@ -1,17 +1,20 @@
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import { CartProvider } from "@/context/CartContext"; 
+import { CartProvider } from "@/context/CartContext";
+import { Noto_Sans } from "next/font/google";
 import "@/styles/reset.scss";
 
+const notoSans = Noto_Sans();
+
 export default function DashboardLayout({
-  children,
+  children
 }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body>
-        <CartProvider> 
+      <body className={notoSans.className}>
+        <CartProvider>
           <Header />
           <main>{children}</main>
           <Footer />
