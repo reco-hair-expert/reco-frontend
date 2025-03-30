@@ -48,7 +48,7 @@ const CatalogCard = ({ perRow, product }: CatalogCardProps) => {
           <h3 className={styles.productName}>{product.name} </h3>
           <span className={styles.productPrice}>{product.price}грн</span>
         </header>
-        <div>
+        <div className={styles.productAction}>
           <p className={styles.productType}>Спрей - реконструктор</p>
           <form className={styles.productSizeForm}>{renderSizes()}</form>
           <div className={styles.productBtnContainer}>
