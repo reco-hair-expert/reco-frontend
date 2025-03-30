@@ -8,6 +8,7 @@ const notoSans = Noto_Sans({
   subsets: ["cyrillic", "latin"],
   weight: ["400", "700"],});
 
+
 export default function DashboardLayout({
   children
 }: {
@@ -15,7 +16,7 @@ export default function DashboardLayout({
 }) {
   return (
     <html lang="en">
-      <body className={notoSans.className}>
+      <body  className={notoSans.className} >
         <CartProvider>
           <Header />
           <main>{children}</main>
