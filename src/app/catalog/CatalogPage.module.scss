@@ -3,30 +3,43 @@
 
 .title {
   @include text-outline;
-  margin-bottom: 36px;
 }
 
 .productsList {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  margin-bottom: 36px;
-}
+  margin: 36px 0;
 
-.productBtn {
-  background-color: $yellow-color;
-  padding: 16px 16px;
-  border-radius: 25px;
-  text-transform: uppercase;
-  margin: 0 auto;
-  display: block;
+  .productBtn {
+    background-color: $yellow-color;
+    padding: 16px 16px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    margin: 0 auto;
+    display: block;
+  }
 }
 
 .recommendationContainer {
   padding-bottom: 36px;
-}
+  position: relative;
 
-.recommendationList {
-  display: flex;
-  gap: 20px;
+  .recommendationHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 36px;
+  }
+
+  .recommendationList {
+    display: flex;
+    gap: 20px;
+  }
+
+  .backgroundCircles {
+    top: 20%;
+    right: -30%;
+    transform: rotate(240deg);
+  }
 }

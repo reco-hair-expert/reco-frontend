@@ -5,7 +5,8 @@
   border-radius: 20px;
   position: relative;
   overflow: hidden;
-  background-color: $grey-color;
+  display: flex;
+  flex-direction: column;
 }
 
 .badgeContainer {
@@ -47,6 +48,9 @@
   padding: 0 16px 16px;
   margin-top: -100px;
   color: $white-color;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 
   .infoContainer {
     display: flex;
@@ -62,6 +66,12 @@
   .productPrice {
     font-weight: 700;
     font-size: 18px;
+  }
+
+  .productAction {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
   }
 
   .productType {
