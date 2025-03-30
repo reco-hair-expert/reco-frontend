@@ -1,4 +1,4 @@
-"use client"
+"use client"; 
 import React, { useState, useEffect } from "react";
 import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
