@@ -1,0 +1,126 @@
+@use "@/styles/variables" as *;
+
+.card {
+  border: $main-border;
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  background-color: $grey-color;
+}
+
+.badgeContainer {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 12px;
+
+  .saleBadge,
+  .typeBadge {
+    border-radius: 25px;
+    padding: 4px 12px;
+  }
+
+  .saleBadge {
+    background-color: $yellow-color;
+  }
+
+  .typeBadge {
+    border: 1px solid $yellow-color;
+    color: $white-color;
+    align-self: baseline;
+  }
+}
+
+.infoBtn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  &Icon {
+    stroke: $yellow-color;
+  }
+}
+
+.productDetailsContainer {
+  padding: 0 16px 16px;
+  margin-top: -100px;
+  color: $white-color;
+
+  .infoContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .productName {
+    font-weight: 500;
+    text-transform: uppercase;
+    color: $yellow-color;
+  }
+
+  .productPrice {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .productType {
+    font-weight: 100;
+    margin-bottom: 12px;
+  }
+
+  .productSizeForm {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+    margin-bottom: 20px;
+
+    &Label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .sizeInput {
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid $yellow-color;
+      border-radius: 50%;
+      background-color: inherit;
+      transition:
+        border-color $transition-speed $transition-style,
+        background-color $transition-speed $transition-style;
+
+      &:checked {
+        background-color: $yellow-color;
+        border-color: $yellow-color;
+      }
+    }
+  }
+
+  .productBtnContainer {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+
+    .buyBtn,
+    .toCartBtn {
+      font-weight: 500;
+      text-transform: uppercase;
+      padding: 16px 48px;
+      border-radius: 25px;
+      flex-grow: 1;
+    }
+
+    .buyBtn {
+      background-color: $yellow-color;
+    }
+
+    .toCartBtn {
+      border: 1px solid $yellow-color;
+      color: $white-color;
+    }
+  }
+}
