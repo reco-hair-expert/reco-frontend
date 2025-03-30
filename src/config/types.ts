@@ -4,11 +4,14 @@ export type Product = {
   volume: string;
   id: number;
   name: string;
-  photo: string | StaticImageData;
+  photo: StaticImageData;
+  photoProduct?: string | StaticImageData;
   description: string;
   sizes: { [key: string]: number | undefined };
   size?: string;
   quantity?: number;
+  badgeInfo?: boolean; 
+  isNew?: boolean;
 };
 
   
