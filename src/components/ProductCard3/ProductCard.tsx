@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useState, useEffect, useMemo } from "react";
 import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
@@ -7,7 +7,7 @@ import HighlightText from "../HighLightText/HighLightText";
 import Button from "../Button/Button";
 import ButtonArrow from "../ArowButton/ArowButton";
 import Icon from "../Icon/Icon";
-import Image from "next/image"
+import Image from "next/image";
 import Carousel from "react-spring-3d-carousel";
 import { useSwipeable } from "react-swipeable";
 
@@ -15,7 +15,7 @@ interface ProductCardProps {
   products: Product[];
 }
 
-  const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -50,7 +50,6 @@ interface ProductCardProps {
     }
     if (!products?.length) return <div>Продукти не знайдені.</div>;
 
-
     const newItem = {
       id: currentProduct.id,
       name: currentProduct.name,
@@ -74,7 +73,7 @@ interface ProductCardProps {
             className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
             key={index}
           >
-              <Image
+            <Image
               src={currentProduct.photo}
               alt={currentProduct.name}
               width={200}

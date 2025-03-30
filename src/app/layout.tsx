@@ -7,8 +7,8 @@ export const metadata = {
   title: "RECO",
   description: "Описание страницы",
   openGraph: {
-    title: "RECO",
-  },
+    title: "RECO"
+  }
 };
 
 export default function DashboardLayout({

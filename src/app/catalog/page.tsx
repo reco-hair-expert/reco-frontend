@@ -1,4 +1,4 @@
-import { ProductCard } from "@/components/ProductCard/ProductCard";
+import ProductCard from "@/components/ProductCard3/ProductCard";
 import { products } from "@/constants/products";
 
 export default function Catalog() {

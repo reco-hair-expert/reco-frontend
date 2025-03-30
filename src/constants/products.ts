@@ -150,8 +150,7 @@ export const products: Product[] = [
     name: "CONDITIONER VOL",
     photo: "/images/logo/logo-1x.png",
     volume: "Об'єм",
-    description:
-      "Кондиціонер для об’єму, що зволожує, живить та надає блиску.",
+    description: "Кондиціонер для об’єму, що зволожує, живить та надає блиску.",
     sizes: {
       "100 ML": 840,
       "250 ML": 1700,

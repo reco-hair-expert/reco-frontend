@@ -46,19 +46,7 @@
     display: flex;
     height: 34px;
     width: 34px;
-    top: 1px;
-    right: 2px;
-  }
-}
-
-.secondСontainer {
-  display: none;
-
-  @media (max-width: $breakpoint-mobile) {
-    display: flex;
-    height: 34px;
-    width: 34px;
-    top: 1px;
+    top: 2px;
     right: 2px;
   }
 }

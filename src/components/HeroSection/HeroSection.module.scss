@@ -84,7 +84,6 @@
     height: auto;
     padding: 0;
     gap: 30px;
-
   }
 
   .mainContent {
@@ -125,8 +124,6 @@
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: $breakpoint-mobile) {
-
-
   .slogan {
     font-weight: 600;
     font-size: 24px;
