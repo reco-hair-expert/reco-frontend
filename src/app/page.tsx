@@ -1,22 +1,22 @@
-import Head from "next/head";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import FeedbackSection from "@/components/FeedbackSection/FeedbackSection";
 import FeaturesSection from "@/components/FeaturesSection/FeaturesSection";
 import Insta from "@/components/Insta/Insta";
-// import { ProductCard } from "@/components/ProductCard/ProductCard";
-// import { products } from "@/constants/products";
+import { products } from "@/constants/products";
+
+import dynamic from "next/dynamic";
+
+const ProductCard = dynamic(() => import("@/components/ProductCard/ProductCard").then((mod) => mod.default), {
+  ssr: false,
+});
 
 const MainPage = () => {
   return (
     <>
-      <Head>
-        <title>Головна | RECO</title>
-        <meta name="description" content="Описание страницы" />
-        <meta property="og:title" content="Головна | RECO" />
-      </Head>
+     
       <HeroSection />
       <FeaturesSection />
-      {/* <ProductCard products={products} /> */}
+      <ProductCard products={products} />
       <Insta />
       <FeedbackSection />
     </>

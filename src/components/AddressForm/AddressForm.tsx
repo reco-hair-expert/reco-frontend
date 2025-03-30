@@ -1,6 +1,6 @@
 import styles from "./AddressForm.module.scss";
 import { AddressFormProps } from "./types/AddressForm.types";
-import Image from "next/image";  
+import Image from "next/image";
 
 const AddressForm = ({
   className,
@@ -32,8 +32,8 @@ const AddressForm = ({
           src="images/sections/footer/visa-mastercard.svg"
           alt="Visa and Mastercard payment options"
           className={styles.payment_icon}
-          width={100}  // Укажите нужную ширину
-          height={40}  // Укажите нужную высоту
+          width={100} // Укажите нужную ширину
+          height={40} // Укажите нужную высоту
         />
       </div>
     </div>

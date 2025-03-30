@@ -1,3 +1,4 @@
+
 import CatalogCardList from "@/components/CatalogCardList/CatalogCardList";
 import { products } from "@/constants/products";
 import styles from "./CatalogPage.module.scss";
@@ -28,5 +29,6 @@ export default function Catalog() {
         <BackgroundCircles className={styles.backgroundCircles} />
       </section>
     </>
+
   );
 }

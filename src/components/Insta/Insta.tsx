@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect } from "react";
 import "@/styles/index.scss";
 import styles from "./Insta.module.scss";

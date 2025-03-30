@@ -7,8 +7,8 @@
   position: relative;
   display: flex;
   flex: 1;
-  justify-content: start;
-  align-items: start;
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: row;
   background-color: transparent;
   color: $white-color;
@@ -29,7 +29,7 @@
 /* Стили для текстовых элементов */
 .textField {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   text-align: left;
   flex-direction: column;
   gap: 10px;
@@ -83,16 +83,16 @@
     align-items: center;
     height: auto;
     padding: 0;
+    gap: 30px;
+
   }
 
   .mainContent {
     flex-direction: column;
-    gap: 0;
   }
 
   .textField {
     max-width: 100%;
-    gap: 0;
   }
 
   .slogan {
@@ -107,6 +107,7 @@
     font-size: 28px;
     text-align: left;
     max-width: 500px;
+    z-index: 10;
   }
 
   .imageContainer {
@@ -124,14 +125,7 @@
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: $breakpoint-mobile) {
-  .heroSection {
-  }
 
-  .mainContent {
-  }
-
-  .textField {
-  }
 
   .slogan {
     font-weight: 600;
@@ -143,6 +137,7 @@
     font-size: 16px;
     max-width: 290px;
     margin: 0;
+    z-index: 10;
   }
 
   .imageContainer {

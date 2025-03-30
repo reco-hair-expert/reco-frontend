@@ -4,7 +4,7 @@
 .cartSummary {
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: flex-start;
   gap: 20px;
   width: 500px;
 }
@@ -12,7 +12,7 @@
 .summaryContainer {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   padding: 1rem;
   border-radius: 20px;
   border: $main-border;
@@ -52,14 +52,14 @@
 .deliveryOptions {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   text-align: left;
   gap: 1rem;
 }
 
 .deliveryOption {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   width: 100%;
   gap: 1rem;
 }

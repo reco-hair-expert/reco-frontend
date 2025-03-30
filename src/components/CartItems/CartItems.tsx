@@ -10,7 +10,7 @@ const CartItems = () => {
     product: Product;
     size?: string;
     quantity?: number;
-    id?:number;
+    id?: number;
   }
 
   const { cartItems, removeFromCart, updateCartItemQuantity, addToCart } =
@@ -48,12 +48,6 @@ const CartItems = () => {
                   width={200}
                   height={200}
                   className={styles.image}
-                />
-                <Image
-                  src={item.product.photo}
-                  alt={item.product.name}
-                  width={200}
-                  height={200}
                 />
               </div>
               <div className={styles.infoContainer}>

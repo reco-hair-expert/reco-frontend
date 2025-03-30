@@ -15,9 +15,7 @@
 }
 
 .disabled {
-  opacity: 0.5;
   cursor: not-allowed;
-  background-color: transparent;
   border-color: $yellow-color;
 
   .icon {
