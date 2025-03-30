@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useMemo, useCallback } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
 import styles from "./ProductCard.module.scss";
@@ -44,11 +44,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
   const handleSizeChange = (size: string) => setSelectedSize(size);
 
-  const handleAddToCart = useCallback(() => {
+  const handleAddToCart = () => {
     if (!selectedSize || !currentProduct.sizes) {
       return alert("Будь ласка, виберіть розмір!");
     }
-    if (!products?.length) return;
+    if (!products?.length) return <div>Продукти не знайдені.</div>;
 
     const newItem = {
       id: currentProduct.id,
@@ -62,35 +62,24 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(currentProduct, selectedSize);
-  }, [selectedSize, currentProduct, addToCart, products?.length]);
+  };
 
   const slides = useMemo(
     () =>
       products.map((product, index) => ({
-        key: product.id,
+        key: index,
         content: (
           <div
             className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
             key={index}
           >
             <Image
-              src={product.photo}
-              alt={product.name}
+              src={currentProduct.photo}
+              alt={currentProduct.name}
               width={200}
               height={200}
               className={styles.image}
             />
-            {product.isNew && <div className={styles.newBadge}>NEW</div>}
-            {product.badgeInfo && (
-              <div className={styles.badgeInfo}>
-                <Icon
-                  name="icon-info"
-                  size={isMobile ? 24 : 28}
-                  fill="none"
-                  stroke={styles.yellowColor}
-                />
-              </div>
-            )}
             {index === currentIndex && (
               <div className={styles.buttonPlace}>
                 {isMobile ? (
@@ -127,7 +116,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
           </div>
         )
       })),
-    [products, currentIndex, selectedSize, isMobile, handleAddToCart]
+    [products, currentIndex, selectedSize, isMobile]
   );
 
   const swipeHandlers = useSwipeable({

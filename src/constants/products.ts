@@ -70,7 +70,7 @@ export const products: Product[] = [
   {
     id: 5,
     name: "TERMO CONTROL",
-    photo: "/images/logo/logo-1x.png",
+    photo: "/images/sections/features/recoil.png",
     volume: "Об'єм",
     description:
       "Спрей-термозахист з формулою RECO. Захищає від високих/низьких температур і УФ-променів, зволожує, зменшує пухнастість.",
