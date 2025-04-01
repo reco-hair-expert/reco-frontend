@@ -1,5 +1,5 @@
-"use client"
-import React, { useState, useEffect, useMemo } from "react";
+"use client";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
 import styles from "./ProductCard.module.scss";
@@ -7,7 +7,7 @@ import HighlightText from "../HighLightText/HighLightText";
 import Button from "../Button/Button";
 import ButtonArrow from "../ArowButton/ArowButton";
 import Icon from "../Icon/Icon";
-import Image from "next/image"
+import Image from "next/image";
 import Carousel from "react-spring-3d-carousel";
 import { useSwipeable } from "react-swipeable";
 
@@ -15,7 +15,7 @@ interface ProductCardProps {
   products: Product[];
 }
 
-  const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -44,12 +44,11 @@ interface ProductCardProps {
     setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
   const handleSizeChange = (size: string) => setSelectedSize(size);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = useCallback(() => {
     if (!selectedSize || !currentProduct.sizes) {
       return alert("Будь ласка, виберіть розмір!");
     }
-    if (!products?.length) return <div>Продукти не знайдені.</div>;
-
+    if (!products?.length) return;
 
     const newItem = {
       id: currentProduct.id,
@@ -63,24 +62,35 @@ interface ProductCardProps {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(currentProduct, selectedSize);
-  };
+  }, [selectedSize, currentProduct, addToCart, products?.length]);
 
   const slides = useMemo(
     () =>
       products.map((product, index) => ({
-        key: index,
+        key: product.id,
         content: (
           <div
             className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
             key={index}
           >
-              <Image
-              src={currentProduct.photo}
-              alt={currentProduct.name}
+            <Image
+              src={product.photo}
+              alt={product.name}
               width={200}
               height={200}
               className={styles.image}
             />
+            {product.isNew && <div className={styles.newBadge}>NEW</div>}
+            {product.badgeInfo && (
+              <div className={styles.badgeInfo}>
+                <Icon
+                  name="icon-info"
+                  size={isMobile ? 24 : 28}
+                  fill="none"
+                  stroke={styles.yellowColor}
+                />
+              </div>
+            )}
             {index === currentIndex && (
               <div className={styles.buttonPlace}>
                 {isMobile ? (
@@ -117,7 +127,7 @@ interface ProductCardProps {
           </div>
         )
       })),
-    [products, currentIndex, selectedSize, isMobile]
+    [products, currentIndex, selectedSize, isMobile, handleAddToCart]
   );
 
   const swipeHandlers = useSwipeable({

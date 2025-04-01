@@ -6,14 +6,17 @@ import { products } from "@/constants/products";
 
 import dynamic from "next/dynamic";
 
-const ProductCard = dynamic(() => import("@/components/ProductCard/ProductCard").then((mod) => mod.default), {
-  ssr: false,
-});
+const ProductCard = dynamic(
+  () =>
+    import("@/components/ProductCard3/ProductCard").then((mod) => mod.default),
+  {
+    ssr: false
+  }
+);
 
 const MainPage = () => {
   return (
     <>
-     
       <HeroSection />
       <FeaturesSection />
       <ProductCard products={products} />

@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./CartSummary.module.scss";
 import { useCart } from "@/context/CartContext";
-import { CartItem } from "@/config/types";
+import { CartItem } from "@/types/types";
 
 const CartSummary = () => {
   const { cartItems } = useCart();

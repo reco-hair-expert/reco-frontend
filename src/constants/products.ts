@@ -1,13 +1,15 @@
-import { Product } from "@/types/types";
+import recoLogo from "../../public/images/logo/logo-2x.png";
+import reco from "../../public/images/product.png"
 
-export const products: Product[] = [
+export const products = [
   {
     id: 1,
     name: "RECO",
-    photo: "/images/sections/features/recoil.png",
+    photo: reco,
+    photoProduct: reco,
     volume: "Об'єм",
     description:
-      "Інноваційний реконструктор для відновлення сильно пошкодженого волосся...",
+      "Інноваційний реконструктор для відновлення сильно пошкодженого волосся. Відновлює дисульфідні та водневі зв’язки, зміцнює структуру, зменшує ламкість. Кремово-масляна структура робить продукт економічним у використанні. Рекомендовано проводити процедуру раз на 3-4 тижні.",
     sizes: {
       "15 ML": 600,
       "30 ML": 1200,
@@ -15,14 +17,14 @@ export const products: Product[] = [
       "100 ML": 3240,
       "200 ML": 6000
     },
-    price: 600,
-    isNew: true,
-    badgeInfo: true
+    price: 600
   },
   {
     id: 2,
     name: "HAPPY END",
-    photo: "/images/logo/logo-1x.png",
+    photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Засіб для живлення, зволоження та блиску волосся. Робить його м’яким, еластичним, слухняним. Ідеально для пошкоджених кінчиків. Використовується після миття волосся, дія — 20 хвилин.",
@@ -30,17 +32,16 @@ export const products: Product[] = [
       "15 ML": 720,
       "30 ML": 1440,
       "50 ML": 2160,
-      "100 ML": 3960,
-      "200 ML": 7200
+      "100 ML": 3960
     },
-    price: 720,
-    isNew: true,
-    badgeInfo: true
+    price: 720
   },
   {
     id: 3,
-    name: "REC ON Booster",
-    photo: "/images/logo/logo-1x.png",
+    name: "REC ON",
+    photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Спрей-реконструктор з активною формулою для пористого та ламкого волосся. Зволожує, розгладжує, захищає від зовнішніх факторів.",
@@ -48,14 +49,14 @@ export const products: Product[] = [
       "100 ML": 1560,
       "250 ML": 3120
     },
-    price: 1560,
-    isNew: true,
-    badgeInfo: true
+    price: 1560
   },
   {
     id: 4,
     name: "RecOil",
-    photo: "/images/logo/logo-1x.png",
+    photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Коктейль з натуральних олій, що зволожує, живить, додає блиску та робить волосся слухняним.",
@@ -63,14 +64,14 @@ export const products: Product[] = [
       "15 ML": 720,
       "30 ML": 1440
     },
-    price: 720,
-    isNew: true,
-    badgeInfo: true
+    price: 720
   },
   {
     id: 5,
-    name: "TERMO CONTROL",
-    photo: "/images/logo/logo-1x.png",
+    name: "TERMO CONTROL ",
+    photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Спрей-термозахист з формулою RECO. Захищає від високих/низьких температур і УФ-променів, зволожує, зменшує пухнастість.",
@@ -78,14 +79,14 @@ export const products: Product[] = [
       "100 ML": 1440,
       "250 ML": 2880
     },
-    price: 1440,
-    isNew: true,
-    badgeInfo: true
+    price: 1440
   },
   {
     id: 6,
     name: "VOL UP CRAZY",
-    photo: "/images/logo/logo-1x.png",
+    photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Спрей для прикореневого об’єму. Надає блиску, зберігає форму, захищає волосся від УФ-впливу.",
@@ -93,14 +94,14 @@ export const products: Product[] = [
       "100 ML": 1080,
       "250 ML": 2160
     },
-    price: 1080,
-    isNew: true,
-    badgeInfo: true
+    price: 1080
   },
   {
     id: 7,
     name: "EVERY DAY",
-    photo: "/images/logo/logo-1x.png",
+    photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Завдяки амінокислотам забезпечує розгладження, м’якість, блиск та живлення волосся. Підходить для щоденного використання, підтримує здоров’я та красу волосся кожного дня.",
@@ -109,72 +110,21 @@ export const products: Product[] = [
       "100 ML": 1140,
       "200 ML": 2160
     },
-    price: 600,
-    isNew: true,
-    badgeInfo: true
+    price: 600
   },
   {
     id: 8,
     name: "SHAMPOO HIDRATING",
-    photo: "/images/logo/logo-1x.png",
+    photo: recoLogo,
+    photoProduct: "/images/product.png",
+
     volume: "Об'єм",
     description:
       "Шампунь зволожуючий, що дбайливо очищує волосся, зберігаючи природний баланс вологи.",
     sizes: {
       "100 ML": 450,
-      "250 ML": 900,
-      "1000 ML": 2700
+      "250 ML": 900
     },
-    price: 450,
-    isNew: true,
-    badgeInfo: true
-  },
-  {
-    id: 9,
-    name: "SHAMPOO VOL",
-    photo: "/images/logo/logo-1x.png",
-    volume: "Об'єм",
-    description:
-      "Шампунь для обʼєму, що надає волоссю природний об'єм та зволоження.",
-    sizes: {
-      "100 ML": 450,
-      "250 ML": 900,
-      "1000 ML": 2700
-    },
-    price: 450,
-    isNew: true,
-    badgeInfo: true
-  },
-  {
-    id: 10,
-    name: "CONDITIONER VOL",
-    photo: "/images/logo/logo-1x.png",
-    volume: "Об'єм",
-    description:
-      "Кондиціонер для об’єму, що зволожує, живить та надає блиску.",
-    sizes: {
-      "100 ML": 840,
-      "250 ML": 1700,
-      "1000 ML": 5100
-    },
-    price: 840,
-    isNew: true,
-    badgeInfo: true
-  },
-  {
-    id: 11,
-    name: "DETOX SHAMPOO",
-    photo: "/images/logo/logo-1x.png",
-    volume: "Об'єм",
-    description:
-      "Шампунь детокс для глибокого очищення шкіри голови та волосся.",
-    sizes: {
-      "100 ML": 495,
-      "250 ML": 990,
-      "1000 ML": 2970
-    },
-    price: 495,
-    isNew: true,
-    badgeInfo: true
+    price: 450
   }
 ];

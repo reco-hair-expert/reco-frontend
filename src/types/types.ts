@@ -13,3 +13,12 @@ export type Product = {
   size?: string;
   quantity?: number;
 };
+export type CartItem = {
+  product: Product;
+  quantity: number;
+  size?: string;
+};
+
+export interface CartContextValue {
+  cart: { quantity?: number }[]; 
+}

@@ -1,13 +1,17 @@
-
 import CatalogCardList from "@/components/CatalogCardList/CatalogCardList";
 import { products } from "@/constants/products";
 import styles from "./CatalogPage.module.scss";
 import FilterToggle from "@/components/FilterToggle/FilterToggle";
 import BackgroundCircles from "@/components/BackgroundCircles/BackgroundCircles";
+import ProductCard from "@/components/ProductCard3/ProductCard";
 
 export default function Catalog() {
   return (
     <>
+      <section className="container">
+        <h2 className={styles.title}>НОВИНКИ</h2>
+        <ProductCard products={products} />
+      </section>
       <section className="container">
         <h2 className={styles.title}>Всі товари</h2>
 
@@ -29,6 +33,5 @@ export default function Catalog() {
         <BackgroundCircles className={styles.backgroundCircles} />
       </section>
     </>
-
   );
 }

@@ -49,6 +49,7 @@
   margin-bottom: 4rem;
   max-width: 912px;
   text-wrap: pretty;
+  z-index: 10;
 }
 
 /* Стили для изображения */
@@ -84,7 +85,6 @@
     height: auto;
     padding: 0;
     gap: 30px;
-
   }
 
   .mainContent {
@@ -114,6 +114,7 @@
     position: relative;
     top: 0;
     right: 0;
+    margin-bottom: -100px;
   }
 
   .image {
@@ -125,8 +126,6 @@
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: $breakpoint-mobile) {
-
-
   .slogan {
     font-weight: 600;
     font-size: 24px;
@@ -142,6 +141,7 @@
 
   .imageContainer {
     height: 320px;
+    margin-bottom: 50px;
   }
 
   .image {

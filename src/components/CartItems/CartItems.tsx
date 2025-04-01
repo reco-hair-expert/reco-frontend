@@ -1,5 +1,5 @@
 "use client";
-import { Product } from "@/config/types";
+import { Product } from "@/types/types";
 import { useCart } from "@/context/CartContext";
 import HighlightText from "@/components/HighLightText/HighLightText";
 import styles from "./CartItems.module.scss";

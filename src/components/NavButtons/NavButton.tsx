@@ -13,7 +13,7 @@ const NavButtons: FC<NavButtonsProps> = ({ buttons, className }) => {
     <div className={combinedClass}>
       {buttons.map(({ title, link }) => (
         <Link key={title} href={link}>
-          <Button variant="black" size="s">
+          <Button variant="black" size="m">
             {title}
           </Button>
         </Link>
