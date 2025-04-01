@@ -49,6 +49,7 @@
   margin-bottom: 4rem;
   max-width: 912px;
   text-wrap: pretty;
+  z-index: 10;
 }
 
 /* Стили для изображения */
@@ -113,6 +114,7 @@
     position: relative;
     top: 0;
     right: 0;
+    margin-bottom: 50px;
   }
 
   .image {
