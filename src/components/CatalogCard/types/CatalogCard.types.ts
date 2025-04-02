@@ -1,4 +1,4 @@
-import { Product } from "@/config/types";
+import { Product } from "@/types/types";
 
 export type CatalogCardProps = {
   product: Product;

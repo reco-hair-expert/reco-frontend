@@ -1,4 +1,4 @@
-import { CartItem } from "@/config/types";
+import { CartItem } from "@/types/types";
 
 export interface CartButtonProps {
   className?: string;

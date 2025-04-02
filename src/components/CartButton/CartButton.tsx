@@ -6,14 +6,15 @@ import classNames from "classnames";
 import Icon from "@/components/Icon/Icon";
 import { useContext, useMemo, useCallback } from "react";
 import { CartContext } from "@/context/CartContext";
-import { CartItem } from "@/config/types";
+import { CartItem } from "@/types/types";
 
 const CartButton = ({ className, onClick }: CartButtonProps) => {
-  const { cartItems } = useContext(CartContext);
+  const cartContext = useContext(CartContext);
+
+  const cartItems = useMemo(() => cartContext?.cartItems ?? [], [cartContext]);
 
   const totalItems = useMemo(
-    () =>
-      cartItems.reduce((sum: number, item: CartItem) => sum + item.quantity, 0),
+    () => cartItems.reduce((sum: number, item: CartItem) => sum + item.quantity, 0),
     [cartItems]
   );
 
