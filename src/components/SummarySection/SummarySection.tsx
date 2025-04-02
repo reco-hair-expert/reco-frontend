@@ -4,7 +4,7 @@ import { useCart } from "@/context/CartContext";
 import HighlightText from "@/components/HighLightText/HighLightText";
 import Image from "next/image";
 import styles from "./SummarySection.module.scss";
-import { CartItem } from "@/config/types";
+import { CartItem } from "@/types/types";
 
 const SummarySection = () => {
   const {

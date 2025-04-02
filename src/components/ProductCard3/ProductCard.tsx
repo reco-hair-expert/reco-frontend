@@ -18,7 +18,7 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
   const [offsetRadius, setOffsetRadius] = useState(2);
   const { addToCart } = useCartContext();
   const currentProduct = products[currentIndex];
@@ -27,6 +27,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
 
   useEffect(() => {
     const handleResize = () => {
+      if (typeof window === "undefined") return;
+
       const width = window.innerWidth;
       setIsMobile(width <= 768);
       setOffsetRadius(width >= 768 && width <= 1225 ? 4 : 2);
@@ -38,10 +40,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleNext = () =>
-    setCurrentIndex((prev) => (prev + 1) % products.length);
-  const handlePrev = () =>
-    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+  const handleNext = () => setCurrentIndex((prev) => (prev + 1) % products.length);
+  const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
   const handleSizeChange = (size: string) => setSelectedSize(size);
 
   const handleAddToCart = useCallback(() => {

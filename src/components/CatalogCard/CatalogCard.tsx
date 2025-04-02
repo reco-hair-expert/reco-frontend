@@ -32,7 +32,12 @@ const CatalogCard = ({ perRow, product }: CatalogCardProps) => {
       }}
     >
       <div className={styles.imageContainer}>
-        <Image src={product.photoProduct} alt="reco" width={400} height={300} />
+        <Image
+          src={product.photoProduct || "/fallback-image.jpg"}
+          alt="reco"
+          width={400}
+          height={300}
+        />
       </div>
       <div className={styles.badgeContainer}>
         <span className={styles.saleBadge}>bestseller</span>
