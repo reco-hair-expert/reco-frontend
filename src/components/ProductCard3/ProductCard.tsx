@@ -56,7 +56,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
       size: selectedSize,
       price: currentProduct.sizes[selectedSize],
       photo: currentProduct.photo,
-      basePrice: currentProduct.price || 450
     };
 
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");

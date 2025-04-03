@@ -1,32 +1,27 @@
 "use client";
 
+import { useMemo } from "react";
 import { useCart } from "@/context/CartContext";
 import HighlightText from "@/components/HighLightText/HighLightText";
 import Image from "next/image";
 import styles from "./SummarySection.module.scss";
-import { CartItem } from "@/types/types";
+import { useRouter } from "next/navigation";
 
 const SummarySection = () => {
-  const {
-    cartItems,
-    removeFromCart,
-    updateCartItemQuantity,
-    addToCart,
-    cartTotal
-  } = useCart();
+  const { cartItems } = useCart();
+   const router = useRouter();
 
-  const handleIncreaseQuantity = (item: CartItem) => {
-    addToCart(item.product, item.size || "");
-  };
-
-  const handleDecreaseQuantity = (item: CartItem) => {
-    if (item.quantity > 1) {
-      updateCartItemQuantity(
-        item.product.id,
-        item.quantity - 1,
-        item.size || ""
-      );
-    }
+  const cartTotal = useMemo(() => {
+    return cartItems.reduce((total, item) => {
+      const price =
+        item.size && item.product.sizes[item.size] !== undefined
+          ? item.product.sizes[item.size]
+          : (item.product.price ?? 0);
+      return total + (price ?? 0) * item.quantity;
+    }, 0);
+  }, [cartItems]);
+  const handleContinueShopping = () => {
+    router.push("/catalog");
   };
 
   return (
@@ -46,8 +41,8 @@ const SummarySection = () => {
                 <Image
                   src={item.product.photo}
                   alt={item.product.name}
-                  width={200}
-                  height={200}
+                  width={150}
+                  height={150}
                   className={styles.image}
                 />
               </div>
@@ -59,38 +54,16 @@ const SummarySection = () => {
                   {item.size && (
                     <>
                       <p>{item.size}</p>
+                      <p className={styles.quantity}>
+                        Кількість: {item.quantity}
+                      </p>
                       <p className={styles.price}>
                         {item.product.sizes?.[item.size] || item.product.price}{" "}
                         грн
                       </p>
                     </>
                   )}
-                  <div className={styles.quantityControl}>
-                    <button
-                      onClick={() => handleDecreaseQuantity(item)}
-                      className={styles.quantityButton}
-                    >
-                      -
-                    </button>
-                    <p>{item.quantity}</p>
-                    <button
-                      onClick={() => handleIncreaseQuantity(item)}
-                      className={styles.quantityButton}
-                    >
-                      +
-                    </button>
-                  </div>
                 </div>
-              </div>
-              <div className={styles.removeContainer}>
-                <button
-                  onClick={() =>
-                    removeFromCart(item.product.id, item.size || "")
-                  }
-                  className={styles.removeItem}
-                >
-                  X
-                </button>
               </div>
             </li>
           ))}
@@ -121,6 +94,12 @@ const SummarySection = () => {
         >
           Підтвердити замовлення
         </button>
+        <button
+        className={styles.continueShoppingButton}
+        onClick={handleContinueShopping}
+      >
+        ПРОДОВЖИТИ ПОКУПКИ
+      </button>
       </div>
     </section>
   );
