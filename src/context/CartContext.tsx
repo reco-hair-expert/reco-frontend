@@ -50,10 +50,15 @@ export const CartProvider = ({ children }: Props) => {
   }, []);
 
   useEffect(() => {
-    if (cartItems.length > 0) {
-      saveCartToLocalStorage(cartItems);
+    if (typeof window !== "undefined") {
+      if (cartItems.length > 0) {
+        saveCartToLocalStorage(cartItems);
+      } else {
+        localStorage.removeItem("cartItems"); 
+      }
     }
   }, [cartItems]);
+  
 
   const addToCart = (product: Product, size: string = "") => {
     setCartItems((prevCart) => {

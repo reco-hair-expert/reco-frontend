@@ -35,6 +35,8 @@
 }
 
 .linkLogo {
+  transform: rotate(-45deg);
+
   @media (max-width: $breakpoint-mobile) {
     order: -1;
     flex-grow: 1;
