@@ -3,52 +3,54 @@ import Link from "next/link";
 import Icon from "@/components/Icon/Icon";
 import Image from "next/image";
 import BackgroundCircles from "../BackgroundCircles/BackgroundCircles";
+import { memo } from "react";
 
 const Error404 = () => {
   return (
-    <div className={styles.container}>
-      <BackgroundCircles className={styles.backgroundCirclesLeft} />
+    <main className={styles.container} role="main">
+      <BackgroundCircles className={styles.backgroundCirclesLeft} aria-hidden="true" />
 
       <div className={styles.placeholder}>
-        <div className={styles.title}>
-          <span className={styles.four}>4</span>
+        <div className={styles.title} role="heading" aria-level={1}>
+          <span className={styles.four} aria-hidden="true">4</span>
           <picture>
             <Image
               src="/images/sections/error/reco-every_day-1x.png"
               alt="RECO продукція"
               className={styles.image}
-              width={500} // Указываем размеры изображения
-              height={500} // Указываем размеры изображения
-              sizes="(max-width: 768px) 100vw, 500px" // Для оптимизации под разные экраны
+              width={170}
+              height={170}
+              priority
+              quality={90}
+              sizes="(max-width: 768px) 100px, 170px"
             />
           </picture>
-          <span className={styles.four}>4</span>
+          <span className={styles.four} aria-hidden="true">4</span>
         </div>
         <p className={styles.text}>
           Ой! Ця сторінка явно переживає день неслухняного волосся!
         </p>
-        <div className={styles.btnContainer}>
-          <Link href="/" passHref>
-            <div className={styles.homeBtn}>
-              <div className={styles.iconContainer}>
-                <Icon
-                  name="icon-arrow-up-right2"
-                  fill="white"
-                  stroke="none"
-                  className={styles.homeBtnIcon}
-                />
-              </div>
-              <span className={styles.homeBtnText}> Назад до головної</span>
+        <nav className={styles.btnContainer}>
+          <Link href="/" className={styles.homeBtn}>
+            <div className={styles.iconContainer}>
+              <Icon
+                name="icon-arrow-up-right2"
+                fill="white"
+                stroke="none"
+                className={styles.homeBtnIcon}
+                aria-hidden="true"
+              />
             </div>
+            <span className={styles.homeBtnText}>Назад до головної</span>
           </Link>
-          <Link href="/catalog" passHref>
-            <p className={styles.catalogBtn}>каталог</p>
+          <Link href="/catalog" className={styles.catalogBtn}>
+            каталог
           </Link>
-        </div>
+        </nav>
       </div>
-      <BackgroundCircles className={styles.backgroundCirclesRight} />
-    </div>
+      <BackgroundCircles className={styles.backgroundCirclesRight} aria-hidden="true" />
+    </main>
   );
 };
 
-export default Error404;
+export default memo(Error404);

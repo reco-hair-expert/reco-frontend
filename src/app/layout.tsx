@@ -9,6 +9,11 @@ const notoSans = Noto_Sans({
   weight: ["400", "700"]
 });
 
+export const metadata = {
+  title: 'RECO',
+  description: 'RECO - український бренд косметики',
+};
+
 export default function DashboardLayout({
   children
 }: {
@@ -16,6 +21,9 @@ export default function DashboardLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/images/logo/logo-1x.png" />
+      </head>
       <body className={notoSans.className}>
         <CartProvider>
           <Header />
