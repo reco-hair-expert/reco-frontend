@@ -10,6 +10,7 @@ import { CartContext } from "@/context/CartContext";
 
 const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [showSizeWarning, setShowSizeWarning] = useState(false);
   const cart = useContext(CartContext);
 
   const handleSizeChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -18,11 +19,8 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
 
   const handleBuyClick = useCallback(() => {
     if (!selectedSize) {
-      const sizeWarning = document.createElement('div');
-      sizeWarning.className = styles.sizeWarning;
-      sizeWarning.textContent = 'Будь ласка, оберіть розмір перед покупкою.';
-      document.body.appendChild(sizeWarning);
-      setTimeout(() => sizeWarning.remove(), 3000);
+      setShowSizeWarning(true);
+      setTimeout(() => setShowSizeWarning(false), 3000);
       return;
     }
 
@@ -62,6 +60,11 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
         width: `calc((100% - 20px * ${perRow - 1}) / ${perRow})`,
       }}
     >
+      {showSizeWarning && (
+        <div className={styles.sizeWarning}>
+          Будь ласка, оберіть розмір перед покупкою.
+        </div>
+      )}
       <div className={styles.imageContainer}>
         <Image
           src={product.photoProduct || "/fallback-image.jpg"}
