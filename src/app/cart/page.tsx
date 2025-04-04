@@ -8,14 +8,14 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://reco.com.ua'),
-  title: "Кошик | RECO",
+  title: "Кошик ",
   description: "Перегляньте товари у вашому кошику. Безпечна оплата, швидка доставка по всій Україні.",
   robots: {
     index: false,
     follow: true
   },
   openGraph: {
-    title: "Кошик | RECO",
+    title: "Кошик ",
     description: "Перегляньте товари у вашому кошику. Безпечна оплата, швидка доставка по всій Україні.",
     type: "website",
     images: [

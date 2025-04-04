@@ -5,10 +5,10 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://reco.com.ua'),
-  title: "Каталог товарів | RECO",
+  title: "Каталог товарів ",
   description: "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
   openGraph: {
-    title: "Каталог товарів | RECO",
+    title: "Каталог товарів ",
     description: "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
     type: "website",
     images: [

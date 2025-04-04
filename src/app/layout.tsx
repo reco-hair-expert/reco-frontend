@@ -3,15 +3,35 @@ import Footer from "@/components/Footer/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { Noto_Sans } from "next/font/google";
 import "@/styles/reset.scss";
+import { Metadata, Viewport } from "next";
 
 const notoSans = Noto_Sans({
   subsets: ["cyrillic", "latin"],
   weight: ["400", "700"]
 });
 
-export const metadata = {
-  title: 'RECO',
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://reco.com.ua'),
+  title: {
+    default: 'RECO',
+    template: '%s | RECO'
+  },
   description: 'RECO - український бренд косметики',
+  icons: {
+    icon: '/images/logo/logo-1x.png',
+    shortcut: '/images/logo/logo-1x.png',
+    apple: '/images/logo/logo-1x.png',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function DashboardLayout({
@@ -21,9 +41,6 @@ export default function DashboardLayout({
 }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/images/logo/logo-1x.png" />
-      </head>
       <body className={notoSans.className}>
         <CartProvider>
           <Header />
