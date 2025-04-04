@@ -13,6 +13,7 @@ export type Product = {
   quantity?: number;
   badgeInfo?: string;
   isNew?: boolean;
+  type: string;
 };
 export type CartItem = {
   product: Product;

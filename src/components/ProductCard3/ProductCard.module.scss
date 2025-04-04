@@ -31,7 +31,7 @@
   font-weight: bold;
   position: absolute;
   left: 20px;
-  top: 20px;
+  top: 20px;  
   @include mobile {
     left: 110px;
     top: 20px;
@@ -344,7 +344,7 @@
         appearance: none;
         width: 20px;
         height: 20px;
-        border: 3px solid $yellow-color;
+        border: 3px solid $white-color;
         border-radius: 50%;
         background-color: $black-color;
         position: relative;

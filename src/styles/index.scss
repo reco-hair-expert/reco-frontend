@@ -12,11 +12,14 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 main {
   flex-grow: 1;
-  width: 100vw;
+  width: 100%;
   overflow: hidden;
 }
 
