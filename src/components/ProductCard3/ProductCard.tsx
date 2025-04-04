@@ -56,7 +56,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
       size: selectedSize,
       price: currentProduct.sizes[selectedSize],
       photo: currentProduct.photo,
-      basePrice: currentProduct.price || 450
     };
 
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -201,9 +200,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
           </HighlightText>
           {isMobile ? (
             <>
-              <div className={styles.volume}>
-                <h3>{currentProduct.volume}</h3>
-              </div>
               {renderPrice()}
               {renderSizes()}
               {renderDescription()}
@@ -211,9 +207,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
           ) : (
             <>
               {renderDescription()}
-              <div className={styles.volume}>
-                <h3>{currentProduct.volume}</h3>
-              </div>
               {renderPrice()}
               {renderSizes()}
             </>

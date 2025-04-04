@@ -42,9 +42,9 @@
 .infoContainer {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 1rem;
-  max-width: 506px;
+  width: 506px;
   gap: 1rem;
 }
 
