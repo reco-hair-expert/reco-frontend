@@ -200,9 +200,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
           </HighlightText>
           {isMobile ? (
             <>
-              <div className={styles.volume}>
-                <h3>{currentProduct.volume}</h3>
-              </div>
               {renderPrice()}
               {renderSizes()}
               {renderDescription()}
@@ -210,9 +207,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
           ) : (
             <>
               {renderDescription()}
-              <div className={styles.volume}>
-                <h3>{currentProduct.volume}</h3>
-              </div>
               {renderPrice()}
               {renderSizes()}
             </>

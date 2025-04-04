@@ -2,6 +2,7 @@ import useDeviceDetection from "@/context/useDeviceDetection";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
 import styles from "./HeroButtons.module.scss";
+// import Image from "next/image";
 
 const HeroButtons = () => {
   const { isMobile, isTablet } = useDeviceDetection();
@@ -42,6 +43,15 @@ const HeroButtons = () => {
         </div>
         <span className={styles.moreInfoText}>ПРО НАС</span>
       </Button>
+      {/* <div className={styles.test}>
+          <Image
+            src="/images/logo/logo-1x.png"
+            alt="RECO продукція"
+            width={150}
+            height={150}
+            priority
+          />
+        </div> */}
     </div>
   );
 };
