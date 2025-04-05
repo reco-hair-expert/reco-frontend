@@ -9,7 +9,7 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
   const classes = classNames(styles.featuresSection, className);
 
   return (
-    <section className="container">
+    <section className="container" data-testid="features-section">
       <div className={classes}>
         <BackgroundCircles className={styles.backgroundCircles} />
         <h2>Особливості продукту</h2>

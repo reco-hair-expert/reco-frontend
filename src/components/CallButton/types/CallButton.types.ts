@@ -3,4 +3,5 @@ export interface CallButtonProps {
   onClick?: () => void;
   icon?: string;
   phoneNumber: string;
+  ariaLabel?: string;
 }

@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const FeedbackSection = () => {
   return (
-    <section className="container">
+    <section className="container" data-testid="feedback-section">
       <div className={styles.feedbackSection}>
         <div className={styles.formCirclesContainer}>
           <div className={styles.formCircles}></div>

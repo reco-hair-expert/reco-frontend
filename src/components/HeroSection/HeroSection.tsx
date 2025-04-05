@@ -14,13 +14,13 @@ const HeroSection = ({ className }: HeroSectionProps) => {
 
   return (
     <section className="container">
-      <div className={combinedClass}>
+      <div className={combinedClass} data-testid="hero-section">
         <RecoBg />
         <article className={styles.mainContent}>
           <div className={styles.textField}>
             <h1 className={styles.slogan}>
               <HighlightText>RECO</HighlightText> <br /> бренд створений з
-              любов&#x2019;ю до волосся
+              любовью до волосся
             </h1>
             <figure className={styles.imageContainer}>
               <Image
