@@ -16,13 +16,13 @@ export const metadata: Metadata = {
         url: '/images/catalog-og.jpg',
         width: 1200,
         height: 630,
-        alt: 'Каталог товарів RECO'
+        alt: 'Каталог товарів '
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: "Каталог товарів | RECO",
+    title: "Каталог товарів ",
     description: "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
     images: ['/images/catalog-og.jpg'],
   }
@@ -70,7 +70,7 @@ export default function Catalog() {
         "name": product.name,
         "description": product.description,
         "image": product.photo.src,
-        "price": product.price,
+        "price": Object.values(product.sizes)[0] || 0,
         "priceCurrency": "UAH"
       }
     }))
