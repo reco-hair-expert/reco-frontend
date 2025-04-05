@@ -20,6 +20,10 @@ export type CartItem = {
 };
 
 export interface CartContextValue {
-  cart: { quantity?: number }[]; 
   cartItems: CartItem[];
+  addToCart: (product: Product, size?: string) => void;
+  removeFromCart: (productId: number, size?: string) => void;
+  updateCartItemQuantity: (productId: number, quantity: number, size?: string) => void;
+  cartTotal: number;
+  cartCount: number;
 }

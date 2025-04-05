@@ -5,17 +5,20 @@ import styles from "./CatalogCard.module.scss";
 import Link from "next/link";
 import Icon from "../Icon/Icon";
 import { CatalogCardProps } from "./types/CatalogCard.types";
-import { useContext, useState, useCallback, memo } from "react";
-import { CartContext } from "@/context/CartContext";
+import { useState, useCallback, memo } from "react";
+import { useCart } from "@/context/CartContext";
 
 const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [showSizeWarning, setShowSizeWarning] = useState(false);
-  const cart = useContext(CartContext);
+  const { addToCart } = useCart();
 
-  const handleSizeChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedSize(event.target.value);
-  }, []);
+  const handleSizeChange = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedSize(event.target.value);
+    },
+    []
+  );
 
   const handleBuyClick = useCallback(() => {
     if (!selectedSize) {
@@ -24,40 +27,43 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
       return;
     }
 
-    cart?.addToCart(product, selectedSize);
-  }, [selectedSize, cart, product]);
+    addToCart(product, selectedSize);
+  }, [selectedSize, addToCart, product]);
 
   const getSelectedSizePrice = useCallback(() => {
     if (!selectedSize || !product.sizes) return null;
     return product.sizes[selectedSize];
   }, [selectedSize, product.sizes]);
 
-  const renderSizes = useCallback(() => (
-    <>
-      {Object.keys(product.sizes || {}).length ? (
-        <select
-          className={styles.sizeSelect}
-          value={selectedSize || ''}
-          onChange={handleSizeChange}
-        >
-          <option value="">Оберіть розмір</option>
-          {Object.keys(product.sizes).map((size) => (
-            <option key={size} value={size}>
-              {size}
-            </option>
-          ))}
-        </select>
-      ) : (
-        <div>Розміри не доступні для цього товару.</div>
-      )}
-    </>
-  ), [product.sizes, selectedSize, handleSizeChange]);
+  const renderSizes = useCallback(
+    () => (
+      <>
+        {Object.keys(product.sizes || {}).length ? (
+          <select
+            className={styles.sizeSelect}
+            value={selectedSize || ""}
+            onChange={handleSizeChange}
+          >
+            <option value="">Оберіть розмір</option>
+            {Object.keys(product.sizes).map((size) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <div>Розміри не доступні для цього товару.</div>
+        )}
+      </>
+    ),
+    [product.sizes, selectedSize, handleSizeChange]
+  );
 
   return (
     <div
       className={styles.card}
       style={{
-        width: `calc((100% - 20px * ${perRow - 1}) / ${perRow})`,
+        width: `calc((100% - 20px * ${perRow - 1}) / ${perRow})`
       }}
     >
       {showSizeWarning && (
@@ -105,7 +111,7 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
               {getSelectedSizePrice() ? (
                 <>Купити за {getSelectedSizePrice()} грн</>
               ) : (
-                'Оберіть розмір'
+                "Оберіть розмір"
               )}
             </button>
           </div>
@@ -115,6 +121,6 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
   );
 });
 
-CatalogCard.displayName = 'CatalogCard';
+CatalogCard.displayName = "CatalogCard";
 
 export default CatalogCard;

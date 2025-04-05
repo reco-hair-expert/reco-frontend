@@ -10,6 +10,7 @@ import Icon from "../Icon/Icon";
 import Image from "next/image";
 import Carousel from "react-spring-3d-carousel";
 import { useSwipeable } from "react-swipeable";
+import Link from "next/link";
 
 interface ProductCardProps {
   products: Product[];
@@ -21,6 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
   const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
   const [offsetRadius, setOffsetRadius] = useState(2);
   const { addToCart } = useCartContext();
+
   const currentProduct = products[currentIndex];
 
   useEffect(() => setSelectedSize(null), [currentIndex]);
@@ -103,23 +105,25 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
                     ДОДАТИ В КОШИК
                   </Button>
                 ) : (
-                  <Button
-                    variant="secondary"
-                    size="l"
-                    className={styles.moreButton}
-                  >
-                    <div className={styles.iconContainer}>
-                      <Icon
-                        name="icon-arrow-up-right2"
-                        size={24}
-                        fill="white"
-                        stroke="none"
-                      />
-                    </div>
-                    <span className={styles.moreButtonText}>
-                      БІЛЬШЕ ТОВАРІВ
-                    </span>
-                  </Button>
+                  <Link href="/catalog">
+                    <Button
+                      variant="secondary"
+                      size="l"
+                      className={styles.moreButton}
+                    >
+                      <div className={styles.iconContainer}>
+                        <Icon
+                          name="icon-arrow-up-right2"
+                          size={24}
+                          fill="white"
+                          stroke="none"
+                        />
+                      </div>
+                      <span className={styles.moreButtonText}>
+                        БІЛЬШЕ ТОВАРІВ
+                      </span>
+                    </Button>
+                  </Link>
                 )}
               </div>
             )}

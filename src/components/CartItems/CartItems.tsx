@@ -1,18 +1,11 @@
 "use client";
-import { Product } from "@/types/types";
+import { Product, CartItem } from "@/types/types";
 import { useCart } from "@/context/CartContext";
 import HighlightText from "@/components/HighLightText/HighLightText";
 import styles from "./CartItems.module.scss";
 import Image from "next/image";
 
 const CartItems = () => {
-  interface CartItem {
-    product: Product;
-    size?: string;
-    quantity?: number;
-    id?: number;
-  }
-
   const { cartItems, removeFromCart, updateCartItemQuantity, addToCart } =
     useCart();
 
