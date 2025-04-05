@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { CartButtonProps } from "./types/CartButton.types";
 import styles from "./CartButton.module.scss";
 import classNames from "classnames";
