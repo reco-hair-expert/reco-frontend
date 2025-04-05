@@ -22,7 +22,7 @@ const FeedbackSection = () => {
             <Image
               src="/images/sections/feedback/recoil.png"
               alt="recoil"
-              fill
+              fill={true}
               className={styles.feedbackImg}
             />
           </div>
