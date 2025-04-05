@@ -27,3 +27,10 @@
   width: 80px;
   height: auto;
 }
+
+@media (max-width: $breakpoint-mobile) {
+  .address_form_container {
+    width: 107px;
+    margin-top: 35px;
+  }
+}
