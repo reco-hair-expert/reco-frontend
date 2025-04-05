@@ -18,21 +18,23 @@ const ModalMenu = ({ isOpen, onClick }: ModalMenuProps) => {
     }
   }, [isOpen]);
 
+  if (!isVisible) {
+    return null;
+  }
+
   return (
-    isVisible && (
-      <div
-        className={`${styles.modal} ${isOpen ? styles.show : styles.hide}`}
-        onClick={onClick}
-      >
-        <NavBar>
-          <NavButtons
-            className={styles.modalNavBtns}
-            labels={navigationButtons.map((button) => button.title)}
-            buttons={navigationButtons}
-          />
-        </NavBar>
-      </div>
-    )
+    <div
+      className={`${styles.modal} ${isOpen ? styles.show : styles.hide}`}
+      onClick={onClick}
+    >
+      <NavBar>
+        <NavButtons
+          className={styles.modalNavBtns}
+          labels={navigationButtons.map((button) => button.title)}
+          buttons={navigationButtons}
+        />
+      </NavBar>
+    </div>
   );
 };
 

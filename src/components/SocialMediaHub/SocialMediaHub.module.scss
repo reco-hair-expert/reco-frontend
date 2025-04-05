@@ -10,6 +10,21 @@
   transition: all 0.3s ease;
 
   @media (max-width: $breakpoint-mobile) {
-    order: -1;
+    flex-direction: row;
+  }
+}
+
+@media (max-width: $breakpoint-tablet) {
+  .social_media_hub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .social_media_hub {
+    flex-direction: row;
   }
 }

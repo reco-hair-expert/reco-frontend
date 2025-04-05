@@ -54,11 +54,10 @@ export const CartProvider = ({ children }: Props) => {
       if (cartItems.length > 0) {
         saveCartToLocalStorage(cartItems);
       } else {
-        localStorage.removeItem("cartItems"); 
+        localStorage.removeItem("cartItems");
       }
     }
   }, [cartItems]);
-  
 
   const addToCart = (product: Product, size: string = "") => {
     setCartItems((prevCart) => {
