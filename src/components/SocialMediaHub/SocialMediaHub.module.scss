@@ -13,3 +13,13 @@
     order: -1;
   }
 }
+
+@media (max-width: $breakpoint-tablet) {
+  .social_media_hub {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+}
+

@@ -126,7 +126,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 500px;
+  width: 480px;
   height: 58px;
   background-color: $yellow-color;
   border-radius: 58px;
@@ -140,7 +140,7 @@
   }
 }
 .continueShoppingButton {
-  width: 500px;
+  width: 480px;
   height: 58px;
   background-color: transparent;
   border-radius: 58px;
@@ -185,3 +185,10 @@
     width: 320px;
   }
 }
+
+@media (max-width: $breakpoint-tablet) {
+  .cartItems {
+    width: 100%;
+  }
+}
+

@@ -67,7 +67,7 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
       )}
       <div className={styles.imageContainer}>
         <Image
-          src={product.photoProduct || "/fallback-image.jpg"}
+          src={product.photo || "/fallback-image.jpg"}
           alt={product.name}
           width={400}
           height={300}
