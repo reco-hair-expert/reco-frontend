@@ -14,7 +14,8 @@ const CartButton = ({ className, onClick }: CartButtonProps) => {
   const cartItems = useMemo(() => cartContext?.cartItems ?? [], [cartContext]);
 
   const totalItems = useMemo(
-    () => cartItems.reduce((sum: number, item: CartItem) => sum + item.quantity, 0),
+    () =>
+      cartItems.reduce((sum: number, item: CartItem) => sum + item.quantity, 0),
     [cartItems]
   );
 

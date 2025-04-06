@@ -11,27 +11,27 @@ const notoSans = Noto_Sans({
 });
 
 export const viewport: Viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
+  maximumScale: 1
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://reco.com.ua'),
+  metadataBase: new URL("https://reco.com.ua"),
   title: {
-    default: 'RECO',
-    template: '%s | RECO'
+    default: "RECO",
+    template: "%s | RECO"
   },
-  description: 'RECO - український бренд косметики',
+  description: "RECO - український бренд косметики",
   icons: {
-    icon: '/images/logo/logo-1x.png',
-    shortcut: '/images/logo/logo-1x.png',
-    apple: '/images/logo/logo-1x.png',
+    icon: "/images/logo/logo-1x.png",
+    shortcut: "/images/logo/logo-1x.png",
+    apple: "/images/logo/logo-1x.png"
   },
   robots: {
     index: true,
-    follow: true,
-  },
+    follow: true
+  }
 };
 
 export default function DashboardLayout({

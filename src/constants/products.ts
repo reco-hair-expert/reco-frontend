@@ -1,5 +1,5 @@
 import recoLogo from "../../public/images/logo/logo-2x.png";
-import reco from "../../public/images/product.png"
+import reco from "../../public/images/product.png";
 export const products = [
   {
     id: 1,
@@ -15,11 +15,11 @@ export const products = [
       "30 ml": 1200,
       "50 ml": 1800,
       "100 ml": 3240,
-      "200 ml": 6000,
+      "200 ml": 6000
     },
     price: 600,
     badgeInfo: "Хіт продажів",
-    isNew: true,
+    isNew: true
   },
   {
     id: 2,
@@ -33,11 +33,11 @@ export const products = [
       "15 ml": 720,
       "30 ml": 1440,
       "50 ml": 2160,
-      "100 ml": 3960,
+      "100 ml": 3960
     },
     price: 720,
     badgeInfo: "Новинка",
-    isNew: true,
+    isNew: true
   },
   {
     id: 3,
@@ -46,14 +46,15 @@ export const products = [
     photoProduct: "/images/product.png",
     volume: "Об'єм",
     type: "Спрей - реконструктор",
-    description: "Спрей-реконструктор з активною формулою для пористого волосся...",
+    description:
+      "Спрей-реконструктор з активною формулою для пористого волосся...",
     sizes: {
       "100 ml": 1560,
-      "250 ml": 3120,
+      "250 ml": 3120
     },
     price: 1560,
     badgeInfo: "Рекомендовано",
-    isNew: false,
+    isNew: false
   },
   {
     id: 4,
@@ -65,11 +66,11 @@ export const products = [
     description: "Коктейль з натуральних олій для зволоження волосся...",
     sizes: {
       "15 ml": 720,
-      "30 ml": 1440,
+      "30 ml": 1440
     },
     price: 720,
     badgeInfo: "Найкращий вибір",
-    isNew: false,
+    isNew: false
   },
   {
     id: 5,
@@ -81,11 +82,11 @@ export const products = [
     description: "Спрей-термозахист з формулою RECO...",
     sizes: {
       "100 ml": 1440,
-      "250 ml": 2880,
+      "250 ml": 2880
     },
     price: 1440,
     badgeInfo: "Хіт продажів",
-    isNew: true,
+    isNew: true
   },
   {
     id: 6,
@@ -97,11 +98,11 @@ export const products = [
     description: "Спрей для прикореневого об'єму...",
     sizes: {
       "100 ml": 1080,
-      "250 ml": 2160,
+      "250 ml": 2160
     },
     price: 1080,
     badgeInfo: "Рекомендовано",
-    isNew: false,
+    isNew: false
   },
   {
     id: 7,
@@ -114,11 +115,11 @@ export const products = [
     sizes: {
       "50 ml": 600,
       "100 ml": 1140,
-      "200 ml": 2160,
+      "200 ml": 2160
     },
     price: 600,
     badgeInfo: "Топ продажів",
-    isNew: true,
+    isNew: true
   },
   {
     id: 8,
@@ -130,10 +131,10 @@ export const products = [
     description: "Зволожуючий шампунь для здорового волосся...",
     sizes: {
       "100 ml": 450,
-      "250 ml": 900,
+      "250 ml": 900
     },
     price: 450,
     badgeInfo: "Новинка",
-    isNew: true,
-  },
+    isNew: true
+  }
 ];

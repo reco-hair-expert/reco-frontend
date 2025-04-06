@@ -22,6 +22,6 @@ export type CartItem = {
 };
 
 export interface CartContextValue {
-  cart: { quantity?: number }[]; 
+  cart: { quantity?: number }[];
   cartItems: CartItem[];
 }

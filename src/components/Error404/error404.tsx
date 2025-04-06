@@ -8,11 +8,16 @@ import { memo } from "react";
 const Error404 = () => {
   return (
     <main className={styles.container} role="main">
-      <BackgroundCircles className={styles.backgroundCirclesLeft} aria-hidden="true" />
+      <BackgroundCircles
+        className={styles.backgroundCirclesLeft}
+        aria-hidden="true"
+      />
 
       <div className={styles.placeholder}>
         <div className={styles.title} role="heading" aria-level={1}>
-          <span className={styles.four} aria-hidden="true">4</span>
+          <span className={styles.four} aria-hidden="true">
+            4
+          </span>
           <picture>
             <Image
               src="/images/sections/error/reco-every_day-1x.png"
@@ -25,7 +30,9 @@ const Error404 = () => {
               sizes="(max-width: 768px) 100px, 170px"
             />
           </picture>
-          <span className={styles.four} aria-hidden="true">4</span>
+          <span className={styles.four} aria-hidden="true">
+            4
+          </span>
         </div>
         <p className={styles.text}>
           Ой! Ця сторінка явно переживає день неслухняного волосся!
@@ -48,7 +55,10 @@ const Error404 = () => {
           </Link>
         </nav>
       </div>
-      <BackgroundCircles className={styles.backgroundCirclesRight} aria-hidden="true" />
+      <BackgroundCircles
+        className={styles.backgroundCirclesRight}
+        aria-hidden="true"
+      />
     </main>
   );
 };

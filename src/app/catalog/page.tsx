@@ -4,27 +4,30 @@ import dynamic from "next/dynamic";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://reco.com.ua'),
+  metadataBase: new URL("https://reco.com.ua"),
   title: "Каталог товарів ",
-  description: "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
+  description:
+    "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
   openGraph: {
     title: "Каталог товарів ",
-    description: "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
+    description:
+      "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
     type: "website",
     images: [
       {
-        url: '/images/catalog-og.jpg',
+        url: "/images/catalog-og.jpg",
         width: 1200,
         height: 630,
-        alt: 'Каталог товарів RECO'
+        alt: "Каталог товарів RECO"
       }
     ]
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: "Каталог товарів | RECO",
-    description: "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
-    images: ['/images/catalog-og.jpg'],
+    description:
+      "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
+    images: ["/images/catalog-og.jpg"]
   }
 };
 
@@ -37,21 +40,28 @@ const ProductCard = dynamic(
 );
 
 const CatalogCardList = dynamic(
-  () => import("@/components/CatalogCardList/CatalogCardList").then((mod) => mod.default),
+  () =>
+    import("@/components/CatalogCardList/CatalogCardList").then(
+      (mod) => mod.default
+    ),
   {
     loading: () => <div>Loading...</div>
   }
 );
 
 const FilterToggle = dynamic(
-  () => import("@/components/FilterToggle/FilterToggle").then((mod) => mod.default),
+  () =>
+    import("@/components/FilterToggle/FilterToggle").then((mod) => mod.default),
   {
     loading: () => <div>Loading...</div>
   }
 );
 
 const BackgroundCircles = dynamic(
-  () => import("@/components/BackgroundCircles/BackgroundCircles").then((mod) => mod.default),
+  () =>
+    import("@/components/BackgroundCircles/BackgroundCircles").then(
+      (mod) => mod.default
+    ),
   {
     loading: () => null
   }
@@ -62,16 +72,16 @@ export default function Catalog() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "itemListElement": products.map((product, index) => ({
+    itemListElement: products.map((product, index) => ({
       "@type": "ListItem",
-      "position": index + 1,
-      "item": {
+      position: index + 1,
+      item: {
         "@type": "Product",
-        "name": product.name,
-        "description": product.description,
-        "image": product.photo.src,
-        "price": product.price,
-        "priceCurrency": "UAH"
+        name: product.name,
+        description: product.description,
+        image: product.photo.src,
+        price: product.price,
+        priceCurrency: "UAH"
       }
     }))
   };
@@ -82,7 +92,7 @@ export default function Catalog() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      
+
       <main>
         <section className="container" aria-label="Новинки">
           <h1 className={styles.title}>НОВИНКИ</h1>
@@ -96,12 +106,15 @@ export default function Catalog() {
               <CatalogCardList products={products} perRow={4} />
             </ul>
           </nav>
-          <button className={styles.productBtn} aria-label="Показать больше товаров">
+          <button
+            className={styles.productBtn}
+            aria-label="Показать больше товаров"
+          >
             Показати більше
           </button>
         </section>
 
-        <section 
+        <section
           className={`container ${styles.recommendationContainer}`}
           aria-label="Рекомендации"
         >

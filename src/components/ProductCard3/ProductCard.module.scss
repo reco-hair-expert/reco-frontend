@@ -31,7 +31,7 @@
   font-weight: bold;
   position: absolute;
   left: 20px;
-  top: 20px;  
+  top: 20px;
   @include mobile {
     left: 110px;
     top: 20px;
@@ -275,7 +275,6 @@
     margin-top: 0;
   }
 }
-
 
 @include mobile {
   .descriptionContainer {

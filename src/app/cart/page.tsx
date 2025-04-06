@@ -7,23 +7,25 @@ import "@/styles/index.scss";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://reco.com.ua'),
+  metadataBase: new URL("https://reco.com.ua"),
   title: "Кошик ",
-  description: "Перегляньте товари у вашому кошику. Безпечна оплата, швидка доставка по всій Україні.",
+  description:
+    "Перегляньте товари у вашому кошику. Безпечна оплата, швидка доставка по всій Україні.",
   robots: {
     index: false,
     follow: true
   },
   openGraph: {
     title: "Кошик ",
-    description: "Перегляньте товари у вашому кошику. Безпечна оплата, швидка доставка по всій Україні.",
+    description:
+      "Перегляньте товари у вашому кошику. Безпечна оплата, швидка доставка по всій Україні.",
     type: "website",
     images: [
       {
-        url: '/images/cart-og.jpg',
+        url: "/images/cart-og.jpg",
         width: 1200,
         height: 630,
-        alt: 'Кошик RECO'
+        alt: "Кошик RECO"
       }
     ]
   }

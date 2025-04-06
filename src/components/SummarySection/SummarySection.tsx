@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 
 const SummarySection = () => {
   const { cartItems } = useCart();
-   const router = useRouter();
+  const router = useRouter();
 
   const cartTotal = useMemo(() => {
     return cartItems.reduce((total, item) => {
@@ -95,11 +95,11 @@ const SummarySection = () => {
           Підтвердити замовлення
         </button>
         <button
-        className={styles.continueShoppingButton}
-        onClick={handleContinueShopping}
-      >
-        ПРОДОВЖИТИ ПОКУПКИ
-      </button>
+          className={styles.continueShoppingButton}
+          onClick={handleContinueShopping}
+        >
+          ПРОДОВЖИТИ ПОКУПКИ
+        </button>
       </div>
     </section>
   );

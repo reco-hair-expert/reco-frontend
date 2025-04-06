@@ -18,7 +18,9 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false
+  );
   const [offsetRadius, setOffsetRadius] = useState(2);
   const { addToCart } = useCartContext();
   const currentProduct = products[currentIndex];
@@ -40,8 +42,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleNext = () => setCurrentIndex((prev) => (prev + 1) % products.length);
-  const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+  const handleNext = () =>
+    setCurrentIndex((prev) => (prev + 1) % products.length);
+  const handlePrev = () =>
+    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
   const handleSizeChange = (size: string) => setSelectedSize(size);
 
   const handleAddToCart = useCallback(() => {
@@ -55,7 +59,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
       name: currentProduct.name,
       size: selectedSize,
       price: currentProduct.sizes[selectedSize],
-      photo: currentProduct.photo,
+      photo: currentProduct.photo
     };
 
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
