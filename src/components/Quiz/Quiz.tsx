@@ -8,6 +8,8 @@ import type { QuizData, QuizResults, Answer } from "./types";
 import Button from "@/components/Button/Button";
 import { products } from "@/constants/products";
 import { StaticImageData } from "next/image";
+import Icon from "../Icon/Icon";
+import useDeviceDetection from "@/context/useDeviceDetection";
 
 interface RecommendedProduct {
   id: number;
@@ -37,6 +39,14 @@ interface QuizState {
 }
 
 const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
+  const { isMobile, isTablet } = useDeviceDetection();
+
+  const getButtonSize = () => {
+    if (isMobile) return "s";
+    if (isTablet) return "m";
+    return "l";
+  };
+
   const [state, setState] = useState<QuizState>({
     currentQuestionIndex: 0,
     answers: [],
@@ -253,18 +263,27 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
 
       <div className={styles.navigationButtons}>
         <Button
-          variant="primary"
-          size="m"
+          variant="secondary"
+          size={getButtonSize()}
           onClick={handleBack}
           disabled={isFirstQuestion}
           className={styles.backButton}
         >
+          <div className={styles.iconContainer}>
+            <Icon
+              name="icon-left-icon"
+              size={isMobile ? 20 : 30}
+              fill="black"
+              stroke="white"
+              className={styles.feedbackButtonIcon}
+            />
+          </div>
           НАЗАД
         </Button>
 
         <Button
           variant="primary"
-          size="m"
+          size={getButtonSize()}
           onClick={handleNext}
           disabled={!hasAnsweredCurrent}
           className={styles.nextButton}

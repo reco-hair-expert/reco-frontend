@@ -19,19 +19,8 @@ export default function QuizPage() {
 
   return (
     <main className={styles.container}>
-      <div className={styles.header}>
-        <h1>Персоналізований підбір догляду за волоссям</h1>
-        <p>Відповідайте на питання, щоб отримати індивідуальні рекомендації</p>
-      </div>
-
       <div className={styles.quizWrapper}>
         <Quiz data={quizData} onComplete={handleQuizComplete} />
-      </div>
-
-      <div className={styles.footer}>
-        <p>
-          Цей тест допоможе підібрати оптимальні засоби для вашого типу волосся
-        </p>
       </div>
     </main>
   );
