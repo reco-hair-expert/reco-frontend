@@ -1,12 +1,12 @@
 import { RecoBgProps } from "./types/RecoBg.types";
 import styles from "./RecoBg.module.scss";
 
-const RecoBg = ({ className, children }: RecoBgProps) => {
+const RecoBg = ({ className, children, "data-testid": dataTestId }: RecoBgProps) => {
   const combinedClass = className
     ? `${styles.background} ${className}`
     : styles.background;
   return (
-    <div className={combinedClass}>
+    <div className={combinedClass} data-testid={dataTestId}>
       <div className={styles.wordLayer} style={{ zIndex: 7 }}>
         RECO
       </div>

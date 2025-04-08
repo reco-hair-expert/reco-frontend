@@ -8,7 +8,11 @@ export const products = [
     volume: "Об'єм",
     type: "Реконструктор",
     description:
-      "Інноваційний реконструктор для відновлення сильно пошкодженого волосся...",
+      "Інноваційний продукт для відновлення максимально пошкодженого волосся. Відновлює дисульфідні та водневі зв'язки у структурі волосся всього за 20 хвилин. Після першого застосування волосся стає пружним, еластичним, зникає ламкість.",
+    shortDescription: "Супервідновлення волосся за 20 хвилин",
+    usage: "Нанести на чисте вологе волосся, залишити на 20 хвилин, змити водою.",
+    compound: "Aqua (Water), Bis-aminopropyl Diglysol Dimaleate, Sodium Benzonate, Macadamia Oil, Cottonseed-sweet Almond Oil, Olive Oil, Avocado Oil, Soybean Oil, Mango Butter And Cocoa Butter, Cocos Y (Coconut) Oil, Parfum (Fragrance), Phenoxyethanol, Polyquaternium-10, Citric Acid, Glycerin, Serine, Benzyl Salicylate, Tyhreonine, Peg-8, Coumarin, Ci 15510 (Orange 4), Helianthus Annuus (Sunflower) Seed Oil, Ppg-26-buteth-26 + запатентована формула Hair__expert",
+    recommendations: "Підходить для відновлення сильно пошкодженого волосся.",
     sizes: {
       "15 ml": 600,
       "30 ml": 1200,
@@ -120,4 +124,6 @@ export const products = [
     badgeInfo: "Новинка",
     isNew: true,
   },
+ 
+  
 ];
