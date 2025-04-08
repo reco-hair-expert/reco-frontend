@@ -1,0 +1,25 @@
+@use "@/styles/variables" as *;
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.quizWrapper {
+  margin-bottom: 2rem;
+  flex-grow: 1;
+}
+
+/* Адаптація для мобільних пристроїв */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .quizWrapper {
+    padding: 1.5rem;
+  }
+}

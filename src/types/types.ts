@@ -27,3 +27,4 @@ export interface CartContextValue {
   cartTotal: number;
   cartCount: number;
 }
+

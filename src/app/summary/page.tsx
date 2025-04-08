@@ -18,10 +18,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: '/images/summary-og.jpg',
+        url: "/images/summary-og.jpg",
         width: 1200,
         height: 630,
-        alt: 'Оформлення замовлення RECO'
+        alt: "Оформлення замовлення RECO"
       }
     ]
   }

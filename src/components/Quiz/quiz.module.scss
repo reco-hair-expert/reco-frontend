@@ -1,0 +1,220 @@
+@use "@/styles/variables.scss" as *;
+
+@mixin quiz-article {
+  background-repeat: no-repeat;
+  background-size: contain;
+  color: $white-color;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: $breakpoint-mobile) {
+    position: absolute;
+    font-size: 12px;
+  }
+}
+
+.progressText {
+  color: white;
+  font-size: 40px;
+  font-weight: 400;
+  text-align: center;
+  margin: 30px;
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 20px;
+  }
+}
+
+.currentNumber {
+  color: $yellow-color;
+}
+
+.questionText {
+  position: relative;
+  color: $white-color;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0px 40px;
+  background-image: image-set(
+    url(/images/sections/quiz/text-container.png) type("image/webp") 1x
+  );
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 544px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 300px;
+    height: 224px;
+    padding: 40px 20px;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    background-image: image-set(
+      url(/images/sections/quiz/text-container.png) type("image/webp") 1x
+    );
+    width: 290px;
+    height: 152px;
+    padding: 30px 15px;
+  }
+}
+
+.quizContainer {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.progressContainer {
+  height: 16px;
+  background-color: $grey-color;
+  border-radius: 3px;
+  overflow: hidden;
+
+  @media (max-width: $breakpoint-mobile) {
+    height: 10px;
+  }
+}
+
+.progressBar {
+  height: 100%;
+  background-color: $yellow-color;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.productImage {
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.questionText {
+  font-size: 18px;
+  font-weight: 400;
+  color: white;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.optionsContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.optionItem {
+  padding: 16px;
+  background-color: $black-color;
+  border: 1px solid rgba($yellow-color, 0.3);
+  border-radius: 24px;
+  cursor: pointer;
+  font-size: 16px;
+  color: $white-color;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    border-color: rgba($yellow-color, 0.7);
+    background-color: rgba(255, 253, 245, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  &.selected {
+    background: linear-gradient(
+      145deg,
+      rgba(255, 215, 0, 0.15),
+      rgba(255, 255, 255, 0.1)
+    );
+    border-color: $yellow-color;
+    color: $yellow-color;
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.25);
+    transform: translateY(-1px);
+
+    &:hover {
+      background: linear-gradient(
+        145deg,
+        rgba(255, 215, 0, 0.25),
+        rgba(255, 255, 255, 0.15)
+      );
+    }
+  }
+}
+
+.navigationButtons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 24px auto 0;
+  width: 100%;
+  max-width: 400px;
+
+  > * {
+    flex: 1;
+    min-width: 120px;
+    max-width: 200px;
+  }
+}
+
+.backButton {
+  background-color: white;
+  color: #333;
+  border: 1px solid #e0e0e0;
+
+  &:hover:not(:disabled) {
+    background-color: #f9f9f9;
+  }
+}
+.iconContainer {
+  height: 54px;
+  width: 54px;
+  background-color: $grey-color;
+  border-radius: 50%;
+  display: flex;
+  margin-right: 1px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 1px;
+  @media (max-width: $breakpoint-mobile) {
+    height: 36px;
+    width: 36px;
+    top: 2px;
+    right: 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  .quizContainer {
+    padding: 16px;
+  }
+
+  .optionItem {
+    padding: 14px;
+    font-size: 15px;
+  }
+
+  .questionText {
+    font-size: 17px;
+    margin-bottom: 20px;
+  }
+
+  .navigationButtons {
+    margin-top: 20px;
+    max-width: 100%;
+    padding: 0 16px;
+
+    > * {
+      max-width: none;
+    }
+  }
+}
