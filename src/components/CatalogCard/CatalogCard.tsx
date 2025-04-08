@@ -5,13 +5,13 @@ import styles from "./CatalogCard.module.scss";
 import Link from "next/link";
 import Icon from "../Icon/Icon";
 import { CatalogCardProps } from "./types/CatalogCard.types";
-import { useContext, useState, useCallback, memo } from "react";
-import { CartContext } from "@/context/CartContext";
+import { useState, useCallback, memo } from "react";
+import { useCart } from "@/context/CartContext";
 
 const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [showSizeWarning, setShowSizeWarning] = useState(false);
-  const cart = useContext(CartContext);
+  const { addToCart } = useCart();
 
   const handleSizeChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -27,8 +27,8 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
       return;
     }
 
-    cart?.addToCart(product, selectedSize);
-  }, [selectedSize, cart, product]);
+    addToCart(product, selectedSize);
+  }, [selectedSize, addToCart, product]);
 
   const getSelectedSizePrice = useCallback(() => {
     if (!selectedSize || !product.sizes) return null;
@@ -61,6 +61,7 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
 
   return (
     <div
+      data-testid="catalog-card"
       className={styles.card}
       style={{
         width: `calc((100% - 20px * ${perRow - 1}) / ${perRow})`

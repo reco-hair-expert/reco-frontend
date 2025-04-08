@@ -12,10 +12,9 @@ const CartSummary = () => {
 
   const total = useMemo(() => {
     return cartItems.reduce((acc: number, item: CartItem) => {
-      const price: number =
-        item.size && item.product.sizes[item.size] !== undefined
-          ? (item.product.sizes[item.size] ?? 0)
-          : (item.product.price ?? 0);
+      const price: number = item.size
+        ? item.product.sizes[item.size] || 0
+        : 0;
       return acc + price * (item.quantity || 1);
     }, 0);
   }, [cartItems]);

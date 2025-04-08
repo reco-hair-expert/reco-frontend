@@ -5,11 +5,14 @@ export const products = [
     id: 1,
     name: "RECO",
     photo: reco,
-    photoProduct: reco,
     volume: "Об'єм",
     type: "Реконструктор",
     description:
-      "Інноваційний реконструктор для відновлення сильно пошкодженого волосся...",
+      "Інноваційний продукт для відновлення максимально пошкодженого волосся. Відновлює дисульфідні та водневі зв'язки у структурі волосся всього за 20 хвилин. Після першого застосування волосся стає пружним, еластичним, зникає ламкість.",
+    shortDescription: "Супервідновлення волосся за 20 хвилин",
+    usage: "Нанести на чисте вологе волосся, залишити на 20 хвилин, змити водою.",
+    compound: "Aqua (Water), Bis-aminopropyl Diglysol Dimaleate, Sodium Benzonate, Macadamia Oil, Cottonseed-sweet Almond Oil, Olive Oil, Avocado Oil, Soybean Oil, Mango Butter And Cocoa Butter, Cocos Y (Coconut) Oil, Parfum (Fragrance), Phenoxyethanol, Polyquaternium-10, Citric Acid, Glycerin, Serine, Benzyl Salicylate, Tyhreonine, Peg-8, Coumarin, Ci 15510 (Orange 4), Helianthus Annuus (Sunflower) Seed Oil, Ppg-26-buteth-26 + запатентована формула Hair__expert",
+    recommendations: "Підходить для відновлення сильно пошкодженого волосся.",
     sizes: {
       "15 ml": 600,
       "30 ml": 1200,
@@ -17,7 +20,6 @@ export const products = [
       "100 ml": 3240,
       "200 ml": 6000
     },
-    price: 600,
     badgeInfo: "Хіт продажів",
     isNew: true
   },
@@ -25,7 +27,6 @@ export const products = [
     id: 2,
     name: "HAPPY END",
     photo: recoLogo,
-    photoProduct: "/images/product.png",
     volume: "Об'єм",
     type: "Засіб для живлення",
     description: "Засіб для живлення, зволоження та блиску волосся...",
@@ -35,7 +36,6 @@ export const products = [
       "50 ml": 2160,
       "100 ml": 3960
     },
-    price: 720,
     badgeInfo: "Новинка",
     isNew: true
   },
@@ -43,7 +43,6 @@ export const products = [
     id: 3,
     name: "REC ON",
     photo: recoLogo,
-    photoProduct: "/images/product.png",
     volume: "Об'єм",
     type: "Спрей - реконструктор",
     description:
@@ -52,7 +51,6 @@ export const products = [
       "100 ml": 1560,
       "250 ml": 3120
     },
-    price: 1560,
     badgeInfo: "Рекомендовано",
     isNew: false
   },
@@ -60,7 +58,6 @@ export const products = [
     id: 4,
     name: "RecOil",
     photo: recoLogo,
-    photoProduct: "/images/product.png",
     volume: "Об'єм",
     type: "Олія - зволоження",
     description: "Коктейль з натуральних олій для зволоження волосся...",
@@ -68,7 +65,6 @@ export const products = [
       "15 ml": 720,
       "30 ml": 1440
     },
-    price: 720,
     badgeInfo: "Найкращий вибір",
     isNew: false
   },
@@ -76,7 +72,6 @@ export const products = [
     id: 5,
     name: "TERMO CONTROL",
     photo: recoLogo,
-    photoProduct: "/images/product.png",
     volume: "Об'єм",
     type: "Спрей - термозахист",
     description: "Спрей-термозахист з формулою RECO...",
@@ -84,7 +79,6 @@ export const products = [
       "100 ml": 1440,
       "250 ml": 2880
     },
-    price: 1440,
     badgeInfo: "Хіт продажів",
     isNew: true
   },
@@ -92,7 +86,6 @@ export const products = [
     id: 6,
     name: "VOL UP CRAZY",
     photo: recoLogo,
-    photoProduct: "/images/product.png",
     volume: "Об'єм",
     type: "Спрей - прикорінне",
     description: "Спрей для прикореневого об'єму...",
@@ -100,7 +93,6 @@ export const products = [
       "100 ml": 1080,
       "250 ml": 2160
     },
-    price: 1080,
     badgeInfo: "Рекомендовано",
     isNew: false
   },
@@ -108,7 +100,6 @@ export const products = [
     id: 7,
     name: "EVERY DAY",
     photo: recoLogo,
-    photoProduct: "/images/product.png",
     volume: "Об'єм",
     type: "Шампунь",
     description: "Шампунь для щоденного використання...",
@@ -117,7 +108,6 @@ export const products = [
       "100 ml": 1140,
       "200 ml": 2160
     },
-    price: 600,
     badgeInfo: "Топ продажів",
     isNew: true
   },
@@ -125,7 +115,6 @@ export const products = [
     id: 8,
     name: "SHAMPOO HIDRATING",
     photo: recoLogo,
-    photoProduct: "/images/product.png",
     volume: "Об'єм",
     type: "Шампунь",
     description: "Зволожуючий шампунь для здорового волосся...",
@@ -133,8 +122,7 @@ export const products = [
       "100 ml": 450,
       "250 ml": 900
     },
-    price: 450,
     badgeInfo: "Новинка",
-    isNew: true
-  }
+    isNew: true,
+  },
 ];

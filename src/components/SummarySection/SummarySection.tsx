@@ -13,11 +13,10 @@ const SummarySection = () => {
 
   const cartTotal = useMemo(() => {
     return cartItems.reduce((total, item) => {
-      const price =
-        item.size && item.product.sizes[item.size] !== undefined
-          ? item.product.sizes[item.size]
-          : (item.product.price ?? 0);
-      return total + (price ?? 0) * item.quantity;
+      const price = item.size
+        ? item.product.sizes[item.size] || 0
+        : 0;
+      return total + price * item.quantity;
     }, 0);
   }, [cartItems]);
   const handleContinueShopping = () => {
@@ -58,8 +57,7 @@ const SummarySection = () => {
                         Кількість: {item.quantity}
                       </p>
                       <p className={styles.price}>
-                        {item.product.sizes?.[item.size] || item.product.price}{" "}
-                        грн
+                        {item.product.sizes[item.size] || 0} грн
                       </p>
                     </>
                   )}

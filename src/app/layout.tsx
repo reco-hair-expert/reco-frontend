@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     default: "RECO",
     template: "%s | RECO"
   },
-  description: "RECO - український бренд косметики",
+  description: 'RECO - Косметика майбутнього',
   icons: {
     icon: "/images/logo/logo-1x.png",
     shortcut: "/images/logo/logo-1x.png",

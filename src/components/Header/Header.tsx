@@ -35,15 +35,15 @@ const Header = () => {
           </NavBar>
 
           <div className={styles.active_btns}>
-            <Link href={`tel:${phoneNumber}`} className={styles.call_btn}>
+            <Link href={`tel:${phoneNumber}`} className={styles.call_btn} aria-label="Call">
               <CallButton phoneNumber={phoneNumber} />
             </Link>
-            <Link href="/cart" className={styles.cart_btn}>
+            <Link href="/cart" className={styles.cart_btn} aria-label="Cart">
               <CartButton cart={[]} />
             </Link>
           </div>
 
-          <BurgerBtn />
+          <BurgerBtn aria-label="Menu" />
         </div>
       </div>
     </header>

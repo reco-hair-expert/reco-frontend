@@ -5,7 +5,11 @@ import styles from "./BurgerBtn.module.scss";
 import classNames from "classnames";
 import ModalMenu from "../MobileMenu/ModalMenu";
 
-const BurgerBtn = () => {
+interface BurgerBtnProps {
+  'aria-label'?: string;
+}
+
+const BurgerBtn = ({ 'aria-label': ariaLabel }: BurgerBtnProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
 
@@ -37,6 +41,7 @@ const BurgerBtn = () => {
         type="button"
         className={classNames(styles.burgerBtn, { [styles.open]: modalIsOpen })}
         onClick={handleClick}
+        aria-label={ariaLabel}
       >
         <span></span>
         <span></span>

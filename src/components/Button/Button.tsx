@@ -1,3 +1,4 @@
+import React from "react";
 import { ButtonProps } from "./types/Button.types";
 import classNames from "classnames";
 import "./Button.scss";

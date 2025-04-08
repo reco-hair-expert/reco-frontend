@@ -99,8 +99,8 @@ export const CartProvider = ({ children }: Props) => {
     );
   };
 
-  const cartTotal = cartItems.reduce(
-    (total, item) => total + item.product.price * item.quantity,
+  const total = cartItems.reduce(
+    (total, item) => total + (item.product.sizes[item.size || ''] || 0) * item.quantity,
     0
   );
   const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
@@ -112,7 +112,7 @@ export const CartProvider = ({ children }: Props) => {
         addToCart,
         removeFromCart,
         updateCartItemQuantity,
-        cartTotal,
+        cartTotal: total,
         cartCount
       }}
     >

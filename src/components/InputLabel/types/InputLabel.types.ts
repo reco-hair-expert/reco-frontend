@@ -1,4 +1,4 @@
-export type InputLableProps = {
+export type InputLabelProps = {
   htmlFor: string;
   children: string;
   required?: boolean;

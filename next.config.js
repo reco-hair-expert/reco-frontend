@@ -28,6 +28,9 @@ const nextConfig = {
     }
     return config;
   },
+  experimental: {
+    forceSwcTransforms: true // This forces the use of SWC even when Babel is present
+  }
 }
 
 module.exports = nextConfig
