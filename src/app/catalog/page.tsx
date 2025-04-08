@@ -95,8 +95,10 @@ export default function Catalog() {
 
       <main>
         <section className="container" aria-label="Новинки">
-          <h1 className={styles.title}>НОВИНКИ</h1>
-          <ProductCard products={products} />
+          <div className={styles.newProducts}>
+            <h1 className={styles.title}>НОВИНКИ</h1>
+            <ProductCard products={products} />
+          </div>
         </section>
 
         <section className="container" aria-label="Все товары">
