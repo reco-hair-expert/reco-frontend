@@ -4,39 +4,12 @@ import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import QuizProgress from "./QuizProgress";
 import styles from "./quiz.module.scss";
-import type { QuizData, QuizResults, Answer } from "./types";
+import type { Answer, QuizProps, QuizState, RecommendedProduct } from "./types";
 import Button from "@/components/Button/Button";
 import { products } from "@/constants/products";
 import { StaticImageData } from "next/image";
 import Icon from "../Icon/Icon";
 import useDeviceDetection from "@/context/useDeviceDetection";
-
-interface RecommendedProduct {
-  id: number;
-  name: string;
-  photo: StaticImageData;
-  photoProduct: StaticImageData;
-  type: string;
-  description: string;
-  price: number;
-  badgeInfo?: string;
-  isNew: boolean;
-  score: number;
-  volume: string;
-  sizes: Record<string, number>;
-}
-
-interface QuizProps {
-  data: QuizData;
-  onComplete: (results: QuizResults) => void;
-}
-
-interface QuizState {
-  currentQuestionIndex: number;
-  answers: Answer[];
-  showResults: boolean;
-  recommendedProducts: RecommendedProduct[];
-}
 
 const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const { isMobile, isTablet } = useDeviceDetection();
@@ -112,7 +85,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     results: { name: string; score: number }[]
   ): RecommendedProduct[] => {
     const fallbackImage = {
-      src: "/product.png",
+      src: "/images/product.png",
       height: 1,
       width: 1,
       blurDataURL: ""
