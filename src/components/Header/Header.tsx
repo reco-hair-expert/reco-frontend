@@ -1,3 +1,4 @@
+"use client";
 import styles from "./Header.module.scss";
 import "@/styles/index.scss";
 import Image from "next/image";
@@ -9,10 +10,13 @@ import CallButton from "../CallButton/CallButton";
 import CartButton from "../CartButton/CartButton";
 import { phoneNumber } from "@/constants/contacts";
 import BurgerBtn from "../BurgerBtn/BurgerBtn";
+import { useScrollHeader } from '@/hooks/useScrollHeader';
 
 const Header = () => {
+  const isHeaderVisible = useScrollHeader();
+
   return (
-    <header className={styles.header}>
+    <header className={`${styles.header} ${!isHeaderVisible ? styles.hidden : ''}`}>
       <div className="container">
         <div className={styles.content}>
           <Link href="/" className={styles.logo}>

@@ -4,10 +4,11 @@
 .heroSection {
   padding-top: 6rem;
   padding-bottom: 6rem;
+  margin-top: 100px;
   position: relative;
   display: flex;
   flex: 1;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   flex-direction: row;
   background-color: transparent;
@@ -32,7 +33,7 @@
   justify-content: flex-start;
   text-align: left;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
   z-index: 1000;
   max-width: 82%;
 }
@@ -44,7 +45,7 @@
 }
 
 .text {
-  font-size: 32px;
+  font-size: 30px;
   text-align: left;
   margin-bottom: 4rem;
   max-width: 912px;
@@ -92,7 +93,7 @@
   }
 
   .textField {
-    max-width: 100%;
+    min-width: 100%;
   }
 
   .slogan {
@@ -106,7 +107,7 @@
   .text {
     font-size: 28px;
     text-align: left;
-    max-width: 500px;
+    max-width: 100%;
     z-index: 10;
   }
 

@@ -5,6 +5,7 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  outline: 1px solid green;
 }
 
 body {
@@ -43,6 +44,7 @@ button {
   margin: 0 auto;
   padding: 0 10px;
   width: 100%;
+  overflow: visible;
 
   @media (min-width: $breakpoint-mobile) {
     max-width: $breakpoint-mobile;

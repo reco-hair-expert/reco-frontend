@@ -6,8 +6,9 @@
   align-items: center;
   min-width: 100%;
   padding: 96px 20px;
-  position: relative;
-  overflow-x: hidden;
+  position: relative; 
+  min-height: 100vh;
+  overflow: visible;
 }
 
 .placeholder {
@@ -20,6 +21,8 @@
   gap: 50px;
   text-align: center;
   padding: 0 20px;
+  position: relative;
+  z-index: 1;
 
   @media screen and (max-width: $breakpoint-mobile) {
     width: 100%;
@@ -171,14 +174,15 @@
 .backgroundCirclesLeft {
   position: absolute;
   top: 19%;
-  left: 5%;
+  left: -10%;
   transform: rotate(45deg) scale(1.3);
+  z-index: -1;
 }
 
 .backgroundCirclesRight {
   position: absolute;
   top: 33%;
-  right: 5%;
+  right: -10%;
   transform: rotate(235deg) scale(1.3);
   z-index: -1;
 }
