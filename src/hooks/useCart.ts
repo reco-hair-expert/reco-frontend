@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
-import { Product } from "@/types/types";
+import { Product, CartItem } from "@/types/types";
 
 export const useCart = () => {
-  const [cart, setCart] = useState<Product[]>(() => {
+  const [cart, setCart] = useState<CartItem[]>(() => {
     const storedCart = localStorage.getItem("cart");
     return storedCart ? JSON.parse(storedCart) : [];
   });
@@ -14,17 +14,17 @@ export const useCart = () => {
   const addToCart = useCallback((product: Product, size: string) => {
     setCart((prevCart) => {
       const productInCart = prevCart.find(
-        (item) => item.name === product.name && item.size === size
+        (item) => item.product.id === product.id && item.size === size
       );
 
       if (productInCart) {
         return prevCart.map((item) =>
-          item.name === product.name && item.size === size
-            ? { ...item, quantity: (item.quantity || 0) + 1 }
+          item.product.id === product.id && item.size === size
+            ? { ...item, quantity: item.quantity + 1 }
             : item
         );
       } else {
-        return [...prevCart, { ...product, size, quantity: 1 }];
+        return [...prevCart, { product, quantity: 1, size }];
       }
     });
   }, []);
@@ -32,7 +32,7 @@ export const useCart = () => {
   const removeFromCart = useCallback((product: Product, size: string) => {
     setCart((prevCart) =>
       prevCart.filter(
-        (item) => !(item.name === product.name && item.size === size)
+        (item) => !(item.product.id === product.id && item.size === size)
       )
     );
   }, []);
@@ -41,17 +41,28 @@ export const useCart = () => {
     setCart((prevCart) =>
       prevCart
         .map((item) =>
-          item.name === product.name && item.size === size
-            ? { ...item, quantity: Math.max((item.quantity || 0) - 1, 1) }
+          item.product.id === product.id && item.size === size
+            ? { ...item, quantity: Math.max(item.quantity - 1, 1) }
             : item
         )
-        .filter((item) => (item.quantity ?? 0) > 0)
+        .filter((item) => item.quantity > 0)
     );
   }, []);
 
-  const clearCart = useCallback(() => {
-    setCart([]);
-  }, []);
+  const getCartTotal = useCallback(() => {
+    return cart.reduce((total, item) => {
+      const sizePrice = item.size 
+        ? item.product.sizes.find(s => s.size === item.size)?.price || 0
+        : 0;
+      return total + sizePrice * item.quantity;
+    }, 0);
+  }, [cart]);
 
-  return { cart, addToCart, removeFromCart, decreaseQuantity, clearCart };
+  return {
+    cart,
+    addToCart,
+    removeFromCart,
+    decreaseQuantity,
+    getCartTotal
+  };
 };

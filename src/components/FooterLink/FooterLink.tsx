@@ -20,6 +20,7 @@ const FooterLinks: React.FC = () => {
           href={button.link}
           className={classNames(styles.footerLink)}
           aria-label={button.title}
+          passHref
         >
           {button.title}
         </Link>

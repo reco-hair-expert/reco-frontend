@@ -10,12 +10,22 @@ const CartSummary = () => {
   const { cartItems } = useCart();
   const router = useRouter();
 
+  const getItemPrice = (item: CartItem) => {
+    if (!item.size || !item.product.sizes) return 0;
+
+    // Проверяем, является ли sizes массивом (новая структура)
+    if (Array.isArray(item.product.sizes)) {
+      const sizeObj = item.product.sizes.find((s) => s.size === item.size);
+      return sizeObj?.price || 0;
+    }
+
+    // Старая структура (объект)
+    return (item.product.sizes as Record<string, number>)[item.size] || 0;
+  };
+
   const total = useMemo(() => {
     return cartItems.reduce((acc: number, item: CartItem) => {
-      const price: number =
-        item.size && item.product.sizes[item.size] !== undefined
-          ? (item.product.sizes[item.size] ?? 0)
-          : (item.product.price ?? 0);
+      const price = getItemPrice(item);
       return acc + price * (item.quantity || 1);
     }, 0);
   }, [cartItems]);

@@ -2,6 +2,13 @@ import styles from "./AddressForm.module.scss";
 import { AddressFormProps } from "./types/AddressForm.types";
 import Image from "next/image";
 
+const PAYMENT_ICON = {
+  src: "/images/sections/footer/visa-mastercard.svg",
+  alt: "Visa and Mastercard payment options",
+  width: 100,
+  height: 40,
+};
+
 const AddressForm = ({
   className,
   phoneNumber,
@@ -12,28 +19,25 @@ const AddressForm = ({
     ? `${styles.header} ${className}`
     : styles.header;
 
-  const phoneLink = `tel:${phoneNumber}`;
-  const mailLink = `mailto:${email}`;
-
   return (
     <div className={`${combinedClass} ${styles.address_form_container}`}>
       <div className={styles.info_item}>{address}</div>
 
       <div className={styles.info_item}>
-        <a href={phoneLink}>{phoneNumber}</a>
+        <a href={`tel:${phoneNumber}`}>{phoneNumber}</a>
       </div>
 
       <div className={styles.info_item}>
-        <a href={mailLink}>{email}</a>
+        <a href={`mailto:${email}`}>{email}</a>
       </div>
 
       <div className={styles.payment_icon_container}>
         <Image
-          src="images/sections/footer/visa-mastercard.svg"
-          alt="Visa and Mastercard payment options"
+          src={PAYMENT_ICON.src}
+          alt={PAYMENT_ICON.alt}
           className={styles.payment_icon}
-          width={100} // Укажите нужную ширину
-          height={40} // Укажите нужную высоту
+          width={PAYMENT_ICON.width}
+          height={PAYMENT_ICON.height}
         />
       </div>
     </div>

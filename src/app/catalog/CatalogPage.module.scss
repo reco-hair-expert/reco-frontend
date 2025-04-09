@@ -21,6 +21,13 @@
   }
 }
 
+.newProducts {
+  display: flex;
+  margin-top: 100px;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .recommendationContainer {
   padding-bottom: 36px;
   position: relative;

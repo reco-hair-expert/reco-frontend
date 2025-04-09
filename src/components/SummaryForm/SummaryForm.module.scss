@@ -25,8 +25,15 @@
   @include inputField;
 }
 
+.inputError {
+  border-color: #ff0000;
+}
+
 .inputErrorText {
-  @include inputFieldError;
+  color: #ff0000;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-left: 4px;
 }
 
 .inputContainerWrapper {

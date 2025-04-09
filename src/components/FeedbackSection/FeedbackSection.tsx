@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const FeedbackSection = () => {
   return (
-    <section className="container">
+    <section className="container" data-testid="feedback-section">
       <div className={styles.feedbackSection}>
         <div className={styles.formCirclesContainer}>
           <div className={styles.formCircles}></div>
@@ -22,7 +22,7 @@ const FeedbackSection = () => {
             <Image
               src="/images/sections/feedback/recoil.png"
               alt="recoil"
-              fill
+              fill={true}
               className={styles.feedbackImg}
             />
           </div>

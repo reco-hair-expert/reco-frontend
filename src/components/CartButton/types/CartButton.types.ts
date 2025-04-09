@@ -5,4 +5,5 @@ export interface CartButtonProps {
   onClick?: () => void;
   icon?: string;
   cart: CartItem[];
+  'aria-label'?: string;
 }

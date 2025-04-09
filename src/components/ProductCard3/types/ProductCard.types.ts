@@ -4,7 +4,6 @@ export interface Product {
   description: string;
   photo: string;
   sizes: Record<string, number>;
-  price: number;
 }
 
 export interface ProductCardProps {

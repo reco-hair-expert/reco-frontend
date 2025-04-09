@@ -10,6 +10,7 @@ import Icon from "../Icon/Icon";
 import Image from "next/image";
 import Carousel from "react-spring-3d-carousel";
 import { useSwipeable } from "react-swipeable";
+import Link from "next/link";
 
 interface ProductCardProps {
   products: Product[];
@@ -18,9 +19,12 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [isMobile, setIsMobile] = useState(() => (typeof window !== "undefined" ? window.innerWidth <= 768 : false));
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== "undefined" ? window.innerWidth <= 768 : false
+  );
   const [offsetRadius, setOffsetRadius] = useState(2);
   const { addToCart } = useCartContext();
+
   const currentProduct = products[currentIndex];
 
   useEffect(() => setSelectedSize(null), [currentIndex]);
@@ -40,8 +44,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const handleNext = () => setCurrentIndex((prev) => (prev + 1) % products.length);
-  const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+  const handleNext = () =>
+    setCurrentIndex((prev) => (prev + 1) % products.length);
+  const handlePrev = () =>
+    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
   const handleSizeChange = (size: string) => setSelectedSize(size);
 
   const handleAddToCart = useCallback(() => {
@@ -50,12 +56,15 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     }
     if (!products?.length) return;
 
+    const selectedSizeObj = currentProduct.sizes.find(s => s.size === selectedSize);
+    if (!selectedSizeObj) return;
+
     const newItem = {
       id: currentProduct.id,
       name: currentProduct.name,
       size: selectedSize,
-      price: currentProduct.sizes[selectedSize],
-      photo: currentProduct.photo,
+      price: selectedSizeObj.price,
+      photo: currentProduct.photo
     };
 
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
@@ -63,83 +72,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     addToCart(currentProduct, selectedSize);
   }, [selectedSize, currentProduct, addToCart, products?.length]);
 
-  const slides = useMemo(
-    () =>
-      products.map((product, index) => ({
-        key: product.id,
-        content: (
-          <div
-            className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
-            key={index}
-          >
-            <Image
-              src={product.photo}
-              alt={product.name}
-              width={200}
-              height={200}
-              className={styles.image}
-            />
-            {product.isNew && <div className={styles.newBadge}>NEW</div>}
-            {product.badgeInfo && (
-              <div className={styles.badgeInfo}>
-                <Icon
-                  name="icon-info"
-                  size={isMobile ? 24 : 28}
-                  fill="none"
-                  stroke={styles.yellowColor}
-                />
-              </div>
-            )}
-            {index === currentIndex && (
-              <div className={styles.buttonPlace}>
-                {isMobile ? (
-                  <Button
-                    size="m"
-                    variant="primary"
-                    className={styles.addToCart}
-                    onClick={handleAddToCart}
-                    disabled={!selectedSize}
-                  >
-                    ДОДАТИ В КОШИК
-                  </Button>
-                ) : (
-                  <Button
-                    variant="secondary"
-                    size="l"
-                    className={styles.moreButton}
-                  >
-                    <div className={styles.iconContainer}>
-                      <Icon
-                        name="icon-arrow-up-right2"
-                        size={24}
-                        fill="white"
-                        stroke="none"
-                      />
-                    </div>
-                    <span className={styles.moreButtonText}>
-                      БІЛЬШЕ ТОВАРІВ
-                    </span>
-                  </Button>
-                )}
-              </div>
-            )}
-          </div>
-        )
-      })),
-    [products, currentIndex, selectedSize, isMobile, handleAddToCart]
-  );
-
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => isMobile && handleNext(),
-    onSwipedRight: () => isMobile && handlePrev(),
-    preventScrollOnSwipe: true,
-    trackMouse: true
-  });
-
   const renderSizes = () => (
     <div className={styles.sizes}>
-      {Object.keys(currentProduct.sizes || {}).length ? (
-        Object.keys(currentProduct.sizes).map((size) => (
+      {currentProduct.sizes?.length ? (
+        currentProduct.sizes.map(({ size, price }) => (
           <label key={size}>
             <input
               type="radio"
@@ -163,14 +99,95 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     </div>
   );
 
-  const renderPrice = () => (
-    <p className={styles.priceContainer}>
-      <strong className={styles.price}>Ціна: </strong>
-      {selectedSize
-        ? `${currentProduct.sizes[selectedSize]} грн`
-        : "Оберіть розмір"}
-    </p>
+  const renderPrice = () => {
+    const selectedSizeObj = selectedSize 
+      ? currentProduct.sizes.find(s => s.size === selectedSize)
+      : null;
+
+    return (
+      <p className={styles.priceContainer}>
+        <strong className={styles.price}>Ціна: </strong>
+        {selectedSizeObj
+          ? `${selectedSizeObj.price} грн`
+          : "Оберіть розмір"}
+      </p>
+    );
+  };
+
+  const slides = useMemo(
+    () =>
+      products.map((product, index) => ({
+        key: product.id,
+        content: (
+          <div
+            className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
+            key={index}
+          >
+            <Image
+              src={product.photo}
+              alt={product.name}
+              width={200}
+              height={200}
+              className={styles.image}
+            />
+            {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
+            {product.badgeInfo && (
+              <div className={styles.badgeInfo}>
+                <Icon
+                  name="icon-info"
+                  size={isMobile ? 24 : 28}
+                  fill="none"
+                  stroke={styles.yellowColor}
+                />
+              </div>
+            )}
+            {index === currentIndex && (
+              <div className={styles.buttonPlace}>
+                {isMobile ? (
+                  <Button
+                    size="m"
+                    variant="primary"
+                    className={styles.addToCart}
+                    onClick={handleAddToCart}
+                    disabled={!selectedSize}
+                  >
+                    ДОДАТИ В КОШИК
+                  </Button>
+                ) : (
+                  <Link href="/catalog">
+                    <Button
+                      variant="secondary"
+                      size="l"
+                      className={styles.moreButton}
+                    >
+                      <div className={styles.iconContainer}>
+                        <Icon
+                          name="icon-arrow-up-right2"
+                          size={24}
+                          fill="white"
+                          stroke="none"
+                        />
+                      </div>
+                      <span className={styles.moreButtonText}>
+                        БІЛЬШЕ ТОВАРІВ
+                      </span>
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            )}
+          </div>
+        )
+      })),
+    [products, currentIndex, selectedSize, isMobile, handleAddToCart]
   );
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => isMobile && handleNext(),
+    onSwipedRight: () => isMobile && handlePrev(),
+    preventScrollOnSwipe: true,
+    trackMouse: true
+  });
 
   return (
     <section className="container" {...swipeHandlers}>

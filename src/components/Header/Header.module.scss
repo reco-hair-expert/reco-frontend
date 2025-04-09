@@ -5,13 +5,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2000;
   background-color: $black-color;
+  transition: transform 0.3s ease-in-out;
   height: 100px;
   width: 100%;
   box-sizing: border-box;
-  z-index: 2000;
+  
+  &.hidden {
+    transform: translateY(-100%);
+  }
 }
 
 /* Стили для контейнера внутри хедера */
