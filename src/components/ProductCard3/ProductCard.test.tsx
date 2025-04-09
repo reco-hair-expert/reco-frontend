@@ -58,23 +58,40 @@ describe("ProductCard Component", () => {
   const mockProducts = [
     {
       id: 1,
+      _id: "1",
       name: "Product 1",
-      volume: "100ml",
       photo: "/test-image-1.jpg",
       description: "Test description 1",
-      sizes: { S: 100, M: 200, L: 300 },
+      shortDescription: "Short test description 1",
       type: "test",
-      isNew: true,
+      application: "Test application",
+      composition: "Test composition",
+      recommendation: "Test recommendation",
+      sizes: [
+        { _id: "s1", size: "S", price: 100 },
+        { _id: "m1", size: "M", price: 200 },
+        { _id: "l1", size: "L", price: 300 }
+      ],
+      isNewProduct: true,
       badgeInfo: "Special offer"
     },
     {
       id: 2,
+      _id: "2",
       name: "Product 2",
-      volume: "200ml",
       photo: "/test-image-2.jpg",
       description: "Test description 2",
-      sizes: { S: 150, M: 250, L: 350 },
-      type: "test"
+      shortDescription: "Short test description 2",
+      type: "test",
+      application: "Test application",
+      composition: "Test composition",
+      recommendation: "Test recommendation",
+      sizes: [
+        { _id: "s2", size: "S", price: 150 },
+        { _id: "m2", size: "M", price: 250 },
+        { _id: "l2", size: "L", price: 350 }
+      ],
+      isNewProduct: false
     }
   ];
 
@@ -129,9 +146,9 @@ describe("ProductCard Component", () => {
 
   it("renders size options", () => {
     renderWithContext();
-    expect(screen.getByLabelText("S")).toBeInTheDocument();
-    expect(screen.getByLabelText("M")).toBeInTheDocument();
-    expect(screen.getByLabelText("L")).toBeInTheDocument();
+    expect(screen.getByText("S")).toBeInTheDocument();
+    expect(screen.getByText("M")).toBeInTheDocument();
+    expect(screen.getByText("L")).toBeInTheDocument();
   });
 
   it("allows size selection", () => {
@@ -166,7 +183,7 @@ describe("ProductCard Component", () => {
       </CartContext.Provider>
     );
 
-    fireEvent.click(screen.getByLabelText("M"));
+    fireEvent.click(screen.getByText("M"));
     fireEvent.click(screen.getByText("ДОДАТИ В КОШИК"));
     expect(mockAddToCart).toHaveBeenCalledWith(mockProducts[0], "M");
   });

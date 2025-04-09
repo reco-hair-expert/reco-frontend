@@ -32,17 +32,24 @@ jest.mock('@/context/CartContext', () => ({
 
 describe('CatalogCard Component', () => {
   const mockProduct = {
+    _id: '1',
     id: 1,
     name: 'Test Product',
     photo: '/test-image.jpg',
-    sizes: {
-      S: 100,
-      M: 120,
-      L: 140,
-    },
+    sizes: [
+      { _id: '1', size: 'S', price: 100 },
+      { _id: '2', size: 'M', price: 120 },
+      { _id: '3', size: 'L', price: 140 }
+    ],
     volume: '500ml',
     description: 'Test product description',
-    type: 'Сухе'
+    shortDescription: 'Short test description',
+    application: 'Test application',
+    composition: 'Test composition',
+    type: 'Сухе',
+    isBestseller: true,
+    recommendation: 'Test recommendation',
+    isNewProduct: false
   };
 
   const mockAddToCart = jest.fn();
@@ -62,11 +69,7 @@ describe('CatalogCard Component', () => {
     
     expect(screen.getByText('Test Product')).toBeInTheDocument();
     expect(screen.getByAltText('Test Product')).toHaveAttribute('src', '/test-image.jpg');
-    expect(screen.getByText('bestseller')).toBeInTheDocument();
-    
-    // Use getAllByText for elements that appear multiple times
-    const typeElements = screen.getAllByText('Сухе');
-    expect(typeElements.length).toBeGreaterThan(0);
+    expect(screen.getAllByText('Сухе')).toHaveLength(2);
   });
 
   it('renders size selector with available sizes', () => {
@@ -74,10 +77,6 @@ describe('CatalogCard Component', () => {
     
     const sizeSelect = screen.getByRole('combobox');
     expect(sizeSelect).toBeInTheDocument();
-    
-    // Use getAllByText for elements that appear multiple times
-    const sizeOptions = screen.getAllByText('Оберіть розмір');
-    expect(sizeOptions.length).toBeGreaterThan(0);
     
     expect(screen.getByText('S')).toBeInTheDocument();
     expect(screen.getByText('M')).toBeInTheDocument();
@@ -87,7 +86,6 @@ describe('CatalogCard Component', () => {
   it('shows warning when trying to buy without selecting size', async () => {
     render(<CatalogCard product={mockProduct} perRow={3} />);
     
-    // Find the button by its class instead of text
     const buyButton = screen.getByRole('button', { name: /Оберіть розмір/i });
     fireEvent.click(buyButton);
     
@@ -105,7 +103,6 @@ describe('CatalogCard Component', () => {
     const sizeSelect = screen.getByRole('combobox');
     fireEvent.change(sizeSelect, { target: { value: 'M' } });
     
-    // The button text changes after selecting a size
     const buyButton = screen.getByRole('button', { name: /Купити за 120 грн/i });
     fireEvent.click(buyButton);
     

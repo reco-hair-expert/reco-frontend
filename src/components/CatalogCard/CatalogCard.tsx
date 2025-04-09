@@ -32,20 +32,21 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
 
   const getSelectedSizePrice = useCallback(() => {
     if (!selectedSize || !product.sizes) return null;
-    return product.sizes[selectedSize];
+    const selectedSizeObj = product.sizes.find(s => s.size === selectedSize);
+    return selectedSizeObj?.price || null;
   }, [selectedSize, product.sizes]);
 
   const renderSizes = useCallback(
     () => (
       <>
-        {Object.keys(product.sizes || {}).length ? (
+        {product.sizes?.length ? (
           <select
             className={styles.sizeSelect}
             value={selectedSize || ""}
             onChange={handleSizeChange}
           >
             <option value="">Оберіть розмір</option>
-            {Object.keys(product.sizes).map((size) => (
+            {product.sizes.map(({ size }) => (
               <option key={size} value={size}>
                 {size}
               </option>
@@ -87,8 +88,10 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
       </div>
 
       <div className={styles.badgeContainer}>
-        <span className={styles.saleBadge}>bestseller</span>
-        <span className={styles.typeBadge}>Сухе</span>
+        {product.badgeInfo && (
+          <span className={styles.saleBadge}>{product.badgeInfo}</span>
+        )}
+        <span className={styles.typeBadge}>{product.type}</span>
       </div>
 
       <Link href="/" className={styles.infoBtn}>

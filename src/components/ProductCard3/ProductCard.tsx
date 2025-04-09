@@ -56,11 +56,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     }
     if (!products?.length) return;
 
+    const selectedSizeObj = currentProduct.sizes.find(s => s.size === selectedSize);
+    if (!selectedSizeObj) return;
+
     const newItem = {
       id: currentProduct.id,
       name: currentProduct.name,
       size: selectedSize,
-      price: currentProduct.sizes[selectedSize],
+      price: selectedSizeObj.price,
       photo: currentProduct.photo
     };
 
@@ -68,6 +71,48 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(currentProduct, selectedSize);
   }, [selectedSize, currentProduct, addToCart, products?.length]);
+
+  const renderSizes = () => (
+    <div className={styles.sizes}>
+      {currentProduct.sizes?.length ? (
+        currentProduct.sizes.map(({ size, price }) => (
+          <label key={size}>
+            <input
+              type="radio"
+              name="size"
+              value={size}
+              checked={selectedSize === size}
+              onChange={() => handleSizeChange(size)}
+            />
+            {size}
+          </label>
+        ))
+      ) : (
+        <div>Розміри не доступні для цього товару.</div>
+      )}
+    </div>
+  );
+
+  const renderDescription = () => (
+    <div className={styles.descriptionContainer}>
+      <p>{currentProduct.description}</p>
+    </div>
+  );
+
+  const renderPrice = () => {
+    const selectedSizeObj = selectedSize 
+      ? currentProduct.sizes.find(s => s.size === selectedSize)
+      : null;
+
+    return (
+      <p className={styles.priceContainer}>
+        <strong className={styles.price}>Ціна: </strong>
+        {selectedSizeObj
+          ? `${selectedSizeObj.price} грн`
+          : "Оберіть розмір"}
+      </p>
+    );
+  };
 
   const slides = useMemo(
     () =>
@@ -85,7 +130,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
               height={200}
               className={styles.image}
             />
-            {product.isNew && <div className={styles.newBadge}>NEW</div>}
+            {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
             {product.badgeInfo && (
               <div className={styles.badgeInfo}>
                 <Icon
@@ -143,42 +188,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     preventScrollOnSwipe: true,
     trackMouse: true
   });
-
-  const renderSizes = () => (
-    <div className={styles.sizes}>
-      {Object.keys(currentProduct.sizes || {}).length ? (
-        Object.keys(currentProduct.sizes).map((size) => (
-          <label key={size}>
-            <input
-              type="radio"
-              name="size"
-              value={size}
-              checked={selectedSize === size}
-              onChange={() => handleSizeChange(size)}
-            />
-            {size}
-          </label>
-        ))
-      ) : (
-        <div>Розміри не доступні для цього товару.</div>
-      )}
-    </div>
-  );
-
-  const renderDescription = () => (
-    <div className={styles.descriptionContainer}>
-      <p>{currentProduct.description}</p>
-    </div>
-  );
-
-  const renderPrice = () => (
-    <p className={styles.priceContainer}>
-      <strong className={styles.price}>Ціна: </strong>
-      {selectedSize
-        ? `${currentProduct.sizes[selectedSize]} грн`
-        : "Оберіть розмір"}
-    </p>
-  );
 
   return (
     <section className="container" {...swipeHandlers}>

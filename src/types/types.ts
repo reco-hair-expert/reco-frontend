@@ -1,18 +1,25 @@
 import { StaticImageData } from "next/image";
 
 export type Product = {
-  volume: string;
   id: number;
+  _id: string;
   name: string;
   photo: StaticImageData | string;
   description: string;
-  sizes: { [key: string]: number | undefined };
-  size?: string;
-  quantity?: number;
-  badgeInfo?: string;
-  isNew?: boolean;
+  shortDescription: string;
   type: string;
+  application: string;
+  composition: string;
+  recommendation: string;
+  sizes: Array<{
+    _id: string;
+    size: string;
+    price: number;
+  }>;
+  badgeInfo?: string;
+  isNewProduct: boolean;
 };
+
 export type CartItem = {
   product: Product;
   quantity: number;

@@ -4,6 +4,7 @@ import { useCart } from "@/context/CartContext";
 import HighlightText from "@/components/HighLightText/HighLightText";
 import styles from "./CartItems.module.scss";
 import Image from "next/image";
+import { useMemo } from "react";
 
 const CartItems = () => {
   const { cartItems, removeFromCart, updateCartItemQuantity, addToCart } =
@@ -23,6 +24,17 @@ const CartItems = () => {
     }
   };
 
+  const getItemPrice = (item: CartItem) => {
+    if (!item.size || !item.product.sizes) return 0;
+
+    if (Array.isArray(item.product.sizes)) {
+      const sizeObj = item.product.sizes.find((s) => s.size === item.size);
+      return sizeObj?.price || 0;
+    }
+
+    return (item.product.sizes as Record<string, number>)[item.size] || 0;
+  };
+
   return (
     <section className={styles.cartItems}>
       {cartItems.length === 0 ? (
@@ -38,14 +50,23 @@ const CartItems = () => {
                 <Image
                   src={item.product.photo}
                   alt={item.product.name}
-                  width={200}
-                  height={200}
-                  className={styles.image}
+                  width={148}
+                  height={148}
                 />
               </div>
               <div className={styles.infoContainer}>
                 <HighlightText>
-                  <p className={styles.title}>{item.product.name}</p>
+                  <p className={styles.title}>
+                    {item.product.name}{" "}
+                    <button
+                      onClick={() =>
+                        removeFromCart(item.product.id, item.size || "")
+                      }
+                      className={styles.removeItem}
+                    >
+                      X
+                    </button>
+                  </p>
                 </HighlightText>
                 <p className={styles.description}>{item.product.description}</p>
 
@@ -53,9 +74,7 @@ const CartItems = () => {
                   {item.size && (
                     <>
                       <p>{item.size}</p>
-                      <p className={styles.price}>
-                        {item.product.sizes[item.size]} грн
-                      </p>
+                      <p className={styles.price}>{getItemPrice(item)} грн</p>
                     </>
                   )}
                   <div className={styles.quantityControl}>
@@ -74,16 +93,6 @@ const CartItems = () => {
                     </button>
                   </div>
                 </div>
-              </div>
-              <div className={styles.removeContainer}>
-                <button
-                  onClick={() =>
-                    removeFromCart(item.product.id, item.size || "")
-                  }
-                  className={styles.removeItem}
-                >
-                  X
-                </button>
               </div>
             </li>
           ))}
