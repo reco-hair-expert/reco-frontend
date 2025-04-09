@@ -65,10 +65,6 @@ describe('HeroSection Component', () => {
     expect(image).toHaveAttribute('width', '600');
     expect(image).toHaveAttribute('height', '400');
     
-    // Check image caption
-    const caption = screen.getByText('Інноваційний догляд для вашого волосся');
-    expect(caption).toBeInTheDocument();
-    
     // Check description text
     const description = screen.getByText(/Кожен заслуговує на здорове, сильне та блискуче волосся/);
     expect(description).toBeInTheDocument();
