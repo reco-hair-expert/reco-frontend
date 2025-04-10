@@ -60,4 +60,4 @@ export const products: Product[] = [
     volume: "200ml",
     sizes: { S: 150, M: 250, L: 350 }
   }
-]; 
+];

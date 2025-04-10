@@ -54,8 +54,8 @@ export const CatalogClient = () => {
         const fetchedProducts = await fetchProducts();
         setProducts(fetchedProducts);
       } catch (error) {
-        setError('Failed to load products. Please try again later.');
-        console.error('Error loading products:', error);
+        setError("Failed to load products. Please try again later.");
+        console.error("Error loading products:", error);
       } finally {
         setLoading(false);
       }
@@ -81,11 +81,11 @@ export const CatalogClient = () => {
       position: index + 1,
       item: {
         "@type": "Product",
-        "name": product.name,
-        "description": product.description,
-        "image": product.photo,
-        "price": Object.values(product.sizes)[0] || 0,
-        "priceCurrency": "UAH"
+        name: product.name,
+        description: product.description,
+        image: product.photo,
+        price: Object.values(product.sizes)[0] || 0,
+        priceCurrency: "UAH"
       }
     }))
   };
@@ -138,4 +138,4 @@ export const CatalogClient = () => {
       </main>
     </>
   );
-}; 
+};

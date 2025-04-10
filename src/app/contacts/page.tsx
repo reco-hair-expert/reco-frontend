@@ -5,4 +5,4 @@ export default function ContactsPage() {
       <p>Сторінка знаходиться в розробці</p>
     </div>
   );
-} 
+}

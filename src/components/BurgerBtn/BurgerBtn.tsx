@@ -6,10 +6,10 @@ import classNames from "classnames";
 import ModalMenu from "../MobileMenu/ModalMenu";
 
 interface BurgerBtnProps {
-  'aria-label'?: string;
+  "aria-label"?: string;
 }
 
-const BurgerBtn = ({ 'aria-label': ariaLabel }: BurgerBtnProps) => {
+const BurgerBtn = ({ "aria-label": ariaLabel }: BurgerBtnProps) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [isClient, setIsClient] = useState(false);
 

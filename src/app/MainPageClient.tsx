@@ -30,8 +30,8 @@ export const MainPageClient = () => {
         const fetchedProducts = await fetchProducts();
         setProducts(fetchedProducts);
       } catch (error) {
-        setError('Failed to load products. Please try again later.');
-        console.error('Error loading products:', error);
+        setError("Failed to load products. Please try again later.");
+        console.error("Error loading products:", error);
       } finally {
         setLoading(false);
       }
@@ -57,4 +57,4 @@ export const MainPageClient = () => {
       <FeedbackSection />
     </>
   );
-}; 
+};

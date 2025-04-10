@@ -4,39 +4,12 @@ import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import QuizProgress from "./QuizProgress";
 import styles from "./quiz.module.scss";
-import type { QuizData, QuizResults, Answer } from "./types";
+import type { Answer, QuizProps, QuizState, RecommendedProduct } from "./types";
 import Button from "@/components/Button/Button";
+import { products } from "@/constants/products";
 import { StaticImageData } from "next/image";
 import Icon from "../Icon/Icon";
 import useDeviceDetection from "@/context/useDeviceDetection";
-
-interface RecommendedProduct {
-  id: number;
-  name: string;
-  photo: StaticImageData;
-  photoProduct: StaticImageData;
-  type: string;
-  description: string;
-  price: number;
-  badgeInfo?: string;
-  isNew: boolean;
-  score: number;
-  volume: string;
-  sizes: Record<string, number>;
-}
-
-interface QuizProps {
-  data: QuizData;
-  onComplete: (results: QuizResults) => void;
-}
-
-interface QuizState {
-  currentQuestionIndex: number;
-  answers: Answer[];
-  showResults: boolean;
-  recommendedProducts: RecommendedProduct[];
-  isLoading: boolean;
-}
 
 const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const { isMobile, isTablet } = useDeviceDetection();
@@ -51,12 +24,11 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     currentQuestionIndex: 0,
     answers: [],
     showResults: false,
-    recommendedProducts: [],
-    isLoading: false
+    recommendedProducts: []
   });
 
   const { questions } = data;
-  const { currentQuestionIndex, answers, showResults, recommendedProducts, isLoading } =
+  const { currentQuestionIndex, answers, showResults, recommendedProducts } =
     state;
 
   const { currentQuestion, totalQuestions, isLastQuestion, isFirstQuestion } =
@@ -91,45 +63,79 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     }));
   };
 
-  const fetchRecommendations = async (userAnswers: Answer[]) => {
-    try {
-      setState(prev => ({ ...prev, isLoading: true }));
-      const response = await fetch('/api/quiz/recommendations', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ answers: userAnswers }),
+  const calculateResults = (userAnswers: Answer[]) => {
+    const productScores: Record<string, number> = {};
+
+    userAnswers.forEach((answer) => {
+      const question = questions.find((q) => q.id === answer.questionId);
+      const option = question?.options.find((o) => o.id === answer.optionId);
+
+      option?.recommendedProducts.forEach((productName) => {
+        productScores[productName] = (productScores[productName] || 0) + 1;
       });
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch recommendations');
-      }
-      
-      const data = await response.json();
-      return data.recommendedProducts;
-    } catch (error) {
-      console.error('Error fetching recommendations:', error);
-      return [];
-    } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
-    }
+    });
+
+    return Object.entries(productScores)
+      .map(([name, score]) => ({ name, score }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3);
   };
 
-  const handleNext = async () => {
+  const enrichResultsWithProductData = (
+    results: { name: string; score: number }[]
+  ): RecommendedProduct[] => {
+    const fallbackImage = {
+      src: "/images/product.png",
+      height: 1,
+      width: 1,
+      blurDataURL: ""
+    } as StaticImageData;
+
+    return results.map((result) => {
+      const product = products.find((p) => p.name === result.name);
+      if (!product) {
+        return {
+          id: 0,
+          name: result.name,
+          type: "Unknown",
+          description: "No description available",
+          price: 0,
+          isNew: false,
+          score: result.score,
+          volume: "N/A",
+          sizes: {},
+          photo: fallbackImage,
+          photoProduct: fallbackImage,
+          badgeInfo: ""
+        };
+      }
+
+      return {
+        ...product,
+        photoProduct: product.photoProduct as StaticImageData,
+        score: result.score,
+        sizes: Object.fromEntries(
+          Object.entries(product.sizes).map(([key, value]) => [key, value ?? 0])
+        )
+      };
+    });
+  };
+
+  const handleNext = () => {
     if (!hasAnsweredCurrent) {
       alert("Будь ласка, оберіть варіант відповіді");
       return;
     }
 
     if (isLastQuestion) {
-      const recommendations = await fetchRecommendations(answers);
+      const results = calculateResults(answers);
+      const enrichedResults = enrichResultsWithProductData(results);
       setState((prev) => ({
         ...prev,
         showResults: true,
-        recommendedProducts: recommendations
+        recommendedProducts: enrichedResults
       }));
-      onComplete({ recommendedProducts: recommendations });
+      onComplete({ recommendedProducts: results });
     } else {
       setState((prev) => ({
         ...prev,
@@ -152,8 +158,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       currentQuestionIndex: 0,
       answers: [],
       showResults: false,
-      recommendedProducts: [],
-      isLoading: false
+      recommendedProducts: []
     });
   };
 
@@ -161,49 +166,44 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     return (
       <div className={styles.resultsContainer}>
         <h2 className={styles.resultsTitle}>Ваші рекомендації</h2>
-        {isLoading ? (
-          <div className={styles.loading}>Завантаження...</div>
-        ) : (
-          <>
-            <div className={styles.productsGrid}>
-              {recommendedProducts.map((product) => (
-                <div key={product.id} className={styles.productCard}>
-                  <div className={styles.productImageContainer}>
-                    <Image
-                      src={product.photo}
-                      alt={product.name}
-                      width={200}
-                      height={200}
-                      className={styles.productImage}
-                      priority={true}
-                    />
-                    {product.badgeInfo && (
-                      <span className={styles.productBadge}>
-                        {product.badgeInfo}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className={styles.productName}>{product.name}</h3>
-                  <p className={styles.productType}>{product.type}</p>
-                  <p className={styles.productDescription}>{product.description}</p>
-                  <div className={styles.productPrice}>Від {product.price} грн</div>
-                  <div className={styles.productScore}>
-                    Рейтинг: {product.score}
-                  </div>
-                </div>
-              ))}
-            </div>
 
-            <Button
-              variant="primary"
-              size="m"
-              onClick={restartQuiz}
-              className={styles.restartButton}
-            >
-              Пройти тест знову
-            </Button>
-          </>
-        )}
+        <div className={styles.productsGrid}>
+          {recommendedProducts.map((product) => (
+            <div key={product.id} className={styles.productCard}>
+              <div className={styles.productImageContainer}>
+                <Image
+                  src={product.photo}
+                  alt={product.name}
+                  width={200}
+                  height={200}
+                  className={styles.productImage}
+                  priority={true}
+                />
+                {product.badgeInfo && (
+                  <span className={styles.productBadge}>
+                    {product.badgeInfo}
+                  </span>
+                )}
+              </div>
+              <h3 className={styles.productName}>{product.name}</h3>
+              <p className={styles.productType}>{product.type}</p>
+              <p className={styles.productDescription}>{product.description}</p>
+              <div className={styles.productPrice}>Від {product.price} грн</div>
+              <div className={styles.productScore}>
+                Рейтинг: {product.score}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <Button
+          variant="primary"
+          size="m"
+          onClick={restartQuiz}
+          className={styles.restartButton}
+        >
+          Пройти тест знову
+        </Button>
       </div>
     );
   }

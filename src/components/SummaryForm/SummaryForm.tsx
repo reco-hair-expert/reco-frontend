@@ -39,14 +39,14 @@ const SummaryForm = () => {
             id="firstName"
             type="text"
             placeholder="Введіть ім'я"
-            {...register('firstName', {
-              required: 'Це поле обовʼязкове',
+            {...register("firstName", {
+              required: "Це поле обовʼязкове",
               pattern: {
                 value: /^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ'ʼ\s]+$/,
-                message: 'Імʼя повинно містити тільки букви'
+                message: "Імʼя повинно містити тільки букви"
               }
             })}
-            className={`${styles.inputField} ${errors.firstName ? styles.inputError : ''}`}
+            className={`${styles.inputField} ${errors.firstName ? styles.inputError : ""}`}
           />
 
           {errors.firstName && (
@@ -63,14 +63,14 @@ const SummaryForm = () => {
             id="lastName"
             type="text"
             placeholder="Введіть прізвище"
-            {...register('lastName', {
-              required: 'Це поле обовʼязкове',
+            {...register("lastName", {
+              required: "Це поле обовʼязкове",
               pattern: {
                 value: /^[a-zA-Zа-яА-ЯёЁіІїЇєЄґҐ'ʼ\s]+$/,
-                message: 'Прізвище повинно містити тільки букви'
+                message: "Прізвище повинно містити тільки букви"
               }
             })}
-            className={`${styles.inputField} ${errors.lastName ? styles.inputError : ''}`}
+            className={`${styles.inputField} ${errors.lastName ? styles.inputError : ""}`}
           />
 
           {errors.lastName && (
@@ -88,16 +88,16 @@ const SummaryForm = () => {
           id="phoneNumber"
           type="text"
           placeholder="+380 __ ___ __ __"
-          {...register('phoneNumber', {
-            required: 'Це поле обовʼязкове',
+          {...register("phoneNumber", {
+            required: "Це поле обовʼязкове",
             minLength: {
               value: 17,
-              message: 'Введіть повний номер'
+              message: "Введіть повний номер"
             }
           })}
           onChange={(event) => handlePhoneChange(event, setValue)}
           onFocus={(event) => handlePhoneChange(event, setValue)}
-          className={`${styles.inputField} ${errors.phoneNumber ? styles.inputError : ''}`}
+          className={`${styles.inputField} ${errors.phoneNumber ? styles.inputError : ""}`}
         />
 
         {errors.phoneNumber && (
@@ -115,8 +115,8 @@ const SummaryForm = () => {
           type="text"
           className={styles.inputField}
           placeholder="Україна"
-          {...register('country', {
-            required: 'Це поле обовʼязкове'
+          {...register("country", {
+            required: "Це поле обовʼязкове"
           })}
         />
 
@@ -136,8 +136,8 @@ const SummaryForm = () => {
             type="text"
             className={styles.inputField}
             placeholder="Виберіть місто"
-            {...register('city', {
-              required: 'Це поле обовʼязкове'
+            {...register("city", {
+              required: "Це поле обовʼязкове"
             })}
           />
 
@@ -156,8 +156,8 @@ const SummaryForm = () => {
             type="text"
             className={styles.inputField}
             placeholder="Виберіть відділення"
-            {...register('postOffice', {
-              required: 'Це поле обовʼязкове'
+            {...register("postOffice", {
+              required: "Це поле обовʼязкове"
             })}
           />
 
@@ -174,7 +174,7 @@ const SummaryForm = () => {
           id="comment"
           className={styles.inputField}
           placeholder="Наприклад спеціальні нотатки для доставки"
-          {...register('comment')}
+          {...register("comment")}
         />
 
         {errors.comment && (

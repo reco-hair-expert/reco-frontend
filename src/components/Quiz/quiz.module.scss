@@ -1,5 +1,200 @@
 @use "@/styles/variables.scss" as *;
 
+.resultsContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  color: $white-color;
+  text-align: center;
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 20px 16px;
+  }
+}
+
+.resultsTitle {
+  font-size: 32px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 40px;
+  position: relative;
+  display: inline-block;
+  padding: 0 20px;
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 60px;
+    height: 1px;
+    background: rgba($yellow-color, 0.5);
+  }
+
+  &::before {
+    left: -60px;
+  }
+
+  &::after {
+    right: -60px;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    font-size: 24px;
+    margin-bottom: 30px;
+
+    &::before,
+    &::after {
+      width: 30px;
+    }
+
+    &::before {
+      left: -30px;
+    }
+
+    &::after {
+      right: -30px;
+    }
+  }
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+.productCard {
+  background: rgba($black-color, 0.7);
+  border: 1px solid rgba($yellow-color, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+
+  &:hover {
+    border-color: rgba($yellow-color, 0.5);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.productImageContainer {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba($white-color, 0.1);
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.productBadge {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: $yellow-color;
+  color: $black-color;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 12px;
+  text-transform: uppercase;
+}
+
+.productName {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: $yellow-color;
+  text-transform: uppercase;
+}
+
+.productType {
+  font-size: 14px;
+  color: rgba($white-color, 0.7);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.productDescription {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  color: $white-color;
+}
+
+.productPrice {
+  font-size: 18px;
+  font-weight: 600;
+  color: $yellow-color;
+  margin-bottom: 8px;
+}
+
+.productScore {
+  font-size: 14px;
+  color: rgba($white-color, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  &::before {
+    content: "★";
+    color: $yellow-color;
+    font-size: 16px;
+  }
+}
+
+.restartButton {
+  background: $yellow-color;
+  color: $black-color;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 24px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  margin-top: 20px;
+
+  &:hover {
+    background: darken($yellow-color, 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 100%;
+    padding: 14px;
+  }
+}
+
 @mixin quiz-article {
   background-repeat: no-repeat;
   background-size: contain;

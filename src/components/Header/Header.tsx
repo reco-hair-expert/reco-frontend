@@ -10,13 +10,15 @@ import CallButton from "../CallButton/CallButton";
 import CartButton from "../CartButton/CartButton";
 import { phoneNumber } from "@/constants/contacts";
 import BurgerBtn from "../BurgerBtn/BurgerBtn";
-import { useScrollHeader } from '@/hooks/useScrollHeader';
+import { useScrollHeader } from "@/hooks/useScrollHeader";
 
 const Header = () => {
   const isHeaderVisible = useScrollHeader();
 
   return (
-    <header className={`${styles.header} ${!isHeaderVisible ? styles.hidden : ''}`}>
+    <header
+      className={`${styles.header} ${!isHeaderVisible ? styles.hidden : ""}`}
+    >
       <div className="container">
         <div className={styles.content}>
           <Link href="/" className={styles.logo}>
@@ -40,7 +42,11 @@ const Header = () => {
           </NavBar>
 
           <div className={styles.active_btns}>
-            <Link href={`tel:${phoneNumber}`} className={styles.call_btn} aria-label="Call">
+            <Link
+              href={`tel:${phoneNumber}`}
+              className={styles.call_btn}
+              aria-label="Call"
+            >
               <CallButton phoneNumber={phoneNumber} />
             </Link>
             <Link href="/cart" className={styles.cart_btn} aria-label="Cart">
