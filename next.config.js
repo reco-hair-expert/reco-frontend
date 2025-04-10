@@ -31,6 +31,9 @@ const nextConfig = {
   experimental: {
     forceSwcTransforms: true,
   },
+  server: {
+    port: 3001,
+  },
 }
 
 module.exports = nextConfig

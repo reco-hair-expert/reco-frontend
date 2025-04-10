@@ -32,7 +32,7 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
 
   const getSelectedSizePrice = useCallback(() => {
     if (!selectedSize || !product.sizes) return null;
-    const selectedSizeObj = product.sizes.find(s => s.size === selectedSize);
+    const selectedSizeObj = product.sizes.find((s) => s.size === selectedSize);
     return selectedSizeObj?.price || null;
   }, [selectedSize, product.sizes]);
 
@@ -68,11 +68,6 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
         width: `calc((100% - 20px * ${perRow - 1}) / ${perRow})`
       }}
     >
-      {showSizeWarning && (
-        <div className={styles.sizeWarning}>
-          Будь ласка, оберіть розмір перед покупкою.
-        </div>
-      )}
       <div className={styles.imageContainer}>
         <Image
           src={product.photo || "/fallback-image.jpg"}
@@ -87,6 +82,12 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
         />
       </div>
 
+      {showSizeWarning && (
+        <div className={styles.sizeWarning}>
+          Будь ласка, оберіть розмір перед покупкою.
+        </div>
+      )}
+
       <div className={styles.badgeContainer}>
         {product.badgeInfo && (
           <span className={styles.saleBadge}>{product.badgeInfo}</span>
@@ -94,7 +95,7 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
         <span className={styles.typeBadge}>{product.type}</span>
       </div>
 
-      <Link href="/" className={styles.infoBtn}>
+      <Link href={`/${product._id}`} className={styles.infoBtn}>
         <Icon name="icon-info" className={styles.infoBtnIcon} />
       </Link>
 

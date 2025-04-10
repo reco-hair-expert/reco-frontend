@@ -46,9 +46,28 @@
   position: absolute;
   top: 16px;
   right: 16px;
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  transition: background-color $transition-speed $transition-style;
+  pointer-events: auto;
+
+  &:hover {
+    box-shadow: 0 0 2px 1px rgba(255, 255, 0, 0.6); /* жёлтое размытие */
+    transition: all 0.3s ease;
+  }
+  
 
   &Icon {
     stroke: $yellow-color;
+    width: 24px;
+    height: 24px;
+    pointer-events: none;
   }
 }
 
@@ -59,6 +78,7 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  pointer-events: auto;
 
   .infoContainer {
     display: flex;
