@@ -21,12 +21,13 @@ const Header = () => {
         <div className={styles.content}>
           <Link href="/" className={styles.logo}>
             <Image
-              src="/images/logo/logo-1x.png" // Путь к изображению
+              src="/images/logo/logo-1x.png"
               alt="Логотип компании"
-              width={64} // Указываем ширину
-              height={64} // Указываем высоту
+              width={64}
+              height={64}
               sizes="(max-width: 768px) 48px, 48px"
-              className={styles.logoImg} // Указываем размер в зависимости от ширины экрана
+              className={styles.logoImg}
+              unoptimized
             />
           </Link>
 

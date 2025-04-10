@@ -14,9 +14,10 @@ import Link from "next/link";
 
 interface ProductCardProps {
   products: Product[];
+  showButton?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(() =>
@@ -56,7 +57,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
     }
     if (!products?.length) return;
 
-    const selectedSizeObj = currentProduct.sizes.find(s => s.size === selectedSize);
+    const selectedSizeObj = currentProduct.sizes.find(
+      (s) => s.size === selectedSize
+    );
     if (!selectedSizeObj) return;
 
     const newItem = {
@@ -100,16 +103,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
   );
 
   const renderPrice = () => {
-    const selectedSizeObj = selectedSize 
-      ? currentProduct.sizes.find(s => s.size === selectedSize)
+    const selectedSizeObj = selectedSize
+      ? currentProduct.sizes.find((s) => s.size === selectedSize)
       : null;
 
     return (
       <p className={styles.priceContainer}>
         <strong className={styles.price}>Ціна: </strong>
-        {selectedSizeObj
-          ? `${selectedSizeObj.price} грн`
-          : "Оберіть розмір"}
+        {selectedSizeObj ? `${selectedSizeObj.price} грн` : "Оберіть розмір"}
       </p>
     );
   };
@@ -136,16 +137,18 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
             />
             {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
             {product.badgeInfo && (
-              <div className={styles.badgeInfo}>
-                <Icon
-                  name="icon-info"
-                  size={isMobile ? 24 : 28}
-                  fill="none"
-                  stroke={styles.yellowColor}
-                />
-              </div>
+              <Link href={`/${product._id}`}>
+                <div className={styles.badgeInfo}>
+                  <Icon
+                    name="icon-info"
+                    size={isMobile ? 24 : 28}
+                    fill="none"
+                    stroke={styles.yellowColor}
+                  />
+                </div>
+              </Link>
             )}
-            {index === currentIndex && (
+            {index === currentIndex && showButton && (
               <div className={styles.buttonPlace}>
                 {isMobile ? (
                   <Button
@@ -158,7 +161,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
                     ДОДАТИ В КОШИК
                   </Button>
                 ) : (
-                  <Link href="/catalog">
+                  <Link href={`/catalog`}>
                     <Button
                       variant="secondary"
                       size="l"
@@ -183,7 +186,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products }) => {
           </div>
         )
       })),
-    [products, currentIndex, selectedSize, isMobile, handleAddToCart]
+    [products, currentIndex, selectedSize, isMobile, handleAddToCart, showButton]
   );
 
   const swipeHandlers = useSwipeable({

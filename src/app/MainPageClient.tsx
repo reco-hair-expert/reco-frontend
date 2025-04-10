@@ -52,7 +52,7 @@ export const MainPageClient = () => {
     <>
       <HeroSection />
       <FeaturesSection />
-      <ProductCard products={products} />
+      <ProductCard products={products} showButton={true} />
       <Insta />
       <FeedbackSection />
     </>
