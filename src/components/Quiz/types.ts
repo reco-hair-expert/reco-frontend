@@ -1,4 +1,4 @@
-import { StaticImageData } from "next/image";
+import { Product } from "@/types/types";
 
 // types.ts
 export type Question = {
@@ -29,29 +29,26 @@ export type QuizResults = {
   }[];
 };
 
-export interface RecommendedProduct {
-  id: number;
-  name: string;
-  photo: StaticImageData;
-  photoProduct: StaticImageData;
-  type: string;
-  description: string;
-  price: number;
-  badgeInfo?: string;
-  isNew: boolean;
+export type RecommendedProduct = Product & {
   score: number;
+  photoProduct: string;
+  price: number;
+  isNew: boolean;
   volume: string;
-  sizes: Record<string, number>;
-}
+};
 
 export interface QuizProps {
-  data: QuizData;
-  onComplete: (results: QuizResults) => void;
+  data: {
+    questions: Question[];
+  };
+  onComplete: (results: {
+    recommendedProducts: { name: string; score: number }[];
+  }) => void;
 }
 
-export interface QuizState {
+export type QuizState = {
   currentQuestionIndex: number;
   answers: Answer[];
   showResults: boolean;
   recommendedProducts: RecommendedProduct[];
-}
+};
