@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Image from "next/image";
 import QuizProgress from "./QuizProgress";
 import styles from "./quiz.module.scss";
@@ -15,6 +15,18 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const { isMobile, isTablet } = useDeviceDetection();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedSize, setSelectedSize] = useState<string>("");
+
+  const [state, setState] = useState<QuizState>({
+    currentQuestionIndex: 0,
+    answers: [],
+    showResults: false,
+    recommendedProducts: []
+  });
+
+  const { questions } = data;
+  const { currentQuestionIndex, answers, showResults, recommendedProducts } =
+    state;
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -36,16 +48,36 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     return "l";
   };
 
-  const [state, setState] = useState<QuizState>({
-    currentQuestionIndex: 0,
-    answers: [],
-    showResults: false,
-    recommendedProducts: []
-  });
+  const handleSizeChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedSize(e.target.value);
+    },
+    []
+  );
 
-  const { questions } = data;
-  const { currentQuestionIndex, answers, showResults, recommendedProducts } =
-    state;
+  const renderSizes = useCallback(
+    (product: Product) => (
+      <>
+        {product.sizes?.length ? (
+          <select
+            className={styles.sizeSelect}
+            value={selectedSize || ""}
+            onChange={handleSizeChange}
+          >
+            <option value="">Оберіть розмір</option>
+            {product.sizes.map(({ size }) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <div className={styles.noSizes}>Розміри не доступні</div>
+        )}
+      </>
+    ),
+    [selectedSize, handleSizeChange]
+  );
 
   const { currentQuestion, totalQuestions, isLastQuestion, isFirstQuestion } =
     useMemo(
@@ -84,12 +116,10 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   ): { name: string; score: number }[] => {
     const productScores: Record<string, number> = {};
 
-    // Ініціалізуємо всі продукти з нульовими балами
     products.forEach((product) => {
       productScores[product.name] = 0;
     });
 
-    // Рахуємо бали для продуктів з відповідей
     userAnswers.forEach((answer) => {
       const question = questions.find((q) => q.id === answer.questionId);
       const option = question?.options.find((o) => o.id === answer.optionId);
@@ -101,7 +131,6 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       });
     });
 
-    // Сортуємо за балом (спадання) і повертаємо топ-3
     return Object.entries(productScores)
       .map(([name, score]) => ({ name, score }))
       .sort((a, b) => b.score - a.score)
@@ -127,6 +156,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       })
       .filter((product): product is RecommendedProduct => product !== null);
   };
+
   const handleNext = () => {
     if (!hasAnsweredCurrent) {
       alert("Будь ласка, оберіть варіант відповіді");
@@ -140,10 +170,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       }
 
       const results = calculateResults(answers);
-      console.log("Raw results:", results); // Додали логування
-
       const enrichedResults = enrichResultsWithProductData(results);
-      console.log("Enriched results:", enrichedResults); // Додали логування
 
       setState((prev) => ({
         ...prev,
@@ -176,6 +203,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       showResults: false,
       recommendedProducts: []
     });
+    setSelectedSize("");
   };
 
   if (isLoading) {
@@ -185,9 +213,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   if (showResults) {
     return (
       <div className={styles.resultsContainer}>
-        <h2 className={styles.resultsTitle}>Ваші рекомендації</h2>
+        <h2 className={styles.resultsTitle}>Рекомендації</h2>
 
-        <div className={styles.productsGrid}>
+        <div className={styles.productsFlex}>
           {recommendedProducts.map((product) => (
             <div key={product.id} className={styles.productCard}>
               <div className={styles.productImageContainer}>
@@ -207,13 +235,15 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
               </div>
               <h3 className={styles.productName}>{product.name}</h3>
               <p className={styles.productType}>{product.type}</p>
-              <p className={styles.productDescription}>{product.description}</p>
               <div className={styles.productPrice}>
                 Від {product.sizes?.[0]?.price || 0} грн
               </div>
-              <div className={styles.productScore}>
-                Рейтинг: {product.score}
-              </div>
+              <form className={styles.productSizeForm}>
+                {renderSizes(product)}
+              </form>
+              <Button variant="primary" size="xl" className={styles.buyButton}>
+                КУПИТИ
+              </Button>
             </div>
           ))}
         </div>
