@@ -1,0 +1,117 @@
+@use "@/styles/variables.scss" as *;
+
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popupContainer {
+  width: 800px;
+  height: 302px;
+  background: $grey-color;
+  border-radius: 30px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.iconContainer,
+.secondСontainer {
+  background-color: $grey-color;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-right: 1px;
+}
+
+.iconContainer {
+  height: 52px;
+  width: 52px;
+  top: 3px;
+  right: 2px;
+
+  @media (max-width: $breakpoint-mobile) {
+    display: none;
+  }
+}
+.button__text {
+  padding-right: 2rem;
+  color: $black-color;
+  margin-right: 8px;
+  font-size: 16px;
+  text-decoration: none;
+
+  @media (max-width: $breakpoint-mobile) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    width: 100%;
+    padding: 0;
+  }
+}
+
+.popupTitle {
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: $white-color;
+  margin: 42px 0 16px 0;
+}
+
+.popupText {
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0;
+  text-align: center;
+  color: $white-color;
+  margin: 0 0 24px 0;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: $white-color;
+}
+
+.startButton {
+  display: inline-block;
+  padding: 15px 40px;
+  background-color: $white-color;
+  color: $black-color;
+  border: none;
+  border-radius: 50px;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 20px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: darken($white-color, 10%);
+  }
+}

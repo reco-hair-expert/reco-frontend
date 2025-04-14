@@ -222,7 +222,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                 <Image
                   src={product.photo}
                   alt={product.name}
-                  width={200}
+                  width={300}
                   height={200}
                   className={styles.productImage}
                   priority={true}
