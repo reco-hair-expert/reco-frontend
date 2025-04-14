@@ -5,4 +5,4 @@ export default function FeedbackPage() {
       <p>Сторінка знаходиться в розробці</p>
     </div>
   );
-} 
+}

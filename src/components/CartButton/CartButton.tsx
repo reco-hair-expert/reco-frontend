@@ -9,7 +9,11 @@ import { useContext, useMemo, useCallback } from "react";
 import { CartContext } from "@/context/CartContext";
 import { CartItem } from "@/types/types";
 
-const CartButton = ({ className, onClick, 'aria-label': ariaLabel }: CartButtonProps) => {
+const CartButton = ({
+  className,
+  onClick,
+  "aria-label": ariaLabel
+}: CartButtonProps) => {
   const cartContext = useContext(CartContext);
 
   const cartItems = useMemo(() => cartContext?.cartItems ?? [], [cartContext]);

@@ -1,7 +1,11 @@
 import { RecoBgProps } from "./types/RecoBg.types";
 import styles from "./RecoBg.module.scss";
 
-const RecoBg = ({ className, children, "data-testid": dataTestId }: RecoBgProps) => {
+const RecoBg = ({
+  className,
+  children,
+  "data-testid": dataTestId
+}: RecoBgProps) => {
   const combinedClass = className
     ? `${styles.background} ${className}`
     : styles.background;

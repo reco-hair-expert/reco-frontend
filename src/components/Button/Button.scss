@@ -57,6 +57,16 @@
     }
   }
 
+  &--xl {
+    width: 340px;
+    height: 58px;
+    font-size: 18px;
+    .button__icon {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
   &--black1 {
     width: 161px;
     height: 68px;

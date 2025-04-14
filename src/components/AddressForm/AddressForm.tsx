@@ -6,7 +6,7 @@ const PAYMENT_ICON = {
   src: "/images/sections/footer/visa-mastercard.svg",
   alt: "Visa and Mastercard payment options",
   width: 100,
-  height: 40,
+  height: 40
 };
 
 const AddressForm = ({

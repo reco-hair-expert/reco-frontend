@@ -23,7 +23,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Каталог товарів",
-    description: "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
+    description:
+      "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
     images: ["/images/catalog-og.jpg"]
   }
 };

@@ -42,7 +42,6 @@
   flex-direction: column;
   gap: 1.5rem;
   color: white;
-
 }
 
 .productName {
@@ -56,7 +55,6 @@
     margin: 0;
     line-height: 1.5;
     color: white;
-
   }
 }
 
@@ -65,7 +63,6 @@
   flex-wrap: wrap;
   gap: 0.5rem;
   color: white;
-
 
   label {
     display: flex;
@@ -90,11 +87,10 @@
   font-size: 1.25rem;
   margin: 0;
   color: white;
-
 }
 
 .price {
-    color: white;
+  color: white;
 }
 
 .addToCart {
@@ -107,7 +103,6 @@
   padding: 15px;
   border-radius: 8px;
   color: white;
-
 }
 
 .infoItem {
@@ -120,4 +115,4 @@
     color: white;
     margin-right: 5px;
   }
-} 
+}
