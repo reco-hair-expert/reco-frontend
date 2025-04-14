@@ -8,6 +8,7 @@ import FeaturesSection from "@/components/FeaturesSection/FeaturesSection";
 import Insta from "@/components/Insta/Insta";
 import FeedbackSection from "@/components/FeedbackSection/FeedbackSection";
 import styles from "./page.module.scss";
+import QuizPopup from "@/components/Popup/QuizPopup";
 
 const ProductCard = dynamic(
   () =>
@@ -21,6 +22,7 @@ export const MainPageClient = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -30,15 +32,35 @@ export const MainPageClient = () => {
         const fetchedProducts = await fetchProducts();
         setProducts(fetchedProducts);
       } catch (error) {
-        setError('Failed to load products. Please try again later.');
-        console.error('Error loading products:', error);
+        setError("Failed to load products. Please try again later.");
+        console.error("Error loading products:", error);
       } finally {
         setLoading(false);
       }
     };
 
     loadProducts();
+
+    const popupTimer = setTimeout(() => {
+      setIsPopupOpen(true);
+    }, 5000);
+
+    return () => {
+      clearTimeout(popupTimer);
+    };
   }, []);
+
+  useEffect(() => {
+    if (isPopupOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
+  }, [isPopupOpen]);
+
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
 
   if (loading) {
     return <div className={styles.loading}>Loading products...</div>;
@@ -55,6 +77,8 @@ export const MainPageClient = () => {
       <ProductCard products={products} showButton={true} />
       <Insta />
       <FeedbackSection />
+
+      <QuizPopup onClose={handleClosePopup} isVisible={isPopupOpen} />
     </>
   );
-}; 
+};

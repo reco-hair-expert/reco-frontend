@@ -1,45 +1,46 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Image from "next/image";
 import QuizProgress from "./QuizProgress";
 import styles from "./quiz.module.scss";
-import type { QuizData, QuizResults, Answer } from "./types";
+import type { Answer, QuizProps, QuizState, RecommendedProduct } from "./types";
+import { fetchProducts } from "@/services/products";
 import Button from "@/components/Button/Button";
-import { StaticImageData } from "next/image";
 import Icon from "../Icon/Icon";
 import useDeviceDetection from "@/context/useDeviceDetection";
-
-interface RecommendedProduct {
-  id: number;
-  name: string;
-  photo: StaticImageData;
-  photoProduct: StaticImageData;
-  type: string;
-  description: string;
-  price: number;
-  badgeInfo?: string;
-  isNew: boolean;
-  score: number;
-  volume: string;
-  sizes: Record<string, number>;
-}
-
-interface QuizProps {
-  data: QuizData;
-  onComplete: (results: QuizResults) => void;
-}
-
-interface QuizState {
-  currentQuestionIndex: number;
-  answers: Answer[];
-  showResults: boolean;
-  recommendedProducts: RecommendedProduct[];
-  isLoading: boolean;
-}
+import { Product } from "@/types/types";
 
 const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const { isMobile, isTablet } = useDeviceDetection();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedSize, setSelectedSize] = useState<string>("");
+
+  const [state, setState] = useState<QuizState>({
+    currentQuestionIndex: 0,
+    answers: [],
+    showResults: false,
+    recommendedProducts: []
+  });
+
+  const { questions } = data;
+  const { currentQuestionIndex, answers, showResults, recommendedProducts } =
+    state;
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const fetchedProducts = await fetchProducts();
+        setProducts(fetchedProducts);
+      } catch (error) {
+        console.error("Failed to load products:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    loadProducts();
+  }, []);
 
   const getButtonSize = () => {
     if (isMobile) return "s";
@@ -47,17 +48,36 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     return "l";
   };
 
-  const [state, setState] = useState<QuizState>({
-    currentQuestionIndex: 0,
-    answers: [],
-    showResults: false,
-    recommendedProducts: [],
-    isLoading: false
-  });
+  const handleSizeChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      setSelectedSize(e.target.value);
+    },
+    []
+  );
 
-  const { questions } = data;
-  const { currentQuestionIndex, answers, showResults, recommendedProducts, isLoading } =
-    state;
+  const renderSizes = useCallback(
+    (product: Product) => (
+      <>
+        {product.sizes?.length ? (
+          <select
+            className={styles.sizeSelect}
+            value={selectedSize || ""}
+            onChange={handleSizeChange}
+          >
+            <option value="">Оберіть розмір</option>
+            {product.sizes.map(({ size }) => (
+              <option key={size} value={size}>
+                {size}
+              </option>
+            ))}
+          </select>
+        ) : (
+          <div className={styles.noSizes}>Розміри не доступні</div>
+        )}
+      </>
+    ),
+    [selectedSize, handleSizeChange]
+  );
 
   const { currentQuestion, totalQuestions, isLastQuestion, isFirstQuestion } =
     useMemo(
@@ -91,45 +111,74 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     }));
   };
 
-  const fetchRecommendations = async (userAnswers: Answer[]) => {
-    try {
-      setState(prev => ({ ...prev, isLoading: true }));
-      const response = await fetch('/api/quiz/recommendations', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ answers: userAnswers }),
+  const calculateResults = (
+    userAnswers: Answer[]
+  ): { name: string; score: number }[] => {
+    const productScores: Record<string, number> = {};
+
+    products.forEach((product) => {
+      productScores[product.name] = 0;
+    });
+
+    userAnswers.forEach((answer) => {
+      const question = questions.find((q) => q.id === answer.questionId);
+      const option = question?.options.find((o) => o.id === answer.optionId);
+
+      option?.recommendedProducts?.forEach((productName) => {
+        if (productName in productScores) {
+          productScores[productName] += 1;
+        }
       });
-      
-      if (!response.ok) {
-        throw new Error('Failed to fetch recommendations');
-      }
-      
-      const data = await response.json();
-      return data.recommendedProducts;
-    } catch (error) {
-      console.error('Error fetching recommendations:', error);
-      return [];
-    } finally {
-      setState(prev => ({ ...prev, isLoading: false }));
-    }
+    });
+
+    return Object.entries(productScores)
+      .map(([name, score]) => ({ name, score }))
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 3);
   };
 
-  const handleNext = async () => {
+  const enrichResultsWithProductData = (
+    results: { name: string; score: number }[]
+  ): RecommendedProduct[] => {
+    return results
+      .map((result) => {
+        const product = products.find((p) => p.name === result.name);
+        return product
+          ? {
+              ...product,
+              score: result.score,
+              photoProduct: product.photo,
+              price: product.sizes?.[0]?.price || 0,
+              isNew: product.isNewProduct,
+              volume: product.sizes?.[0]?.size || ""
+            }
+          : null;
+      })
+      .filter((product): product is RecommendedProduct => product !== null);
+  };
+
+  const handleNext = () => {
     if (!hasAnsweredCurrent) {
       alert("Будь ласка, оберіть варіант відповіді");
       return;
     }
 
     if (isLastQuestion) {
-      const recommendations = await fetchRecommendations(answers);
+      if (products.length === 0) {
+        alert("Продукти ще не завантажені. Спробуйте ще раз.");
+        return;
+      }
+
+      const results = calculateResults(answers);
+      const enrichedResults = enrichResultsWithProductData(results);
+
       setState((prev) => ({
         ...prev,
         showResults: true,
-        recommendedProducts: recommendations
+        recommendedProducts: enrichedResults
       }));
-      onComplete({ recommendedProducts: recommendations });
+
+      onComplete({ recommendedProducts: results });
     } else {
       setState((prev) => ({
         ...prev,
@@ -152,58 +201,61 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       currentQuestionIndex: 0,
       answers: [],
       showResults: false,
-      recommendedProducts: [],
-      isLoading: false
+      recommendedProducts: []
     });
+    setSelectedSize("");
   };
+
+  if (isLoading) {
+    return <div className={styles.loading}>Завантаження продуктів...</div>;
+  }
 
   if (showResults) {
     return (
       <div className={styles.resultsContainer}>
-        <h2 className={styles.resultsTitle}>Ваші рекомендації</h2>
-        {isLoading ? (
-          <div className={styles.loading}>Завантаження...</div>
-        ) : (
-          <>
-            <div className={styles.productsGrid}>
-              {recommendedProducts.map((product) => (
-                <div key={product.id} className={styles.productCard}>
-                  <div className={styles.productImageContainer}>
-                    <Image
-                      src={product.photo}
-                      alt={product.name}
-                      width={200}
-                      height={200}
-                      className={styles.productImage}
-                      priority={true}
-                    />
-                    {product.badgeInfo && (
-                      <span className={styles.productBadge}>
-                        {product.badgeInfo}
-                      </span>
-                    )}
-                  </div>
-                  <h3 className={styles.productName}>{product.name}</h3>
-                  <p className={styles.productType}>{product.type}</p>
-                  <p className={styles.productDescription}>{product.description}</p>
-                  <div className={styles.productPrice}>Від {product.price} грн</div>
-                  <div className={styles.productScore}>
-                    Рейтинг: {product.score}
-                  </div>
-                </div>
-              ))}
-            </div>
+        <h2 className={styles.resultsTitle}>Рекомендації</h2>
 
-            <Button
-              variant="primary"
-              size="m"
-              onClick={restartQuiz}
-              className={styles.restartButton}
-            >
-              Пройти тест знову
-            </Button>
-          </>
-        )}
+        <div className={styles.productsFlex}>
+          {recommendedProducts.map((product) => (
+            <div key={product.id} className={styles.productCard}>
+              <div className={styles.productImageContainer}>
+                <Image
+                  src={product.photo}
+                  alt={product.name}
+                  width={300}
+                  height={200}
+                  className={styles.productImage}
+                  priority={true}
+                />
+                {product.badgeInfo && (
+                  <span className={styles.productBadge}>
+                    {product.badgeInfo}
+                  </span>
+                )}
+              </div>
+              <h3 className={styles.productName}>{product.name}</h3>
+              <p className={styles.productType}>{product.type}</p>
+              <div className={styles.productPrice}>
+                Від {product.sizes?.[0]?.price || 0} грн
+              </div>
+              <form className={styles.productSizeForm}>
+                {renderSizes(product)}
+              </form>
+              <Button variant="primary" size="xl" className={styles.buyButton}>
+                КУПИТИ
+              </Button>
+            </div>
+          ))}
+        </div>
+
+        <Button
+          variant="primary"
+          size="m"
+          onClick={restartQuiz}
+          className={styles.restartButton}
+        >
+          Пройти тест знову
+        </Button>
       </div>
     );
   }
@@ -258,7 +310,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
           variant="primary"
           size={getButtonSize()}
           onClick={handleNext}
-          disabled={!hasAnsweredCurrent}
+          disabled={
+            !hasAnsweredCurrent || (isLastQuestion && products.length === 0)
+          }
           className={styles.nextButton}
         >
           {isLastQuestion ? "РЕЗУЛЬТАТ" : "ДАЛІ"}

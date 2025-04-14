@@ -1,61 +1,75 @@
-import React from 'react';
-import { render, screen, fireEvent } from '@testing-library/react';
-import CartItems from './CartItems';
-import { CartContext } from '@/context/CartContext';
-import { CartItem, Product } from '@/types/types';
+import React from "react";
+import { render, screen, fireEvent } from "@testing-library/react";
+import CartItems from "./CartItems";
+import { CartContext } from "@/context/CartContext";
+import { CartItem, Product } from "@/types/types";
 
 // Mock the Image component from Next.js
-jest.mock('next/image', () => {
+jest.mock("next/image", () => {
   return function MockImage({ src, alt, width, height, className }: any) {
-    return <img src={src} alt={alt} width={width} height={height} className={className} />;
+    return (
+      <img
+        src={src}
+        alt={alt}
+        width={width}
+        height={height}
+        className={className}
+      />
+    );
   };
 });
 
 // Mock the HighlightText component
-jest.mock('@/components/HighLightText/HighLightText', () => {
-  return function MockHighlightText({ children }: { children: React.ReactNode }) {
+jest.mock("@/components/HighLightText/HighLightText", () => {
+  return function MockHighlightText({
+    children
+  }: {
+    children: React.ReactNode;
+  }) {
     return <div data-testid="highlight-text">{children}</div>;
   };
 });
 
-describe('CartItems Component', () => {
+describe("CartItems Component", () => {
   const mockRemoveFromCart = jest.fn();
   const mockUpdateCartItemQuantity = jest.fn();
   const mockAddToCart = jest.fn();
 
   const mockProduct: Product = {
     id: 1,
-    name: 'Test Product',
-    volume: '100ml',
-    photo: '/test-image.jpg',
-    description: 'Test description',
-    sizes: { '100ml': 100, '200ml': 180 },
-    type: 'test'
+    name: "Test Product",
+    volume: "100ml",
+    photo: "/test-image.jpg",
+    description: "Test description",
+    sizes: { "100ml": 100, "200ml": 180 },
+    type: "test"
   };
 
   const mockCartItems: CartItem[] = [
     {
       product: mockProduct,
       quantity: 2,
-      size: '100ml'
+      size: "100ml"
     },
     {
-      product: { ...mockProduct, id: 2, name: 'Test Product 2' },
+      product: { ...mockProduct, id: 2, name: "Test Product 2" },
       quantity: 1,
-      size: '200ml'
+      size: "200ml"
     }
   ];
 
   const renderWithCartContext = (cartItems: CartItem[] = []) => {
     return render(
-      <CartContext.Provider value={{
-        cartItems,
-        addToCart: mockAddToCart,
-        removeFromCart: mockRemoveFromCart,
-        updateCartItemQuantity: mockUpdateCartItemQuantity,
-        cartTotal: 0,
-        cartCount: cartItems.reduce((sum, item) => sum + item.quantity, 0)
-      }}>
+      <CartContext.Provider
+        value={{
+          cartItems,
+          addToCart: mockAddToCart,
+          removeFromCart: mockRemoveFromCart,
+          updateCartItemQuantity: mockUpdateCartItemQuantity,
+          cartTotal: 0,
+          cartCount: cartItems.reduce((sum, item) => sum + item.quantity, 0)
+        }}
+      >
         <CartItems />
       </CartContext.Provider>
     );
@@ -65,101 +79,101 @@ describe('CartItems Component', () => {
     jest.clearAllMocks();
   });
 
-  it('renders empty cart message when cart is empty', () => {
+  it("renders empty cart message when cart is empty", () => {
     renderWithCartContext([]);
-    expect(screen.getByText('Your cart is empty')).toBeInTheDocument();
+    expect(screen.getByText("Your cart is empty")).toBeInTheDocument();
   });
 
-  it('renders cart items when cart is not empty', () => {
+  it("renders cart items when cart is not empty", () => {
     renderWithCartContext(mockCartItems);
-    
+
     // Check if product names are rendered
-    expect(screen.getByText('Test Product')).toBeInTheDocument();
-    expect(screen.getByText('Test Product 2')).toBeInTheDocument();
-    
+    expect(screen.getByText("Test Product")).toBeInTheDocument();
+    expect(screen.getByText("Test Product 2")).toBeInTheDocument();
+
     // Check if product descriptions are rendered
-    const descriptions = screen.getAllByText('Test description');
+    const descriptions = screen.getAllByText("Test description");
     expect(descriptions).toHaveLength(2);
     expect(descriptions[0]).toBeInTheDocument();
     expect(descriptions[1]).toBeInTheDocument();
-    
+
     // Check if product images are rendered
-    const images = screen.getAllByRole('img');
+    const images = screen.getAllByRole("img");
     expect(images).toHaveLength(2);
-    expect(images[0]).toHaveAttribute('src', '/test-image.jpg');
-    expect(images[0]).toHaveAttribute('alt', 'Test Product');
+    expect(images[0]).toHaveAttribute("src", "/test-image.jpg");
+    expect(images[0]).toHaveAttribute("alt", "Test Product");
   });
 
-  it('displays correct quantity for each item', () => {
+  it("displays correct quantity for each item", () => {
     renderWithCartContext(mockCartItems);
-    
+
     // Check if quantities are displayed correctly
-    expect(screen.getByText('2')).toBeInTheDocument(); // First item quantity
-    expect(screen.getByText('1')).toBeInTheDocument(); // Second item quantity
+    expect(screen.getByText("2")).toBeInTheDocument(); // First item quantity
+    expect(screen.getByText("1")).toBeInTheDocument(); // Second item quantity
   });
 
-  it('displays correct size and price for each item', () => {
+  it("displays correct size and price for each item", () => {
     renderWithCartContext(mockCartItems);
-    
+
     // Check if sizes are displayed
-    expect(screen.getByText('100ml')).toBeInTheDocument();
-    expect(screen.getByText('200ml')).toBeInTheDocument();
-    
+    expect(screen.getByText("100ml")).toBeInTheDocument();
+    expect(screen.getByText("200ml")).toBeInTheDocument();
+
     // Check if prices are displayed
-    expect(screen.getByText('100 грн')).toBeInTheDocument();
-    expect(screen.getByText('180 грн')).toBeInTheDocument();
+    expect(screen.getByText("100 грн")).toBeInTheDocument();
+    expect(screen.getByText("180 грн")).toBeInTheDocument();
   });
 
-  it('calls removeFromCart when remove button is clicked', () => {
+  it("calls removeFromCart when remove button is clicked", () => {
     renderWithCartContext(mockCartItems);
-    
+
     // Find and click the remove button for the first item
-    const removeButtons = screen.getAllByText('X');
+    const removeButtons = screen.getAllByText("X");
     fireEvent.click(removeButtons[0]);
-    
+
     // Check if removeFromCart was called with correct parameters
-    expect(mockRemoveFromCart).toHaveBeenCalledWith(1, '100ml');
+    expect(mockRemoveFromCart).toHaveBeenCalledWith(1, "100ml");
   });
 
-  it('calls updateCartItemQuantity when decrease button is clicked', () => {
+  it("calls updateCartItemQuantity when decrease button is clicked", () => {
     renderWithCartContext(mockCartItems);
-    
+
     // Find and click the decrease button for the first item
-    const decreaseButtons = screen.getAllByText('-');
+    const decreaseButtons = screen.getAllByText("-");
     fireEvent.click(decreaseButtons[0]);
-    
+
     // Check if updateCartItemQuantity was called with correct parameters
-    expect(mockUpdateCartItemQuantity).toHaveBeenCalledWith(1, 1, '100ml');
+    expect(mockUpdateCartItemQuantity).toHaveBeenCalledWith(1, 1, "100ml");
   });
 
-  it('calls addToCart when increase button is clicked', () => {
+  it("calls addToCart when increase button is clicked", () => {
     renderWithCartContext(mockCartItems);
-    
+
     // Find and click the increase button for the first item
-    const increaseButtons = screen.getAllByText('+');
+    const increaseButtons = screen.getAllByText("+");
     fireEvent.click(increaseButtons[0]);
-    
+
     // Check if addToCart was called with correct parameters
-    expect(mockAddToCart).toHaveBeenCalledWith(mockProduct, '100ml');
+    expect(mockAddToCart).toHaveBeenCalledWith(mockProduct, "100ml");
   });
 
-  it('does not decrease quantity below 1', () => {
+  it("does not decrease quantity below 1", () => {
     // Create a cart item with quantity 1
     const singleItemCart: CartItem[] = [
       {
         product: mockProduct,
         quantity: 1,
-        size: '100ml'
+        size: "100ml"
       }
     ];
-    
+
     renderWithCartContext(singleItemCart);
-    
+
     // Find and click the decrease button
-    const decreaseButton = screen.getByText('-');
+    const decreaseButton = screen.getByText("-");
     fireEvent.click(decreaseButton);
-    
+
     // Check that updateCartItemQuantity was not called
     expect(mockUpdateCartItemQuantity).not.toHaveBeenCalled();
   });
-}); 
+});

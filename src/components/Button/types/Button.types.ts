@@ -1,5 +1,12 @@
 import React, { ReactElement } from "react";
-export type ButtonSize = "s" | "m" | "l" | "black1" | "black2" | "black3";
+export type ButtonSize =
+  | "s"
+  | "m"
+  | "l"
+  | "xl"
+  | "black1"
+  | "black2"
+  | "black3";
 export type ButtonState =
   | "default"
   | "hover"

@@ -1,11 +1,11 @@
-'use client';
-import React, { useState } from 'react';
-import { Product } from '@/types/types';
-import { useCartContext } from '@/hooks/useCartContext';
-import styles from './SingleProductCard.module.scss';
-import Button from '../Button/Button';
-import Icon from '../Icon/Icon';
-import Image from 'next/image';
+"use client";
+import React, { useState } from "react";
+import { Product } from "@/types/types";
+import { useCartContext } from "@/hooks/useCartContext";
+import styles from "./SingleProductCard.module.scss";
+import Button from "../Button/Button";
+import Icon from "../Icon/Icon";
+import Image from "next/image";
 
 interface SingleProductCardProps {
   product: Product;
@@ -19,7 +19,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
 
   const handleAddToCart = () => {
     if (!selectedSize || !product.sizes) {
-      return alert('Будь ласка, виберіть розмір!');
+      return alert("Будь ласка, виберіть розмір!");
     }
 
     const selectedSizeObj = product.sizes.find((s) => s.size === selectedSize);
@@ -33,8 +33,8 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
       photo: product.photo
     };
 
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    localStorage.setItem('cart', JSON.stringify([...cart, newItem]));
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(product, selectedSize);
   };
 
@@ -95,7 +95,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
     return (
       <p className={styles.priceContainer}>
         <strong className={styles.price}>Ціна: </strong>
-        {selectedSizeObj ? `${selectedSizeObj.price} грн` : 'Оберіть розмір'}
+        {selectedSizeObj ? `${selectedSizeObj.price} грн` : "Оберіть розмір"}
       </p>
     );
   };
@@ -133,4 +133,4 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
   );
 };
 
-export default SingleProductCard; 
+export default SingleProductCard;

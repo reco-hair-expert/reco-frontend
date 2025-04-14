@@ -186,7 +186,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
           </div>
         )
       })),
-    [products, currentIndex, selectedSize, isMobile, handleAddToCart, showButton]
+    [
+      products,
+      currentIndex,
+      selectedSize,
+      isMobile,
+      handleAddToCart,
+      showButton
+    ]
   );
 
   const swipeHandlers = useSwipeable({

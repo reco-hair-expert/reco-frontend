@@ -99,15 +99,12 @@ export const CartProvider = ({ children }: Props) => {
     );
   };
 
-  const total = cartItems.reduce(
-    (total, item) => {
-      const sizePrice = item.size 
-        ? item.product.sizes.find(s => s.size === item.size)?.price || 0
-        : 0;
-      return total + sizePrice * item.quantity;
-    },
-    0
-  );
+  const total = cartItems.reduce((total, item) => {
+    const sizePrice = item.size
+      ? item.product.sizes.find((s) => s.size === item.size)?.price || 0
+      : 0;
+    return total + sizePrice * item.quantity;
+  }, 0);
   const cartCount = cartItems.reduce((count, item) => count + item.quantity, 0);
 
   return (

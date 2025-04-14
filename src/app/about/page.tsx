@@ -5,4 +5,4 @@ export default function AboutPage() {
       <p>Сторінка знаходиться в розробці</p>
     </div>
   );
-} 
+}

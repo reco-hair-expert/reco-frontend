@@ -18,7 +18,7 @@ export default function QuizPage() {
   };
 
   return (
-    <main className={styles.container}>
+    <main className="container">
       <div className={styles.quizWrapper}>
         <Quiz data={quizData} onComplete={handleQuizComplete} />
       </div>

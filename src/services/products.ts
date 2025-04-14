@@ -1,23 +1,25 @@
-import { Product } from '@/types/types';
-import reco from '../../public/images/products/recoil.png';
+import { Product } from "@/types/types";
+import reco from "../../public/images/products/recoil.png";
 
 const fetchOptions = {
   headers: {
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Origin': 'http://localhost:3001'
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    Origin: "http://localhost:3001"
   }
 };
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch('https://reco-backend-two.onrender.com/products', fetchOptions);
+    const response = await fetch(
+      "https://reco-backend-two.onrender.com/products",
+      fetchOptions
+    );
     if (!response.ok) {
-      throw new Error('Failed to fetch products');
+      throw new Error("Failed to fetch products");
     }
     const data = await response.json();
-    console.log(data);
-
+    
     return data.data.map((product: any, index: number) => ({
       id: index + 1,
       _id: product._id || `product_${index + 1}`,
@@ -38,25 +40,28 @@ export const fetchProducts = async (): Promise<Product[]> => {
       isNewProduct: product.isNewProduct
     }));
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error("Error fetching products:", error);
     return [];
   }
 };
 
 export const fetchProductById = async (id: string): Promise<Product | null> => {
   try {
-    const response = await fetch('https://reco-backend-two.onrender.com/products', fetchOptions);
+    const response = await fetch(
+      "https://reco-backend-two.onrender.com/products",
+      fetchOptions
+    );
     if (!response.ok) {
-      throw new Error('Failed to fetch products');
+      throw new Error("Failed to fetch products");
     }
     const data = await response.json();
-    
+
     if (!data.data || data.data.length === 0) {
       return null;
     }
 
     const product = data.data.find((p: any) => p._id === id);
-    
+
     if (!product) {
       return null;
     }
@@ -81,7 +86,7 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
       isNewProduct: product.isNewProduct
     };
   } catch (error) {
-    console.error('Error fetching product:', error);
+    console.error("Error fetching product:", error);
     return null;
   }
-}; 
+};

@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
-import { Product } from '@/types/types';
-import { fetchProductById } from '@/services/products';
-import SingleProductCard from '@/components/SingleProductCard/SingleProductCard';
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import { Product } from "@/types/types";
+import { fetchProductById } from "@/services/products";
+import SingleProductCard from "@/components/SingleProductCard/SingleProductCard";
 
 export default function ProductPage({ params }: { params: { slug: string } }) {
   const [product, setProduct] = useState<Product | null>(null);
@@ -16,7 +16,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         const data = await fetchProductById(params.slug);
         setProduct(data);
       } catch (error) {
-        console.error('Error loading product:', error);
+        console.error("Error loading product:", error);
       } finally {
         setLoading(false);
       }
