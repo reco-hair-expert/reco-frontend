@@ -3,15 +3,10 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'reco.com.ua',
-      },
-      {
-        protocol: 'https',
-        hostname: 'reco-one.vercel.app',
-      },
+    domains: [
+      'reco.com.ua',
+      'reco-one.vercel.app',
+      'res.cloudinary.com', 
     ],
     formats: ['image/avif', 'image/webp'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
@@ -36,4 +31,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = nextConfig;
