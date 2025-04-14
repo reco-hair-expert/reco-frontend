@@ -7,9 +7,10 @@ import useDeviceDetection from "@/context/useDeviceDetection";
 
 interface QuizPopupProps {
   onClose: () => void;
+  isVisible: boolean;
 }
 
-const QuizPopup: React.FC<QuizPopupProps> = ({ onClose }) => {
+const QuizPopup: React.FC<QuizPopupProps> = ({ onClose, isVisible }) => {
   const { isMobile, isTablet } = useDeviceDetection();
 
   const getButtonSize = () => {
@@ -17,8 +18,11 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ onClose }) => {
     if (isTablet) return "m";
     return "l";
   };
+
   return (
-    <div className={styles.popupOverlay}>
+    <div
+      className={`${styles.popupOverlay} ${isVisible ? styles.visible : ""}`}
+    >
       <div className={styles.popupContainer}>
         <button className={styles.closeButton} onClick={onClose}>
           ×
@@ -29,24 +33,26 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ onClose }) => {
         <p className={styles.popupText}>
           Лише 6 питань – і ви дізнаєтеся свій ідеальний догляд!
         </p>
-        <Link href="/quiz" passHref>
-          <Button
-            size={getButtonSize()}
-            variant="primary"
-            className={styles.button}
-          >
-            <div className={styles.iconContainer}>
-              <Icon
-                name="icon-arrow-up-right2"
-                size={30}
-                fill="white"
-                stroke="none"
-                className={styles.ButtonIcon}
-              />
-            </div>
-            <span className={styles.button__text}>РОЗПОЧАТИ КВІЗ</span>
-          </Button>
-        </Link>
+        <div className={styles.buttonWrapper}>
+          <Link href="/quiz" passHref>
+            <Button
+              size={getButtonSize()}
+              variant="primary"
+              className={styles.button}
+            >
+              <span className={styles.button__text}>РОЗПОЧАТИ КВІЗ</span>
+              <div className={styles.iconContainer}>
+                <Icon
+                  name="icon-arrow-up-right2"
+                  size={30}
+                  fill="white"
+                  stroke="none"
+                  className={styles.ButtonIcon}
+                />
+              </div>
+            </Button>
+          </Link>
+        </div>
       </div>
     </div>
   );

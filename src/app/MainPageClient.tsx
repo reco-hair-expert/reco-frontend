@@ -58,6 +58,10 @@ export const MainPageClient = () => {
     }
   }, [isPopupOpen]);
 
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
   if (loading) {
     return <div className={styles.loading}>Loading products...</div>;
   }
@@ -74,7 +78,7 @@ export const MainPageClient = () => {
       <Insta />
       <FeedbackSection />
 
-      {isPopupOpen && <QuizPopup onClose={() => setIsPopupOpen(false)} />}
+      <QuizPopup onClose={handleClosePopup} isVisible={isPopupOpen} />
     </>
   );
 };
