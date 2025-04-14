@@ -16,7 +16,8 @@ export const fetchProducts = async (): Promise<Product[]> => {
       throw new Error('Failed to fetch products');
     }
     const data = await response.json();
-    
+    console.log(data);
+
     return data.data.map((product: any, index: number) => ({
       id: index + 1,
       _id: product._id || `product_${index + 1}`,
@@ -30,7 +31,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
       recommendation: product.recommendation,
       sizes: product.sizes.map((size: any) => ({
         _id: size._id,
-        size: size.size,
+        size: size.volume,
         price: size.price
       })),
       badgeInfo: product.badgeInfo,
