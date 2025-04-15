@@ -51,7 +51,6 @@ describe("CatalogCard Component", () => {
     application: "Test application",
     composition: "Test composition",
     type: "Сухе",
-    isBestseller: true,
     recommendation: "Test recommendation",
     isNewProduct: false
   };
