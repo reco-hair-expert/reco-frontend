@@ -7,7 +7,7 @@
   position: relative;
   overflow: hidden;
   display: flex;
-  height: 491px;
+  height: 485px;
   width: 292px;
   flex-direction: column;
 }
@@ -111,8 +111,9 @@
   }
 
   .productType {
-    font-weight: 100;
-    margin-bottom: 12px;
+    font-weight: 50;
+    margin-bottom: 10px;
+    font-size: 14px;
   }
 
   .productSizeForm {
@@ -124,7 +125,7 @@
     .sizeSelect {
       width: 100%;
       padding: 8px 12px;
-      border: 1px solid $white-color;
+      border: none;
       border-radius: 8px;
       background-color: transparent;
       color: $white-color;

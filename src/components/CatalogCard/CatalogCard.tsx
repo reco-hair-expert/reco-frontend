@@ -92,7 +92,7 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
         {product.badgeInfo && (
           <span className={styles.saleBadge}>{product.badgeInfo}</span>
         )}
-        <span className={styles.typeBadge}>{product.type}</span>
+        {/* <span className={styles.typeBadge}>{product.type}</span> */}
       </div>
 
       <Link href={`/${product._id}`} className={styles.infoBtn}>
@@ -105,7 +105,7 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
         </header>
 
         <div className={styles.productAction}>
-          <p className={styles.productType}>{product.type}</p>
+          <p className={styles.productType}>{product.shortDescription}</p>
           <form className={styles.productSizeForm}>{renderSizes()}</form>
           <div className={styles.productBtnContainer}>
             <button
