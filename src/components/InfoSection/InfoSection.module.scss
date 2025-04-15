@@ -1,0 +1,55 @@
+// InfoSection.module.scss
+@use "../../styles/variables.scss" as *;
+
+.infoSection {
+  padding: 2rem;
+  margin-top: 4rem;
+
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: $yellow-color;
+  }
+
+  h4 {
+    font-size: 1.5rem;
+    color: $white-color;
+  }
+
+  .infoContent {
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 1em;
+      color: $white-color;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+
+      animation: fadeInUp 0.3s ease-in-out;
+    }
+
+    a {
+      color: #0070f3;
+      text-decoration: underline;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+
+    ul,
+    ol {
+      margin: 1em 0;
+      padding-left: 1.5em;
+      color: $white-color;
+    }
+
+    li {
+      margin-bottom: 0.5em;
+      color: $white-color;
+    }
+  }
+}

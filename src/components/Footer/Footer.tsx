@@ -38,8 +38,9 @@ const Footer = ({ className }: FooterProps) => {
           </SocialMediaHub>
         </div>
         <p className={styles.authorRights}>
-          © 2025 RECO. Всі права захищені. Політика конфіденційності | Умови
-          використання
+          © 2025 RECO. Всі права захищені.
+          <Link href="/policy/privacy-policy">Політика конфіденційності</Link> |
+          <Link href="/policy/offer">Оферта</Link>
         </p>
       </div>
     </footer>
