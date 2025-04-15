@@ -50,7 +50,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
               checked={selectedSize === size}
               onChange={() => handleSizeChange(size)}
             />
-            {size}
+            {size} — {price} ₴
           </label>
         ))
       ) : (
@@ -58,6 +58,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
       )}
     </div>
   );
+  
 
   const renderDescription = () => (
     <div className={styles.descriptionContainer}>

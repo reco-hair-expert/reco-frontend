@@ -75,11 +75,19 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
     addToCart(currentProduct, selectedSize);
   }, [selectedSize, currentProduct, addToCart, products?.length]);
 
-  const renderSizes = () => (
-    <div className={styles.sizes}>
-      {currentProduct.sizes?.length ? (
-        currentProduct.sizes.map(({ size, price }) => (
-          <label key={size}>
+  const renderSizes = () => {
+    const totalSizes = currentProduct.sizes?.length || 0;
+
+    return (
+<div className={styles.radioInput}>
+  {totalSizes ? (
+    <>
+      {currentProduct.sizes.map(({ size }, index) => {
+        const selectedIndex = currentProduct.sizes.findIndex(({ size }) => size === selectedSize);
+        const isFilled = index <= selectedIndex;
+
+        return (
+          <label key={size} className={isFilled ? styles.filled : ''}>
             <input
               type="radio"
               name="size"
@@ -87,14 +95,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
               checked={selectedSize === size}
               onChange={() => handleSizeChange(size)}
             />
-            {size}
+            <span>{size}</span>
           </label>
-        ))
-      ) : (
-        <div>Розміри не доступні для цього товару.</div>
-      )}
-    </div>
-  );
+        );
+      })}
+      <div
+        className={styles.selection}
+        style={{
+          width: `${((currentProduct.sizes.findIndex(({ size }) => size === selectedSize) + 1) / totalSizes) * 100}%`
+        }}
+      />
+    </>
+  ) : (
+    <div>Розміри не доступні для цього товару.</div>
+  )}
+</div>
+    );
+  };
 
   const renderDescription = () => (
     <div className={styles.descriptionContainer}>

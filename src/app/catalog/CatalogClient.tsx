@@ -101,7 +101,7 @@ export const CatalogClient = () => {
         <section className="container" aria-label="Новинки">
           <div className={styles.newProducts}>
             <h1 className={styles.title}>НОВИНКИ</h1>
-            <ProductCard products={products} />
+            <ProductCard products={products} showButton={false} />
           </div>
         </section>
 
