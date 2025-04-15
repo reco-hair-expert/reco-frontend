@@ -1,5 +1,10 @@
+// ------------------------
+// Переменные и миксины
+// ------------------------
+
 @use "@/styles/variables.scss" as *;
 
+// Миксины для медиазапросов
 @mixin mobile {
   @media (max-width: $breakpoint-mobile) {
     @content;
@@ -12,16 +17,21 @@
   }
 }
 
-@include mobile {
-  .container {
-    width: 100%;
-    height: 755px;
-    @include mobile {
-      height: 100vh;
-    }
+// ------------------------
+// Стили для компонентов
+// ------------------------
+
+/* Container */
+.container {
+  width: 100%;
+  height: 755px;
+
+  @include mobile {
+    height: 100vh;
   }
 }
 
+/* Новые бейджики */
 .newBadge {
   background-color: $yellow-color;
   color: $black-color;
@@ -32,6 +42,7 @@
   position: absolute;
   left: 20px;
   top: 20px;
+
   @include mobile {
     left: 110px;
     top: 20px;
@@ -40,25 +51,29 @@
   }
 }
 
+/* Информация о бейджике */
 .badgeInfo {
   svg {
     stroke: $yellow-color;
   }
+
   position: absolute;
   right: 20px;
   top: 20px;
+
   @include mobile {
     right: 110px;
-    top: 20px;
   }
 }
 
+/* Карточка товара */
 .card {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
   border-radius: 10px;
   overflow: hidden;
-
   max-width: 1224px;
   height: 512px;
   margin: 20px;
@@ -72,12 +87,14 @@
     height: auto;
     margin: 0 27px;
   }
+
   @include tablet {
     flex-direction: column;
     height: auto;
   }
 }
 
+/* Слайд */
 .slide {
   width: 396px;
   height: 512px;
@@ -93,11 +110,13 @@
     height: 274px;
     position: static;
   }
+
   @include tablet {
     position: static;
   }
 
   $breakpoint-tablet-plus-one: $breakpoint-tablet + 1;
+
   @media (min-width: $breakpoint-tablet-plus-one) {
     position: absolute;
   }
@@ -120,28 +139,30 @@
     border-radius: 20px;
     border: $main-border;
     background-color: $black-color;
+
     @include mobile {
       max-width: 50%;
       height: 90px;
       right: 100px;
     }
   }
+
   &.active {
     opacity: 1;
-    background: linear-gradient(
-      149deg,
-      rgba(80, 71, 42, 1) 5%,
-      rgba(43, 41, 32, 1) 50%,
-      rgba(0, 0, 0, 1) 100%
-    );
+    background: linear-gradient(149deg,
+        rgba(80, 71, 42, 1) 5%,
+        rgba(43, 41, 32, 1) 50%,
+        rgba(0, 0, 0, 1) 100%);
   }
 }
 
+/* Анимация fadeInUp */
 @keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -153,6 +174,7 @@
   will-change: transform, opacity;
 }
 
+/* Карусель */
 .carousel {
   position: relative;
   width: 708px;
@@ -162,15 +184,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
   @include mobile {
     width: 100%;
     height: 300px;
   }
 
   img {
-    width: auto;
-    height: 100%;
+    width: 100%;
+    height: auto;
     object-fit: cover;
+
     @include mobile {
       width: 100%;
       height: auto;
@@ -194,6 +218,7 @@
       opacity: 1;
       cursor: pointer;
       box-sizing: border-box;
+
       @include mobile {
         width: 90%;
         margin: 10px auto;
@@ -203,6 +228,7 @@
         opacity: 0.5;
         cursor: not-allowed;
       }
+
       @include mobile {
         font-size: 14px;
         padding: 8px;
@@ -220,6 +246,7 @@
     cursor: pointer;
     font-size: 1.5rem;
     z-index: 2;
+
     @include mobile {
       width: 40px;
       height: 40px;
@@ -228,6 +255,7 @@
 
   .arrowLeft {
     left: 10px;
+
     @include mobile {
       left: 0;
       z-index: 2;
@@ -236,6 +264,7 @@
 
   .arrowRight {
     right: 12px;
+
     @include mobile {
       right: 0;
       z-index: 2;
@@ -243,6 +272,7 @@
   }
 }
 
+/* Иконка */
 .iconContainer {
   height: 52px;
   width: 52px;
@@ -255,8 +285,13 @@
   position: absolute;
   top: 2px;
   right: 2px;
+
+  @include mobile {
+    margin: 0 auto;
+  }
 }
 
+/* Описание товара */
 .moreButtonText {
   padding-right: 2rem;
   color: $white-color;
@@ -264,11 +299,10 @@
   font-size: 16px;
 }
 
+/* Цена */
 .priceContainer {
-  position: relative;
-  left: 230px;
-  top: 37px;
   margin-top: -37px;
+
   @include mobile {
     left: 0;
     top: 0;
@@ -276,16 +310,15 @@
   }
 }
 
-@include mobile {
-  .descriptionContainer {
-    width: 100%;
-    max-width: 400px;
-    height: 150px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    box-sizing: border-box;
-    word-wrap: break-word;
-  }
+/* Контейнер для описания */
+.descriptionContainer {
+  width: 100%;
+  max-width: 400px;
+  height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  word-wrap: break-word;
 }
 
 .info {
@@ -301,7 +334,7 @@
   @include mobile {
     width: 100%;
     height: 248px;
-    margin: 30px 15px 60px 15px;
+    margin: 0 auto;
     padding: 0;
   }
 
@@ -311,6 +344,7 @@
     text-decoration: underline;
     margin: 0;
     text-decoration: none;
+
     @include mobile {
       font-size: 1.3em;
     }
@@ -335,6 +369,7 @@
       cursor: pointer;
       gap: 8px;
       text-decoration: none;
+
       @include mobile {
         font-size: 0.8rem;
       }
@@ -356,5 +391,80 @@
         }
       }
     }
+  }
+}
+.radioInput {
+  --container_width: 398px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 9999px;
+  background-color: $black-color;
+  color: $white-color;
+  width: var(--container_width);
+  overflow: hidden;
+  border: 1px solid $yellow-color;
+  transition: background-color 0.3s ease;
+
+  @include mobile {
+    --container_width: 95%;
+    margin: 0 auto;
+  }
+
+  label {
+    flex: 1;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: -1px;
+    transition: color 0.3s ease;
+
+    @include mobile {
+      font-size: 12px;
+    }
+
+    input {
+      display: none;
+    }
+
+    span {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 5px;
+      border-radius: 9999px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      color: $white-color;
+    }
+
+    &:hover span {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    input:checked + span {
+      color: $black-color;
+    }
+
+    &.filled span {
+      color: $black-color;
+    }
+  }
+
+  .selection {
+    position: absolute;
+    height: 100%;
+    background-color: $yellow-color;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 0%;
+    transition: width 0.3s ease, left 0.3s ease;
+    border-radius: 9999px;
   }
 }

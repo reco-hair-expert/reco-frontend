@@ -79,7 +79,7 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
       recommendation: product.recommendation,
       sizes: product.sizes.map((size: any) => ({
         _id: size._id,
-        size: size.size,
+        size: size.volume,
         price: size.price
       })),
       badgeInfo: product.badgeInfo,
