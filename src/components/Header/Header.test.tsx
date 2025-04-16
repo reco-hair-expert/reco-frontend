@@ -25,7 +25,7 @@ describe("Header Component", () => {
     render(<Header />);
     const logo = screen.getByAltText("Логотип компании");
     expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute("src", "/images/logo/logo-1x.png");
+    expect(logo).toHaveAttribute("src", "/images/logo/logo.svg");
     expect(logo).toHaveAttribute("width", "64");
     expect(logo).toHaveAttribute("height", "64");
   });

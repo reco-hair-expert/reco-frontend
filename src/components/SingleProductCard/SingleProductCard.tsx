@@ -4,8 +4,8 @@ import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
 import styles from "./SingleProductCard.module.scss";
 import Button from "../Button/Button";
-import Icon from "../Icon/Icon";
 import Image from "next/image";
+import HighlightText from "../HighLightText/HighLightText";
 
 interface SingleProductCardProps {
   product: Product;
@@ -115,7 +115,9 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
         {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
       </div>
       <div className={styles.infoContainer}>
-        <h1 className={styles.productName}>{product.name}</h1>
+        <HighlightText>
+          <h1 className={styles.productName}>{product.name}</h1>
+        </HighlightText>
         {renderDescription()}
         {renderAdditionalInfo()}
         {renderSizes()}

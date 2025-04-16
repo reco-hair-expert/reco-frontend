@@ -112,19 +112,13 @@ export const CatalogClient = () => {
               <CatalogCardList products={products} perRow={4} />
             </ul>
           </nav>
-          <button
-            className={styles.productBtn}
-            aria-label="Показать больше товаров"
-          >
-            Показати більше
-          </button>
         </section>
 
         <section
           className={`container ${styles.recommendationContainer}`}
           aria-label="Рекомендации"
         >
-          <div className={styles.recommendationHeader}>
+          {/* <div className={styles.recommendationHeader}>
             <h2 className={styles.title}>Рекомендації</h2>
             <FilterToggle />
           </div>
@@ -132,7 +126,7 @@ export const CatalogClient = () => {
             <ul className={styles.recommendationList}>
               <CatalogCardList perRow={3} products={products.slice(0, 3)} />
             </ul>
-          </nav>
+          </nav> */}
           <BackgroundCircles className={styles.backgroundCircles} />
         </section>
       </main>

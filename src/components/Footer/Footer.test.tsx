@@ -65,7 +65,7 @@ describe("Footer Component", () => {
     // Check logo
     const logo = screen.getByAltText("Логотип компании");
     expect(logo).toBeInTheDocument();
-    expect(logo).toHaveAttribute("src", "/images/logo/logo-1x.png");
+    expect(logo).toHaveAttribute("src", "/images/logo/logo.svg");
 
     // Check footer links
     expect(screen.getByTestId("footer-links")).toBeInTheDocument();

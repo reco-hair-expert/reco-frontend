@@ -23,7 +23,7 @@ const Header = () => {
         <div className={styles.content}>
           <Link href="/" className={styles.logo}>
             <Image
-              src="/images/logo/logo-1x.png"
+              src="/images/logo/logo.svg"
               alt="Логотип компании"
               width={64}
               height={64}
