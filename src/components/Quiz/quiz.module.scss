@@ -251,13 +251,13 @@
 }
 
 .progressContainer {
-  height: 16px;
+  height: 8px;
   background-color: $grey-color;
   border-radius: 3px;
   overflow: hidden;
 
   @media (max-width: $breakpoint-mobile) {
-    height: 10px;
+    height: 6px;
   }
 }
 
@@ -369,6 +369,7 @@
     width: 36px;
     top: 2px;
     right: 0px;
+
   }
 }
 
