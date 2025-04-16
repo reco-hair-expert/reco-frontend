@@ -18,11 +18,11 @@ const Footer = ({ className }: FooterProps) => {
         <div className={styles.footer_container}>
           <Link href="/" className={styles.linkLogo}>
             <Image
-              src="/images/logo/logo-1x.png" // Путь к изображению
+              src="/images/logo/logo.svg"
               alt="Логотип компании"
-              width={64} // Указываем ширину
-              height={64} // Указываем высоту
-              sizes="(max-width: 768px) 48px, 48px" // Указываем размер в зависимости от ширины экрана
+              width={64}
+              height={64}
+              sizes="(max-width: 768px) 48px, 48px"
             />
           </Link>
           <FooterLinks />
