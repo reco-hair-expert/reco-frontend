@@ -58,7 +58,6 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
       )}
     </div>
   );
-  
 
   const renderDescription = () => (
     <div className={styles.descriptionContainer}>

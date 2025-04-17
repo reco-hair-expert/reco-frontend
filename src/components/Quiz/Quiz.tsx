@@ -303,7 +303,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
               className={styles.feedbackButtonIcon}
             />
           </div>
-          НАЗАД
+          <span className={styles.backText}>НАЗАД</span>
         </Button>
 
         <Button
