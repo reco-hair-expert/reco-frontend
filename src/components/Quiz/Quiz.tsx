@@ -17,7 +17,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const { isMobile, isTablet } = useDeviceDetection();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedSize, setSelectedSize] = useState<string>("");
+  const [selectedSizes, setSelectedSizes] = useState<Record<number, string>>(
+    {}
+  );
 
   const [state, setState] = useState<QuizState>({
     currentQuestionIndex: 0,
@@ -50,12 +52,12 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     return "l";
   };
 
-  const handleSizeChange = useCallback(
-    (e: React.ChangeEvent<HTMLSelectElement>) => {
-      setSelectedSize(e.target.value);
-    },
-    []
-  );
+  const handleSizeChange = useCallback((productId: number, size: string) => {
+    setSelectedSizes((prev) => ({
+      ...prev,
+      [productId]: size
+    }));
+  }, []);
 
   const renderSizes = useCallback(
     (product: Product) => (
@@ -63,8 +65,8 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
         {product.sizes?.length ? (
           <select
             className={styles.sizeSelect}
-            value={selectedSize || ""}
-            onChange={handleSizeChange}
+            value={selectedSizes[product.id] || ""}
+            onChange={(e) => handleSizeChange(product.id, e.target.value)}
           >
             <option value="">Оберіть розмір</option>
             {product.sizes.map(({ size }) => (
@@ -78,7 +80,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
         )}
       </>
     ),
-    [selectedSize, handleSizeChange]
+    [selectedSizes, handleSizeChange]
   );
 
   const { currentQuestion, totalQuestions, isLastQuestion, isFirstQuestion } =
@@ -103,7 +105,6 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   );
 
   const handleOptionSelect = (optionId: number) => {
-    // Якщо клікнули на вже вибраний варіант - скасовуємо вибір
     if (currentAnswer?.optionId === optionId) {
       setState((prev) => ({
         ...prev,
@@ -223,7 +224,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       showResults: false,
       recommendedProducts: []
     });
-    setSelectedSize("");
+    setSelectedSizes({});
   };
 
   if (isLoading) {
