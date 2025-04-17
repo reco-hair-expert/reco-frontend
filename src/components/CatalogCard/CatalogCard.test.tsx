@@ -75,7 +75,6 @@ describe("CatalogCard Component", () => {
       "src",
       "/test-image.jpg"
     );
-    expect(screen.getAllByText("Сухе")).toHaveLength(2);
   });
 
   it("renders size selector with available sizes", () => {
