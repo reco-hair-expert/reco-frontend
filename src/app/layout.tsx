@@ -17,16 +17,16 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://reco.com.ua"),
+  metadataBase: new URL("https://hairexpertreco.com/"),
   title: {
     default: "RECO",
     template: "%s | RECO"
   },
   description: "RECO - Косметика майбутнього",
   icons: {
-    icon: "/images/logo/logo-1x.png",
-    shortcut: "/images/logo/logo-1x.png",
-    apple: "/images/logo/logo-1x.png"
+    icon: "/images/logo/logo.svg",
+    shortcut: "/images/logo/logo.svg",
+    apple: "/images/logo/logo.svg"
   },
   robots: {
     index: true,
