@@ -261,8 +261,12 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
               <form className={styles.productSizeForm}>
                 {renderSizes(product)}
               </form>
-              <Button variant="primary" size="xl" className={styles.buyButton}>
-                КУПИТИ
+              <Button
+                variant="primary"
+                size={isMobile ? "m" : "xl"}
+                className={styles.buyButton}
+              >
+                <span className={styles.textButton}>КУПИТИ</span>
               </Button>
             </div>
           ))}
@@ -270,11 +274,11 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
 
         <Button
           variant="primary"
-          size="m"
+          size={isMobile ? "m" : "l"}
           onClick={restartQuiz}
           className={styles.restartButton}
         >
-          Пройти тест знову
+          <span className={styles.returnText}>Пройти тест знову</span>
         </Button>
       </div>
     );
