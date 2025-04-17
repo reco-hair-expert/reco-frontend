@@ -377,6 +377,14 @@
   }
 }
 
+.buttonHome {
+  margin-left: 40px;
+  @media (max-width: $breakpoint-mobile) {
+    margin-right: 10px;
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 480px) {
   .quizContainer {
     padding: 16px;

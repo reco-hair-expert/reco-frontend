@@ -10,8 +10,10 @@ import Button from "@/components/Button/Button";
 import Icon from "../Icon/Icon";
 import useDeviceDetection from "@/context/useDeviceDetection";
 import { Product } from "@/types/types";
+import { useRouter } from "next/navigation";
 
 const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
+  const router = useRouter();
   const { isMobile, isTablet } = useDeviceDetection();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -95,7 +97,21 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     [answers, currentQuestion.id]
   );
 
+  const currentAnswer = useMemo(
+    () => answers.find((a) => a.questionId === currentQuestion.id),
+    [answers, currentQuestion.id]
+  );
+
   const handleOptionSelect = (optionId: number) => {
+    // Якщо клікнули на вже вибраний варіант - скасовуємо вибір
+    if (currentAnswer?.optionId === optionId) {
+      setState((prev) => ({
+        ...prev,
+        answers: prev.answers.filter((a) => a.questionId !== currentQuestion.id)
+      }));
+      return;
+    }
+
     const newAnswer = {
       questionId: currentQuestion.id,
       optionId
@@ -196,6 +212,10 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     }
   };
 
+  const goToHome = () => {
+    router.push("/");
+  };
+
   const restartQuiz = () => {
     setState({
       currentQuestionIndex: 0,
@@ -271,13 +291,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
           <div
             key={option.id}
             className={`${styles.optionItem} ${
-              answers.some(
-                (a) =>
-                  a.questionId === currentQuestion.id &&
-                  a.optionId === option.id
-              )
-                ? styles.selected
-                : ""
+              currentAnswer?.optionId === option.id ? styles.selected : ""
             }`}
             onClick={() => handleOptionSelect(option.id)}
           >
@@ -287,32 +301,52 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       </div>
 
       <div className={styles.navigationButtons}>
-        <Button
-          variant="secondary"
-          size={getButtonSize()}
-          onClick={handleBack}
-          disabled={isFirstQuestion}
-          className={styles.backButton}
-        >
-          <div className={styles.iconContainer}>
-            <Icon
-              name="icon-left-icon"
-              size={isMobile ? 20 : 30}
-              fill="black"
-              stroke="white"
-              className={styles.feedbackButtonIcon}
-            />
-          </div>
-          <span className={styles.backText}>НАЗАД</span>
-        </Button>
+        {isFirstQuestion && answers.length === 0 ? (
+          <Button
+            variant="secondary"
+            size={getButtonSize()}
+            onClick={goToHome}
+            className={styles.homeButton}
+          >
+            <div className={styles.iconContainer}>
+              <Icon
+                name="icon-left-icon"
+                size={isMobile ? 20 : 30}
+                fill="black"
+                stroke="white"
+                className={styles.feedbackButtonIcon}
+              />
+            </div>
+            <span className={styles.buttonHome}>
+              {isMobile ? "ГОЛОВНА" : "НА ГОЛОВНУ"}
+            </span>
+          </Button>
+        ) : (
+          <Button
+            variant="secondary"
+            size={getButtonSize()}
+            onClick={handleBack}
+            disabled={isFirstQuestion}
+            className={styles.backButton}
+          >
+            <div className={styles.iconContainer}>
+              <Icon
+                name="icon-left-icon"
+                size={isMobile ? 20 : 30}
+                fill="black"
+                stroke="white"
+                className={styles.feedbackButtonIcon}
+              />
+            </div>
+            <span className={styles.backText}>НАЗАД</span>
+          </Button>
+        )}
 
         <Button
           variant="primary"
           size={getButtonSize()}
           onClick={handleNext}
-          disabled={
-            !hasAnsweredCurrent || (isLastQuestion && products.length === 0)
-          }
+          disabled={!hasAnsweredCurrent}
           className={styles.nextButton}
         >
           {isLastQuestion ? "РЕЗУЛЬТАТ" : "ДАЛІ"}
