@@ -4,6 +4,10 @@
 .infoSection {
   padding: 2rem;
   margin-top: 4rem;
+  width: 832px;
+  @media (max-width: $breakpoint-mobile) {
+    width: 100%;
+  }
 
   h2 {
     font-size: 2rem;
@@ -13,7 +17,7 @@
 
   h4 {
     font-size: 1.5rem;
-    color: $white-color;
+    color: $yellow-color;
   }
 
   .infoContent {

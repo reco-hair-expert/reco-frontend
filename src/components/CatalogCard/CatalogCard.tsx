@@ -61,13 +61,7 @@ const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
   );
 
   return (
-    <div
-      data-testid="catalog-card"
-      className={styles.card}
-      style={{
-        width: `calc((100% - 20px * ${perRow - 1}) / ${perRow})`
-      }}
-    >
+    <div data-testid="catalog-card" className={styles.card}>
       <div className={styles.imageContainer}>
         <Image
           src={product.photo || "/fallback-image.jpg"}
