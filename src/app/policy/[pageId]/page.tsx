@@ -1,7 +1,6 @@
-// app/policy/[pageId]/page.tsx
-
 import { infoPages } from "@/constants/policy";
 import InfoSection from "@/components/InfoSection/InfoSection";
+import styles from "./PolicyPage.module.scss";
 
 interface InfoPageProps {
   params: { pageId: string };
@@ -19,7 +18,21 @@ export default function InfoPage({ params }: InfoPageProps) {
 
   return (
     <div className="container">
-      <InfoSection title={pageData.title} content={pageData.content} />
+      <div className={styles.policyContainer}>
+        <div className={styles.mainContent}>
+          <InfoSection title={pageData.title} content={pageData.content} />
+        </div>
+        <aside className={styles.sidebar}>
+          <h3>Другие страницы</h3>
+          <ul>
+            {infoPages.map((page) => (
+              <li key={page.id}>
+                <a href={`/policy/${page.id}`}>{page.title}</a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
     </div>
   );
 }
