@@ -85,7 +85,7 @@ export const MainPageClient = () => {
       <ProductCard products={products} showButton={true} />
 
       <Suspense
-        fallback={<div className={styles.loading}>Загружаем Insta...</div>}
+        fallback={<div className={styles.loading}>Завантажуемо Insta...</div>}
       >
         <Insta />
       </Suspense>
