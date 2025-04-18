@@ -5,6 +5,9 @@
   padding: 2rem;
   margin-top: 4rem;
   width: 832px;
+  @media (max-width: $breakpoint-mobile) {
+    width: 100%;
+  }
 
 
   h2 {
