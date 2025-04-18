@@ -256,9 +256,16 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
               </div>
               <h3 className={styles.productName}>{product.name}</h3>
               <p className={styles.productType}>{product.type}</p>
-              <div className={styles.productPrice}>
-                Від {product.sizes?.[0]?.price || 0} грн
-              </div>
+              {(() => {
+                const selectedSize = selectedSizes[product.id];
+                const sizeObj = product.sizes?.find(
+                  (s) => s.size === selectedSize
+                );
+                const price = sizeObj?.price || product.sizes?.[0]?.price || 0;
+                return (
+                  <div className={styles.productPrice}>Від {price} грн</div>
+                );
+              })()}
               <form className={styles.productSizeForm}>
                 {renderSizes(product)}
               </form>
