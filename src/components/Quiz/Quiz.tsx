@@ -48,7 +48,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
 
   const getButtonSize = () => {
     if (isMobile) return "s";
-    if (isTablet) return "m";
+    if (isTablet) return "l";
     return "l";
   };
 
@@ -269,25 +269,28 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
               <form className={styles.productSizeForm}>
                 {renderSizes(product)}
               </form>
-              <Button
-                variant="primary"
-                size={isMobile ? "m" : "xl"}
-                className={styles.buyButton}
-              >
-                <span className={styles.textButton}>КУПИТИ</span>
-              </Button>
+              <div className={styles.buttonContainer}>
+                <Button
+                  variant="primary"
+                  size={isMobile ? "l" : isTablet ? "l" : "xl"}
+                  className={styles.buyButton}
+                >
+                  <span className={styles.textButton}>КУПИТИ</span>
+                </Button>
+              </div>
             </div>
           ))}
         </div>
-
-        <Button
-          variant="primary"
-          size={isMobile ? "m" : "l"}
-          onClick={restartQuiz}
-          className={styles.restartButton}
-        >
-          <span className={styles.returnText}>Пройти тест знову</span>
-        </Button>
+        <div className={styles.resultsButtons}>
+          <Button
+            variant="primary"
+            size={isMobile ? "m" : "l"}
+            onClick={restartQuiz}
+            className={styles.restartButton}
+          >
+            <span className={styles.textButton}>Пройти тест знову</span>
+          </Button>
+        </div>
       </div>
     );
   }
