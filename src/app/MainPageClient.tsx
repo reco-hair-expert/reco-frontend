@@ -1,22 +1,33 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import dynamic from "next/dynamic";
 import { Product } from "@/types/types";
 import { fetchProducts } from "@/services/products";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection/FeaturesSection";
-import Insta from "@/components/Insta/Insta";
-import FeedbackSection from "@/components/FeedbackSection/FeedbackSection";
 import styles from "./page.module.scss";
-import QuizPopup from "@/components/Popup/QuizPopup";
 
 const ProductCard = dynamic(
-  () =>
-    import("@/components/ProductCard3/ProductCard").then((mod) => mod.default),
-  {
-    ssr: false
-  }
+  () => import("@/components/ProductCard3/ProductCard"),
+  { ssr: false }
 );
+
+const Insta = dynamic(() => import("@/components/Insta/Insta"), {
+  ssr: false,
+  loading: () => <div className={styles.loading}>Загружаем Insta...</div>
+});
+
+// const FeedbackSection = dynamic(
+//   () => import("@/components/FeedbackSection/FeedbackSection"),
+//   {
+//     ssr: false,
+//     loading: () => <div className={styles.loading}>Отзывы грузятся...</div>
+//   }
+// );
+
+const QuizPopup = dynamic(() => import("@/components/Popup/QuizPopup"), {
+  ssr: false
+});
 
 export const MainPageClient = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -51,11 +62,7 @@ export const MainPageClient = () => {
   }, []);
 
   useEffect(() => {
-    if (isPopupOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = isPopupOpen ? "hidden" : "auto";
   }, [isPopupOpen]);
 
   const handleClosePopup = () => {
@@ -74,11 +81,24 @@ export const MainPageClient = () => {
     <>
       <HeroSection />
       <FeaturesSection />
-      <ProductCard products={products} showButton={true} />
-      <Insta />
-      <FeedbackSection />
 
-      <QuizPopup onClose={handleClosePopup} isVisible={isPopupOpen} />
+      <ProductCard products={products} showButton={true} />
+
+      <Suspense
+        fallback={<div className={styles.loading}>Загружаем Insta...</div>}
+      >
+        <Insta />
+      </Suspense>
+
+      {/* <Suspense
+        fallback={<div className={styles.loading}>Отзывы грузятся...</div>}
+      >
+        <FeedbackSection />
+      </Suspense> */}
+
+      {isPopupOpen && (
+        <QuizPopup onClose={handleClosePopup} isVisible={isPopupOpen} />
+      )}
     </>
   );
 };
