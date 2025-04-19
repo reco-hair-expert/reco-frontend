@@ -1,3 +1,6 @@
+"use client";
+import { usePathname } from "next/navigation";
+import Link from "next/link";
 import { infoPages } from "@/constants/policy";
 import InfoSection from "@/components/InfoSection/InfoSection";
 import styles from "./PolicyPage.module.scss";
@@ -8,8 +11,8 @@ interface InfoPageProps {
 
 export default function InfoPage({ params }: InfoPageProps) {
   const { pageId } = params;
+  const pathname = usePathname(); // для определения текущего пути
 
-  // Находим нужную страницу по pageId
   const pageData = infoPages.find((page) => page.id === pageId);
 
   if (!pageData) {
@@ -25,11 +28,21 @@ export default function InfoPage({ params }: InfoPageProps) {
         <aside className={styles.sidebar}>
           <h3>Другие страницы</h3>
           <ul>
-            {infoPages.map((page) => (
-              <li key={page.id}>
-                <a href={`/policy/${page.id}`}>{page.title}</a>
-              </li>
-            ))}
+            {infoPages.map((page) => {
+              const linkPath = `/policy/${page.id}`;
+              const isActive = pathname === linkPath;
+
+              return (
+                <li key={page.id}>
+                  <Link
+                    href={linkPath}
+                    className={isActive ? styles.activeLink : ""}
+                  >
+                    {page.title}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </aside>
       </div>
