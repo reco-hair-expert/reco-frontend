@@ -28,7 +28,7 @@
   width: 90%;
   height: 80%;
   padding-bottom: 40px;
-  object-fit: contain; 
+  object-fit: contain;
   @media (max-width: $breakpoint-mobile) {
     width: 95%;
     height: 80%;
@@ -205,7 +205,7 @@
       @media (max-width: $breakpoint-mobile) {
         min-width: 120px;
         font-size: 12px;
-        padding:  12px 0 ;
+        padding: 12px 0;
         text-align: center;
       }
     }

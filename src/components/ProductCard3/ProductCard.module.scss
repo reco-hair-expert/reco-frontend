@@ -150,10 +150,12 @@
 
   &.active {
     opacity: 1;
-    background: linear-gradient(149deg,
-        rgba(80, 71, 42, 1) 5%,
-        rgba(43, 41, 32, 1) 50%,
-        rgba(0, 0, 0, 1) 100%);
+    background: linear-gradient(
+      149deg,
+      rgba(80, 71, 42, 1) 5%,
+      rgba(43, 41, 32, 1) 50%,
+      rgba(0, 0, 0, 1) 100%
+    );
   }
 }
 
@@ -439,7 +441,9 @@
       text-align: center;
       padding: 5px;
       border-radius: 9999px;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      transition:
+        background-color 0.3s ease,
+        color 0.3s ease;
       color: $white-color;
     }
 
@@ -464,7 +468,9 @@
     top: 0;
     left: 0;
     width: 0%;
-    transition: width 0.3s ease, left 0.3s ease;
+    transition:
+      width 0.3s ease,
+      left 0.3s ease;
     border-radius: 9999px;
   }
 }

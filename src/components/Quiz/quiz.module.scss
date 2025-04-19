@@ -1,18 +1,43 @@
 @use "@/styles/variables.scss" as *;
 
+// Media query mixins
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin small-mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
 .resultsContainer {
+  display: flex;
+  flex-direction: column;
   max-width: 1250px;
-  margin: 0 auto;
+  margin: 80px auto 0;
   padding: 40px 20px;
   color: $white-color;
   text-align: center;
-  margin-top: 80px;
   overflow-x: hidden;
 
-  @media (max-width: $breakpoint-mobile) {
+  @include mobile {
     padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 }
+
 .productSizeForm {
   display: flex;
   flex-wrap: wrap;
@@ -22,21 +47,26 @@
   .sizeSelect {
     width: 100%;
     padding: 8px 12px;
+    border: none;
     border-radius: 8px;
     background-color: transparent;
     color: $white-color;
     font-size: 14px;
     cursor: pointer;
     transition: all $transition-speed $transition-style;
-    border: none;
 
     &:focus {
       outline: none;
+      border-color: $yellow-color;
     }
 
     option {
       background-color: $black-color;
       color: $white-color;
+    }
+
+    @include mobile {
+      margin-top: 12px;
     }
   }
 }
@@ -46,17 +76,21 @@
   font-weight: 500;
   text-transform: uppercase;
   margin-bottom: 40px;
-  position: relative;
-  display: block;
   text-align: left;
   color: transparent;
   -webkit-text-stroke: 1px #fbc000;
 
-  @media (max-width: $breakpoint-mobile) {
+  @include mobile {
     font-size: 24px;
     margin-bottom: 30px;
   }
+  @include tablet {
+    font-size: 36px;
+    margin-bottom: 30px;
+    text-align: center;
+  }
 }
+
 .productsFlex {
   display: flex;
   flex-wrap: nowrap;
@@ -65,6 +99,43 @@
   padding: 20px;
   width: 100%;
   justify-content: center;
+
+  @include mobile {
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 16px;
+    margin-bottom: 20px;
+    overflow-x: hidden;
+    gap: 16px;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  @include tablet {
+    flex-direction: column;
+    justify-content:center;
+    align-items: center;
+    padding: 20px 40px;
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+
+    scrollbar-width: thin;
+    scrollbar-color: $yellow-color rgba($yellow-color, 0.2);
+
+    &::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: rgba($yellow-color, 0.1);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: $yellow-color;
+      border-radius: 3px;
+    }
+  }
 }
 
 .productCard {
@@ -81,7 +152,20 @@
     border-color: rgba($yellow-color, 0.5);
     transform: translateY(-5px);
   }
+
+  @include tablet {
+    width: 420px;
+    height: 500px;
+    padding: 15px;
+  }
+
+  @include mobile {
+    width: 280px;
+    height: 410px;
+    padding: 12px;
+  }
 }
+
 .productImageContainer {
   width: 350px;
   height: 70%;
@@ -90,14 +174,13 @@
   justify-content: center;
   align-items: center;
 
-  @media (max-width: 900px) {
-    width: 200px;
-    height: 250px;
+  @include tablet {
+    width: 100%;
+    height: auto;
   }
 
-  @media (max-width: $breakpoint-mobile) {
-    width: 160px;
-    height: 200px;
+  @include mobile {
+    width: 240px;
   }
 }
 
@@ -105,6 +188,8 @@
   display: block;
   max-width: 100%;
   height: auto;
+  object-fit: contain;
+  border-radius: 4px;
 
   &:hover {
     transform: scale(1.05);
@@ -122,6 +207,11 @@
   padding: 4px 8px;
   border-radius: 12px;
   text-transform: uppercase;
+
+  @include mobile {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
 }
 
 .productName {
@@ -130,6 +220,11 @@
   color: $yellow-color;
   text-transform: uppercase;
   text-align: left;
+
+  @include mobile {
+    font-size: 16px;
+    margin-bottom: 6px;
+  }
 }
 
 .productType {
@@ -141,6 +236,12 @@
   text-align: left;
   width: 100%;
   display: block;
+
+  @include mobile {
+    font-size: 14px;
+    margin-top: 8px;
+    margin-bottom: 0px;
+  }
 }
 
 .productPrice {
@@ -150,6 +251,18 @@
   position: relative;
   left: 120px;
   bottom: 60px;
+
+  @include mobile {
+    font-size: 14px;
+    left: 80px;
+    bottom: 45px;
+  }
+
+  @include tablet {
+    font-size: 16px;
+    left: 80px;
+    bottom: 45px;
+  }
 }
 
 .restartButton {
@@ -164,7 +277,6 @@
   transition: all 0.3s ease;
   text-transform: uppercase;
   margin-top: 20px;
-  position: relative;
 
   &:hover {
     background: darken($yellow-color, 10%);
@@ -172,23 +284,41 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
-  @media (max-width: $breakpoint-mobile) {
+  @include mobile {
     width: 100%;
     padding: 14px;
   }
 }
 
-@mixin quiz-article {
-  background-repeat: no-repeat;
-  background-size: contain;
-  color: $white-color;
-  text-transform: uppercase;
-  position: relative;
-  z-index: 1;
+.buttonContainer {
+  @include mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
 
-  @media (max-width: $breakpoint-mobile) {
-    position: absolute;
-    font-size: 12px;
+  @include tablet {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+}
+
+.resultsButtons {
+  @include mobile {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  @include tablet {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }
 
@@ -199,7 +329,7 @@
   text-align: center;
   margin: 30px;
 
-  @media (max-width: $breakpoint-mobile) {
+  @include mobile {
     font-size: 20px;
   }
 }
@@ -214,9 +344,7 @@
   text-transform: uppercase;
   text-align: center;
   padding: 0px 40px;
-  background-image: image-set(
-    url(/images/sections/quiz/text-container.png) type("image/webp") 1x
-  );
+  background-image: image-set(url(/images/sections/quiz/text-container.png) type("image/webp") 1x);
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -226,17 +354,17 @@
   align-items: center;
   justify-content: center;
   margin: 0 auto;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.4;
 
-  @media (max-width: $breakpoint-tablet) {
+  @include tablet {
     width: 300px;
     height: 224px;
     padding: 40px 20px;
   }
 
-  @media (max-width: $breakpoint-mobile) {
-    background-image: image-set(
-      url(/images/sections/quiz/text-container.png) type("image/webp") 1x
-    );
+  @include mobile {
     width: 290px;
     height: 152px;
     padding: 30px 15px;
@@ -245,19 +373,22 @@
 
 .quizContainer {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 40px auto 0;
   padding: 20px;
-  margin-top: 40px;
+
+  @include small-mobile {
+    padding: 16px;
+  }
 }
 
 .progressContainer {
-  height: 16px;
+  height: 8px;
   background-color: $grey-color;
   border-radius: 3px;
   overflow: hidden;
 
-  @media (max-width: $breakpoint-mobile) {
-    height: 10px;
+  @include mobile {
+    height: 6px;
   }
 }
 
@@ -266,19 +397,6 @@
   background-color: $yellow-color;
   border-radius: 3px;
   transition: width 0.3s ease;
-}
-
-.productImage {
-  object-fit: contain;
-  border-radius: 4px;
-}
-
-.questionText {
-  font-size: 18px;
-  font-weight: 400;
-  color: white;
-  text-align: center;
-  line-height: 1.4;
 }
 
 .optionsContainer {
@@ -308,11 +426,9 @@
   }
 
   &.selected {
-    background: linear-gradient(
-      145deg,
-      rgba(255, 215, 0, 0.15),
-      rgba(255, 255, 255, 0.1)
-    );
+    background: linear-gradient(145deg,
+        rgba(255, 215, 0, 0.15),
+        rgba(255, 255, 255, 0.1));
     border-color: $yellow-color;
     color: $yellow-color;
     font-weight: 600;
@@ -320,12 +436,15 @@
     transform: translateY(-1px);
 
     &:hover {
-      background: linear-gradient(
-        145deg,
-        rgba(255, 215, 0, 0.25),
-        rgba(255, 255, 255, 0.15)
-      );
+      background: linear-gradient(145deg,
+          rgba(255, 215, 0, 0.25),
+          rgba(255, 255, 255, 0.15));
     }
+  }
+
+  @include small-mobile {
+    padding: 14px;
+    font-size: 15px;
   }
 }
 
@@ -337,22 +456,23 @@
   width: 100%;
   max-width: 400px;
 
-  > * {
+  >* {
     flex: 1;
     min-width: 120px;
     max-width: 200px;
   }
-}
 
-.backButton {
-  background-color: white;
-  color: #333;
-  border: 1px solid #e0e0e0;
+  @include small-mobile {
+    margin-top: 20px;
+    max-width: 100%;
+    padding: 0 16px;
 
-  &:hover:not(:disabled) {
-    background-color: #f9f9f9;
+    >* {
+      max-width: none;
+    }
   }
 }
+
 .iconContainer {
   height: 54px;
   width: 54px;
@@ -364,36 +484,32 @@
   align-items: center;
   position: absolute;
   top: 1px;
-  @media (max-width: $breakpoint-mobile) {
+
+  @include mobile {
     height: 36px;
     width: 36px;
     top: 2px;
-    right: 0px;
   }
 }
 
-@media (max-width: 480px) {
-  .quizContainer {
-    padding: 16px;
+.backText {
+  @include mobile {
+    margin-left: 15px;
   }
+}
 
-  .optionItem {
-    padding: 14px;
-    font-size: 15px;
+.buttonHome {
+  margin-left: 40px;
+
+  @include mobile {
+    margin-right: 10px;
+    font-size: 14px;
   }
+}
 
-  .questionText {
+.questionText {
+  @include small-mobile {
     font-size: 17px;
     margin-bottom: 20px;
-  }
-
-  .navigationButtons {
-    margin-top: 20px;
-    max-width: 100%;
-    padding: 0 16px;
-
-    > * {
-      max-width: none;
-    }
   }
 }

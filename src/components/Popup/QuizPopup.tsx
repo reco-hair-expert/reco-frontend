@@ -40,16 +40,18 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ onClose, isVisible }) => {
               variant="primary"
               className={styles.button}
             >
-              <span className={styles.button__text}>РОЗПОЧАТИ КВІЗ</span>
               <div className={styles.iconContainer}>
                 <Icon
                   name="icon-arrow-up-right2"
-                  size={30}
+                  size={isMobile ? 20 : 30}
                   fill="white"
                   stroke="none"
                   className={styles.ButtonIcon}
                 />
               </div>
+              <span className={styles.button__text}>
+                {isMobile ? "РОЗПОЧАТИ" : "РОЗПОЧАТИ КВІЗ"}
+              </span>
             </Button>
           </Link>
         </div>

@@ -19,7 +19,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
       throw new Error("Failed to fetch products");
     }
     const data = await response.json();
-    
+
     return data.data.map((product: any, index: number) => ({
       id: index + 1,
       _id: product._id || `product_${index + 1}`,
