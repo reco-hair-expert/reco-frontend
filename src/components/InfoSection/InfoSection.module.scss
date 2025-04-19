@@ -2,7 +2,7 @@
 @use "../../styles/variables.scss" as *;
 
 .infoSection {
-  padding: 2rem;
+  padding: 2rem 0;
   margin-top: 4rem;
   width: 832px;
   @media (max-width: $breakpoint-mobile) {
