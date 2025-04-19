@@ -15,8 +15,9 @@
   max-width: 1360px;
   width: 100%;
   box-sizing: border-box;
+
   @media (max-width: $breakpoint-mobile) {
-    padding: 20px;
+    padding: 20px 0;
   }
 }
 
@@ -29,22 +30,61 @@
   width: 100%;
   max-width: 1360px;
   background-color: transparent;
+
   @media (max-width: $breakpoint-mobile) {
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 16px;
   }
+}
+
+.logo {
+  order: 1;
+}
+
+.addressForm {
+  order: 2;
+}
+
+.footerLinks {
+  order: 3;
+}
+
+.socialHub {
+  order: 4;
 }
 
 .authorRights {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-weight: 100;
   color: white;
-  font-size: 0.8rem;
+  font-size: 14px;
+  text-align: center;
+  gap: 4px;
+
   @media (max-width: $breakpoint-mobile) {
-    font-size: 8px;
+    width: 100%;
+    font-size: 10px;
   }
 }
 
-@media (max-width: $breakpoint-mobile) {
-  .footer_container {
-    flex-direction: row;
+.policyLinks {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  text-align: center;
+
+  a {
+    color: $white-color;
+    text-decoration: none;
   }
+}
+
+.linkLogo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
