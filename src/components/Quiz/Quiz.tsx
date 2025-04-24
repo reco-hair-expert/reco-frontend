@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect, useCallback } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import QuizProgress from "./QuizProgress";
 import styles from "./quiz.module.scss";
 import type { Answer, QuizProps, QuizState, RecommendedProduct } from "./types";
@@ -11,12 +11,24 @@ import Icon from "../Icon/Icon";
 import useDeviceDetection from "@/context/useDeviceDetection";
 import { Product } from "@/types/types";
 import { useRouter } from "next/navigation";
+import { useCartContext } from "@/hooks/useCartContext";
+import Link from "next/link";
+
+type CartItem = {
+  id: number;
+  name: string;
+  size: string;
+  price: number;
+  photo: string | StaticImageData;
+  quantity: number;
+};
 
 const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const router = useRouter();
   const { isMobile, isTablet } = useDeviceDetection();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { addToCart } = useCartContext();
   const [selectedSizes, setSelectedSizes] = useState<Record<number, string>>(
     {}
   );
@@ -227,6 +239,35 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     setSelectedSizes({});
   };
 
+  const handleAddToCart = (product: RecommendedProduct) => {
+    const selectedSize = selectedSizes[product.id];
+
+    if (!selectedSize && product.sizes?.length) {
+      alert("Будь ласка, оберіть розмір");
+      return;
+    }
+
+    const sizeObj =
+      product.sizes?.find((s) => s.size === selectedSize) || product.sizes?.[0];
+
+    if (!sizeObj) {
+      alert("Немає доступних розмірів для цього продукту");
+      return;
+    }
+
+    const itemToAdd: CartItem = {
+      id: product.id,
+      name: product.name,
+      size: sizeObj.size,
+      price: sizeObj.price,
+      photo: product.photo,
+      quantity: 1
+    };
+
+    addToCart(itemToAdd as unknown as Product);
+    alert(`${product.name} додано до кошика`);
+  };
+
   if (isLoading) {
     return <div className={styles.loading}>Завантаження продуктів...</div>;
   }
@@ -248,11 +289,17 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                   className={styles.productImage}
                   priority={true}
                 />
-                {product.badgeInfo && (
-                  <span className={styles.productBadge}>
-                    {product.badgeInfo}
-                  </span>
-                )}
+                <Link href={`/${product._id}`}>
+                  <div className={styles.badgeInfo}>
+                    <Icon
+                      name="icon-info"
+                      size={isMobile ? 24 : 28}
+                      fill="none"
+                      stroke={styles.yellowColor}
+                    />
+                  </div>
+                </Link>
+                <span className={styles.productBadge}>{product.badgeInfo}</span>
               </div>
               <h3 className={styles.productName}>{product.name}</h3>
               <p className={styles.productType}>{product.type}</p>
@@ -274,8 +321,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                   variant="primary"
                   size={isMobile ? "l" : isTablet ? "l" : "xl"}
                   className={styles.buyButton}
+                  onClick={() => handleAddToCart(product)}
                 >
-                  <span className={styles.textButton}>КУПИТИ</span>
+                  <span className={styles.textButton}>ДОДАТИ ДО КОШИКА</span>
                 </Button>
               </div>
             </div>

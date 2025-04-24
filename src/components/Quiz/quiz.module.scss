@@ -113,7 +113,7 @@
 
   @include tablet {
     flex-direction: column;
-    justify-content:center;
+    justify-content: center;
     align-items: center;
     padding: 20px 40px;
     margin-left: -20px;
@@ -167,6 +167,7 @@
 }
 
 .productImageContainer {
+  position: relative;
   width: 350px;
   height: 70%;
   overflow: hidden;
@@ -198,8 +199,8 @@
 
 .productBadge {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 5px;
+  left: 5px;
   background: $yellow-color;
   color: $black-color;
   font-size: 12px;
@@ -207,10 +208,26 @@
   padding: 4px 8px;
   border-radius: 12px;
   text-transform: uppercase;
+  z-index: 2;
 
   @include mobile {
     font-size: 10px;
     padding: 2px 6px;
+  }
+}
+
+.badgeInfo {
+  svg {
+    stroke: $yellow-color;
+  }
+
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index: 2;
+
+  @include mobile {
+    left: 210px;
   }
 }
 
@@ -303,7 +320,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-
   }
 }
 
@@ -344,7 +360,9 @@
   text-transform: uppercase;
   text-align: center;
   padding: 0px 40px;
-  background-image: image-set(url(/images/sections/quiz/text-container.png) type("image/webp") 1x);
+  background-image: image-set(
+    url(/images/sections/quiz/text-container.png) type("image/webp") 1x
+  );
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -426,9 +444,11 @@
   }
 
   &.selected {
-    background: linear-gradient(145deg,
-        rgba(255, 215, 0, 0.15),
-        rgba(255, 255, 255, 0.1));
+    background: linear-gradient(
+      145deg,
+      rgba(255, 215, 0, 0.15),
+      rgba(255, 255, 255, 0.1)
+    );
     border-color: $yellow-color;
     color: $yellow-color;
     font-weight: 600;
@@ -436,9 +456,11 @@
     transform: translateY(-1px);
 
     &:hover {
-      background: linear-gradient(145deg,
-          rgba(255, 215, 0, 0.25),
-          rgba(255, 255, 255, 0.15));
+      background: linear-gradient(
+        145deg,
+        rgba(255, 215, 0, 0.25),
+        rgba(255, 255, 255, 0.15)
+      );
     }
   }
 
@@ -456,7 +478,7 @@
   width: 100%;
   max-width: 400px;
 
-  >* {
+  > * {
     flex: 1;
     min-width: 120px;
     max-width: 200px;
@@ -467,7 +489,7 @@
     max-width: 100%;
     padding: 0 16px;
 
-    >* {
+    > * {
       max-width: none;
     }
   }
