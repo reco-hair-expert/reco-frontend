@@ -1,10 +1,9 @@
 "use client";
-import { Product, CartItem } from "@/types/types";
+import { CartItem } from "@/types/types";
 import { useCart } from "@/context/CartContext";
 import HighlightText from "@/components/HighLightText/HighLightText";
 import styles from "./CartItems.module.scss";
 import Image from "next/image";
-import { useMemo } from "react";
 
 const CartItems = () => {
   const { cartItems, removeFromCart, updateCartItemQuantity, addToCart } =

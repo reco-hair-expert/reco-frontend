@@ -195,7 +195,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
                         />
                       </div>
                       <span className={styles.moreButtonText}>
-                        БІЛЬШЕ ТОВАРІВ
+                        ВСІ ТОВАРИ
                       </span>
                     </Button>
                   </Link>
