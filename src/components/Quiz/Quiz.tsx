@@ -281,24 +281,24 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
           {recommendedProducts.map((product) => (
             <div key={product.id} className={styles.productCard}>
               <div className={styles.productImageContainer}>
-                <Image
-                  src={product.photo}
-                  alt={product.name}
-                  width={300}
-                  height={200}
-                  className={styles.productImage}
-                  priority={true}
-                />
                 <Link href={`/${product._id}`}>
-                  <div className={styles.badgeInfo}>
-                    <Icon
-                      name="icon-info"
-                      size={isMobile ? 24 : 28}
-                      fill="none"
-                      stroke={styles.yellowColor}
-                    />
-                  </div>
+                  <Image
+                    src={product.photo}
+                    alt={product.name}
+                    width={300}
+                    height={200}
+                    className={styles.productImage}
+                    priority={true}
+                  />
                 </Link>
+                <div className={styles.badgeInfo}>
+                  <Icon
+                    name="icon-info"
+                    size={isMobile ? 24 : 28}
+                    fill="none"
+                    stroke={styles.yellowColor}
+                  />
+                </div>
                 <span className={styles.productBadge}>{product.badgeInfo}</span>
               </div>
               <h3 className={styles.productName}>{product.name}</h3>
