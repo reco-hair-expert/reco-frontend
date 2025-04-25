@@ -6,15 +6,19 @@ import { CartItem, Product } from "@/types/types";
 
 // Mock the Image component from Next.js
 jest.mock("next/image", () => {
-  return function MockImage({ src, alt, width, height, className }: any) {
+  return function MockImage({ alt, width, height, className }: { src: string; alt: string; width: number; height: number; className?: string }) {
     return (
-      <img
-        src={src}
-        alt={alt}
-        width={width}
-        height={height}
+      <div
+        data-testid="mock-image"
+        style={{
+          width: `${width}px`,
+          height: `${height}px`,
+          backgroundColor: "#ccc",
+        }}
         className={className}
-      />
+      >
+        <span>{alt}</span>
+      </div>
     );
   };
 });
@@ -41,7 +45,10 @@ describe("CartItems Component", () => {
     volume: "100ml",
     photo: "/test-image.jpg",
     description: "Test description",
-    sizes: { "100ml": 100, "200ml": 180 },
+    sizes: [
+      { _id: "1", size: "100ml", price: 100 }, 
+      { _id: "2", size: "200ml", price: 180 }
+    ],
     type: "test"
   };
 

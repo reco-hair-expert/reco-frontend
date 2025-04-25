@@ -73,7 +73,16 @@ const CartItems = () => {
                   {item.size && (
                     <>
                       <p>{item.size}</p>
-                      <p className={styles.price}>{getItemPrice(item)} грн</p>
+                      <p className={styles.price}>
+                        {(getItemPrice(item) * item.quantity).toLocaleString(
+                          "uk-UA",
+                          {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 2
+                          }
+                        )}{" "}
+                        грн
+                      </p>
                     </>
                   )}
                   <div className={styles.quantityControl}>
