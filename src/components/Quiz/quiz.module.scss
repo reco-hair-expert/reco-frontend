@@ -52,7 +52,7 @@
 
 .infoButton {
   position: absolute;
-  top: 5px;
+  top: -5px;
   right: 10px;
   background: none;
   border: none;
@@ -266,23 +266,24 @@
 }
 
 .productImage {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
   transition: transform 0.3s ease;
   border-radius: 4px;
-}
-
-.productImage {
-  display: block;
-  max-width: 100%;
-  height: auto;
-  object-fit: contain;
-  border-radius: 4px;
+  margin: 0 auto;
 
   &:hover {
     transform: scale(1.05);
   }
+  @include tablet {
+    width: 85%;
+  }
+  @include mobile {
+    width:  75%;
+  }
+  
 }
 
 .productBadge {
@@ -314,9 +315,6 @@
   top: 5px;
   z-index: 2;
 
-  @include mobile {
-    left: 210px;
-  }
 }
 
 .productName {
