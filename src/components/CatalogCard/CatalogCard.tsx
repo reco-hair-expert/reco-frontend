@@ -8,7 +8,7 @@ import { CatalogCardProps } from "./types/CatalogCard.types";
 import { useState, useCallback, memo } from "react";
 import { useCart } from "@/context/CartContext";
 
-const CatalogCard = memo(({ perRow, product }: CatalogCardProps) => {
+const CatalogCard = memo(({ product }: CatalogCardProps) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [showSizeWarning, setShowSizeWarning] = useState(false);
   const { addToCart } = useCart();
