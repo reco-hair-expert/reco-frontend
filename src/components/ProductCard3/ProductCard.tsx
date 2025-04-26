@@ -1,4 +1,3 @@
-"use client";
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
@@ -11,6 +10,7 @@ import Image from "next/image";
 import Carousel from "react-spring-3d-carousel";
 import { useSwipeable } from "react-swipeable";
 import Link from "next/link";
+import ProductSizeSelector from "../ProductSizeSelector/ProductSizeSelector"; // Импортируем компонент
 
 interface ProductCardProps {
   products: Product[];
@@ -49,7 +49,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
     setCurrentIndex((prev) => (prev + 1) % products.length);
   const handlePrev = () =>
     setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
-  const handleSizeChange = (size: string) => setSelectedSize(size);
 
   const handleAddToCart = useCallback(() => {
     if (!selectedSize || !currentProduct.sizes) {
@@ -74,46 +73,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
     localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(currentProduct, selectedSize);
   }, [selectedSize, currentProduct, addToCart, products?.length]);
-
-  const renderSizes = () => {
-    const totalSizes = currentProduct.sizes?.length || 0;
-
-    return (
-      <div className={styles.radioInput}>
-        {totalSizes ? (
-          <>
-            {currentProduct.sizes.map(({ size }, index) => {
-              const selectedIndex = currentProduct.sizes.findIndex(
-                ({ size }) => size === selectedSize
-              );
-              const isFilled = index <= selectedIndex;
-
-              return (
-                <label key={size} className={isFilled ? styles.filled : ""}>
-                  <input
-                    type="radio"
-                    name="size"
-                    value={size}
-                    checked={selectedSize === size}
-                    onChange={() => handleSizeChange(size)}
-                  />
-                  <span>{size}</span>
-                </label>
-              );
-            })}
-            <div
-              className={styles.selection}
-              style={{
-                width: `${((currentProduct.sizes.findIndex(({ size }) => size === selectedSize) + 1) / totalSizes) * 100}%`
-              }}
-            />
-          </>
-        ) : (
-          <div>Розміри не доступні для цього товару.</div>
-        )}
-      </div>
-    );
-  };
 
   const renderDescription = () => (
     <div className={styles.descriptionContainer}>
@@ -194,9 +153,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
                           stroke="none"
                         />
                       </div>
-                      <span className={styles.moreButtonText}>
-                        ВСІ ТОВАРИ
-                      </span>
+                      <span className={styles.moreButtonText}>ВСІ ТОВАРИ</span>
                     </Button>
                   </Link>
                 )}
@@ -251,14 +208,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
           {isMobile ? (
             <>
               {renderPrice()}
-              {renderSizes()}
+              <ProductSizeSelector
+                sizes={currentProduct.sizes}
+                selectedSize={selectedSize}
+                onSizeChange={setSelectedSize}
+              />
               {renderDescription()}
             </>
           ) : (
             <>
               {renderDescription()}
               {renderPrice()}
-              {renderSizes()}
+              <ProductSizeSelector
+                sizes={currentProduct.sizes}
+                selectedSize={selectedSize}
+                onSizeChange={setSelectedSize}
+              />
             </>
           )}
 

@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
@@ -6,6 +7,9 @@ import styles from "./SingleProductCard.module.scss";
 import Button from "../Button/Button";
 import Image from "next/image";
 import HighlightText from "../HighLightText/HighLightText";
+import ProductSizeSelector from "../ProductSizeSelector/ProductSizeSelector";
+import useDeviceDetection from "@/context/useDeviceDetection";
+import Collapsible from "react-collapsible";
 
 interface SingleProductCardProps {
   product: Product;
@@ -14,6 +18,13 @@ interface SingleProductCardProps {
 const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const { addToCart } = useCartContext();
+  const { isMobile, isTablet } = useDeviceDetection();
+
+  const getButtonSize = () => {
+    if (isMobile) return "s";
+    if (isTablet) return "m";
+    return "xxl";
+  };
 
   const handleSizeChange = (size: string) => setSelectedSize(size);
 
@@ -38,52 +49,29 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
     addToCart(product, selectedSize);
   };
 
-  const renderSizes = () => (
-    <div className={styles.sizes}>
-      {product.sizes?.length ? (
-        product.sizes.map(({ size, price }) => (
-          <label key={size}>
-            <input
-              type="radio"
-              name="size"
-              value={size}
-              checked={selectedSize === size}
-              onChange={() => handleSizeChange(size)}
-            />
-            {size} — {price} ₴
-          </label>
-        ))
-      ) : (
-        <div>Розміри не доступні для цього товару.</div>
-      )}
-    </div>
-  );
-
-  const renderDescription = () => (
-    <div className={styles.descriptionContainer}>
-      <p>{product.description}</p>
-    </div>
-  );
-
   const renderAdditionalInfo = () => (
     <div className={styles.additionalInfo}>
-      <p className={styles.infoItem}>
-        <strong>Тип:</strong> {product.type}
-      </p>
-      <p className={styles.infoItem}>
-        <strong>Застосування:</strong> {product.application}
-      </p>
-      <p className={styles.infoItem}>
-        <strong>Склад:</strong> {product.composition}
-      </p>
-      <p className={styles.infoItem}>
-        <strong>Рекомендації:</strong> {product.recommendation}
-      </p>
-      {product.badgeInfo && (
+        <p className={styles.descriptionText}>{product.description}</p>
+      <Collapsible
+        trigger="Застосування"
+        className={styles.collapsibleTrigger}
+        
+      >
+        <p className={styles.infoItem}>{product.application}</p>
+      </Collapsible>
+      <Collapsible trigger="Склад" className={styles.collapsibleTrigger}>
         <p className={styles.infoItem}>
-          <strong>Додаткова інформація:</strong> {product.badgeInfo}
+          <strong>Склад:</strong> {product.composition}
         </p>
-      )}
+      </Collapsible>
+      <Collapsible
+        trigger="Рекомендації"
+        className={styles.collapsibleTrigger}
+      >
+        <p className={styles.infoItem}>
+          <strong>Рекомендації:</strong> {product.recommendation}
+        </p>
+      </Collapsible>
     </div>
   );
 
@@ -94,8 +82,9 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
 
     return (
       <p className={styles.priceContainer}>
-        <strong className={styles.price}>Ціна: </strong>
-        {selectedSizeObj ? `${selectedSizeObj.price} грн` : "Оберіть розмір"}
+        <strong className={styles.price}>
+          {selectedSizeObj ? `${selectedSizeObj.price} грн` : "Оберіть розмір"}
+        </strong>
       </p>
     );
   };
@@ -114,22 +103,25 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
         {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
       </div>
       <div className={styles.infoContainer}>
-        <HighlightText>
-          <h1 className={styles.productName}>{product.name}</h1>
-        </HighlightText>
-        {renderDescription()}
+        <div className={styles.headingContainer}>
+          <HighlightText>
+            <h1 className={styles.productName}>{product.name}</h1>
+          </HighlightText>
+          <p className={styles.productType}>{product.type}</p>
+        </div>
+
         {renderAdditionalInfo()}
-        {renderSizes()}
-        {renderPrice()}
-        <Button
-          size="l"
-          variant="primary"
-          className={styles.addToCart}
-          onClick={handleAddToCart}
-          disabled={!selectedSize}
-        >
-          ДОДАТИ В КОШИК
-        </Button>
+        <div className={styles.sizeAndPrice}>
+          <ProductSizeSelector
+            sizes={product.sizes || []}
+            selectedSize={selectedSize}
+            onSizeChange={handleSizeChange}
+          />
+          {renderPrice()}
+          <Button size={getButtonSize()} onClick={handleAddToCart}>
+            КУПИТИ
+          </Button>
+        </div>
       </div>
     </div>
   );
