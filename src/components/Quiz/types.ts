@@ -35,6 +35,7 @@ export type RecommendedProduct = Product & {
   price: number;
   isNew: boolean;
   volume: string;
+  additionalInfo?: string;
 };
 
 export interface QuizProps {
