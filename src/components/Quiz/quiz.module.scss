@@ -24,12 +24,36 @@
   height: 100%;
   transition: transform 0.6s;
   transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
+  will-change: transform;
+  -moz-will-change: transform;
+}
+
+.infoItem {
+  margin: 8px 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: white;
+
+  strong {
+    color: $yellow-color;
+  }
 }
 
 .productCard.flipped .cardInner {
   transform: rotateY(180deg);
+}
+
+.cardFront {
+  transform: rotateY(0deg) translateZ(1px);
+  -moz-transform: rotateY(0deg) translateZ(1px);
+}
+
+.cardBack {
+  transform: rotateY(180deg) translateZ(1px);
+  -moz-transform: rotateY(180deg) translateZ(1px);
 }
 
 .cardFront,
@@ -42,17 +66,18 @@
   box-sizing: border-box;
   top: 0;
   left: 0;
+  -moz-backface-visibility: hidden;
 }
 
 .cardBack {
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   overflow-y: auto;
   padding: 20px;
 }
 
 .infoButton {
   position: absolute;
-  top: -5px;
+  top: -4px;
   right: 10px;
   background: none;
   border: none;
@@ -64,7 +89,7 @@
 
 .flipBackButton {
   position: absolute;
-  top: 10px;
+  top: -4px;
   right: 10px;
   background: none;
   border: none;
@@ -86,9 +111,8 @@
 
 .description h4,
 .additionalInfo h4 {
-  margin-top: 60px;
+  margin-top: 40px;
   font-size: 16px;
-  font-weight: bold;
   color: $yellow-color;
 }
 
@@ -219,6 +243,8 @@
 }
 
 .productCard {
+  perspective: 1000px;
+  -moz-perspective: 1000px;
   flex: 0 0 auto;
   width: 396px;
   height: 579px;
@@ -281,9 +307,8 @@
     width: 85%;
   }
   @include mobile {
-    width:  75%;
+    width: 75%;
   }
-  
 }
 
 .productBadge {
@@ -314,10 +339,10 @@
   right: 5px;
   top: 5px;
   z-index: 2;
-
 }
 
 .productName {
+  display: flex;
   font-size: 20px;
   margin-bottom: 8px;
   color: $yellow-color;
@@ -326,7 +351,6 @@
 
   @include mobile {
     font-size: 16px;
-    margin-bottom: 6px;
   }
 }
 

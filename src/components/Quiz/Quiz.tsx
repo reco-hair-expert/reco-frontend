@@ -376,6 +376,11 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                         <p>{product.additionalInfo}</p>
                       </div>
                     )}
+                    {product.application && (
+                      <p className={styles.infoItem}>
+                        <strong>Застосування:</strong> {product.application}
+                      </p>
+                    )}
                   </div>
                   <button
                     className={styles.flipBackButton}
