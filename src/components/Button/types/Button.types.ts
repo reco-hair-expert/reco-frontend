@@ -4,6 +4,7 @@ export type ButtonSize =
   | "m"
   | "l"
   | "xl"
+  | "xxl"
   | "black1"
   | "black2"
   | "black3";
