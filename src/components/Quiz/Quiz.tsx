@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect, useCallback } from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import QuizProgress from "./QuizProgress";
 import styles from "./quiz.module.scss";
 import type { Answer, QuizProps, QuizState, RecommendedProduct } from "./types";
@@ -11,15 +11,35 @@ import Icon from "../Icon/Icon";
 import useDeviceDetection from "@/context/useDeviceDetection";
 import { Product } from "@/types/types";
 import { useRouter } from "next/navigation";
+import { useCartContext } from "@/hooks/useCartContext";
+import Link from "next/link";
+
+type CartItem = {
+  id: number;
+  name: string;
+  size: string;
+  price: number;
+  photo: string | StaticImageData;
+  quantity: number;
+};
 
 const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
+  const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
   const router = useRouter();
   const { isMobile, isTablet } = useDeviceDetection();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const { addToCart } = useCartContext();
   const [selectedSizes, setSelectedSizes] = useState<Record<number, string>>(
     {}
   );
+
+  const toggleCardFlip = (productId: number) => {
+    setFlippedCards((prev) => ({
+      ...prev,
+      [productId]: !prev[productId]
+    }));
+  };
 
   const [state, setState] = useState<QuizState>({
     currentQuestionIndex: 0,
@@ -227,6 +247,35 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     setSelectedSizes({});
   };
 
+  const handleAddToCart = (product: RecommendedProduct) => {
+    const selectedSize = selectedSizes[product.id];
+
+    if (!selectedSize && product.sizes?.length) {
+      alert("Будь ласка, оберіть розмір");
+      return;
+    }
+
+    const sizeObj =
+      product.sizes?.find((s) => s.size === selectedSize) || product.sizes?.[0];
+
+    if (!sizeObj) {
+      alert("Немає доступних розмірів для цього продукту");
+      return;
+    }
+
+    const itemToAdd: CartItem = {
+      id: product.id,
+      name: product.name,
+      size: sizeObj.size,
+      price: sizeObj.price,
+      photo: product.photo,
+      quantity: 1
+    };
+
+    addToCart(itemToAdd as unknown as Product);
+    alert(`${product.name} додано до кошика`);
+  };
+
   if (isLoading) {
     return <div className={styles.loading}>Завантаження продуктів...</div>;
   }
@@ -238,45 +287,117 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
 
         <div className={styles.productsFlex}>
           {recommendedProducts.map((product) => (
-            <div key={product.id} className={styles.productCard}>
-              <div className={styles.productImageContainer}>
-                <Image
-                  src={product.photo}
-                  alt={product.name}
-                  width={300}
-                  height={200}
-                  className={styles.productImage}
-                  priority={true}
-                />
-                {product.badgeInfo && (
-                  <span className={styles.productBadge}>
-                    {product.badgeInfo}
-                  </span>
-                )}
-              </div>
-              <h3 className={styles.productName}>{product.name}</h3>
-              <p className={styles.productType}>{product.type}</p>
-              {(() => {
-                const selectedSize = selectedSizes[product.id];
-                const sizeObj = product.sizes?.find(
-                  (s) => s.size === selectedSize
-                );
-                const price = sizeObj?.price || product.sizes?.[0]?.price || 0;
-                return (
-                  <div className={styles.productPrice}>Від {price} грн</div>
-                );
-              })()}
-              <form className={styles.productSizeForm}>
-                {renderSizes(product)}
-              </form>
-              <div className={styles.buttonContainer}>
-                <Button
-                  variant="primary"
-                  size={isMobile ? "l" : isTablet ? "l" : "xl"}
-                  className={styles.buyButton}
-                >
-                  <span className={styles.textButton}>КУПИТИ</span>
-                </Button>
+            <div
+              key={product.id}
+              className={`${styles.productCard} ${flippedCards[product.id] ? styles.flipped : ""}`}
+            >
+              <div className={styles.cardInner}>
+                {/* Передня частина картки */}
+                <div className={styles.cardFront}>
+                  <div className={styles.productImageContainer}>
+                    <Link href={`/${product._id}`} passHref legacyBehavior>
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.badgeInfo}
+                      >
+                        <Image
+                          src={product.photo}
+                          alt={product.name}
+                          width={300}
+                          height={200}
+                          className={styles.productImage}
+                          priority={true}
+                        />
+                      </a>
+                    </Link>
+                    <button
+                      className={styles.infoButton}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleCardFlip(product.id);
+                      }}
+                    >
+                      <Icon
+                        name="icon-info"
+                        size={isMobile ? 24 : 28}
+                        fill="none"
+                        stroke={styles.yellowColor}
+                      />
+                    </button>
+                    <span className={styles.productBadge}>
+                      {product.badgeInfo}
+                    </span>
+                  </div>
+                  <h3 className={styles.productName}>{product.name}</h3>
+                  <p className={styles.productType}>{product.type}</p>
+                  {(() => {
+                    const selectedSize = selectedSizes[product.id];
+                    const sizeObj = product.sizes?.find(
+                      (s) => s.size === selectedSize
+                    );
+                    const price =
+                      sizeObj?.price || product.sizes?.[0]?.price || 0;
+                    return (
+                      <div className={styles.productPrice}>Від {price} грн</div>
+                    );
+                  })()}
+                  <form className={styles.productSizeForm}>
+                    {renderSizes(product)}
+                  </form>
+                  <div className={styles.buttonContainer}>
+                    <Button
+                      variant="primary"
+                      size={isMobile ? "l" : isTablet ? "l" : "xl"}
+                      className={styles.buyButton}
+                      onClick={() => handleAddToCart(product)}
+                    >
+                      <span className={styles.textButton}>
+                        ДОДАТИ ДО КОШИКА
+                      </span>
+                    </Button>
+                  </div>
+                </div>
+
+                {/* Задня частина картки */}
+                <div className={styles.cardBack}>
+                  <div className={styles.backContent}>
+                    <h3 className={styles.productName}>{product.name}</h3>
+                    {product.description && (
+                      <div className={styles.description}>
+                        <h4>Опис</h4>
+                        <p>{product.description}</p>
+                      </div>
+                    )}
+                    {product.additionalInfo && (
+                      <div className={styles.additionalInfo}>
+                        <h4>Додаткова інформація</h4>
+                        <p>{product.additionalInfo}</p>
+                      </div>
+                    )}
+                    {product.application && (
+                      <p className={styles.infoItem}>
+                        <strong>Застосування:</strong> {product.application}
+                      </p>
+                    )}
+                  </div>
+                  <button
+                    className={styles.flipBackButton}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      toggleCardFlip(product.id);
+                    }}
+                  >
+                    <Icon
+                      name="icon-info"
+                      size={isMobile ? 24 : 28}
+                      fill="none"
+                      stroke={styles.yellowColor}
+                    />
+                  </button>
+                </div>
               </div>
             </div>
           ))}
