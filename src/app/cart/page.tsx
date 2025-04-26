@@ -7,7 +7,7 @@ import "@/styles/index.scss";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://reco.com.ua"),
+  metadataBase: new URL("https://hairexpertreco.com"),
   title: "Кошик ",
   description:
     "Перегляньте товари у вашому кошику. Безпечна оплата, швидка доставка по всій Україні.",

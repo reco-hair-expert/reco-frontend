@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { CatalogClient } from "./CatalogClient";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://reco.com.ua"),
+  metadataBase: new URL("https://hairexpertreco.com"),
   title: "Каталог товарів",
   description:
     "Перегляньте наш каталог товарів. Новинки, рекомендації та всі доступні товари.",
