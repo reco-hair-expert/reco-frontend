@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { MainPageClient } from "./MainPageClient";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://reco.com.ua"),
+  metadataBase: new URL("https://hairexpertreco.com"),
   title: "RECO - Косметика майбутнього",
   description:
     "RECO — інноваційний бренд косметики, що використовує натуральні інгредієнти та передові формули для створення ефективних засобів догляду за шкірою та волоссям.",

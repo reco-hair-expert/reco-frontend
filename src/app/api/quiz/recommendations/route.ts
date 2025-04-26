@@ -35,7 +35,19 @@ export async function POST(request: NextRequest) {
     console.log("Received data from backend:", data);
 
     // Преобразуем данные в нужный формат
-    const recommendedProducts = data.data.map((product: any) => ({
+    interface Product {
+      id: string;
+      name: string;
+      type: string;
+      description: string;
+      sizes: { size: string; price: number }[];
+      badgeInfo?: string;
+      isNewProduct?: boolean;
+      score?: number;
+      volume?: string;
+    }
+
+    const recommendedProducts = data.data.map((product: Product) => ({
       id: product.id,
       name: product.name,
       photo: reco,
@@ -47,7 +59,7 @@ export async function POST(request: NextRequest) {
       isNew: product.isNewProduct,
       score: product.score || 0,
       volume: product.volume || "",
-      sizes: product.sizes.reduce((acc: any, size: any) => {
+      sizes: product.sizes.reduce((acc: Record<string, number>, size: { size: string; price: number }) => {
         acc[size.size] = size.price;
         return acc;
       }, {})
