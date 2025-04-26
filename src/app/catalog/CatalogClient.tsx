@@ -23,13 +23,13 @@ const CatalogCardList = dynamic(
   }
 );
 
-const FilterToggle = dynamic(
-  () =>
-    import("@/components/FilterToggle/FilterToggle").then((mod) => mod.default),
-  {
-    loading: () => <div>Loading...</div>
-  }
-);
+// const FilterToggle = dynamic(
+//   () =>
+//     import("@/components/FilterToggle/FilterToggle").then((mod) => mod.default),
+//   {
+//     loading: () => <div>Loading...</div>
+//   }
+// );
 
 const BackgroundCircles = dynamic(
   () =>

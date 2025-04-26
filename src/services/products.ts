@@ -20,7 +20,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
     }
     const data = await response.json();
 
-    return data.data.map((product: any, index: number) => ({
+    return data.data.map((product: { _id?: string; name: string; pictures: { mainPicture?: string }; description: string; shortDescription: string; type: string; application: string; composition: string; recommendation: string; sizes: { _id: string; volume: string; price: number }[]; badgeInfo: string; isNewProduct: boolean }, index: number) => ({
       id: index + 1,
       _id: product._id || `product_${index + 1}`,
       name: product.name,
@@ -31,7 +31,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
       application: product.application,
       composition: product.composition,
       recommendation: product.recommendation,
-      sizes: product.sizes.map((size: any) => ({
+      sizes: product.sizes.map((size: { _id: string; volume: string; price: number }) => ({
         _id: size._id,
         size: size.volume,
         price: size.price
@@ -60,7 +60,7 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
       return null;
     }
 
-    const product = data.data.find((p: any) => p._id === id);
+    const product = data.data.find((p: { _id: string }) => p._id === id);
 
     if (!product) {
       return null;
@@ -77,7 +77,7 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
       application: product.application,
       composition: product.composition,
       recommendation: product.recommendation,
-      sizes: product.sizes.map((size: any) => ({
+      sizes: product.sizes.map((size: { _id: string; volume: string; price: number }) => ({
         _id: size._id,
         size: size.volume,
         price: size.price
