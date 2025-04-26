@@ -1,0 +1,58 @@
+@use "@/styles/variables" as *;
+
+* {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  // outline: 1px solid green
+}
+
+body {
+  background-color: $black-color;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+main {
+  flex-grow: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+footer {
+  margin-top: auto;
+}
+
+a,
+button {
+  transition:
+    color $transition-speed $transition-style,
+    background-color $transition-speed $transition-style,
+    border $transition-speed $transition-style,
+    outline $transition-speed $transition-style,
+    transform $transition-speed $transition-style;
+}
+
+.container {
+  min-width: 320px;
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 0 10px;
+  width: 100%;
+  overflow: visible;
+
+  @media (min-width: $breakpoint-mobile) {
+    max-width: $breakpoint-mobile;
+    padding: 0 16px;
+  }
+
+  @media (min-width: $breakpoint-tablet) {
+    max-width: $breakpoint-tablet;
+    padding: 0 24px;
+  }
+}

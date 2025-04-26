@@ -1,0 +1,248 @@
+@use "src/styles/variables.scss" as *;
+
+.card {
+  display: flex;
+  gap: 2rem;
+  margin-top: 140px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 100px;
+  }
+}
+
+.imageContainer {
+  flex: 1 1 55%;
+  max-width: 55%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    order: 0; 
+  }
+}
+.headingContainer{
+  display: flex;
+  flex-direction: column;
+  padding: 0 40px;
+  margin-top: 20px;
+}
+.descriptionContainer{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.collapsibleTrigger {
+  display: flex;
+  font-size: 16px;
+  color: $white-color;
+  cursor: pointer;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  position: relative; /* Для позиционирования стрелки */
+
+  /* Стиль стрелки */
+  &::after {
+    content: "▼"; /* Стрелка вниз */
+    position: absolute;
+    right: 10px; /* Отступ от правого края */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    transition: transform 0.3s ease; /* Плавный переход */
+  }
+
+  /* Когда раскрыто, изменим стрелку */
+  &.is-open::after {
+    content: "▲"; /* Стрелка вверх */
+    transform: translateY(-50%) rotate(180deg); /* Поворот на 180° */
+  }
+
+  /* Состояние при закрытом collapsible */
+  &.is-closed::after {
+    content: "▼"; /* Стрелка вниз */
+    transform: translateY(-50%);
+  }
+}
+
+
+.productImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.newBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #ff4d4d;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-weight: bold;
+}
+
+.infoContainer {
+  flex: 1 1 45%;
+  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: white;
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+    order: 1; 
+  }
+
+  .productName {
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0;
+
+    @media (max-width: 768px) {
+      font-size: 32px;
+    }
+  }
+
+  .sizes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        border-color: #999;
+      }
+
+      input[type="radio"] {
+        margin: 0;
+      }
+    }
+  }
+
+  .sizeAndPrice {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    margin-top: 20px;
+    min-height: 50px;
+    gap: 20px;
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      gap: 10px;
+      min-height: auto;
+    }
+  }
+
+  .priceContainer {
+    font-size: 1.25rem;
+    margin: 0;
+  }
+
+  .price {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .addToCart {
+    margin-top: auto;
+    width: 100%;
+  }
+
+  .additionalInfo {
+    display: flex;
+    flex-direction: column;
+    margin: 20px 0;
+    padding: 0 40px;
+    gap: 20px;
+
+
+    @media (max-width: 768px) {
+      padding: 0 20px;
+    }
+
+    .infoItem {
+      margin: 8px 0;
+      font-size: 14px;
+      line-height: 1.5;
+
+      strong {
+        margin-right: 5px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+  }
+
+  .imageContainer {
+    order: 0; /* картинка первая */
+    max-width: 100%;
+  }
+
+  .descriptionContainer {
+    gap: 20px;
+    order: 3; /* описание после размера и кнопки */
+  }
+
+  .sizeAndPrice {
+    order: 2; /* размер и цена */
+  }
+
+  .additionalInfo {
+    gap: 20px;
+    order: 4; /* дополнительная информация */
+  }
+
+  .productName {
+    font-size: 32px;
+  }
+
+  .sizes {
+    gap: 0.5rem;
+  }
+
+  .priceContainer {
+    font-size: 1.25rem;
+  }
+
+  .addToCart {
+    margin-top: auto;
+    width: 100%;
+  }
+
+  .descriptionContainer {
+    padding: 0 20px;
+  }
+}
