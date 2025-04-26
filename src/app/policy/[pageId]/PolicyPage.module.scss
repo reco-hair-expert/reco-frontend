@@ -5,6 +5,11 @@
   justify-content: space-between;
   gap: 20px;
   width: 100%;
+  @media screen and (max-width: $breakpoint-mobile) {
+    flex-direction: column-reverse;
+    align-items: center;
+    
+  }
 }
 
 .mainContent {
@@ -19,7 +24,9 @@
   border-radius: 8px;
 
   @media (max-width: $breakpoint-mobile) {
-    display: none;
+    width: 100%;
+    flex: auto;
+    order: 0;
   }
 
   h3 {
