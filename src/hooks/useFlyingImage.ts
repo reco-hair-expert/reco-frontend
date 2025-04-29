@@ -19,7 +19,13 @@ export function useFlyingImage() {
     };
   }, []);
 
-  function flyToCart({ imageSrc, fromRect }: { imageSrc: string; fromRect: DOMRect }) {
+  function flyToCart({
+    imageSrc,
+    fromRect
+  }: {
+    imageSrc: string;
+    fromRect: DOMRect;
+  }) {
     if (!containerRef.current) return;
 
     const image = document.createElement("img");
