@@ -31,7 +31,7 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ onClose, isVisible }) => {
           Пройдіть короткий тест – дізнайтеся, що потрібно вашому волоссю!
         </h2>
         <p className={styles.popupText}>
-          Лише 6 питань – і ви дізнаєтеся свій ідеальний догляд!
+          ЛИШЕ 6 ПИТАНЬ – І ВИ ДІЗНАЄТЕСЯ СВІЙ ІДЕАЛЬНИЙ ДОГЛЯД!
         </p>
         <div className={styles.buttonWrapper}>
           <Link href="/quiz" passHref>
@@ -50,7 +50,7 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ onClose, isVisible }) => {
                 />
               </div>
               <span className={styles.button__text}>
-                {isMobile ? "РОЗПОЧАТИ" : "РОЗПОЧАТИ КВІЗ"}
+                {isMobile ? "ПІДІБРАТИ" : "ПІДІБРАТИ ФОРМУЛУ"}
               </span>
             </Button>
           </Link>

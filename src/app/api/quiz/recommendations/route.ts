@@ -59,10 +59,16 @@ export async function POST(request: NextRequest) {
       isNew: product.isNewProduct,
       score: product.score || 0,
       volume: product.volume || "",
-      sizes: product.sizes.reduce((acc: Record<string, number>, size: { size: string; price: number }) => {
-        acc[size.size] = size.price;
-        return acc;
-      }, {})
+      sizes: product.sizes.reduce(
+        (
+          acc: Record<string, number>,
+          size: { size: string; price: number }
+        ) => {
+          acc[size.size] = size.price;
+          return acc;
+        },
+        {}
+      )
     }));
 
     return NextResponse.json({ recommendedProducts });

@@ -6,12 +6,12 @@ const eslintConfig = [
     languageOptions: {
       parserOptions: {
         ecmaVersion: "latest",
-        sourceType: "module",
+        sourceType: "module"
       },
       globals: {
-        React: "readonly",
-      },
-    },
+        React: "readonly"
+      }
+    }
   },
 
   // Подключение next/core-web-vitals + next/typescript
@@ -25,13 +25,13 @@ const eslintConfig = [
       parserOptions: {
         project: "./tsconfig.json",
         tsconfigRootDir: process.cwd(), // <-- Ловушка на неправильный путь
-        createDefaultProgram: true, // <-- Если tsconfig глючит, всё равно стартует
-      },
+        createDefaultProgram: true // <-- Если tsconfig глючит, всё равно стартует
+      }
     },
     rules: {
       "@typescript-eslint/no-unused-vars": "warn",
-      "@typescript-eslint/no-explicit-any": "off",
-    },
+      "@typescript-eslint/no-explicit-any": "off"
+    }
   },
 
   // Специфично для JavaScript файлов
@@ -40,12 +40,12 @@ const eslintConfig = [
     languageOptions: {
       parser: "@babel/eslint-parser",
       parserOptions: {
-        requireConfigFile: false,
-      },
+        requireConfigFile: false
+      }
     },
     rules: {
-      "no-unused-vars": "warn",
-    },
+      "no-unused-vars": "warn"
+    }
   },
 
   // Общие React-правила
@@ -53,9 +53,9 @@ const eslintConfig = [
     files: ["**/*.{js,jsx,ts,tsx}"],
     rules: {
       "react/react-in-jsx-scope": "off",
-      "react/prop-types": "off",
-    },
-  },
+      "react/prop-types": "off"
+    }
+  }
 ];
 
 export default eslintConfig;

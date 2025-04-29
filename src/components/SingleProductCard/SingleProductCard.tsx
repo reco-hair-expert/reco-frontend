@@ -51,12 +51,8 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
 
   const renderAdditionalInfo = () => (
     <div className={styles.additionalInfo}>
-        <p className={styles.descriptionText}>{product.description}</p>
-      <Collapsible
-        trigger="Застосування"
-        className={styles.collapsibleTrigger}
-        
-      >
+      <p className={styles.descriptionText}>{product.description}</p>
+      <Collapsible trigger="Застосування" className={styles.collapsibleTrigger}>
         <p className={styles.infoItem}>{product.application}</p>
       </Collapsible>
       <Collapsible trigger="Склад" className={styles.collapsibleTrigger}>
@@ -64,10 +60,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
           <strong>Склад:</strong> {product.composition}
         </p>
       </Collapsible>
-      <Collapsible
-        trigger="Рекомендації"
-        className={styles.collapsibleTrigger}
-      >
+      <Collapsible trigger="Рекомендації" className={styles.collapsibleTrigger}>
         <p className={styles.infoItem}>
           <strong>Рекомендації:</strong> {product.recommendation}
         </p>

@@ -20,25 +20,45 @@ export const fetchProducts = async (): Promise<Product[]> => {
     }
     const data = await response.json();
 
-    return data.data.map((product: { _id?: string; name: string; pictures: { mainPicture?: string }; description: string; shortDescription: string; type: string; application: string; composition: string; recommendation: string; sizes: { _id: string; volume: string; price: number }[]; badgeInfo: string; isNewProduct: boolean }, index: number) => ({
-      id: index + 1,
-      _id: product._id || `product_${index + 1}`,
-      name: product.name,
-      photo: product.pictures.mainPicture || reco,
-      description: product.description,
-      shortDescription: product.shortDescription,
-      type: product.type,
-      application: product.application,
-      composition: product.composition,
-      recommendation: product.recommendation,
-      sizes: product.sizes.map((size: { _id: string; volume: string; price: number }) => ({
-        _id: size._id,
-        size: size.volume,
-        price: size.price
-      })),
-      badgeInfo: product.badgeInfo,
-      isNewProduct: product.isNewProduct
-    }));
+    return data.data.map(
+      (
+        product: {
+          _id?: string;
+          name: string;
+          pictures: { mainPicture?: string };
+          description: string;
+          shortDescription: string;
+          type: string;
+          application: string;
+          composition: string;
+          recommendation: string;
+          sizes: { _id: string; volume: string; price: number }[];
+          badgeInfo: string;
+          isNewProduct: boolean;
+        },
+        index: number
+      ) => ({
+        id: index + 1,
+        _id: product._id || `product_${index + 1}`,
+        name: product.name,
+        photo: product.pictures.mainPicture || reco,
+        description: product.description,
+        shortDescription: product.shortDescription,
+        type: product.type,
+        application: product.application,
+        composition: product.composition,
+        recommendation: product.recommendation,
+        sizes: product.sizes.map(
+          (size: { _id: string; volume: string; price: number }) => ({
+            _id: size._id,
+            size: size.volume,
+            price: size.price
+          })
+        ),
+        badgeInfo: product.badgeInfo,
+        isNewProduct: product.isNewProduct
+      })
+    );
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
@@ -77,11 +97,13 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
       application: product.application,
       composition: product.composition,
       recommendation: product.recommendation,
-      sizes: product.sizes.map((size: { _id: string; volume: string; price: number }) => ({
-        _id: size._id,
-        size: size.volume,
-        price: size.price
-      })),
+      sizes: product.sizes.map(
+        (size: { _id: string; volume: string; price: number }) => ({
+          _id: size._id,
+          size: size.volume,
+          price: size.price
+        })
+      ),
       badgeInfo: product.badgeInfo,
       isNewProduct: product.isNewProduct
     };

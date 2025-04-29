@@ -1,14 +1,13 @@
 import styles from "./ArowButton.module.scss";
-import React from "react";
 import { ButtonArrowProps } from "./types/ArowButton";
 import Icon from "../Icon/Icon";
 
-const ButtonArrow: React.FC<ButtonArrowProps> = ({
+const ButtonArrow = ({
   className,
   icon,
   onClick,
   onTouchEnd
-}) => {
+}: ButtonArrowProps) => {
   return (
     <button
       className={`${styles.buttonArrow} ${className}`}
