@@ -1,4 +1,4 @@
-import { Product } from "@/types/types";
+import type { Product } from "@/types/types";
 
 // types.ts
 export type Question = {

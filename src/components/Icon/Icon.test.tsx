@@ -22,7 +22,7 @@ describe("Icon Component", () => {
 
   it("renders with custom stroke and fill", () => {
     const { container } = render(
-      <Icon name="test-icon" stroke="red" fill="blue" />
+      <Icon fill="blue" name="test-icon" stroke="red" />
     );
     const svg = container.querySelector("svg");
     expect(svg).toHaveAttribute("stroke", "red");
@@ -31,7 +31,7 @@ describe("Icon Component", () => {
 
   it("renders with custom className", () => {
     const { container } = render(
-      <Icon name="test-icon" className="custom-class" />
+      <Icon className="custom-class" name="test-icon" />
     );
     const svg = container.querySelector("svg");
     expect(svg).toHaveClass("custom-class");

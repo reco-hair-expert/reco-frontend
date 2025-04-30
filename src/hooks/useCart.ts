@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { Product, CartItem } from "@/types/types";
+import type { Product, CartItem } from "@/types/types";
 
 export const useCart = () => {
   const [cart, setCart] = useState<CartItem[]>(() => {

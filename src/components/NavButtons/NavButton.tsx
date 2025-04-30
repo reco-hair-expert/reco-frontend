@@ -1,8 +1,8 @@
-import { FC } from "react";
+import type { FC } from "react";
 import Link from "next/link";
 import Button from "../Button/Button";
 import styles from "./NavButtons.module.scss";
-import { NavButtonsProps } from "./types/NavButton.types";
+import type { NavButtonsProps } from "./types/NavButton.types";
 
 const NavButtons: FC<NavButtonsProps> = ({ buttons, className }) => {
   const combinedClass = className
@@ -13,7 +13,7 @@ const NavButtons: FC<NavButtonsProps> = ({ buttons, className }) => {
     <div className={combinedClass}>
       {buttons.map(({ title, link }) => (
         <Link key={title} href={link}>
-          <Button variant="black" size="m">
+          <Button size="m" variant="black">
             {title}
           </Button>
         </Link>

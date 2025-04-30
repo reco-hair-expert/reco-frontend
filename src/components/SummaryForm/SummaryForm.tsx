@@ -1,9 +1,10 @@
 "use client";
-import { SubmitHandler, useForm } from "react-hook-form";
+import type { SubmitHandler} from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import styles from "./SummaryForm.module.scss";
 
-import { FormInput } from "./types/SummaryForm.types";
+import type { FormInput } from "./types/SummaryForm.types";
 import InputLabel from "../InputLabel/InputLabel";
 import handlePhoneChange from "@/utils/handlePhoneChange";
 
@@ -23,9 +24,9 @@ const SummaryForm = () => {
 
   return (
     <form
-      id="summaryForm"
-      data-testid="summaryForm"
       className={styles.summaryForm}
+      data-testid="summaryForm"
+      id="summaryForm"
       onSubmit={handleSubmit(onSubmit)}
     >
       <h2 className={styles.formTitle}>Платіжні дані</h2>
@@ -37,8 +38,8 @@ const SummaryForm = () => {
 
           <input
             id="firstName"
-            type="text"
             placeholder="Введіть ім'я"
+            type="text"
             {...register("firstName", {
               required: "Це поле обовʼязкове",
               pattern: {
@@ -61,8 +62,8 @@ const SummaryForm = () => {
 
           <input
             id="lastName"
-            type="text"
             placeholder="Введіть прізвище"
+            type="text"
             {...register("lastName", {
               required: "Це поле обовʼязкове",
               pattern: {
@@ -86,8 +87,8 @@ const SummaryForm = () => {
 
         <input
           id="phoneNumber"
-          type="text"
           placeholder="+380 __ ___ __ __"
+          type="text"
           {...register("phoneNumber", {
             required: "Це поле обовʼязкове",
             minLength: {
@@ -95,9 +96,9 @@ const SummaryForm = () => {
               message: "Введіть повний номер"
             }
           })}
+          className={`${styles.inputField} ${errors.phoneNumber ? styles.inputError : ""}`}
           onChange={(event) => handlePhoneChange(event, setValue)}
           onFocus={(event) => handlePhoneChange(event, setValue)}
-          className={`${styles.inputField} ${errors.phoneNumber ? styles.inputError : ""}`}
         />
 
         {errors.phoneNumber && (
@@ -111,10 +112,10 @@ const SummaryForm = () => {
         </InputLabel>
 
         <input
-          id="country"
-          type="text"
           className={styles.inputField}
+          id="country"
           placeholder="Україна"
+          type="text"
           {...register("country", {
             required: "Це поле обовʼязкове"
           })}
@@ -132,10 +133,10 @@ const SummaryForm = () => {
           </InputLabel>
 
           <input
-            id="city"
-            type="text"
             className={styles.inputField}
+            id="city"
             placeholder="Виберіть місто"
+            type="text"
             {...register("city", {
               required: "Це поле обовʼязкове"
             })}
@@ -152,10 +153,10 @@ const SummaryForm = () => {
           </InputLabel>
 
           <input
-            id="postOffice"
-            type="text"
             className={styles.inputField}
+            id="postOffice"
             placeholder="Виберіть відділення"
+            type="text"
             {...register("postOffice", {
               required: "Це поле обовʼязкове"
             })}
@@ -171,8 +172,8 @@ const SummaryForm = () => {
         <InputLabel htmlFor="comment">Нотатки до замовлення</InputLabel>
 
         <textarea
-          id="comment"
           className={styles.inputField}
+          id="comment"
           placeholder="Наприклад спеціальні нотатки для доставки"
           {...register("comment")}
         />
@@ -182,7 +183,7 @@ const SummaryForm = () => {
         )}
       </div>
 
-      <button type="submit" className={styles.submitButton}>
+      <button className={styles.submitButton} type="submit">
         Підтвердити замовлення
       </button>
     </form>

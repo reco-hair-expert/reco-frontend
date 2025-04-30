@@ -23,7 +23,7 @@ describe("CallButton Component", () => {
   });
 
   it("renders with correct accessibility attributes", () => {
-    render(<CallButton phoneNumber={mockPhoneNumber} ariaLabel="Call us" />);
+    render(<CallButton ariaLabel="Call us" phoneNumber={mockPhoneNumber} />);
     const button = screen.getByRole("button", { name: /call us/i });
     expect(button).toBeInTheDocument();
   });
@@ -44,7 +44,7 @@ describe("CallButton Component", () => {
   it("applies custom className correctly", () => {
     const customClass = "custom-class";
     render(
-      <CallButton phoneNumber={mockPhoneNumber} className={customClass} />
+      <CallButton className={customClass} phoneNumber={mockPhoneNumber} />
     );
     const button = screen.getByRole("button");
     expect(button).toHaveClass(customClass);

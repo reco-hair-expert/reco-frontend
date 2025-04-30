@@ -4,7 +4,7 @@ import { navigationButtons } from "@/constants/navigationButtons";
 import NavBar from "../NavBar/NavBar";
 import NavButtons from "../NavButtons/NavButton";
 import styles from "./ModalMenu.module.scss";
-import { ModalMenuProps } from "./types/ModalMenu.types";
+import type { ModalMenuProps } from "./types/ModalMenu.types";
 
 const ModalMenu = ({ isOpen, onClick }: ModalMenuProps) => {
   const [isVisible, setIsVisible] = useState(isOpen);
@@ -29,9 +29,9 @@ const ModalMenu = ({ isOpen, onClick }: ModalMenuProps) => {
     >
       <NavBar>
         <NavButtons
+          buttons={navigationButtons}
           className={styles.modalNavBtns}
           labels={navigationButtons.map((button) => button.title)}
-          buttons={navigationButtons}
         />
       </NavBar>
     </div>

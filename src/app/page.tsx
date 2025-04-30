@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
 import { MainPageClient } from "./MainPageClient";
 
 export const metadata: Metadata = {

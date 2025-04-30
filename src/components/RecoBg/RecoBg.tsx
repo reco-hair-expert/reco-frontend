@@ -1,4 +1,4 @@
-import { RecoBgProps } from "./types/RecoBg.types";
+import type { RecoBgProps } from "./types/RecoBg.types";
 import styles from "./RecoBg.module.scss";
 
 const RecoBg = ({

@@ -1,5 +1,5 @@
 import React from "react";
-import { ButtonProps } from "./types/Button.types";
+import type { ButtonProps } from "./types/Button.types";
 import classNames from "classnames";
 import "./Button.scss";
 
@@ -24,12 +24,12 @@ const Button = ({
   return (
     <button
       className={classes}
-      onClick={!disabled ? onClick : undefined}
       disabled={disabled}
+      onClick={!disabled ? onClick : undefined}
     >
       <span className="button__text">{children}</span>
       {typeof icon === "string" && (
-        <img src={icon} alt="icon" className="button__icon" />
+        <img alt="icon" className="button__icon" src={icon} />
       )}
       {disabled}
     </button>

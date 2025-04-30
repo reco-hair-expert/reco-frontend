@@ -22,7 +22,7 @@ jest.mock("next/link", () => {
 jest.mock("../Icon/Icon", () => {
   return ({ name, className }: any) => {
     return (
-      <div data-testid={`icon-${name}`} className={className}>
+      <div className={className} data-testid={`icon-${name}`}>
         Icon
       </div>
     );
@@ -68,7 +68,7 @@ describe("CatalogCard Component", () => {
   });
 
   it("renders product information correctly", () => {
-    render(<CatalogCard product={mockProduct} perRow={3} />);
+    render(<CatalogCard perRow={3} product={mockProduct} />);
 
     expect(screen.getByText("Test Product")).toBeInTheDocument();
     expect(screen.getByAltText("Test Product")).toHaveAttribute(
@@ -78,7 +78,7 @@ describe("CatalogCard Component", () => {
   });
 
   it("renders size selector with available sizes", () => {
-    render(<CatalogCard product={mockProduct} perRow={3} />);
+    render(<CatalogCard perRow={3} product={mockProduct} />);
 
     const sizeSelect = screen.getByRole("combobox");
     expect(sizeSelect).toBeInTheDocument();
@@ -89,7 +89,7 @@ describe("CatalogCard Component", () => {
   });
 
   it("shows warning when trying to buy without selecting size", async () => {
-    render(<CatalogCard product={mockProduct} perRow={3} />);
+    render(<CatalogCard perRow={3} product={mockProduct} />);
 
     const buyButton = screen.getByRole("button", { name: /Оберіть розмір/i });
     fireEvent.click(buyButton);
@@ -110,7 +110,7 @@ describe("CatalogCard Component", () => {
   });
 
   it("adds product to cart when size is selected", () => {
-    render(<CatalogCard product={mockProduct} perRow={3} />);
+    render(<CatalogCard perRow={3} product={mockProduct} />);
 
     const sizeSelect = screen.getByRole("combobox");
     fireEvent.change(sizeSelect, { target: { value: "M" } });
@@ -124,7 +124,7 @@ describe("CatalogCard Component", () => {
   });
 
   it("applies correct width based on perRow prop", () => {
-    render(<CatalogCard product={mockProduct} perRow={4} />);
+    render(<CatalogCard perRow={4} product={mockProduct} />);
 
     const card = screen.getByTestId("catalog-card");
     expect(card).toHaveStyle({ width: "calc((100% - 20px * 3) / 4)" });

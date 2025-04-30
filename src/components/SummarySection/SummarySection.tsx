@@ -48,10 +48,10 @@ const SummarySection = () => {
             >
               <div className={styles.imageContainer}>
                 <Image
-                  src={item.product.photo}
                   alt={item.product.name}
-                  width={150}
                   height={150}
+                  src={item.product.photo}
+                  width={150}
                 />
               </div>
               <div className={styles.infoContainer}>
@@ -86,19 +86,19 @@ const SummarySection = () => {
       <div className={styles.deliveryOptions}>
         <p>Доставка</p>
         <div className={styles.deliveryOption}>
-          <input type="radio" name="delivery" id="delivery-standard" />
+          <input id="delivery-standard" name="delivery" type="radio" />
           <label
-            htmlFor="delivery-standard"
             className={styles.deliveryOptionDescription}
+            htmlFor="delivery-standard"
           >
             Стандартна доставка
           </label>
         </div>
         <div className={styles.deliveryOption}>
-          <input type="radio" name="delivery" id="delivery-express" />
+          <input id="delivery-express" name="delivery" type="radio" />
           <label
-            htmlFor="delivery-express"
             className={styles.deliveryOptionDescription}
+            htmlFor="delivery-express"
           >
             Експрес доставка
           </label>

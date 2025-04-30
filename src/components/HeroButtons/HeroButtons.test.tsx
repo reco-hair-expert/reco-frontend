@@ -14,10 +14,10 @@ jest.mock("../Button/Button", () => {
   return ({ children, size, variant, className }: any) => {
     return (
       <button
-        data-testid="button"
-        data-size={size}
-        data-variant={variant}
         className={className}
+        data-size={size}
+        data-testid="button"
+        data-variant={variant}
       >
         {children}
       </button>
@@ -30,11 +30,11 @@ jest.mock("../Icon/Icon", () => {
   return ({ name, size, fill, stroke, className }: any) => {
     return (
       <div
-        data-testid={`icon-${name}`}
-        data-size={size}
-        data-fill={fill}
-        data-stroke={stroke}
         className={className}
+        data-fill={fill}
+        data-size={size}
+        data-stroke={stroke}
+        data-testid={`icon-${name}`}
       />
     );
   };

@@ -6,7 +6,7 @@ import FeedbackForm from "./FeedbackForm";
 jest.mock("../Icon/Icon", () => {
   return ({ name, className }: any) => {
     return (
-      <div data-testid={`icon-${name}`} className={className}>
+      <div className={className} data-testid={`icon-${name}`}>
         Icon
       </div>
     );
@@ -18,10 +18,10 @@ jest.mock("../Button/Button", () => {
   return ({ children, variant, size, className }: any) => {
     return (
       <button
+        className={className}
+        data-size={size}
         data-testid="button"
         data-variant={variant}
-        data-size={size}
-        className={className}
       >
         {children}
       </button>
@@ -33,7 +33,7 @@ jest.mock("../Button/Button", () => {
 jest.mock("../InputLabel/InputLabel", () => {
   return ({ children, htmlFor, required }: any) => {
     return (
-      <label htmlFor={htmlFor} data-required={required}>
+      <label data-required={required} htmlFor={htmlFor}>
         {children}
       </label>
     );

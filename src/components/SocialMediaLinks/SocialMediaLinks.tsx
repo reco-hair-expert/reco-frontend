@@ -1,5 +1,5 @@
 import React from "react";
-import { SocialMediaIconProps } from "./types/SocialMediaLinks.types";
+import type { SocialMediaIconProps } from "./types/SocialMediaLinks.types";
 import styles from "./SocialMediaLinks.module.scss";
 import Image from "next/image";
 
@@ -29,13 +29,13 @@ const SocialMediaIcon: React.FC<SocialMediaIconProps> = ({
   }
 
   return (
-    <a href={link} target="_blank" rel="noopener noreferrer">
+    <a href={link} rel="noopener noreferrer" target="_blank">
       <Image
-        src={iconSrc}
         alt={`${platform} icon`}
-        width={size}
-        height={size}
         className={styles.icon}
+        height={size}
+        src={iconSrc}
+        width={size}
       />
     </a>
   );

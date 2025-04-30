@@ -1,4 +1,4 @@
-import { FooterButton } from "./types/FooterLink.types";
+import type { FooterButton } from "./types/FooterLink.types";
 import React from "react";
 import classNames from "classnames";
 import styles from "./FooterLink.module.scss";
@@ -17,10 +17,10 @@ const FooterLinks: React.FC = () => {
       {footerButtons.map((button) => (
         <Link
           key={button.link}
-          href={button.link}
-          className={classNames(styles.footerLink)}
-          aria-label={button.title}
           passHref
+          aria-label={button.title}
+          className={classNames(styles.footerLink)}
+          href={button.link}
         >
           {button.title}
         </Link>

@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState, useMemo, useEffect, useCallback } from "react";
-import Image, { StaticImageData } from "next/image";
+import type { StaticImageData } from "next/image";
+import Image from "next/image";
 import QuizProgress from "./QuizProgress";
 import styles from "./quiz.module.scss";
 import type { Answer, QuizProps, QuizState, RecommendedProduct } from "./types";
@@ -9,7 +10,7 @@ import { fetchProducts } from "@/services/products";
 import Button from "@/components/Button/Button";
 import Icon from "../Icon/Icon";
 import useDeviceDetection from "@/context/useDeviceDetection";
-import { Product } from "@/types/types";
+import type { Product } from "@/types/types";
 import { useRouter } from "next/navigation";
 import { useCartContext } from "@/hooks/useCartContext";
 import Link from "next/link";
@@ -295,19 +296,19 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                 {/* Передня частина картки */}
                 <div className={styles.cardFront}>
                   <div className={styles.productImageContainer}>
-                    <Link href={`/${product._id}`} passHref legacyBehavior>
+                    <Link legacyBehavior passHref href={`/${product._id}`}>
                       <a
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className={styles.badgeInfo}
+                        rel="noopener noreferrer"
+                        target="_blank"
                       >
                         <Image
-                          src={product.photo}
                           alt={product.name}
-                          width={300}
-                          height={200}
                           className={styles.productImage}
+                          height={200}
                           priority={true}
+                          src={product.photo}
+                          width={300}
                         />
                       </a>
                     </Link>
@@ -320,9 +321,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                       }}
                     >
                       <Icon
+                        fill="none"
                         name="icon-info"
                         size={isMobile ? 24 : 28}
-                        fill="none"
                         stroke={styles.yellowColor}
                       />
                     </button>
@@ -348,9 +349,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                   </form>
                   <div className={styles.buttonContainer}>
                     <Button
-                      variant="primary"
-                      size={isMobile ? "l" : isTablet ? "l" : "xl"}
                       className={styles.buyButton}
+                      size={isMobile ? "l" : isTablet ? "l" : "xl"}
+                      variant="primary"
                       onClick={() => handleAddToCart(product)}
                     >
                       <span className={styles.textButton}>
@@ -391,9 +392,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                     }}
                   >
                     <Icon
+                      fill="none"
                       name="icon-info"
                       size={isMobile ? 24 : 28}
-                      fill="none"
                       stroke={styles.yellowColor}
                     />
                   </button>
@@ -404,10 +405,10 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
         </div>
         <div className={styles.resultsButtons}>
           <Button
-            variant="primary"
-            size={isMobile ? "m" : "l"}
-            onClick={restartQuiz}
             className={styles.restartButton}
+            size={isMobile ? "m" : "l"}
+            variant="primary"
+            onClick={restartQuiz}
           >
             <span className={styles.textButton}>Пройти тест знову</span>
           </Button>
@@ -439,18 +440,18 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       <div className={styles.navigationButtons}>
         {isFirstQuestion && answers.length === 0 ? (
           <Button
-            variant="secondary"
-            size={getButtonSize()}
-            onClick={goToHome}
             className={styles.homeButton}
+            size={getButtonSize()}
+            variant="secondary"
+            onClick={goToHome}
           >
             <div className={styles.iconContainer}>
               <Icon
+                className={styles.feedbackButtonIcon}
+                fill="black"
                 name="icon-left-icon"
                 size={isMobile ? 20 : 30}
-                fill="black"
                 stroke="white"
-                className={styles.feedbackButtonIcon}
               />
             </div>
             <span className={styles.buttonHome}>
@@ -459,19 +460,19 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
           </Button>
         ) : (
           <Button
-            variant="secondary"
-            size={getButtonSize()}
-            onClick={handleBack}
-            disabled={isFirstQuestion}
             className={styles.backButton}
+            disabled={isFirstQuestion}
+            size={getButtonSize()}
+            variant="secondary"
+            onClick={handleBack}
           >
             <div className={styles.iconContainer}>
               <Icon
+                className={styles.feedbackButtonIcon}
+                fill="black"
                 name="icon-left-icon"
                 size={isMobile ? 20 : 30}
-                fill="black"
                 stroke="white"
-                className={styles.feedbackButtonIcon}
               />
             </div>
             <span className={styles.backText}>НАЗАД</span>
@@ -479,11 +480,11 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
         )}
 
         <Button
-          variant="primary"
-          size={getButtonSize()}
-          onClick={handleNext}
-          disabled={!hasAnsweredCurrent}
           className={styles.nextButton}
+          disabled={!hasAnsweredCurrent}
+          size={getButtonSize()}
+          variant="primary"
+          onClick={handleNext}
         >
           {isLastQuestion ? "РЕЗУЛЬТАТ" : "ДАЛІ"}
         </Button>

@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import CartButton from "./CartButton";
 import { CartContext } from "@/context/CartContext";
-import { CartItem } from "@/types/types";
+import type { CartItem } from "@/types/types";
 
 // Mock the Icon component
 jest.mock("@/components/Icon/Icon", () => {

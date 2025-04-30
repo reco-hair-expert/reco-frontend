@@ -8,10 +8,10 @@ jest.mock("@/components/Icon/Icon", () => {
     return (
       <svg
         className={className}
-        data-testid="mock-icon"
         data-name={name}
-        data-stroke={stroke}
         data-size={size}
+        data-stroke={stroke}
+        data-testid="mock-icon"
       />
     );
   };
@@ -39,7 +39,7 @@ describe("InputLabel Component", () => {
 
   it("renders star icon when required is true", () => {
     render(
-      <InputLabel htmlFor="test-input" required>
+      <InputLabel required htmlFor="test-input">
         Test Label
       </InputLabel>
     );

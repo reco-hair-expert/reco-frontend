@@ -21,35 +21,35 @@ const Header = () => {
     >
       <div className="container">
         <div className={styles.content}>
-          <Link href="/" className={styles.logo}>
+          <Link className={styles.logo} href="/">
             <Image
-              src="/images/logo/logo.svg"
+              unoptimized
               alt="Логотип компании"
-              width={64}
+              className={styles.logoImg}
               height={64}
               sizes="(max-width: 768px) 48px, 48px"
-              className={styles.logoImg}
-              unoptimized
+              src="/images/logo/logo.svg"
+              width={64}
             />
           </Link>
 
           <NavBar className={styles.navBar}>
             <NavButtons
+              buttons={navigationButtons}
               className={styles.navBarBtns}
               labels={navigationButtons.map((button) => button.title)}
-              buttons={navigationButtons}
             />
           </NavBar>
 
           <div className={styles.active_btns}>
             <Link
-              href={`tel:${phoneNumber}`}
-              className={styles.call_btn}
               aria-label="Call"
+              className={styles.call_btn}
+              href={`tel:${phoneNumber}`}
             >
               <CallButton phoneNumber={phoneNumber} />
             </Link>
-            <Link href="/cart" className={styles.cart_btn} aria-label="Cart">
+            <Link aria-label="Cart" className={styles.cart_btn} href="/cart">
               <CartButton cart={[]} />
             </Link>
           </div>

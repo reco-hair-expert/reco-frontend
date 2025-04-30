@@ -6,7 +6,7 @@ import ButtonArrow from "./ArowButton";
 jest.mock("../Icon/Icon", () => {
   return ({ name, size, fill, stroke, className }: any) => {
     return (
-      <div data-testid={name} className={className}>
+      <div className={className} data-testid={name}>
         Icon
       </div>
     );
@@ -32,7 +32,7 @@ describe("ButtonArrow Component", () => {
 
   it("applies custom className", () => {
     const customClass = "custom-class";
-    render(<ButtonArrow icon="left" className={customClass} />);
+    render(<ButtonArrow className={customClass} icon="left" />);
     const button = screen.getByRole("button");
     expect(button).toHaveClass(customClass);
   });

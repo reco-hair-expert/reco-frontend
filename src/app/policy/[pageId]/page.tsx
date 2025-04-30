@@ -23,7 +23,7 @@ export default function InfoPage({ params }: InfoPageProps) {
     <div className="container">
       <div className={styles.policyContainer}>
         <div className={styles.mainContent}>
-          <InfoSection title={pageData.title} content={pageData.content} />
+          <InfoSection content={pageData.content} title={pageData.title} />
         </div>
         <aside className={styles.sidebar}>
           <h3>Другие страницы</h3>
@@ -35,8 +35,8 @@ export default function InfoPage({ params }: InfoPageProps) {
               return (
                 <li key={page.id}>
                   <Link
-                    href={linkPath}
                     className={isActive ? styles.activeLink : ""}
+                    href={linkPath}
                   >
                     {page.title}
                   </Link>
