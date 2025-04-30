@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Product } from "@/types/types";
+import type { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
 import styles from "./ProductCard.module.scss";
 import HighlightText from "../HighLightText/HighLightText";
@@ -99,28 +99,28 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
         key: product.id,
         content: (
           <div
-            className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
             key={index}
+            className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
           >
             <Image
-              src={product.photo}
               alt={product.name}
-              width={300}
-              height={300}
-              quality={80}
-              placeholder="blur"
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCD/2wBDARUXFy4eHhs4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OD/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className={styles.productImage}
+              height={300}
+              placeholder="blur"
+              quality={80}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              src={product.photo}
+              width={300}
             />
             {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
             {product.badgeInfo && (
               <Link href={`/${product._id}`}>
                 <div className={styles.badgeInfo}>
                   <Icon
+                    fill="none"
                     name="icon-info"
                     size={isMobile ? 24 : 28}
-                    fill="none"
                     stroke={styles.yellowColor}
                   />
                 </div>
@@ -130,26 +130,26 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
               <div className={styles.buttonPlace}>
                 {isMobile ? (
                   <Button
+                    className={styles.addToCart}
+                    disabled={!selectedSize}
                     size="m"
                     variant="primary"
-                    className={styles.addToCart}
                     onClick={handleAddToCart}
-                    disabled={!selectedSize}
                   >
                     ДОДАТИ В КОШИК
                   </Button>
                 ) : (
                   <Link href={`/catalog`}>
                     <Button
-                      variant="secondary"
-                      size="l"
                       className={styles.moreButton}
+                      size="l"
+                      variant="secondary"
                     >
                       <div className={styles.iconContainer}>
                         <Icon
+                          fill="white"
                           name="icon-arrow-up-right2"
                           size={24}
-                          fill="white"
                           stroke="none"
                         />
                       </div>
@@ -184,21 +184,21 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
       <div className={styles.card}>
         <div className={styles.carousel}>
           <Carousel
-            slides={slides}
+            animationConfig={{ tension: 100, friction: 20 }}
             goToSlide={currentIndex}
             offsetRadius={offsetRadius}
             showNavigation={false}
-            animationConfig={{ tension: 100, friction: 20 }}
+            slides={slides}
           />
           <ButtonArrow
+            className={styles.arrowLeft}
             icon="left"
             onClick={handlePrev}
-            className={styles.arrowLeft}
           />
           <ButtonArrow
+            className={styles.arrowRight}
             icon="right"
             onClick={handleNext}
-            className={styles.arrowRight}
           />
         </div>
         <div className={styles.info}>
@@ -209,8 +209,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
             <>
               {renderPrice()}
               <ProductSizeSelector
-                sizes={currentProduct.sizes}
                 selectedSize={selectedSize}
+                sizes={currentProduct.sizes}
                 onSizeChange={setSelectedSize}
               />
               {renderDescription()}
@@ -220,8 +220,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
               {renderDescription()}
               {renderPrice()}
               <ProductSizeSelector
-                sizes={currentProduct.sizes}
                 selectedSize={selectedSize}
+                sizes={currentProduct.sizes}
                 onSizeChange={setSelectedSize}
               />
             </>
@@ -229,11 +229,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
 
           {!isMobile && (
             <Button
+              className={styles.addToCart}
+              disabled={!selectedSize}
               size="m"
               variant="primary"
-              className={styles.addToCart}
               onClick={handleAddToCart}
-              disabled={!selectedSize}
             >
               ДОДАТИ В КОШИК
             </Button>

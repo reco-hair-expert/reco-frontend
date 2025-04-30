@@ -1,5 +1,5 @@
 "use client";
-import { CartItem } from "@/types/types";
+import type { CartItem } from "@/types/types";
 import { useCart } from "@/context/CartContext";
 import HighlightText from "@/components/HighLightText/HighLightText";
 import styles from "./CartItems.module.scss";
@@ -47,10 +47,10 @@ const CartItems = () => {
             >
               <div className={styles.imageContainer}>
                 <Image
-                  src={item.product.photo}
                   alt={item.product.name}
-                  width={148}
                   height={148}
+                  src={item.product.photo}
+                  width={148}
                 />
               </div>
               <div className={styles.infoContainer}>
@@ -58,10 +58,10 @@ const CartItems = () => {
                   <p className={styles.title}>
                     {item.product.name}{" "}
                     <button
+                      className={styles.removeItem}
                       onClick={() =>
                         removeFromCart(item.product.id, item.size || "")
                       }
-                      className={styles.removeItem}
                     >
                       X
                     </button>
@@ -87,15 +87,15 @@ const CartItems = () => {
                   )}
                   <div className={styles.quantityControl}>
                     <button
-                      onClick={() => handleDecreaseQuantity(item)}
                       className={styles.quantityButton}
+                      onClick={() => handleDecreaseQuantity(item)}
                     >
                       -
                     </button>
                     <p>{item.quantity || 1}</p>
                     <button
-                      onClick={() => handleIncreaseQuantity(item)}
                       className={styles.quantityButton}
+                      onClick={() => handleIncreaseQuantity(item)}
                     >
                       +
                     </button>

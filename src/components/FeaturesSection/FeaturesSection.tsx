@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { FeaturesSectionProps } from "./types/FeaturesSection.types";
+import type { FeaturesSectionProps } from "./types/FeaturesSection.types";
 import Image from "next/image";
 import styles from "./FeaturesSection.module.scss";
 import HighlightText from "../HighLightText/HighLightText";
@@ -28,9 +28,9 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
 
         <div className={styles.featuresImgContainer}>
           <Image
-            src="/images/sections/features/recoil.png"
-            alt="recoil"
             fill
+            alt="recoil"
+            src="/images/sections/features/recoil.png"
             style={{ objectFit: "contain" }}
           />
         </div>

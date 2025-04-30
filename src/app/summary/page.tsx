@@ -2,7 +2,7 @@ import styles from "./SummaryPage.module.scss";
 import SummarySection from "@/components/SummarySection/SummarySection";
 import SummaryForm from "@/components/SummaryForm/SummaryForm";
 import "@/styles/index.scss";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hairexpertreco.com"),

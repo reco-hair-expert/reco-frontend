@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./CartSummary.module.scss";
 import { useCart } from "@/context/CartContext";
-import { CartItem } from "@/types/types";
+import type { CartItem } from "@/types/types";
 
 const CartSummary = () => {
   const { cartItems } = useCart();
@@ -46,7 +46,7 @@ const CartSummary = () => {
           <h3 className={styles.deliveryHeader}> Доставка</h3>
           <div className={styles.deliveryOptions}>
             <div className={styles.deliveryOption}>
-              <input type="radio" name="delivery" id="delivery-standard" />
+              <input id="delivery-standard" name="delivery" type="radio" />
               <label
                 className={styles.deliveryOptionDescription}
                 htmlFor="delivery-standard"
@@ -55,7 +55,7 @@ const CartSummary = () => {
               </label>
             </div>
             <div className={styles.deliveryOption}>
-              <input type="radio" name="delivery" id="delivery-express" />
+              <input id="delivery-express" name="delivery" type="radio" />
               <label
                 className={styles.deliveryOptionDescription}
                 htmlFor="delivery-express"

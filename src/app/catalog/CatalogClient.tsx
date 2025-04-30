@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import styles from "./CatalogPage.module.scss";
-import { Product } from "@/types/types";
+import type { Product } from "@/types/types";
 import { fetchProducts } from "@/services/products";
 
 const ProductCard = dynamic(
@@ -93,30 +93,30 @@ export const CatalogClient = () => {
   return (
     <>
       <script
-        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        type="application/ld+json"
       />
 
       <main>
-        <section className="container" aria-label="Новинки">
+        <section aria-label="Новинки" className="container">
           <div className={styles.newProducts}>
             <h1 className={styles.title}>НОВИНКИ</h1>
             <ProductCard products={products} showButton={false} />
           </div>
         </section>
 
-        <section className="container" aria-label="Все товары">
+        <section aria-label="Все товары" className="container">
           <h2 className={styles.title}>Всі товари</h2>
           <nav aria-label="Навигация по товарам">
             <ul className={styles.productsList}>
-              <CatalogCardList products={products} perRow={4} />
+              <CatalogCardList perRow={4} products={products} />
             </ul>
           </nav>
         </section>
 
         <section
-          className={`container ${styles.recommendationContainer}`}
           aria-label="Рекомендации"
+          className={`container ${styles.recommendationContainer}`}
         >
           {/* <div className={styles.recommendationHeader}>
             <h2 className={styles.title}>Рекомендації</h2>

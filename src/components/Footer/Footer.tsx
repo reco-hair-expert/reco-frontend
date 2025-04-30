@@ -1,5 +1,5 @@
 import styles from "./Footer.module.scss";
-import { FooterProps } from "./types/Footer.types";
+import type { FooterProps } from "./types/Footer.types";
 import Image from "next/image";
 import Link from "next/link";
 import AddressForm from "../AddressForm/AddressForm";
@@ -17,13 +17,13 @@ const Footer = ({ className }: FooterProps) => {
       <div className={`${combinedClass} ${styles.footer}`}>
         <div className={styles.footer_container}>
           <div className={styles.logo}>
-            <Link href="/" className={styles.linkLogo}>
+            <Link className={styles.linkLogo} href="/">
               <Image
-                src="/images/logo/logo.svg"
                 alt="Логотип компанії"
-                width={64}
                 height={64}
                 sizes="(max-width: 768px) 48px, 48px"
+                src="/images/logo/logo.svg"
+                width={64}
               />
             </Link>
           </div>
@@ -31,8 +31,8 @@ const Footer = ({ className }: FooterProps) => {
           <div className={styles.addressForm}>
             <AddressForm
               address={address}
-              phoneNumber={phoneNumber}
               email={email}
+              phoneNumber={phoneNumber}
             />
           </div>
 

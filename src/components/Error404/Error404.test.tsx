@@ -21,7 +21,7 @@ jest.mock("next/link", () => {
 jest.mock("../Icon/Icon", () => {
   return ({ name, className }: any) => {
     return (
-      <div data-testid={`icon-${name}`} className={className}>
+      <div className={className} data-testid={`icon-${name}`}>
         Icon
       </div>
     );
@@ -33,9 +33,9 @@ jest.mock("../BackgroundCircles/BackgroundCircles", () => {
   return ({ className, "aria-hidden": ariaHidden }: any) => {
     return (
       <div
-        data-testid="background-circles"
-        className={className}
         aria-hidden={ariaHidden}
+        className={className}
+        data-testid="background-circles"
       />
     );
   };

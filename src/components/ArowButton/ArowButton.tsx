@@ -1,6 +1,6 @@
 import styles from "./ArowButton.module.scss";
 import React from "react";
-import { ButtonArrowProps } from "./types/ArowButton";
+import type { ButtonArrowProps } from "./types/ArowButton";
 import Icon from "../Icon/Icon";
 
 const ButtonArrow: React.FC<ButtonArrowProps> = ({
@@ -17,19 +17,19 @@ const ButtonArrow: React.FC<ButtonArrowProps> = ({
     >
       {icon === "left" ? (
         <Icon
+          className={styles.arrowLeft}
+          fill="black"
           name="icon-arrow-right2"
           size={30}
-          fill="black"
           stroke="none"
-          className={styles.arrowLeft}
         />
       ) : (
         <Icon
+          className={styles.arrowRight}
+          fill=" black"
           name="icon-arrow-right2"
           size={30}
-          fill=" black"
           stroke="none"
-          className={styles.arrowRight}
         />
       )}
     </button>

@@ -20,7 +20,7 @@ jest.mock("../Button/Button", () => {
     variant: string;
     size: string;
   }) => (
-    <button data-variant={variant} data-size={size}>
+    <button data-size={size} data-variant={variant}>
       {children}
     </button>
   );
@@ -63,8 +63,8 @@ describe("NavButtons Component", () => {
     const { container } = render(
       <NavButtons
         buttons={mockButtons}
-        labels={mockLabels}
         className={customClass}
+        labels={mockLabels}
       />
     );
     const navButtonsContainer = container.firstChild;

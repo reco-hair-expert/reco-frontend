@@ -20,7 +20,7 @@ jest.mock("../HighLightText/HighLightText", () => {
 // Mock the BackgroundCircles component
 jest.mock("../BackgroundCircles/BackgroundCircles", () => {
   return ({ className }: any) => {
-    return <div data-testid="background-circles" className={className} />;
+    return <div className={className} data-testid="background-circles" />;
   };
 });
 

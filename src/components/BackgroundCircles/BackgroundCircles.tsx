@@ -1,8 +1,8 @@
 import styles from "./BackgroundCircles.module.scss";
-import { BackgroundCirclesProps } from "./types/BackgroundCircles.types";
+import type { BackgroundCirclesProps } from "./types/BackgroundCircles.types";
 
 const BackgroundCircles = ({ className }: BackgroundCirclesProps) => {
-  return <div className={`${styles.circles} ${className}`}></div>;
+  return <div className={`${styles.circles} ${className}`} />;
 };
 
 export default BackgroundCircles;

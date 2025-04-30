@@ -1,5 +1,5 @@
 import styles from "./AddressForm.module.scss";
-import { AddressFormProps } from "./types/AddressForm.types";
+import type { AddressFormProps } from "./types/AddressForm.types";
 import Image from "next/image";
 
 const PAYMENT_ICON = {
@@ -33,11 +33,11 @@ const AddressForm = ({
 
       <div className={styles.payment_icon_container}>
         <Image
-          src={PAYMENT_ICON.src}
           alt={PAYMENT_ICON.alt}
           className={styles.payment_icon}
-          width={PAYMENT_ICON.width}
           height={PAYMENT_ICON.height}
+          src={PAYMENT_ICON.src}
+          width={PAYMENT_ICON.width}
         />
       </div>
     </div>

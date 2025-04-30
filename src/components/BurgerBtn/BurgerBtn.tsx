@@ -38,14 +38,14 @@ const BurgerBtn = ({ "aria-label": ariaLabel }: BurgerBtnProps) => {
   return (
     <>
       <button
-        type="button"
-        className={classNames(styles.burgerBtn, { [styles.open]: modalIsOpen })}
-        onClick={handleClick}
         aria-label={ariaLabel}
+        className={classNames(styles.burgerBtn, { [styles.open]: modalIsOpen })}
+        type="button"
+        onClick={handleClick}
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        <span />
+        <span />
+        <span />
       </button>
       {isClient &&
         createPortal(

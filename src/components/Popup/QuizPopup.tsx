@@ -34,19 +34,19 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ onClose, isVisible }) => {
           Лише 6 питань – і ви дізнаєтеся свій ідеальний догляд!
         </p>
         <div className={styles.buttonWrapper}>
-          <Link href="/quiz" passHref>
+          <Link passHref href="/quiz">
             <Button
+              className={styles.button}
               size={getButtonSize()}
               variant="primary"
-              className={styles.button}
             >
               <div className={styles.iconContainer}>
                 <Icon
+                  className={styles.ButtonIcon}
+                  fill="white"
                   name="icon-arrow-up-right2"
                   size={isMobile ? 20 : 30}
-                  fill="white"
                   stroke="none"
-                  className={styles.ButtonIcon}
                 />
               </div>
               <span className={styles.button__text}>

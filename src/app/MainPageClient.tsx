@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState, Suspense } from "react";
 import dynamic from "next/dynamic";
-import { Product } from "@/types/types";
+import type { Product } from "@/types/types";
 import { fetchProducts } from "@/services/products";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection/FeaturesSection";
@@ -97,7 +97,7 @@ export const MainPageClient = () => {
       </Suspense> */}
 
       {isPopupOpen && (
-        <QuizPopup onClose={handleClosePopup} isVisible={isPopupOpen} />
+        <QuizPopup isVisible={isPopupOpen} onClose={handleClosePopup} />
       )}
     </>
   );

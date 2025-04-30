@@ -3,7 +3,7 @@ import Footer from "@/components/Footer/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { Noto_Sans } from "next/font/google";
 import "@/styles/reset.scss";
-import { Metadata, Viewport } from "next";
+import type { Metadata, Viewport } from "next";
 
 const notoSans = Noto_Sans({
   subsets: ["cyrillic", "latin"],

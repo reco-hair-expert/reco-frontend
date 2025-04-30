@@ -1,4 +1,4 @@
-import { SocialMediaHubProps } from "./types/SocialMediaHub.types";
+import type { SocialMediaHubProps } from "./types/SocialMediaHub.types";
 import styles from "./SocialMediaHub.module.scss";
 
 const SocialMediaHub = ({

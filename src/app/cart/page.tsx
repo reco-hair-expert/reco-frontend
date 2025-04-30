@@ -4,7 +4,7 @@ import CartItems from "@/components/CartItems/CartItems";
 import CartSummary from "@/components/CartSummary/CartSummary";
 import HighlightText from "@/components/HighLightText/HighLightText";
 import "@/styles/index.scss";
-import { Metadata } from "next";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://hairexpertreco.com"),

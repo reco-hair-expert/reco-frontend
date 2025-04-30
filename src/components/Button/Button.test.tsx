@@ -47,7 +47,7 @@ describe("Button Component", () => {
   it("does not handle click events when disabled", () => {
     const handleClick = jest.fn();
     render(
-      <Button onClick={handleClick} disabled>
+      <Button disabled onClick={handleClick}>
         Click me
       </Button>
     );

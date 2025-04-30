@@ -9,28 +9,28 @@ const Error404 = () => {
   return (
     <main className={styles.container} role="main">
       <BackgroundCircles
-        className={styles.backgroundCirclesLeft}
         aria-hidden="true"
+        className={styles.backgroundCirclesLeft}
       />
 
       <div className={styles.placeholder}>
-        <div className={styles.title} role="heading" aria-level={1}>
-          <span className={styles.four} aria-hidden="true">
+        <div aria-level={1} className={styles.title} role="heading">
+          <span aria-hidden="true" className={styles.four}>
             4
           </span>
           <picture>
             <Image
-              src="/images/sections/error/reco-every_day-1x.png"
+              priority
               alt="RECO продукція"
               className={styles.image}
-              width={170}
               height={170}
-              priority
               quality={90}
               sizes="(max-width: 768px) 100px, 170px"
+              src="/images/sections/error/reco-every_day-1x.png"
+              width={170}
             />
           </picture>
-          <span className={styles.four} aria-hidden="true">
+          <span aria-hidden="true" className={styles.four}>
             4
           </span>
         </div>
@@ -38,26 +38,26 @@ const Error404 = () => {
           Ой! Ця сторінка явно переживає день неслухняного волосся!
         </p>
         <nav className={styles.btnContainer}>
-          <Link href="/" className={styles.homeBtn}>
+          <Link className={styles.homeBtn} href="/">
             <div className={styles.iconContainer}>
               <Icon
-                name="icon-arrow-up-right2"
-                fill="white"
-                stroke="none"
-                className={styles.homeBtnIcon}
                 aria-hidden="true"
+                className={styles.homeBtnIcon}
+                fill="white"
+                name="icon-arrow-up-right2"
+                stroke="none"
               />
             </div>
             <span className={styles.homeBtnText}>Назад до головної</span>
           </Link>
-          <Link href="/catalog" className={styles.catalogBtn}>
+          <Link className={styles.catalogBtn} href="/catalog">
             каталог
           </Link>
         </nav>
       </div>
       <BackgroundCircles
-        className={styles.backgroundCirclesRight}
         aria-hidden="true"
+        className={styles.backgroundCirclesRight}
       />
     </main>
   );

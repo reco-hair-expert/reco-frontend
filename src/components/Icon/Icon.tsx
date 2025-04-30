@@ -1,5 +1,5 @@
 import React from "react";
-import { IconProps } from "./types/Icon.types";
+import type { IconProps } from "./types/Icon.types";
 
 const Icon: React.FC<IconProps> = ({
   name,
@@ -11,10 +11,10 @@ const Icon: React.FC<IconProps> = ({
   return (
     <svg
       className={className}
-      width={size}
-      height={size}
       fill={fill}
+      height={size}
       stroke={stroke}
+      width={size}
     >
       <use href={`/sprite.svg#${name}`} />
     </svg>

@@ -1,13 +1,13 @@
 "use client";
 
 import React from "react";
-import { CartButtonProps } from "./types/CartButton.types";
+import type { CartButtonProps } from "./types/CartButton.types";
 import styles from "./CartButton.module.scss";
 import classNames from "classnames";
 import Icon from "@/components/Icon/Icon";
 import { useContext, useMemo, useCallback } from "react";
 import { CartContext } from "@/context/CartContext";
-import { CartItem } from "@/types/types";
+import type { CartItem } from "@/types/types";
 
 const CartButton = ({
   className,
@@ -34,12 +34,12 @@ const CartButton = ({
 
   return (
     <button
-      className={classes}
-      onClick={handleClick}
-      disabled={totalItems === 0}
       aria-label={ariaLabel}
+      className={classes}
+      disabled={totalItems === 0}
+      onClick={handleClick}
     >
-      <Icon name="icon-cart" stroke="black" size={25} className={styles.icon} />
+      <Icon className={styles.icon} name="icon-cart" size={25} stroke="black" />
       {totalItems > 0 && <span className={styles.badge}>{totalItems}</span>}
     </button>
   );

@@ -7,9 +7,9 @@ jest.mock("../CatalogCard/CatalogCard", () => {
   return function MockCatalogCard({ product, perRow }: any) {
     return (
       <div
-        data-testid="catalog-card"
-        data-product-id={product.id}
         data-per-row={perRow}
+        data-product-id={product.id}
+        data-testid="catalog-card"
       >
         {product.name}
       </div>
@@ -49,14 +49,14 @@ describe("CatalogCardList Component", () => {
   ];
 
   it("renders the correct number of catalog cards", () => {
-    render(<CatalogCardList products={mockProducts} perRow={3} />);
+    render(<CatalogCardList perRow={3} products={mockProducts} />);
 
     const cards = screen.getAllByTestId("catalog-card");
     expect(cards).toHaveLength(mockProducts.length);
   });
 
   it("passes the correct perRow prop to each card", () => {
-    render(<CatalogCardList products={mockProducts} perRow={4} />);
+    render(<CatalogCardList perRow={4} products={mockProducts} />);
 
     const cards = screen.getAllByTestId("catalog-card");
     cards.forEach((card) => {
@@ -65,7 +65,7 @@ describe("CatalogCardList Component", () => {
   });
 
   it("passes the correct product data to each card", () => {
-    render(<CatalogCardList products={mockProducts} perRow={3} />);
+    render(<CatalogCardList perRow={3} products={mockProducts} />);
 
     const cards = screen.getAllByTestId("catalog-card");
 
@@ -77,7 +77,7 @@ describe("CatalogCardList Component", () => {
   });
 
   it("renders an empty list when no products are provided", () => {
-    render(<CatalogCardList products={[]} perRow={3} />);
+    render(<CatalogCardList perRow={3} products={[]} />);
 
     const cards = screen.queryAllByTestId("catalog-card");
     expect(cards).toHaveLength(0);

@@ -22,10 +22,10 @@ const ProductSizeSelector: React.FC<ProductSizeSelectorProps> = ({ sizes, select
         {sizes.map(({ size }) => (
           <label key={size} className={selectedSize === size ? styles.filled : ''}>
             <input
-              type="radio"
-              name="size"
-              value={size}
               checked={selectedSize === size}
+              name="size"
+              type="radio"
+              value={size}
               onChange={() => onSizeChange(size)}
             />
             <span>{size}</span>

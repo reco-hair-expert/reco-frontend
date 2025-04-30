@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import { Product } from "@/types/types";
+import type { Product } from "@/types/types";
 import { fetchProductById } from "@/services/products";
 import SingleProductCard from "@/components/SingleProductCard/SingleProductCard";
 

@@ -1,11 +1,12 @@
 "use client";
 
-import { FormInput } from "./types/FeedbackForm.types";
+import type { FormInput } from "./types/FeedbackForm.types";
 
 import styles from "./FeedbackForm.module.scss";
 import Icon from "@/components/Icon/Icon";
 import Button from "@/components/Button/Button";
-import { useForm, SubmitHandler } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import handlePhoneChange from "@/utils/handlePhoneChange";
 import InputLabel from "@/components/InputLabel/InputLabel";
 import useDeviceDetection from "@/context/useDeviceDetection";
@@ -33,7 +34,7 @@ const FeedbackForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.feedbackForm}>
+    <form className={styles.feedbackForm} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.feedbackInputContainer}>
         <InputLabel htmlFor="name" required={true}>
           Ім&#39;я
@@ -47,9 +48,9 @@ const FeedbackForm = () => {
               message: "Імʼя повинно містити тільки букви"
             }
           })}
-          type="text"
-          placeholder="Введіть ваше імʼя"
           className={`${styles.feedbackInput} ${errors.name ? styles.inputError : ""}`}
+          placeholder="Введіть ваше імʼя"
+          type="text"
         />
 
         {errors.name && (
@@ -72,17 +73,17 @@ const FeedbackForm = () => {
                 message: "Введіть повний номер"
               }
             })}
-            type="tel"
             className={`${styles.feedbackInput} ${errors.phoneNumber ? styles.inputError : ""}`}
             placeholder="+380 __ ___ __ __"
+            type="tel"
             onChange={(event) => handlePhoneChange(event, setValue)}
             onFocus={(event) => handlePhoneChange(event, setValue)}
           />
           <Icon
-            name="icon-phone"
-            color="none"
-            stroke="#96989B"
             className={styles.inputIconPhone}
+            color="none"
+            name="icon-phone"
+            stroke="#96989B"
           />
         </div>
 
@@ -93,17 +94,17 @@ const FeedbackForm = () => {
 
       <div className={styles.buttonContainer}>
         <Button
-          variant="primary"
-          size={getButtonSize()}
           className="feedbackButton"
+          size={getButtonSize()}
+          variant="primary"
         >
           <div className={styles.iconContainer}>
             <Icon
+              className={styles.feedbackButtonIcon}
+              fill="white"
               name="icon-arrow-up-right2"
               size={isMobile ? 20 : 30}
-              fill="white"
               stroke="none"
-              className={styles.feedbackButtonIcon}
             />
           </div>
           <span className={styles.feedbackButtonText}> НАДІСЛАТИ</span>

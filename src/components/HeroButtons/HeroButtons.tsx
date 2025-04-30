@@ -17,17 +17,17 @@ const HeroButtons = () => {
     <div className={styles.buttonBar}>
       <Link href="/catalog">
         <Button
+          className={styles.button}
           size={getButtonSize()}
           variant="primary"
-          className={styles.button}
         >
           <div className={styles.iconContainer}>
             <Icon
+              className={styles.ButtonIcon}
+              fill="white"
               name="icon-arrow-up-right2"
               size={30}
-              fill="white"
               stroke="none"
-              className={styles.ButtonIcon}
             />
           </div>
           <span className={styles.button__text}>ЗАМОВИТИ</span>
@@ -37,11 +37,11 @@ const HeroButtons = () => {
         <Button size={getButtonSize()} variant="secondary">
           <div className={styles.secondСontainer}>
             <Icon
+              className={styles.SecondIcon}
+              fill="white"
               name="icon-arrow-up-right2"
               size={getButtonSize() === "s" ? 16 : 30}
-              fill="white"
               stroke="none"
-              className={styles.SecondIcon}
             />
           </div>
           <span className={styles.moreInfoText}>ПРО НАС</span>

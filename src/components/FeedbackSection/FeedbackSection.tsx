@@ -9,10 +9,10 @@ const FeedbackSection = () => {
     <section className="container" data-testid="feedback-section">
       <div className={styles.feedbackSection}>
         <div className={styles.formCirclesContainer}>
-          <div className={styles.formCircles}></div>
+          <div className={styles.formCircles} />
         </div>
         <BackgroundCircles className={styles.backgroundCircles} />
-        <div className={styles.feedbackArrow}></div>
+        <div className={styles.feedbackArrow} />
         <h2 className={styles.feedbackTitle}>
           Залиште свої дані, щоб отримати більше інформації
         </h2>
@@ -20,10 +20,10 @@ const FeedbackSection = () => {
           <FeedbackForm />
           <div className={styles.feedbackImgContainer}>
             <Image
-              src="/images/sections/feedback/recoil.png"
               alt="recoil"
-              fill={true}
               className={styles.feedbackImg}
+              fill={true}
+              src="/images/sections/feedback/recoil.png"
             />
           </div>
         </div>

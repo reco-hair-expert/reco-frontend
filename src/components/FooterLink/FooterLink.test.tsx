@@ -6,7 +6,7 @@ import FooterLinks from "./FooterLink";
 jest.mock("next/link", () => {
   return ({ children, href, className, ariaLabel }: any) => {
     return (
-      <a href={href} className={className} aria-label={ariaLabel || children}>
+      <a aria-label={ariaLabel || children} className={className} href={href}>
         {children}
       </a>
     );
