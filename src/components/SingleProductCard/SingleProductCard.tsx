@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Product } from "@/types/types";
+import type { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
 import styles from "./SingleProductCard.module.scss";
 import Button from "../Button/Button";
@@ -51,16 +51,23 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
 
   const renderAdditionalInfo = () => (
     <div className={styles.additionalInfo}>
-      <p className={styles.descriptionText}>{product.description}</p>
-      <Collapsible trigger="Застосування" className={styles.collapsibleTrigger}>
+        <p className={styles.descriptionText}>{product.description}</p>
+      <Collapsible
+        className={styles.collapsibleTrigger}
+        trigger="Застосування"
+        
+      >
         <p className={styles.infoItem}>{product.application}</p>
       </Collapsible>
-      <Collapsible trigger="Склад" className={styles.collapsibleTrigger}>
+      <Collapsible className={styles.collapsibleTrigger} trigger="Склад">
         <p className={styles.infoItem}>
           <strong>Склад:</strong> {product.composition}
         </p>
       </Collapsible>
-      <Collapsible trigger="Рекомендації" className={styles.collapsibleTrigger}>
+      <Collapsible
+        className={styles.collapsibleTrigger}
+        trigger="Рекомендації"
+      >
         <p className={styles.infoItem}>
           <strong>Рекомендації:</strong> {product.recommendation}
         </p>
@@ -86,12 +93,12 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
     <div className={styles.card}>
       <div className={styles.imageContainer}>
         <Image
-          src={product.photo}
           alt={product.name}
-          width={500}
+          className={styles.productImage}
           height={500}
           quality={80}
-          className={styles.productImage}
+          src={product.photo}
+          width={500}
         />
         {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
       </div>
@@ -106,8 +113,8 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
         {renderAdditionalInfo()}
         <div className={styles.sizeAndPrice}>
           <ProductSizeSelector
-            sizes={product.sizes || []}
             selectedSize={selectedSize}
+            sizes={product.sizes || []}
             onSizeChange={handleSizeChange}
           />
           {renderPrice()}
