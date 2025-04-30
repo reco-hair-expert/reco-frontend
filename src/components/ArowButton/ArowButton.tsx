@@ -1,13 +1,14 @@
 import styles from "./ArowButton.module.scss";
-import { ButtonArrowProps } from "./types/ArowButton";
+import React from "react";
+import type { ButtonArrowProps } from "./types/ArowButton";
 import Icon from "../Icon/Icon";
 
-const ButtonArrow = ({
+const ButtonArrow: React.FC<ButtonArrowProps> = ({
   className,
   icon,
   onClick,
   onTouchEnd
-}: ButtonArrowProps) => {
+}) => {
   return (
     <button
       className={`${styles.buttonArrow} ${className}`}
@@ -16,19 +17,19 @@ const ButtonArrow = ({
     >
       {icon === "left" ? (
         <Icon
+          className={styles.arrowLeft}
+          fill="black"
           name="icon-arrow-right2"
           size={30}
-          fill="black"
           stroke="none"
-          className={styles.arrowLeft}
         />
       ) : (
         <Icon
+          className={styles.arrowRight}
+          fill=" black"
           name="icon-arrow-right2"
           size={30}
-          fill=" black"
           stroke="none"
-          className={styles.arrowRight}
         />
       )}
     </button>
