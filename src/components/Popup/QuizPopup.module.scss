@@ -74,7 +74,7 @@
 .button__text {
   padding: 1rem;
   color: $black-color;
-  margin-right: 25px;
+  margin-right: 45px;
   font-size: 16px;
   text-decoration: none;
   text-align: center;
@@ -90,7 +90,7 @@
   @media (max-width: $breakpoint-mobile) {
     padding: 1rem;
     font-size: 12px;
-    margin-left: -5px;
+    margin-left: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
