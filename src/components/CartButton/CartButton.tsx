@@ -34,6 +34,7 @@ const CartButton = ({
 
   return (
     <button
+      id="cart-icon"
       aria-label={ariaLabel}
       className={classes}
       disabled={totalItems === 0}
