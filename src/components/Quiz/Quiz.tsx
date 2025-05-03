@@ -14,6 +14,10 @@ import type { Product } from "@/types/types";
 import { useRouter } from "next/navigation";
 import { useCartContext } from "@/hooks/useCartContext";
 import Link from "next/link";
+import SuccessBlock from "./SuccessBlock";
+import SummaryForm from "../SummaryForm/SummaryForm";
+import SummarySection from "../SummarySection/SummarySection";
+import PhoneConsultationForm from "./PhoneConsultationForm";
 
 type CartItem = {
   id: number;
@@ -291,6 +295,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   if (showResults) {
     return (
       <div className={styles.resultsContainer}>
+        <SuccessBlock />
+        <PhoneConsultationForm />
+
         <h2 className={styles.resultsTitle}>Рекомендації</h2>
 
         {showSizeWarning && (
