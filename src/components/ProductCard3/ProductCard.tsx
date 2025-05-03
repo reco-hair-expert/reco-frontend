@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import type { Product } from "@/types/types";
 import { useCartContext } from "@/hooks/useCartContext";
+import { useFlyingImage } from "@/hooks/useFlyingImage";
 import styles from "./ProductCard.module.scss";
 import HighlightText from "../HighLightText/HighLightText";
 import Button from "../Button/Button";
@@ -10,7 +11,7 @@ import Image from "next/image";
 import Carousel from "react-spring-3d-carousel";
 import { useSwipeable } from "react-swipeable";
 import Link from "next/link";
-import ProductSizeSelector from "../ProductSizeSelector/ProductSizeSelector"; // Импортируем компонент
+import ProductSizeSelector from "../ProductSizeSelector/ProductSizeSelector"; 
 
 interface ProductCardProps {
   products: Product[];
@@ -25,6 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
   );
   const [offsetRadius, setOffsetRadius] = useState(2);
   const { addToCart } = useCartContext();
+  const { flyToCart } = useFlyingImage();
 
   const currentProduct = products[currentIndex];
 
@@ -72,7 +74,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(currentProduct, selectedSize);
-  }, [selectedSize, currentProduct, addToCart, products?.length]);
+    
+    // Get the image element's position
+    const imageElement = document.querySelector(`.${styles.slide}.${styles.active} .${styles.productImage}`);
+    if (imageElement) {
+      const rect = imageElement.getBoundingClientRect();
+      const imageSrc = typeof currentProduct.photo === 'string' 
+        ? currentProduct.photo 
+        : currentProduct.photo.src;
+      flyToCart({ imageSrc, fromRect: rect });
+    }
+  }, [selectedSize, currentProduct, addToCart, products?.length, flyToCart]);
 
   const renderDescription = () => (
     <div className={styles.descriptionContainer}>
@@ -104,7 +116,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
           >
             <Image
               alt={product.name}
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCD/2wBDARUXFy4eHhs4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OD/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCD/2wBDARUXFy4eHhs4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OD/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               className={styles.productImage}
               height={300}
               placeholder="blur"

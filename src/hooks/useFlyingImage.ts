@@ -30,12 +30,17 @@ export function useFlyingImage() {
 
     // Создаем аудио элемент
     const audio = new Audio();
-    const audioPath = `${window.location.origin}/sound/cponk.mp3`;
+    const audioPath = `/sound/cponk.mp3`;
     audio.src = audioPath;
     audio.preload = "auto";
     
     audio.addEventListener('canplaythrough', () => {
+      console.log('Audio is ready to play');
       audioRef.current = audio;
+    });
+
+    audio.addEventListener('error', (e) => {
+      console.error('Audio loading error:', e);
     });
 
     return () => {
@@ -59,19 +64,28 @@ export function useFlyingImage() {
   }, []);
 
   const playSound = useCallback(() => {
-    if (!audioRef.current) return;
+    if (!audioRef.current) {
+      console.log('Audio element not ready');
+      return;
+    }
 
     try {
+      console.log('Attempting to play sound');
       audioRef.current.currentTime = 0;
       const playPromise = audioRef.current.play();
       
       if (playPromise !== undefined) {
-        playPromise.catch(() => {
+        playPromise.catch((error) => {
+          console.error('Playback error:', error);
           const playAudioOnInteraction = () => {
             if (audioRef.current) {
               audioRef.current.play()
                 .then(() => {
+                  console.log('Sound played after interaction');
                   document.removeEventListener('click', playAudioOnInteraction);
+                })
+                .catch((error) => {
+                  console.error('Error playing after interaction:', error);
                 });
             }
           };
