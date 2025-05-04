@@ -1,8 +1,7 @@
 import type { Product } from "@/types/types";
 import reco from "../../public/images/products/recoil.png";
 
-// const NEXT_PUBLIC_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? ""; 
-const NEXT_PUBLIC_API_BASE_URL = "https://reco-backend-two-production.up.railway.app"; 
+const NEXT_PUBLIC_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? ""; 
 
 const fetchOptions = {
   headers: {
@@ -13,7 +12,8 @@ const fetchOptions = {
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${NEXT_PUBLIC_API_BASE_URL}/products`, fetchOptions); // Используем прямой URL
+
+    const response = await fetch(`${NEXT_PUBLIC_API_BASE_URL}/products`, fetchOptions);
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
