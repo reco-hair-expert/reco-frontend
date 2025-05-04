@@ -41,7 +41,7 @@ const PhoneConsultationForm: React.FC = () => {
       <h2 className={styles.title}>
         Запиш номер телефону, щоб отримати консультацію
       </h2>
-      <div className={styles.feedbackArrow} />
+      <div className={styles.Arrow} />
 
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.inputContainer}>
@@ -59,7 +59,7 @@ const PhoneConsultationForm: React.FC = () => {
                   message: "Введіть повний номер"
                 }
               })}
-              className={`${styles.feedbackInput} ${errors.phoneNumber ? styles.inputError : ""}`}
+              className={`${styles.formInput} ${errors.phoneNumber ? styles.inputError : ""}`}
               placeholder="+380 __ ___ __ __"
               type="tel"
               onChange={(event) => handlePhoneChange(event, setValue)}
@@ -96,14 +96,14 @@ const PhoneConsultationForm: React.FC = () => {
             >
               <div className={styles.iconContainer}>
                 <Icon
-                  className={styles.feedbackButtonIcon}
+                  className={styles.formButtonIcon}
                   fill="white"
                   name="icon-arrow-up-right2"
                   size={isMobile ? 20 : 30}
                   stroke="none"
                 />
               </div>
-              <span className={styles.feedbackButtonText}>
+              <span className={styles.formButtonText}>
                 {isMobile ? "КОНСУЛЬТАЦІЯ" : "ОТРИМАТИ КОНСУЛЬТАЦІЮ"}
               </span>{" "}
             </Button>

@@ -13,13 +13,55 @@
   }
 }
 
-@mixin small-mobile {
-  @media (max-width: 480px) {
-    @content;
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1228px;
+  height: auto;
+  min-height: 407px;
+  padding: 60px 54px 44px 104px;
+  border: $main-border;
+  border-radius: 50px;
+  background-color: $grey-color;
+  margin: 0 auto 130px;
+  box-sizing: border-box;
+  position: relative;
+
+  @include tablet {
+    max-width: 90%;
+    padding: 50px 40px;
+    margin-bottom: 80px;
+    align-items: center;
+    text-align: center;
+  }
+
+  @include mobile {
+    max-width: 95%;
+    padding: 30px 20px;
+    border-radius: 30px;
+    margin-bottom: 60px;
   }
 }
 
-.feedbackArrow {
+.title {
+  font-size: 1.8rem;
+  color: $white-color;
+  margin-bottom: 60px;
+  text-align: center;
+
+  @include tablet {
+    font-size: 1.6rem;
+    margin-bottom: 40px;
+  }
+
+  @include mobile {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+}
+
+.Arrow {
   width: 71px;
   height: 53px;
   background-image: image-set(
@@ -45,32 +87,26 @@
   }
 }
 
-.ImgContainer {
-  position: relative;
-  width: 400px;
-  height: 300px;
-  margin-left: 1000px;
-  margin-top: -220px;
-  z-index: 1;
+.inputContainer {
+  width: 480px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
   @include tablet {
-    width: 250px;
-    height: 160px;
-    margin: 30px auto 0;
-    left: 0;
-    right: 0;
+    width: 100%;
+    max-width: 400px;
   }
 
   @include mobile {
-    width: 180px;
-    height: 120px;
-    margin: 20px auto 0;
+    max-width: 100%;
   }
 }
 
 .phoneNumberInputContainer {
-  margin-top: 10px;
-  margin-bottom: 40px;
+  top: 20px;
+  margin-bottom: 30px;
   position: relative;
   width: 100%;
   max-width: 480px;
@@ -81,11 +117,12 @@
   }
 
   @include mobile {
-    margin-bottom: 20px;
+    margin-bottom: 35px;
+    top: 20px;
   }
 }
 
-.feedbackInput {
+.formInput {
   @include inputField;
   width: 100%;
 
@@ -125,18 +162,6 @@
   }
 }
 
-.feedbackButton {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  width: 100%;
-
-  @include mobile {
-    flex-direction: column;
-  }
-}
-
 .iconContainer {
   height: 54px;
   width: 54px;
@@ -163,7 +188,7 @@
   }
 }
 
-.feedbackButtonText {
+.formButtonText {
   padding: 1rem;
   color: $black-color;
   margin-right: 25px;
@@ -183,67 +208,37 @@
   }
 }
 
-.formContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1228px;
-  height: auto;
-  min-height: 407px;
-  padding: 60px 54px 44px 104px;
-  border: $main-border;
-  border-radius: 50px;
-  background-color: $grey-color;
-  margin: 0 auto 130px;
-  box-sizing: border-box;
+.ImgContainer {
   position: relative;
+  width: 400px;
+  height: 300px;
+  margin-left: 1240px;
+  margin-top: -200px;
+  z-index: 1;
 
   @include tablet {
-    max-width: 90%;
-    padding: 50px 40px;
-    margin-bottom: 80px;
-    align-items: center;
-    text-align: center;
+    width: 250px;
+    height: 160px;
+    margin: 30px auto 0;
+    left: 0;
+    right: 0;
+    bottom: 35px;
   }
 
   @include mobile {
-    max-width: 95%;
-    padding: 30px 20px;
-    border-radius: 30px;
-    margin-bottom: 60px;
+    width: 180px;
+    height: 120px;
+    margin: 0px auto 0;
+    bottom: 10px;
   }
 }
 
-.inputContainer {
-  width: 480px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  @include tablet {
-    width: 100%;
-    max-width: 400px;
-  }
-
-  @include mobile {
-    max-width: 100%;
-  }
+.inputError {
+  border-color: red;
 }
 
-.title {
-  font-size: 1.8rem;
-  color: $white-color;
-  margin-bottom: 60px;
-  text-align: center;
-
-  @include tablet {
-    font-size: 1.6rem;
-    margin-bottom: 40px;
-  }
-
-  @include mobile {
-    font-size: 1.3rem;
-    margin-bottom: 30px;
-  }
+.inputErrorText {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
 }
