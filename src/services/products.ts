@@ -1,20 +1,20 @@
 import type { Product } from "@/types/types";
 import reco from "../../public/images/products/recoil.png";
 
-const API_SECRET_KEY = process.env.API_SECRET_KEY ?? "";
+const SECRET_API_URL = process.env.SECRET_API_URL ?? "";
 
 
 const fetchOptions = {
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-    "Authorization": `Bearer ${API_SECRET_KEY}`, 
+    "Authorization": `Bearer ${SECRET_API_URL}`, 
   }
 };
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${API_SECRET_KEY}/products`, fetchOptions);
+    const response = await fetch(`${SECRET_API_URL}/products`, fetchOptions);
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
@@ -63,7 +63,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
 
 export const fetchProductById = async (id: string): Promise<Product | null> => {
   try {
-    const response = await fetch(`${API_SECRET_KEY}/products/${id}`, fetchOptions); 
+    const response = await fetch(`${SECRET_API_URL}/products/${id}`, fetchOptions); 
     if (!response.ok) {
       throw new Error("Failed to fetch product");
     }
