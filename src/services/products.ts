@@ -1,20 +1,18 @@
 import type { Product } from "@/types/types";
 import reco from "../../public/images/products/recoil.png";
 
-const SECRET_API_URL = process.env.SECRET_API_URL ?? "";
-
+const API_BASE_URL = "https://reco-backend-two-production.up.railway.app";  // Прямой URL без авторизации
 
 const fetchOptions = {
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-    "Authorization": `Bearer ${SECRET_API_URL}`, 
   }
 };
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${SECRET_API_URL}/products`, fetchOptions);
+    const response = await fetch(`${API_BASE_URL}/products`, fetchOptions); // Используем прямой URL
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
@@ -63,7 +61,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
 
 export const fetchProductById = async (id: string): Promise<Product | null> => {
   try {
-    const response = await fetch(`${SECRET_API_URL}/products/${id}`, fetchOptions); 
+    const response = await fetch(`${API_BASE_URL}/products/${id}`, fetchOptions); // Используем прямой URL
     if (!response.ok) {
       throw new Error("Failed to fetch product");
     }
