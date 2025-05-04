@@ -1,7 +1,7 @@
 import type { Product } from "@/types/types";
 import reco from "../../public/images/products/recoil.png";
 
-const API_BASE_URL = "https://reco-backend-two-production.up.railway.app";  // Прямой URL без авторизации
+const API_BASE_URL = process.env.API_BASE_URL ?? ""; 
 
 const fetchOptions = {
   headers: {
