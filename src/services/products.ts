@@ -66,6 +66,7 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
     if (!response.ok) {
       throw new Error("Failed to fetch product");
     }
+
     const data: {
       data: {
         _id: string;
@@ -80,10 +81,10 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
         sizes: { _id: string; volume: string; price: number }[];
         badgeInfo: string;
         isNewProduct: boolean;
-      }[];
+      };
     } = await response.json();
 
-    const product = data.data.find((p) => p._id === id);
+    const product = data.data;
 
     if (!product) {
       return null;
