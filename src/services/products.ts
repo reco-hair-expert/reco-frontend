@@ -1,64 +1,59 @@
 import type { Product } from "@/types/types";
 import reco from "../../public/images/products/recoil.png";
 
+const NEXT_PUBLIC_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? ""; 
+
 const fetchOptions = {
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-    Origin: "http://localhost:3001"
   }
 };
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(
-      "https://reco-backend-two.onrender.com/products",
-      fetchOptions
-    );
+
+    const response = await fetch(`${NEXT_PUBLIC_API_BASE_URL}/products`, fetchOptions);
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
-    const data = await response.json();
+    const data: {
+      data: {
+        id: string;
+        _id?: string;
+        name: string;
+        pictures: { mainPicture?: string };
+        description: string;
+        shortDescription: string;
+        type: string;
+        application: string;
+        composition: string;
+        recommendation: string;
+        sizes: { _id: string; volume: string; price: number }[];
+        badgeInfo: string;
+        isNewProduct: boolean;
+      }[];
+    } = await response.json();
 
-    return data.data.map(
-      (
-        product: {
-          _id?: string;
-          name: string;
-          pictures: { mainPicture?: string };
-          description: string;
-          shortDescription: string;
-          type: string;
-          application: string;
-          composition: string;
-          recommendation: string;
-          sizes: { _id: string; volume: string; price: number }[];
-          badgeInfo: string;
-          isNewProduct: boolean;
-        },
-        index: number
-      ) => ({
-        id: index + 1,
-        _id: product._id || `product_${index + 1}`,
-        name: product.name,
-        photo: product.pictures.mainPicture || reco,
-        description: product.description,
-        shortDescription: product.shortDescription,
-        type: product.type,
-        application: product.application,
-        composition: product.composition,
-        recommendation: product.recommendation,
-        sizes: product.sizes.map(
-          (size: { _id: string; volume: string; price: number }) => ({
-            _id: size._id,
-            size: size.volume,
-            price: size.price
-          })
-        ),
-        badgeInfo: product.badgeInfo,
-        isNewProduct: product.isNewProduct
-      })
-    );
+    return data.data.map((product, index) => ({
+      id: Number(product.id) || index + 1,
+      _id: product._id || `product_${index + 1}`,
+      name: product.name,
+      photo: product.pictures.mainPicture || reco,
+      description: product.description,
+      shortDescription: product.shortDescription,
+      type: product.type,
+      application: product.application,
+      composition: product.composition,
+      recommendation: product.recommendation,
+      sizes: product.sizes.map((size) => ({
+        _id: size._id,
+        size: size.volume,
+        price: size.price
+      })),
+      badgeInfo: product.badgeInfo,
+      isNewProduct: product.isNewProduct
+    }));
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
@@ -67,27 +62,36 @@ export const fetchProducts = async (): Promise<Product[]> => {
 
 export const fetchProductById = async (id: string): Promise<Product | null> => {
   try {
-    const response = await fetch(
-      "https://reco-backend-two.onrender.com/products",
-      fetchOptions
-    );
+    const response = await fetch(`${NEXT_PUBLIC_API_BASE_URL}/products/${id}`, fetchOptions); 
     if (!response.ok) {
-      throw new Error("Failed to fetch products");
-    }
-    const data = await response.json();
-
-    if (!data.data || data.data.length === 0) {
-      return null;
+      throw new Error("Failed to fetch product");
     }
 
-    const product = data.data.find((p: { _id: string }) => p._id === id);
+    const data: {
+      data: {
+        _id: string;
+        name: string;
+        pictures: { mainPicture?: string };
+        description: string;
+        shortDescription: string;
+        type: string;
+        application: string;
+        composition: string;
+        recommendation: string;
+        sizes: { _id: string; volume: string; price: number }[];
+        badgeInfo: string;
+        isNewProduct: boolean;
+      };
+    } = await response.json();
+
+    const product = data.data;
 
     if (!product) {
       return null;
     }
 
     return {
-      id: product.id,
+      id: Number(id),
       _id: product._id,
       name: product.name,
       photo: product.pictures.mainPicture || reco,
@@ -97,13 +101,11 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
       application: product.application,
       composition: product.composition,
       recommendation: product.recommendation,
-      sizes: product.sizes.map(
-        (size: { _id: string; volume: string; price: number }) => ({
-          _id: size._id,
-          size: size.volume,
-          price: size.price
-        })
-      ),
+      sizes: product.sizes.map((size) => ({
+        _id: size._id,
+        size: size.volume,
+        price: size.price
+      })),
       badgeInfo: product.badgeInfo,
       isNewProduct: product.isNewProduct
     };

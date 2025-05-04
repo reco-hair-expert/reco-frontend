@@ -48,6 +48,7 @@ export default [
         React: "readonly",
         // Browser globals
         window: "readonly",
+        process: "readonly",
         document: "readonly",
         localStorage: "readonly",
         alert: "readonly",
@@ -86,15 +87,7 @@ export default [
       "react/react-in-jsx-scope": "off",
       "react/prop-types": "off",
       "react/self-closing-comp": "warn",
-      "react/jsx-sort-props": [
-        "warn",
-        {
-          callbacksLast: true,
-          shorthandFirst: true,
-          ignoreCase: true,
-          reservedFirst: true
-        }
-      ],
+      "react/jsx-sort-props": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
 

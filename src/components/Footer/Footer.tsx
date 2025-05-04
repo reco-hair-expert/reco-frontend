@@ -27,7 +27,6 @@ const Footer = ({ className }: FooterProps) => {
               />
             </Link>
           </div>
-
           <div className={styles.addressForm}>
             <AddressForm
               address={address}
@@ -35,11 +34,9 @@ const Footer = ({ className }: FooterProps) => {
               phoneNumber={phoneNumber}
             />
           </div>
-
           <div className={styles.footerLinks}>
             <FooterLinks />
           </div>
-
           <div className={styles.socialHub}>
             <SocialMediaHub>
               <SocialMediaLinks platform={"instagram"} />
@@ -48,13 +45,18 @@ const Footer = ({ className }: FooterProps) => {
             </SocialMediaHub>
           </div>
         </div>
-
         <div className={styles.authorRights}>
           <p>© 2025 RECO. Всі права захищені.</p>
           <div className={styles.policyLinks}>
             <Link href="/policy/privacy-policy">Політика конфіденційності</Link>
             &nbsp;|&nbsp;
             <Link href="/policy/offer">Умови використання</Link>
+            &nbsp;|&nbsp;
+            <Link href="/policy/delivery-terms"> Умови доставки</Link>
+            &nbsp;|&nbsp;
+            <Link href="/policy/payment-terms"> Умови оплати</Link>
+            &nbsp;|&nbsp;
+            <Link href="/policy/refund-policy"> Умови повернення коштів </Link>
           </div>
         </div>
       </div>

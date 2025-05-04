@@ -34,7 +34,7 @@ const HeroButtons = () => {
         </Button>
       </Link>
       <Link href="/about">
-        <Button size={getButtonSize()} variant="secondary">
+        {/* <Button size={getButtonSize()} variant="secondary">
           <div className={styles.secondСontainer}>
             <Icon
               className={styles.SecondIcon}
@@ -45,7 +45,7 @@ const HeroButtons = () => {
             />
           </div>
           <span className={styles.moreInfoText}>ПРО НАС</span>
-        </Button>
+        </Button> */}
       </Link>
     </div>
   );
