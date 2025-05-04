@@ -1,20 +1,19 @@
 import type { Product } from "@/types/types";
 import reco from "../../public/images/products/recoil.png";
 
-const SECRET_API_URL = process.env.SECRET_API_URL ?? "";
-
+const NEXT_PUBLIC_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? ""; 
 
 const fetchOptions = {
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
-    "Authorization": `Bearer ${SECRET_API_URL}`, 
   }
 };
 
 export const fetchProducts = async (): Promise<Product[]> => {
   try {
-    const response = await fetch(`${SECRET_API_URL}/products`, fetchOptions);
+
+    const response = await fetch(`${NEXT_PUBLIC_API_BASE_URL}/products`, fetchOptions);
     if (!response.ok) {
       throw new Error("Failed to fetch products");
     }
@@ -63,7 +62,7 @@ export const fetchProducts = async (): Promise<Product[]> => {
 
 export const fetchProductById = async (id: string): Promise<Product | null> => {
   try {
-    const response = await fetch(`${SECRET_API_URL}/products/${id}`, fetchOptions); 
+    const response = await fetch(`${NEXT_PUBLIC_API_BASE_URL}/products/${id}`, fetchOptions); 
     if (!response.ok) {
       throw new Error("Failed to fetch product");
     }
