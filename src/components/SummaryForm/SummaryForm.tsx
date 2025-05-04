@@ -1,5 +1,5 @@
 "use client";
-import type { SubmitHandler} from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 
 import styles from "./SummaryForm.module.scss";
