@@ -48,6 +48,7 @@ export default [
         React: "readonly",
         // Browser globals
         window: "readonly",
+        process: "readonly",
         document: "readonly",
         localStorage: "readonly",
         alert: "readonly",
