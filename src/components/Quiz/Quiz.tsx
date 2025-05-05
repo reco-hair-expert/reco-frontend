@@ -14,6 +14,10 @@ import type { Product } from "@/types/types";
 import { useRouter } from "next/navigation";
 import { useCartContext } from "@/hooks/useCartContext";
 import Link from "next/link";
+import SuccessBlock from "./SuccessBlock";
+import SummaryForm from "../SummaryForm/SummaryForm";
+import SummarySection from "../SummarySection/SummarySection";
+import PhoneConsultationForm from "./PhoneConsultationForm";
 
 type CartItem = {
   id: number;
@@ -34,6 +38,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const [selectedSizes, setSelectedSizes] = useState<Record<number, string>>(
     {}
   );
+  const [showSizeWarning, setShowSizeWarning] = useState(false);
+  const [showAddToCartSuccess, setShowAddToCartSuccess] = useState(false);
+  const [addedProductName, setAddedProductName] = useState("");
 
   const toggleCardFlip = (productId: number) => {
     setFlippedCards((prev) => ({
@@ -197,7 +204,8 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
 
   const handleNext = () => {
     if (!hasAnsweredCurrent) {
-      alert("Будь ласка, оберіть варіант відповіді");
+      setShowSizeWarning(true);
+      setTimeout(() => setShowSizeWarning(false), 3000);
       return;
     }
 
@@ -252,7 +260,8 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     const selectedSize = selectedSizes[product.id];
 
     if (!selectedSize && product.sizes?.length) {
-      alert("Будь ласка, оберіть розмір");
+      setShowSizeWarning(true);
+      setTimeout(() => setShowSizeWarning(false), 3000);
       return;
     }
 
@@ -274,7 +283,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     };
 
     addToCart(itemToAdd as unknown as Product);
-    alert(`${product.name} додано до кошика`);
+    setAddedProductName(product.name);
+    setShowAddToCartSuccess(true);
+    setTimeout(() => setShowAddToCartSuccess(false), 3000);
   };
 
   if (isLoading) {
@@ -284,7 +295,22 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   if (showResults) {
     return (
       <div className={styles.resultsContainer}>
+        <SuccessBlock />
+        <PhoneConsultationForm />
+
         <h2 className={styles.resultsTitle}>Рекомендації</h2>
+
+        {showSizeWarning && (
+          <div className={styles.sizeWarning}>
+            Будь ласка, оберіть розмір перед покупкою.
+          </div>
+        )}
+
+        {showAddToCartSuccess && (
+          <div className={`${styles.sizeWarning} ${styles.success}`}>
+            {addedProductName} додано до кошика
+          </div>
+        )}
 
         <div className={styles.productsFlex}>
           {recommendedProducts.map((product) => (

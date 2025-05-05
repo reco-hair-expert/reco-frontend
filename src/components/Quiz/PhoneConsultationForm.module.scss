@@ -1,0 +1,248 @@
+@use "@/styles/variables.scss" as *;
+@use "@/styles/mixins" as *;
+
+@mixin mobile {
+  @media (max-width: $breakpoint-mobile) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1228px;
+  height: auto;
+  min-height: 407px;
+  padding: 60px 54px 44px 104px;
+  border: $main-border;
+  border-radius: 50px;
+  background-color: $grey-color;
+  margin: 0 auto 130px;
+  box-sizing: border-box;
+  position: relative;
+
+  @include tablet {
+    max-width: 90%;
+    padding: 50px 40px;
+    margin-bottom: 80px;
+    align-items: center;
+    text-align: center;
+  }
+
+  @include mobile {
+    max-width: 95%;
+    padding: 30px 20px;
+    border-radius: 30px;
+    margin-bottom: 60px;
+  }
+}
+
+.title {
+  font-size: 1.8rem;
+  color: $white-color;
+  margin-bottom: 60px;
+  text-align: center;
+
+  @include tablet {
+    font-size: 1.6rem;
+    margin-bottom: 40px;
+  }
+
+  @include mobile {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+}
+
+.Arrow {
+  width: 71px;
+  height: 53px;
+  background-image: image-set(
+    url(/images/sections/feedback/arrow-desc-1x.webp) type("image/webp") 1x,
+    url(/images/sections/feedback/arrow-desc-2x.webp) type("image/webp") 2x,
+    url(/images/sections/feedback/arrow-desc-1x.png) type("image/png") 1x,
+    url(/images/sections/feedback/arrow-desc-2x.png) type("image/png") 2x
+  );
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 20%;
+  left: 11%;
+
+  @include tablet {
+    left: 20%;
+    transform: translateX(-50%) rotate(305deg);
+    top: 120px;
+  }
+
+  @include mobile {
+    display: none;
+  }
+}
+
+.inputContainer {
+  width: 480px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  @include tablet {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  @include mobile {
+    max-width: 100%;
+  }
+}
+
+.inputContainer label {
+  width: 100%;
+}
+
+.phoneNumberInputContainer {
+  top: 20px;
+  margin-bottom: 30px;
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+
+  @include tablet {
+    margin-bottom: 30px;
+    max-width: 400px;
+  }
+
+  @include mobile {
+    margin-bottom: 35px;
+    top: 20px;
+  }
+}
+
+.formInput {
+  @include inputField;
+  width: 100%;
+
+  @include mobile {
+    padding: 12px 15px;
+  }
+}
+
+.inputIconPhone {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+
+  @include mobile {
+    right: 8px;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 480px;
+  margin-top: -50px;
+
+  @include tablet {
+    justify-content: center;
+    max-width: 400px;
+  }
+
+  @include mobile {
+    margin-top: 12px;
+    justify-content: center;
+  }
+}
+
+.iconContainer {
+  height: 54px;
+  width: 54px;
+  background-color: $grey-color;
+  border-radius: 50%;
+  display: flex;
+  margin-right: 1px;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 2px;
+  right: 1px;
+
+  @include tablet {
+    height: 48px;
+    width: 48px;
+    margin-top: 4px;
+  }
+
+  @include mobile {
+    height: 46px;
+    width: 46px;
+    margin: 4px;
+  }
+}
+
+.formButtonText {
+  padding: 1rem;
+  color: $black-color;
+  margin-right: 25px;
+  font-size: 16px;
+  text-decoration: none;
+
+  @include tablet {
+    font-size: 14px;
+    margin-right: 15px;
+  }
+
+  @include mobile {
+    font-size: 14px;
+    padding: 0.5rem;
+    margin-right: 20px;
+    text-align: center;
+  }
+}
+
+.ImgContainer {
+  position: relative;
+  width: 400px;
+  height: 300px;
+  margin-left: 1240px;
+  margin-top: -200px;
+  z-index: 1;
+
+  @include tablet {
+    width: 250px;
+    height: 160px;
+    margin: 30px auto 0;
+    left: 0;
+    right: 0;
+    bottom: 35px;
+  }
+
+  @include mobile {
+    width: 180px;
+    height: 120px;
+    margin: 0px auto 0;
+    bottom: 10px;
+  }
+}
+
+.inputError {
+  border-color: red;
+}
+
+.inputErrorText {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
