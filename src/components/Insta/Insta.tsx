@@ -23,7 +23,7 @@ const InstagramWidget = () => {
         <div
           data-elfsight-app-lazy
           className="elfsight-app-ca342234-6376-4789-98da-cfb5f70544ae"
-         />
+        />
       </div>
     </div>
   );

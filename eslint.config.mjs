@@ -25,24 +25,24 @@ export default [
         test: "readonly",
         expect: "readonly",
         beforeEach: "readonly",
-        afterEach: "readonly",
-      },
-    },
+        afterEach: "readonly"
+      }
+    }
   },
   // Configuration for TypeScript and React files
   {
     files: ["**/*.{ts,tsx}"],
     plugins: {
       "@typescript-eslint": typescriptPlugin,
-      "react": reactPlugin,
-      "react-hooks": reactHooksPlugin,
+      react: reactPlugin,
+      "react-hooks": reactHooksPlugin
     },
     languageOptions: {
       parser,
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
-        project: "./tsconfig.json",
+        project: "./tsconfig.json"
       },
       globals: {
         React: "readonly",
@@ -65,17 +65,23 @@ export default [
         test: "readonly",
         expect: "readonly",
         beforeEach: "readonly",
-        afterEach: "readonly",
-      },
+        afterEach: "readonly"
+      }
     },
     rules: {
       // TypeScript rules
-      "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
+        { argsIgnorePattern: "^_" }
+      ],
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/explicit-function-return-type": "off",
       "@typescript-eslint/no-empty-function": "warn",
       "@typescript-eslint/no-non-null-assertion": "warn",
-      "@typescript-eslint/consistent-type-imports": ["warn", { "prefer": "type-imports" }],
+      "@typescript-eslint/consistent-type-imports": [
+        "warn",
+        { prefer: "type-imports" }
+      ],
 
       // React rules
       "react/react-in-jsx-scope": "off",
@@ -87,7 +93,7 @@ export default [
 
       // General rules
       "no-undef": "error",
-      "no-unused-vars": "off", // Using @typescript-eslint/no-unused-vars instead
-    },
-  },
+      "no-unused-vars": "off" // Using @typescript-eslint/no-unused-vars instead
+    }
+  }
 ];

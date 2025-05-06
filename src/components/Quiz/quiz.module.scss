@@ -18,6 +18,74 @@
   }
 }
 
+.sizeWarning {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 14px;
+  z-index: 9999;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  max-width: 90%;
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  animation:
+    slideIn 0.3s ease-out,
+    fadeOut 0.5s ease-in 2.5s forwards;
+
+  background-color: $yellow-color;
+  color: $black-color;
+
+  &::before {
+    content: "⚠️";
+    font-size: 16px;
+  }
+
+  &.success {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+
+    &::before {
+      content: "✓";
+      font-size: 18px;
+    }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@media (max-width: 768px) {
+  .sizeWarning {
+    font-size: 13px;
+    padding: 10px 16px;
+
+    &.success::before {
+      font-size: 16px;
+    }
+  }
+}
+
 .cardInner {
   position: relative;
   width: 100%;
