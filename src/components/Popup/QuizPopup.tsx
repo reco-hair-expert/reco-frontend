@@ -1,9 +1,12 @@
+"use client";
+
 import React from "react";
 import styles from "./QuizPopup.module.scss";
 import Link from "next/link";
 import Button from "../Button/Button";
 import Icon from "../Icon/Icon";
 import useDeviceDetection from "@/context/useDeviceDetection";
+import { usePathname } from "next/navigation";
 
 interface QuizPopupProps {
   onClose: () => void;
@@ -12,11 +15,20 @@ interface QuizPopupProps {
 
 const QuizPopup: React.FC<QuizPopupProps> = ({ onClose, isVisible }) => {
   const { isMobile, isTablet } = useDeviceDetection();
+  const pathname = usePathname();
+  const isQuizPage = pathname === "/quiz";
 
   const getButtonSize = () => {
     if (isMobile) return "s";
     if (isTablet) return "m";
     return "l";
+  };
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    if (isQuizPage) {
+      e.preventDefault();
+      onClose();
+    }
   };
 
   return (
@@ -34,11 +46,12 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ onClose, isVisible }) => {
           ЛИШЕ 6 ПИТАНЬ – І ВИ ДІЗНАЄТЕСЯ СВІЙ ІДЕАЛЬНИЙ ДОГЛЯД!
         </p>
         <div className={styles.buttonWrapper}>
-          <Link passHref href="/quiz">
+          <Link passHref href="/quiz" legacyBehavior>
             <Button
               className={styles.button}
               size={getButtonSize()}
               variant="primary"
+              onClick={handleButtonClick}
             >
               <div className={styles.iconContainer}>
                 <Icon
