@@ -16,7 +16,6 @@ import { useCartContext } from "@/hooks/useCartContext";
 import Link from "next/link";
 import SuccessBlock from "./SuccessBlock";
 import PhoneConsultationForm from "./PhoneConsultationForm";
-import Forma from "../Forma/Forma";
 
 type CartItem = {
   id: number;
@@ -294,7 +293,6 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   if (showResults) {
     return (
       <div className={styles.resultsContainer}>
-        <Forma />
         <SuccessBlock />
         <PhoneConsultationForm />
 
