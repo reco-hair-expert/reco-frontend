@@ -1,25 +1,75 @@
 @use "@/styles/variables" as *;
 
 .container {
-  max-width: 800px;
   margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 1rem;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 0.5rem;
+  }
+}
+
+.backgroundImage {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  width: 60vw;
+  height: 60vh;
+
+  img {
+    object-fit: contain;
+    object-position: center;
+    filter: brightness(1.15) contrast(1.1) saturate(1.1);
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    width: 75vw;
+    height: 75vh;
+
+    img {
+      filter: brightness(1.2) contrast(1.15) saturate(1.15);
+    }
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    width: 90vw;
+    height: 90vh;
+
+    img {
+      object-fit: contain;
+      filter: brightness(1.25) contrast(1.2) saturate(1.2);
+    }
+  }
+
+  @media (max-width: 360px) {
+    width: 95vw;
+    height: 95vh;
+  }
 }
 
 .quizWrapper {
   margin-bottom: 2rem;
   flex-grow: 1;
-}
+  padding: 2rem;
+  width: 100%;
+  overflow-y: auto;
+  max-height: calc(100vh - 4rem);
 
-/* Адаптація для мобільних пристроїв */
-@media (max-width: 768px) {
-  .container {
-    padding: 1rem;
+  @media (max-width: $breakpoint-tablet) {
+    padding: 1.5rem;
   }
 
-  .quizWrapper {
-    padding: 1.5rem;
+  @media (max-width: $breakpoint-mobile) {
+    padding: 1rem;
+    margin-bottom: 1rem;
   }
 }

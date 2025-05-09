@@ -21,7 +21,7 @@ export interface ButtonProps {
   disabled?: boolean;
   variant?: ButtonVariant;
   state?: ButtonState;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
   children: React.ReactNode;
   icon?: ReactElement | string;
   className?: string;

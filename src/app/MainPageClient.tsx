@@ -6,6 +6,7 @@ import { fetchProducts } from "@/services/products";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import FeaturesSection from "@/components/FeaturesSection/FeaturesSection";
 import styles from "./page.module.scss";
+import Forma from "@/components/Forma/Forma";
 
 const ProductCard = dynamic(
   () => import("@/components/ProductCard3/ProductCard"),
@@ -83,6 +84,8 @@ export const MainPageClient = () => {
       <FeaturesSection />
 
       <ProductCard products={products} showButton={true} />
+
+      <Forma />
 
       <Suspense
         fallback={<div className={styles.loading}>Завантажуемо Insta...</div>}
