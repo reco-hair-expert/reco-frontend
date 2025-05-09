@@ -41,6 +41,11 @@
 
 .plusSign {
   color: $yellow-color;
+  font-weight: 400;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .formWrapper {
