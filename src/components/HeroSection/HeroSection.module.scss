@@ -120,10 +120,12 @@
     margin-bottom: -100px;
   }
 
-  .image {
+  .heroImage {
     margin: 0 auto;
     max-width: 400px;
-    transform: scale(1.2);
+    position: relative;
+    right: 39px;
+    top: -16px;
   }
 }
 
@@ -132,7 +134,7 @@
   .slogan {
     text-align: center;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 22px;
     max-width: 88%;
   }
 
@@ -142,11 +144,12 @@
   }
 
   .text {
-    font-size: 16px;
-    max-width: 290px;
+    font-size: 17px;
+    max-width: 370px;
     margin: 0;
     z-index: 10;
-    text-align: justify;
+    letter-spacing: 1px;
+    font-weight: 100;
   }
 
   .imageContainer {

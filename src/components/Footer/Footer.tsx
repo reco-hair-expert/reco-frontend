@@ -8,6 +8,13 @@ import { address, phoneNumber, email } from "@/constants/contacts";
 import SocialMediaLinks from "../SocialMediaLinks/SocialMediaLinks";
 import FooterLinks from "../FooterLink/FooterLink";
 
+const PAYMENT_ICON = {
+  src: "/images/sections/footer/visa-mastercard.svg",
+  alt: "Visa and Mastercard payment options",
+  width: 100,
+  height: 40
+};
+
 const Footer = ({ className }: FooterProps) => {
   const combinedClass = className
     ? `${styles.header} ${className}`
@@ -43,6 +50,15 @@ const Footer = ({ className }: FooterProps) => {
               <SocialMediaLinks platform={"viber"} />
               <SocialMediaLinks platform={"telegram"} />
             </SocialMediaHub>
+          </div>
+          <div className={styles.payment_icon_container}>
+            <Image
+              alt={PAYMENT_ICON.alt}
+              className={styles.payment_icon}
+              height={PAYMENT_ICON.height}
+              src={PAYMENT_ICON.src}
+              width={PAYMENT_ICON.width}
+            />
           </div>
         </div>
         <div className={styles.authorRights}>
