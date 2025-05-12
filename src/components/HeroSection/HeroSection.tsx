@@ -19,8 +19,8 @@ const HeroSection = ({ className }: HeroSectionProps) => {
         <article className={styles.mainContent}>
           <div className={styles.textField}>
             <h1 className={styles.slogan}>
-              <HighlightText>RECO</HighlightText> <br /> бренд створений з
-              любовью до волосся
+              <HighlightText>RECO</HighlightText>  —   це бренд створений з
+              любов'ю до волосся
             </h1>
             <div className={styles.imageContainer}>
               <Image
@@ -38,8 +38,8 @@ const HeroSection = ({ className }: HeroSectionProps) => {
             </div>
 
             <p className={styles.text}>
-              Кожен заслуговує на здорове, сильне та блискуче волосся <br />
-              <HighlightText>RECO</HighlightText> — це інструмент, який дарує
+              Кожен заслуговує на здорове, сильне та блискуче волосся
+              <HighlightText> RECO</HighlightText> — це інструмент, який дарує
               нове життя вашому волоссю
             </p>
             <HeroButtons />

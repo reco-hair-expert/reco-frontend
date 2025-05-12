@@ -48,8 +48,7 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
           <article className={styles.featuresArticleRightBottom}>
             <h3>Комплексний підхід</h3>
             <p className={styles.featuresArticleRightBottomText}>
-              Комплексний підхід:
-              <HighlightText>RECO</HighlightText>
+              Комплексний підхід : RECO 
               не лише відновлює, але й забезпечує{" "}
               <HighlightText>захист, зволоження та живлення</HighlightText>{" "}
               завдяки лінійці продуктів
