@@ -3,7 +3,7 @@ import type { IconProps } from "./types/Icon.types";
 
 const Icon: React.FC<IconProps> = ({
   name,
-  size = 24,
+  size = 32,
   stroke = "currentColor",
   fill = "none",
   className

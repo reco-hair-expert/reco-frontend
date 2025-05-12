@@ -2,13 +2,14 @@
 
 .button {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   border: none;
   background-color: transparent;
   border: 1px solid $yellow-color;
   border-radius: 60px;
   height: 58px;
+  width: 244px;
   gap: 1rem;
   cursor: pointer;
 }
