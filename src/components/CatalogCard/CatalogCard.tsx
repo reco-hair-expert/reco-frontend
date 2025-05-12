@@ -9,8 +9,10 @@ import { useState, useCallback, memo } from "react";
 import { useCart } from "@/context/CartContext";
 
 const CatalogCard = memo(({ product }: CatalogCardProps) => {
-  const [selectedSize, setSelectedSize] = useState<string | null>(null);
-  const [showSizeWarning, setShowSizeWarning] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string | null>(
+    product.sizes?.[0]?.size || null
+  );
+    const [showSizeWarning, setShowSizeWarning] = useState(false);
   const { addToCart } = useCart();
 
   const handleSizeChange = useCallback(
@@ -45,7 +47,6 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
             value={selectedSize || ""}
             onChange={handleSizeChange}
           >
-            <option value="">Оберіть розмір</option>
             {product.sizes.map(({ size }) => (
               <option key={size} value={size}>
                 {size}
