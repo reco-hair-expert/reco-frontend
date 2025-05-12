@@ -27,8 +27,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
   const { addToCart } = useCartContext();
 
   const currentProduct = products[currentIndex];
-
-  useEffect(() => setSelectedSize(null), [currentIndex]);
+  useEffect(() => {
+    const defaultSize = products[currentIndex]?.sizes?.[0]?.size ?? null;
+    setSelectedSize(defaultSize);
+  }, [currentIndex, products]);
 
   useEffect(() => {
     const handleResize = () => {
