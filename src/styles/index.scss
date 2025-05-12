@@ -19,9 +19,12 @@ body {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   width: 100%;
   overflow: hidden;
+  gap: 150px;
 }
 
 footer {
