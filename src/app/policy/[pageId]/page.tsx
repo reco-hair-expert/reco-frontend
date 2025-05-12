@@ -26,7 +26,6 @@ export default function InfoPage({ params }: InfoPageProps) {
           <InfoSection content={pageData.content} title={pageData.title} />
         </div>
         <aside className={styles.sidebar}>
-          <h3>Другие страницы</h3>
           <ul>
             {infoPages.map((page) => {
               const linkPath = `/policy/${page.id}`;

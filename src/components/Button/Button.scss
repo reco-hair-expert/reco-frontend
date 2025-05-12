@@ -17,8 +17,8 @@
   white-space: nowrap;
 
   &.button--disabled {
-    background-color: #c9c6bd;
-    color: #a3a3a0;
+    background-color: $yellow-color;
+    color: $black-color;
     cursor: not-allowed;
     pointer-events: none;
     .button__icon {
