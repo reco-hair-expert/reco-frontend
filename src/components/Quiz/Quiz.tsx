@@ -293,9 +293,6 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   if (showResults) {
     return (
       <div className={styles.resultsContainer}>
-        <SuccessBlock />
-        <PhoneConsultationForm />
-
         <h2 className={styles.resultsTitle}>Рекомендації</h2>
 
         {showSizeWarning && (
@@ -437,6 +434,8 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
             <span className={styles.textButton}>Пройти тест знову</span>
           </Button>
         </div>
+        <SuccessBlock />
+        <PhoneConsultationForm />
       </div>
     );
   }
