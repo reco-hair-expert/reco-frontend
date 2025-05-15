@@ -536,7 +536,6 @@
 .questionText {
   position: relative;
   color: $white-color;
-  text-transform: uppercase;
   text-align: center;
   padding: 0px 40px;
   background-image: image-set(
@@ -545,26 +544,26 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  width: 544px;
-  height: 280px;
+  width: 600px;
+  height: 320px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  font-size: 18px;
+  font-size: 30px;
   font-weight: 400;
   line-height: 1.4;
 
   @include tablet {
-    width: 300px;
-    height: 224px;
     padding: 40px 20px;
+    font-size: 26px;
   }
 
   @include mobile {
-    width: 290px;
-    height: 152px;
+    width: 300px;
+    height: 160px;
     padding: 30px 15px;
+    font-size: 18px;
   }
 }
 
@@ -609,7 +608,7 @@
   border: 1px solid rgba($yellow-color, 0.3);
   border-radius: 24px;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 18px;
   color: $white-color;
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   text-align: center;

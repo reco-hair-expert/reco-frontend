@@ -428,7 +428,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
           <Button
             className={styles.restartButton}
             size={isMobile ? "m" : "l"}
-            variant="primary"
+            variant="secondary"
             onClick={restartQuiz}
           >
             <span className={styles.textButton}>Пройти тест знову</span>
@@ -444,7 +444,10 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     <div className={styles.quizContainer}>
       <QuizProgress current={currentQuestionIndex + 1} total={totalQuestions} />
 
-      <h2 className={styles.questionText}>{currentQuestion.text}</h2>
+      <h2 className={styles.questionText}>
+        {currentQuestion.text.charAt(0).toUpperCase() +
+          currentQuestion.text.slice(1).toLowerCase()}
+      </h2>
 
       <div className={styles.optionsContainer}>
         {currentQuestion.options.map((option) => (
