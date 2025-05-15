@@ -89,7 +89,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
 
     return (
       <p className={styles.priceContainer}>
-        <strong className={styles.price}>Ціна: </strong>
+        <strong className={styles.price}> </strong>
         {selectedSizeObj ? `${selectedSizeObj.price} грн` : "Оберіть розмір"}
       </p>
     );
@@ -116,18 +116,17 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
               width={300}
             />
             {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
-            {product.badgeInfo && (
-              <Link href={`/${product._id}`}>
-                <div className={styles.badgeInfo}>
-                  <Icon
-                    fill="none"
-                    name="icon-info"
-                    size={isMobile ? 24 : 28}
-                    stroke={styles.yellowColor}
-                  />
-                </div>
-              </Link>
-            )}
+            <Link href={`/${product._id}`}>
+              <div className={styles.badgeInfo}>
+                <Icon
+                  fill="none"
+                  name="icon-info"
+                  size={isMobile ? 24 : 28}
+                  stroke={styles.yellowColor}
+                />
+              </div>
+            </Link>
+
             {index === currentIndex && showButton && (
               <div className={styles.buttonPlace}>
                 {isMobile ? (

@@ -78,7 +78,7 @@
   @include mobile {
     flex-direction: column;
     height: auto;
-    margin: 0 27px;
+    gap: 20px;
   }
 
   @include tablet {
@@ -143,12 +143,10 @@
 
   &.active {
     opacity: 1;
-    background: linear-gradient(
-      149deg,
-      rgba(80, 71, 42, 1) 5%,
-      rgba(43, 41, 32, 1) 50%,
-      rgba(0, 0, 0, 1) 100%
-    );
+    background: linear-gradient(149deg,
+        rgba(80, 71, 42, 1) 5%,
+        rgba(43, 41, 32, 1) 50%,
+        rgba(0, 0, 0, 1) 100%);
   }
 }
 
@@ -184,6 +182,7 @@
   @include mobile {
     width: 100%;
     height: 300px;
+
   }
 
   img {
@@ -194,6 +193,8 @@
     @include mobile {
       width: 100%;
       height: auto;
+      position: relative;
+      top: -40px;
     }
   }
 
@@ -315,6 +316,10 @@
   overflow-x: hidden;
   box-sizing: border-box;
   word-wrap: break-word;
+
+  @media(max-width: $breakpoint-mobile) {
+    display: none;
+  }
 }
 
 .info {
@@ -388,6 +393,7 @@
     }
   }
 }
+
 .radioInput {
   --container_width: 398px;
   position: relative;
@@ -444,7 +450,7 @@
       background-color: rgba(255, 255, 255, 0.05);
     }
 
-    input:checked + span {
+    input:checked+span {
       color: $black-color;
     }
 
