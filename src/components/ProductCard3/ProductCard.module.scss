@@ -315,6 +315,9 @@
   overflow-x: hidden;
   box-sizing: border-box;
   word-wrap: break-word;
+  @media( max-width: $breakpoint-mobile){
+    display: none;
+  }
 }
 
 .info {
