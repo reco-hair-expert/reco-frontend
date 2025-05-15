@@ -23,7 +23,7 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
             </p>
           </article>
 
-          <a href="/about">Про нас</a>
+          {/* <a href="/about">Про нас</a> */}
         </div>
 
         <div className={styles.featuresImgContainer}>
