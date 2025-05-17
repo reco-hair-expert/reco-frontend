@@ -56,7 +56,16 @@
       height: 64px;
     }
   }
-
+  &--pr {
+    width: 261px;
+    height: 58px;
+    font-size: 18px;
+    padding-right: 35px;
+    .button__icon {
+      width: 64px;
+      height: 64px;
+    }
+  }
   &--xl {
     width: 340px;
     height: 58px;

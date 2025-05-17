@@ -4,6 +4,7 @@ export type ButtonSize =
   | "s"
   | "m"
   | "l"
+  |"pr"
   | "xl"
   | "xxl"
   | "black1"

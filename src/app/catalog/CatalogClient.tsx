@@ -5,9 +5,9 @@ import styles from "./CatalogPage.module.scss";
 import type { Product } from "@/types/types";
 import { fetchProducts } from "@/services/products";
 
-const ProductCard = dynamic(
+const CatalogProductCard = dynamic(
   () =>
-    import("@/components/ProductCard3/ProductCard").then((mod) => mod.default),
+    import("@/components/CatalodProductCard/CatalogProductCard").then((mod) => mod.default),
   {
     ssr: false
   }
@@ -100,8 +100,8 @@ export const CatalogClient = () => {
       <main>
         <section aria-label="Новинки" className="container">
           <div className={styles.newProducts}>
-            <h1 className={styles.title}>НОВИНКИ</h1>
-            <ProductCard products={products} showButton={true} />
+            <h1 className={styles.title}>НОВІ ТОВАРИ</h1>
+            <CatalogProductCard products={products} />
           </div>
         </section>
 

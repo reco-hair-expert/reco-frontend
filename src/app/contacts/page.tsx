@@ -1,47 +1,41 @@
+import FeedbackSection from "@/components/FeedbackSection/FeedbackSection";
 import styles from "./ContactsPage.module.scss";
+import { CONTACTS } from "@/constants/contacts";
 
 export default function ContactsPage() {
   return (
     <div className="container">
       <div className={styles.contactsContainer}>
-        <h1 className={styles.title}>Контакти</h1>
-        <ul className={styles.contactList}>
-          <li>
-            📞 Телефон:{" "}
-            <a className={styles.link} href="tel:+380509883339">
-              +38 (050) 988 33 39
+        <div className={styles.contacts}>
+          <div className={styles.contactCard}>
+            📞 <a href={CONTACTS.phoneHref} className={styles.link}>
+              {CONTACTS.phoneNumber}
             </a>
-          </li>
-          <li>
-            📧 Email:{" "}
-            <a className={styles.link} href="mailto:reco.hair.expert@gmail.com">
-              reco.hair.expert@gmail.com
+          </div>
+
+          <div className={styles.contactCard}>
+            📧 <a href={CONTACTS.emailHref} className={styles.link}>
+              {CONTACTS.email}
             </a>
-          </li>
-          <li>
-            📷 Instagram:{" "}
-            <a
-              className={styles.link}
-              href="https://www.instagram.com/hair__expert.reconstructor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              @hair__expert.reconstructor
+          </div>
+
+          <div className={styles.contactCard}>
+            📍 {CONTACTS.address}
+          </div>
+
+          <div className={styles.contactCard}>
+            📷 <a href={CONTACTS.instagramHref} className={styles.link} target="_blank" rel="noopener noreferrer">
+              {CONTACTS.instagramName}
             </a>
-          </li>
-          <li>
-            💬 Telegram:{" "}
-            <a
-              className={styles.link}
-              href="https://t.me/+380509883339"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              @hair__expert.reconstructor
+            <br />
+            💬 <a href={CONTACTS.telegramHref} className={styles.link} target="_blank" rel="noopener noreferrer">
+              {CONTACTS.telegramName}
             </a>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
+
+      <FeedbackSection />
     </div>
   );
 }
