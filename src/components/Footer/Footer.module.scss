@@ -25,18 +25,33 @@
 .footer_container {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   column-gap: 10px;
   margin-bottom: 10px;
   width: 100%;
   max-width: 1360px;
   background-color: transparent;
+  flex-direction: column;
+  gap: 40px;
 
   @media (max-width: $breakpoint-mobile) {
     flex-direction: column;
     align-items: center;
     row-gap: 20px;
   }
+}
+
+.textContainer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  @media (max-width: $breakpoint-mobile) {
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+  }
+
 }
 
 .logo {
@@ -50,7 +65,8 @@
 
 .footerLinks {
   order: 2;
-  @media(max-width:$breakpoint-mobile){
+
+  @media(max-width:$breakpoint-mobile) {
     order: 3;
   }
 }
@@ -58,7 +74,8 @@
 .socialHub {
   order: 4;
 }
-.payment_icon_container{
+
+.payment_icon_container {
   order: 5;
 }
 
