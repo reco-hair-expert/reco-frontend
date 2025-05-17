@@ -131,32 +131,27 @@ export const quizData: QuizData = {
     },
     {
       id: 5,
-      text: "Часті термовпливи (фен, праска тощо)?",
+      text: "Чи використовуєте ви засоби для укладання з термовпливом (фен, праска, плойка)?",
       options: [
         {
           id: 1,
-          text: "Так, використовую часто",
+          text: "Так",
           recommendedProducts: ["Heat Protect", "Thermo Shield", "Thermal Care"]
         },
         {
           id: 2,
-          text: "Іноді",
+          text: "Ні",
           recommendedProducts: ["Heat Protect", "EveryDay"]
-        },
-        {
-          id: 3,
-          text: "Майже не використовую",
-          recommendedProducts: []
         }
       ]
     },
     {
       id: 6,
-      text: "Відновлення після фарбування чи освітлення?",
+      text: "Чи потребує ваше волосся відновлення після фарбування або освітлення?",
       options: [
         {
           id: 1,
-          text: "Так, потребую відновлення",
+          text: "Так",
           recommendedProducts: [
             "Color Revive",
             "Post-Color Care",
@@ -165,7 +160,7 @@ export const quizData: QuizData = {
         },
         {
           id: 2,
-          text: "Не фарбую/не освітлюю волосся",
+          text: "Ні",
           recommendedProducts: []
         }
       ]
