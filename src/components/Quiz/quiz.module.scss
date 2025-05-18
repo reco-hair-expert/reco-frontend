@@ -322,17 +322,17 @@
   border-radius: 16px;
   padding: 20px;
   transition: all 0.3s ease;
+  opacity: 1;
+  background: linear-gradient(
+    149deg,
+    rgba(80, 71, 42, 0.9) 5%,
+    rgba(43, 41, 32, 0.9) 50%,
+    rgba(0, 0, 0, 0.9) 100%
+  );
 
   &:hover {
     border-color: rgba($yellow-color, 0.5);
     transform: translateY(-5px);
-    opacity: 1;
-    background: linear-gradient(
-      149deg,
-      rgba(80, 71, 42, 0.9) 5%,
-      rgba(43, 41, 32, 0.9) 50%,
-      rgba(0, 0, 0, 0.9) 100%
-    );
   }
 
   @include tablet {
