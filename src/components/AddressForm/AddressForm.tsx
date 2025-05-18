@@ -1,7 +1,6 @@
 import styles from "./AddressForm.module.scss";
 import type { AddressFormProps } from "./types/AddressForm.types";
 
-
 const AddressForm = ({
   className,
   phoneNumber,
@@ -23,8 +22,6 @@ const AddressForm = ({
       <div className={styles.info_item}>
         <a href={`mailto:${email}`}>{email}</a>
       </div>
-
-     
     </div>
   );
 };

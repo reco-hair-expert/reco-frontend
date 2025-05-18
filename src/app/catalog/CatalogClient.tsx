@@ -7,7 +7,9 @@ import { fetchProducts } from "@/services/products";
 
 const CatalogProductCard = dynamic(
   () =>
-    import("@/components/CatalodProductCard/CatalogProductCard").then((mod) => mod.default),
+    import("@/components/CatalodProductCard/CatalogProductCard").then(
+      (mod) => mod.default
+    ),
   {
     ssr: false
   }

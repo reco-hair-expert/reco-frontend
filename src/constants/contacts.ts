@@ -4,7 +4,8 @@ export const CONTACTS = {
   email: "reco.hair.expert@gmail.com",
   emailHref: "mailto:reco.hair.expert@gmail.com",
   instagramName: "@hair__expert.reconstructor",
-  instagramHref: "https://www.instagram.com/hair__expert.reconstructor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
+  instagramHref:
+    "https://www.instagram.com/hair__expert.reconstructor?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
   telegramName: "@hair__expert.reconstructor",
   telegramHref: "https://t.me/+380509883339",
   address: "Адреса: м. Днiпро, вул. Набережна Перемоги 12"
