@@ -19,8 +19,8 @@ const HeroSection = ({ className }: HeroSectionProps) => {
         <article className={styles.mainContent}>
           <div className={styles.textField}>
             <h1 className={styles.slogan}>
-              <HighlightText>RECO</HighlightText>  —   це бренд створений з
-              любов'ю до волосся
+              <HighlightText>RECO</HighlightText> — це бренд створений з любов'ю
+              до волосся
             </h1>
             <div className={styles.imageContainer}>
               <Image

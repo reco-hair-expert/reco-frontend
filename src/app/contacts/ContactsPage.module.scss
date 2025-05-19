@@ -1,5 +1,4 @@
 .contactsContainer {
-
   margin-top: 150px;
   margin-bottom: 50px;
 }
@@ -19,7 +18,9 @@
   height: 380px;
   text-align: center;
   color: #f1f1f1;
-  transition: border 0.3s, background-color 0.3s;
+  transition:
+    border 0.3s,
+    background-color 0.3s;
 
   display: flex;
   flex-direction: column;

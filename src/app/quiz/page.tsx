@@ -6,14 +6,18 @@ import { quizData } from "@/constants/quizData";
 import styles from "./QuizPage.module.scss";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 
 const QuizPopup = dynamic(() => import("@/components/Popup/QuizPopup"), {
   ssr: false
 });
 
 export default function QuizPage() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [quizStarted, setQuizStarted] = useState(false);
+  const searchParams = useSearchParams();
+  const skipPopup = searchParams.get("direct") === "true";
+
+  const [isPopupOpen, setIsPopupOpen] = useState(!skipPopup);
+  const [quizStarted, setQuizStarted] = useState(skipPopup);
 
   const handleQuizComplete = (results: {
     recommendedProducts: { name: string; score: number }[];
@@ -22,9 +26,7 @@ export default function QuizPage() {
   };
 
   useEffect(() => {
-    setIsPopupOpen(true);
     document.body.style.overflow = isPopupOpen ? "hidden" : "auto";
-
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -39,17 +41,21 @@ export default function QuizPage() {
     <main className={styles.container}>
       {!quizStarted ? (
         <>
-          <div className={styles.backgroundImage}>
-            <Image
-              fill
-              alt="happy end"
-              src="/images/sections/quiz/RecoOn.png"
-              quality={100}
-              priority
-              sizes="(max-width: 480px) 100vw, (max-width: 768px) 90vw, 70vw"
-            />
-          </div>
-          <QuizPopup isVisible={isPopupOpen} onClose={handleClosePopup} />
+          {!skipPopup && (
+            <div className={styles.backgroundImage}>
+              <Image
+                fill
+                alt="happy end"
+                src="/images/sections/quiz/RecoOn.png"
+                quality={100}
+                priority
+                sizes="(max-width: 480px) 100vw, (max-width: 768px) 90vw, 70vw"
+              />
+            </div>
+          )}
+          {!skipPopup && (
+            <QuizPopup isVisible={isPopupOpen} onClose={handleClosePopup} />
+          )}
         </>
       ) : (
         <div className={styles.quizWrapper}>
