@@ -46,7 +46,11 @@ const QuizPopup: React.FC<QuizPopupProps> = ({ onClose, isVisible }) => {
           ЛИШЕ 6 ПИТАНЬ – І ВИ ДІЗНАЄТЕСЯ СВІЙ ІДЕАЛЬНИЙ ДОГЛЯД!
         </p>
         <div className={styles.buttonWrapper}>
-          <Link passHref href="/quiz" legacyBehavior>
+          <Link
+            passHref
+            href={isQuizPage ? "/quiz" : "/quiz?direct=true"}
+            legacyBehavior
+          >
             <Button
               className={styles.button}
               size={getButtonSize()}

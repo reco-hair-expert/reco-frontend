@@ -23,7 +23,7 @@ const Footer = ({ className }: FooterProps) => {
     <footer className="container">
       <div className={`${combinedClass} ${styles.footer}`}>
         <div className={styles.footer_container}>
-          <div className={styles.textContainer} >
+          <div className={styles.textContainer}>
             <div className={styles.logo}>
               <Link className={styles.linkLogo} href="/">
                 <Image

@@ -40,7 +40,6 @@
   }
 }
 
-
 .badgeContainer {
   position: absolute;
   top: 16px;
@@ -123,7 +122,7 @@
     text-transform: uppercase;
     color: $yellow-color;
 
-    @media(max-width: $breakpoint-mobile) {
+    @media (max-width: $breakpoint-mobile) {
       font-size: 14px;
       height: 48px;
     }

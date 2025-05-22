@@ -39,7 +39,7 @@ const PhoneConsultationForm: React.FC = () => {
   return (
     <div className={styles.formContainer}>
       <h2 className={styles.title}>
-        Запиш номер телефону, щоб отримати консультацію
+        Залиш номер телефону, щоб отримати консультацію
       </h2>
       <div className={styles.Arrow} />
 
