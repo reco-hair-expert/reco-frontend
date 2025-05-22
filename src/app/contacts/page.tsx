@@ -8,20 +8,51 @@ export default function ContactsPage() {
       <div className={styles.contactsContainer}>
         <div className={styles.contacts}>
           <div className={styles.contactCard}>
-            📞{" "}
+            <div className={styles.imgContainer}>
+              <img
+                src="/icon/C_phone.svg"
+                alt="Phone Icon"
+                className={styles.icon}
+              />
+            </div>
             <a href={CONTACTS.phoneHref} className={styles.link}>
               {CONTACTS.phoneNumber}
             </a>
           </div>
 
           <div className={styles.contactCard}>
-            📧{" "}
+            <div className={styles.imgContainer}>
+              <img
+                src="/icon/C_mail.svg"
+                alt="Phone Icon"
+                className={styles.icon}
+              />
+            </div>
             <a href={CONTACTS.emailHref} className={styles.link}>
               {CONTACTS.email}
             </a>
           </div>
 
-          <div className={styles.contactCard}>📍 {CONTACTS.address}</div>
+          <div className={styles.contactCard}>
+            <div className={styles.imgContainer}>
+              <img
+                src="/icon/C_adr.svg"
+                alt="Phone Icon"
+                className={styles.icon}
+              />
+            </div>
+            {CONTACTS.address}
+          </div>
+          <div className={styles.contactCard}>
+            <div className={styles.imgContainer}>
+              <img
+                src="/icon/C_time.svg"
+                alt="Phone Icon"
+                className={styles.icon}
+              />
+            </div>
+            {CONTACTS.time}
+          </div>
 
           <div className={styles.contactCard}>
             📷{" "}
@@ -33,7 +64,8 @@ export default function ContactsPage() {
             >
               {CONTACTS.instagramName}
             </a>
-            <br />
+          </div>
+          <div className={styles.contactCard}>
             💬{" "}
             <a
               href={CONTACTS.telegramHref}
