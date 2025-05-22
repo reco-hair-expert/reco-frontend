@@ -62,4 +62,10 @@
       color: #ffd132;
     }
   }
+  @media( max-width:$breakpoint-mobile){
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    height: 250px;
+  }
 }
