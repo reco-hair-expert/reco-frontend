@@ -280,8 +280,8 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  top: 2px;
-  right: 2px;
+  top: 3px;
+  right: 3px;
 
   @include mobile {
     margin: 0 auto;
@@ -298,6 +298,9 @@
 /* Цена */
 .priceContainer {
   margin-top: -37px;
+  font-weight: bold;
+  font-size: 24px;
+
 
   @include mobile {
     left: 0;
@@ -350,7 +353,6 @@
   }
 
   p {
-    font-size: 1rem;
     color: $white-color;
   }
 

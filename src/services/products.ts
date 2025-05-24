@@ -37,6 +37,10 @@ export const fetchProducts = async (): Promise<Product[]> => {
       }[];
     } = await response.json();
 
+    if (!data?.data) {
+      throw new Error("Invalid response format");
+    }
+
     return data.data.map((product, index) => ({
       id: Number(product.id) || index + 1,
       _id: product._id || `product_${index + 1}`,
@@ -64,12 +68,21 @@ export const fetchProducts = async (): Promise<Product[]> => {
 
 export const fetchProductById = async (id: string): Promise<Product | null> => {
   try {
+    if (!/^[a-zA-Z0-9-_]+$/.test(id)) {
+      return null;
+    }
+
+    const encodedId = encodeURIComponent(id);
     const response = await fetch(
-      `${NEXT_PUBLIC_API_BASE_URL}/products/${id}`,
+      `${NEXT_PUBLIC_API_BASE_URL}/products/${encodedId}`,
       fetchOptions
     );
+    
     if (!response.ok) {
-      throw new Error("Failed to fetch product");
+      if (response.status === 404) {
+        return null;
+      }
+      throw new Error(`Failed to fetch product: ${response.statusText}`);
     }
 
     const data: {
@@ -89,11 +102,11 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
       };
     } = await response.json();
 
-    const product = data.data;
-
-    if (!product) {
-      return null;
+    if (!data?.data) {
+      throw new Error("Invalid response format");
     }
+
+    const product = data.data;
 
     return {
       id: Number(id),
