@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
 import type { Product } from "@/types/types";
 import { fetchProductById } from "@/services/products";
 import SingleProductCard from "@/components/SingleProductCard/SingleProductCard";
@@ -11,7 +10,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const router = useRouter();
 
   useEffect(() => {
     const loadProduct = async () => {

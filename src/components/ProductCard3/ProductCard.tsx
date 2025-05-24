@@ -104,6 +104,22 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
             key={index}
             className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
           >
+            <div>
+              {product.isNewProduct && (
+                <div className={styles.newBadge}>NEW</div>
+              )}
+              <Link href={`/${product._id}`}>
+                <div className={styles.badgeInfo}>
+                  <Icon
+                    fill="none"
+                    name="icon-info"
+                    size={isMobile ? 24 : 28}
+                    stroke={styles.yellowColor}
+                  />
+                </div>
+              </Link>
+            </div>
+
             <Image
               alt={product.name}
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCD/2wBDARUXFy4eHhs4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OD/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
@@ -115,17 +131,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
               src={product.photo}
               width={300}
             />
-            {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
-            <Link href={`/${product._id}`}>
-              <div className={styles.badgeInfo}>
-                <Icon
-                  fill="none"
-                  name="icon-info"
-                  size={isMobile ? 24 : 28}
-                  stroke={styles.yellowColor}
-                />
-              </div>
-            </Link>
 
             {index === currentIndex && showButton && (
               <div className={styles.buttonPlace}>
