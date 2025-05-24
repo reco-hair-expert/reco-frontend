@@ -1,11 +1,8 @@
 @use "@/styles/variables" as *;
 
 * {
-  user-select: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  // outline: 1px solid green
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
 }
 
 body {
@@ -16,6 +13,8 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 main {
@@ -25,6 +24,7 @@ main {
   width: 100%;
   overflow: hidden;
   gap: 75px;
+  will-change: transform;
 
   @media (max-width: $breakpoint-mobile) {
     gap: 20px;
@@ -43,6 +43,7 @@ button {
     border $transition-speed $transition-style,
     outline $transition-speed $transition-style,
     transform $transition-speed $transition-style;
+  will-change: transform;
 }
 
 .container {
