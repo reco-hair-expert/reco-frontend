@@ -104,6 +104,21 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
             key={index}
             className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
           >
+            <div>
+              {product.isNewProduct && (
+                <div className={styles.newBadge}>NEW</div>
+              )}
+              <Link href={`/${product._id}`}>
+                <div className={styles.badgeInfo}>
+                  <Icon
+                    fill="none"
+                    name="icon-info"
+                    size={isMobile ? 24 : 28}
+                    stroke={styles.yellowColor}
+                  />
+                </div>
+              </Link>
+            </div>
             <Image
               alt={product.name}
               blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..."
@@ -115,17 +130,6 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
               src={product.photo}
               width={300}
             />
-            {product.isNewProduct && <div className={styles.newBadge}>NEW</div>}
-            <Link href={`/${product._id}`}>
-              <div className={styles.badgeInfo}>
-                <Icon
-                  fill="none"
-                  name="icon-info"
-                  size={isMobile ? 24 : 28}
-                  stroke={styles.yellowColor}
-                />
-              </div>
-            </Link>
 
             {index === currentIndex && isMobile && (
               <div className={styles.buttonPlace}>
