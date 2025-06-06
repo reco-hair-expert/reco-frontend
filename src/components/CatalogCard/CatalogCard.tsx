@@ -12,6 +12,7 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(
     product.sizes?.[0]?.size || null
   );
+
   const [showSizeWarning, setShowSizeWarning] = useState(false);
   const { addToCart } = useCart();
 
