@@ -23,7 +23,7 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
             </p>
           </article>
 
-          <a href="/about">Про нас</a>
+          {/* <a href="/about">Про нас</a> */}
         </div>
 
         <div className={styles.featuresImgContainer}>
@@ -48,8 +48,7 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
           <article className={styles.featuresArticleRightBottom}>
             <h3>Комплексний підхід</h3>
             <p className={styles.featuresArticleRightBottomText}>
-              Комплексний підхід : RECO 
-              не лише відновлює, але й забезпечує{" "}
+              Комплексний підхід : RECO не лише відновлює, але й забезпечує{" "}
               <HighlightText>захист, зволоження та живлення</HighlightText>{" "}
               завдяки лінійці продуктів
             </p>

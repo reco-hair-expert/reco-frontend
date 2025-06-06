@@ -14,10 +14,9 @@ import ProductSizeSelector from "../ProductSizeSelector/ProductSizeSelector";
 
 interface ProductCardProps {
   products: Product[];
-  showButton?: boolean;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
+const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(() =>
@@ -27,6 +26,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
   const { addToCart } = useCartContext();
 
   const currentProduct = products[currentIndex];
+
   useEffect(() => {
     const defaultSize = products[currentIndex]?.sizes?.[0]?.size ?? null;
     setSelectedSize(defaultSize);
@@ -119,10 +119,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
                 </div>
               </Link>
             </div>
-
             <Image
               alt={product.name}
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCD/2wBDARUXFy4eHhs4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OD/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..."
               className={styles.productImage}
               height={300}
               placeholder="blur"
@@ -132,44 +131,23 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
               width={300}
             />
 
-            {index === currentIndex && showButton && (
+            {index === currentIndex && isMobile && (
               <div className={styles.buttonPlace}>
-                {isMobile ? (
-                  <Button
-                    className={styles.addToCart}
-                    disabled={!selectedSize}
-                    size="m"
-                    variant="primary"
-                    onClick={handleAddToCart}
-                  >
-                    ДОДАТИ В КОШИК
-                  </Button>
-                ) : (
-                  <Link href={`/catalog`}>
-                    <Button
-                      className={styles.moreButton}
-                      size="l"
-                      variant="secondary"
-                    >
-                      <span className={styles.moreButtonText}>
-                        БІЛЬШЕ ТОВАРІВ
-                      </span>
-                    </Button>
-                  </Link>
-                )}
+                <Button
+                  className={styles.addToCart}
+                  disabled={!selectedSize}
+                  size="m"
+                  variant="primary"
+                  onClick={handleAddToCart}
+                >
+                  ДОДАТИ В КОШИК
+                </Button>
               </div>
             )}
           </div>
         )
       })),
-    [
-      products,
-      currentIndex,
-      selectedSize,
-      isMobile,
-      handleAddToCart,
-      showButton
-    ]
+    [products, currentIndex, selectedSize, isMobile, handleAddToCart]
   );
 
   const swipeHandlers = useSwipeable({
@@ -218,11 +196,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
           ) : (
             <>
               <div>
-                {" "}
                 {renderDescription()}
                 {renderPrice()}
               </div>
-
               <ProductSizeSelector
                 selectedSize={selectedSize}
                 sizes={currentProduct.sizes}
@@ -256,4 +232,4 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
   );
 };
 
-export default ProductCard;
+export default CatalogProductCard;

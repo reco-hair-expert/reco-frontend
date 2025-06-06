@@ -23,34 +23,37 @@ const Footer = ({ className }: FooterProps) => {
     <footer className="container">
       <div className={`${combinedClass} ${styles.footer}`}>
         <div className={styles.footer_container}>
-          <div className={styles.logo}>
-            <Link className={styles.linkLogo} href="/">
-              <Image
-                alt="Логотип компанії"
-                height={64}
-                sizes="(max-width: 768px) 48px, 48px"
-                src="/images/logo/logo.svg"
-                width={64}
+          <div className={styles.textContainer}>
+            <div className={styles.logo}>
+              <Link className={styles.linkLogo} href="/">
+                <Image
+                  alt="Логотип компанії"
+                  height={64}
+                  sizes="(max-width: 768px) 48px, 48px"
+                  src="/images/logo/logo.svg"
+                  width={64}
+                />
+              </Link>
+            </div>
+            <div className={styles.addressForm}>
+              <AddressForm
+                address={address}
+                email={email}
+                phoneNumber={phoneNumber}
               />
-            </Link>
+            </div>
+            <div className={styles.footerLinks}>
+              <FooterLinks />
+            </div>
+            <div className={styles.socialHub}>
+              <SocialMediaHub>
+                <SocialMediaLinks platform={"instagram"} />
+                <SocialMediaLinks platform={"viber"} />
+                <SocialMediaLinks platform={"telegram"} />
+              </SocialMediaHub>
+            </div>
           </div>
-          <div className={styles.addressForm}>
-            <AddressForm
-              address={address}
-              email={email}
-              phoneNumber={phoneNumber}
-            />
-          </div>
-          <div className={styles.footerLinks}>
-            <FooterLinks />
-          </div>
-          <div className={styles.socialHub}>
-            <SocialMediaHub>
-              <SocialMediaLinks platform={"instagram"} />
-              <SocialMediaLinks platform={"viber"} />
-              <SocialMediaLinks platform={"telegram"} />
-            </SocialMediaHub>
-          </div>
+
           <div className={styles.payment_icon_container}>
             <Image
               alt={PAYMENT_ICON.alt}

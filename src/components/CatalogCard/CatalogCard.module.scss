@@ -10,6 +10,8 @@
   height: 485px;
   width: 292px;
   flex-direction: column;
+  justify-content: flex-start;
+
   @media (max-width: $breakpoint-mobile) {
     width: 159px;
     height: 312px;
@@ -18,21 +20,23 @@
 
 .imageContainer {
   width: 100%;
-  height: 100%;
+  height: 240px;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+  margin-top: 50px;
 
-.imageContainer img {
-  width: 90%;
-  height: 80%;
-  padding-bottom: 40px;
-  object-fit: contain;
   @media (max-width: $breakpoint-mobile) {
-    width: 95%;
-    height: 80%;
-    padding-bottom: 50px;
+    height: 150px;
+    margin-top: 20px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    padding: 0;
   }
 }
 
@@ -43,7 +47,9 @@
   display: inline-flex;
   flex-direction: column;
   gap: 12px;
+
   @media (max-width: $breakpoint-mobile) {
+    display: none;
     width: 73px;
     height: 22px;
     font-size: 12px;
@@ -85,7 +91,8 @@
   pointer-events: auto;
 
   &:hover {
-    box-shadow: 0 0 2px 1px rgba(255, 255, 0, 0.6); /* жёлтое размытие */
+    box-shadow: 0 0 2px 1px rgba(255, 255, 0, 0.6);
+    /* жёлтое размытие */
     transition: all 0.3s ease;
   }
 
@@ -99,7 +106,6 @@
 
 .productDetailsContainer {
   padding: 0 16px 16px;
-  margin-top: -100px;
   color: $white-color;
   flex-grow: 1;
   display: flex;
@@ -115,6 +121,11 @@
     font-weight: 500;
     text-transform: uppercase;
     color: $yellow-color;
+
+    @media (max-width: $breakpoint-mobile) {
+      font-size: 14px;
+      height: 48px;
+    }
   }
 
   .productPrice {
@@ -132,6 +143,8 @@
     font-weight: 50;
     margin-bottom: 10px;
     font-size: 14px;
+    height: 36px;
+
     @media (max-width: $breakpoint-mobile) {
       display: none;
     }
@@ -148,7 +161,8 @@
       padding: 8px 12px;
       border: none;
       border-radius: 8px;
-      background-color: rgba(0, 0, 0, 0.3); 
+
+      background-color: rgba(255, 247, 0, 0.3);
       color: $white-color;
       font-size: 14px;
       cursor: pointer;
@@ -163,11 +177,10 @@
         background-color: $black-color;
         color: $white-color;
       }
+
       @media (max-width: $breakpoint-mobile) {
         width: 100%;
-        border: none;
         padding: 0;
-        background-color: transparent;
       }
     }
   }
@@ -202,6 +215,7 @@
         opacity: 0.7;
         cursor: not-allowed;
       }
+
       @media (max-width: $breakpoint-mobile) {
         min-width: 120px;
         font-size: 12px;
@@ -237,6 +251,7 @@
     transform: translate(-50%, -100%);
     opacity: 0;
   }
+
   to {
     transform: translate(-50%, 0);
     opacity: 1;

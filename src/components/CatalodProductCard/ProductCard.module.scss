@@ -68,7 +68,6 @@
   overflow: hidden;
   max-width: 1224px;
   height: 512px;
-  margin: 20px;
   gap: 70px;
   z-index: 10;
   transition:
@@ -299,6 +298,9 @@
 /* Цена */
 .priceContainer {
   margin-top: -37px;
+  font-weight: bold;
+  font-size: 24px;
+
 
   @include mobile {
     left: 0;
@@ -351,7 +353,6 @@
   }
 
   p {
-    font-size: 1rem;
     color: $white-color;
   }
 
