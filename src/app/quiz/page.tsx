@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import Quiz from "@/components/Quiz/Quiz";
 import { quizData } from "@/constants/quizData";
 import styles from "./QuizPage.module.scss";
@@ -12,7 +12,7 @@ const QuizPopup = dynamic(() => import("@/components/Popup/QuizPopup"), {
   ssr: false
 });
 
-export default function QuizPage() {
+function QuizContent() {
   const searchParams = useSearchParams();
   const skipPopup = searchParams.get("direct") === "true";
 
@@ -63,5 +63,13 @@ export default function QuizPage() {
         </div>
       )}
     </main>
+  );
+}
+
+export default function QuizPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <QuizContent />
+    </Suspense>
   );
 }
