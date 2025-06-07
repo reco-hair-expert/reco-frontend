@@ -54,7 +54,12 @@ export const MainPageClient = () => {
     loadProducts();
 
     const popupTimer = setTimeout(() => {
+      // Сохраняем текущую позицию скролла
+      const scrollPosition = window.scrollY;
+      // Показываем попап
       setIsPopupOpen(true);
+      // Возвращаем страницу в исходное положение
+      window.scrollTo(0, scrollPosition);
     }, 5000);
 
     return () => {
@@ -63,7 +68,16 @@ export const MainPageClient = () => {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isPopupOpen ? "hidden" : "auto";
+    if (isPopupOpen) {
+      // Сохраняем текущую позицию скролла
+      const scrollPosition = window.scrollY;
+      // Блокируем скролл
+      document.body.style.overflow = "hidden";
+      // Возвращаем страницу в исходное положение
+      window.scrollTo(0, scrollPosition);
+    } else {
+      document.body.style.overflow = "auto";
+    }
   }, [isPopupOpen]);
 
   const handleClosePopup = () => {
