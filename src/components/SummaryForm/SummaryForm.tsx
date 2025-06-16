@@ -29,7 +29,7 @@ const SummaryForm = () => {
       id="summaryForm"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h2 className={styles.formTitle}>Платіжні дані</h2>
+      <h2 className={styles.formTitle}>Доставка у відділення Нова Пошта</h2>
       <div className={styles.inputContainerWrapper}>
         <div className={styles.inputContainer}>
           <InputLabel htmlFor="firstName" required={true}>

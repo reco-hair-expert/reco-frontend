@@ -70,12 +70,16 @@ const CartSummary = () => {
           <p>₴{total}</p>
         </div>
       </div>
-      <button
-        className={styles.checkoutButton}
-        onClick={() => router.push("/summary")}
-      >
-        ОФОРМИТИ ЗАМОВЛЕННЯ
-      </button>
+
+      {cartItems.length > 0 && (
+        <button
+          className={styles.checkoutButton}
+          onClick={() => router.push("/summary")}
+        >
+          ОФОРМИТИ ЗАМОВЛЕННЯ
+        </button>
+      )}
+
       <button
         className={styles.continueShoppingButton}
         onClick={handleContinueShopping}
