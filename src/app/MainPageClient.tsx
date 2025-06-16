@@ -62,10 +62,6 @@ export const MainPageClient = () => {
     };
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = isPopupOpen ? "hidden" : "auto";
-  }, [isPopupOpen]);
-
   const handleClosePopup = () => {
     setIsPopupOpen(false);
   };
