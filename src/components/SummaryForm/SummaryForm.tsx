@@ -1,34 +1,37 @@
 "use client";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-
+import { useEffect, useImperativeHandle, forwardRef } from "react";
 import styles from "./SummaryForm.module.scss";
-
 import type { FormInput } from "./types/SummaryForm.types";
 import InputLabel from "../InputLabel/InputLabel";
 import handlePhoneChange from "@/utils/handlePhoneChange";
 
-const SummaryForm = () => {
+interface SummaryFormProps {
+  onFormChange: (data: FormInput, isValid: boolean) => void;
+}
+
+const SummaryForm = forwardRef(function SummaryForm({ onFormChange }: SummaryFormProps, ref) {
   const {
     register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-    setValue
-  } = useForm<FormInput>();
+    formState: { errors, isValid },
+    watch,
+    setValue,
+    trigger
+  } = useForm<FormInput>({ mode: "onChange" });
 
-  const onSubmit: SubmitHandler<FormInput> = (data) => {
-    void data;
-    reset();
-  };
+  const values = watch();
+
+  useEffect(() => {
+    onFormChange(values, isValid);
+  }, [values, isValid, onFormChange]);
+
+  useImperativeHandle(ref, () => ({
+    triggerValidation: () => trigger(undefined, { shouldFocus: true })
+  }));
 
   return (
-    <form
-      className={styles.summaryForm}
-      data-testid="summaryForm"
-      id="summaryForm"
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <form className={styles.summaryForm} id="summaryForm">
       <h2 className={styles.formTitle}>Доставка у відділення Нова Пошта</h2>
       <div className={styles.inputContainerWrapper}>
         <div className={styles.inputContainer}>
@@ -106,7 +109,7 @@ const SummaryForm = () => {
         )}
       </div>
 
-      <div className={styles.inputContainer}>
+      {/* <div className={styles.inputContainer}>
         <InputLabel htmlFor="country" required={true}>
           Країна / Регіон
         </InputLabel>
@@ -124,7 +127,7 @@ const SummaryForm = () => {
         {errors.country && (
           <p className={styles.inputErrorText}>{errors.country.message}</p>
         )}
-      </div>
+      </div> */}
 
       <div className={styles.inputContainerWrapper}>
         <div className={styles.inputContainer}>
@@ -182,12 +185,8 @@ const SummaryForm = () => {
           <p className={styles.inputErrorText}>{errors.comment.message}</p>
         )}
       </div>
-
-      <button className={styles.submitButton} type="submit">
-        Підтвердити замовлення
-      </button>
     </form>
   );
-};
+});
 
 export default SummaryForm;

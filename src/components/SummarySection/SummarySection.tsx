@@ -1,16 +1,21 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useRef } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import HighlightText from "@/components/HighLightText/HighLightText";
 import { useCart } from "@/context/CartContext";
 import styles from "./SummarySection.module.scss";
 import LiqPayButton from "../LiqPayButton/LiqPayButton";
+import SummaryForm from "../SummaryForm/SummaryForm";
 
 const SummarySection = () => {
   const { cartItems } = useCart();
   const router = useRouter();
+
+  const [formData, setFormData] = useState<any>({});
+  const [formValid, setFormValid] = useState(false);
+  const formRef = useRef<any>(null);
 
   const getItemPrice = (item: any) => {
     if (!item.size || !item.product.sizes) return 0;
@@ -36,6 +41,15 @@ const SummarySection = () => {
 
   const generateOrderId = () => {
     return `ORDER_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  };
+
+  // Обработчик для LiqPayButton
+  const handleLiqPayClick = async (e: React.FormEvent) => {
+    if (!formValid && formRef.current) {
+      e.preventDefault();
+      await formRef.current.triggerValidation();
+    }
+    // если форма валидна, LiqPayButton сам обработает submit
   };
 
   return (
@@ -88,7 +102,7 @@ const SummarySection = () => {
         <p>₴{cartTotal}</p>
       </div>
 
-      <div className={styles.deliveryOptions}>
+      {/* <div className={styles.deliveryOptions}>
         <p>Доставка</p>
         <div className={styles.deliveryOption}>
           <input id="delivery-standard" name="delivery" type="radio" />
@@ -108,7 +122,15 @@ const SummarySection = () => {
             Експрес доставка
           </label>
         </div>
-      </div>
+      </div> */}
+
+      <SummaryForm
+        ref={formRef}
+        onFormChange={(data, isValid) => {
+          setFormData(data);
+          setFormValid(isValid);
+        }}
+      />
 
       <div className={styles.buttonPlaceholder}>
         {cartTotal > 0 && (
@@ -116,12 +138,13 @@ const SummarySection = () => {
             amount={cartTotal}
             description={`Замовлення на суму ${cartTotal} грн`}
             orderId={generateOrderId()}
+            deliveryData={formData}
+            cartItems={cartItems}
+            onClick={handleLiqPayClick}
             onSuccess={() => {
-              // Handle successful payment
               router.push("/payment/success");
             }}
             onError={() => {
-              // Handle payment error
               router.push("/payment/error");
             }}
           />

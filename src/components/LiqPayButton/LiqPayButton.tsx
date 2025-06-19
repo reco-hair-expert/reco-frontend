@@ -7,6 +7,10 @@ interface LiqPayButtonProps {
   amount: number;
   description: string;
   orderId: string;
+  deliveryData: any;
+  cartItems: any[];
+  disabled?: boolean;
+  onClick?: (e: React.FormEvent) => void;
   onSuccess?: () => void;
   onError?: () => void;
 }
@@ -15,6 +19,10 @@ const LiqPayButton = ({
   amount,
   description,
   orderId,
+  deliveryData,
+  cartItems,
+  disabled,
+  onClick,
   onSuccess,
   onError,
 }: LiqPayButtonProps) => {
@@ -66,13 +74,11 @@ const LiqPayButton = ({
   // }, [amount, description, orderId, onError]);
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Пока бэкенд не готов, мы просто не будем ничего делать
-    // В будущем, здесь будет вызов к вашему бэкенду для получения данных LiqPay
+    if (onClick) {
+      const result = await onClick(e);
+      if (e.defaultPrevented) return;
+    }
     try {
-      // TODO: Раскомментируйте и замените на реальный вызов к вашему бэкенду
-      // который вернет { data: string, signature: string }
       const response = await fetch("YOUR_EXTERNAL_LIQPAY_API_ENDPOINT", {
         method: "POST",
         headers: {
@@ -82,8 +88,10 @@ const LiqPayButton = ({
           amount,
           description,
           orderId,
+          deliveryData,
+          cartItems,
           result_url: `${window.location.origin}/payment/success`,
-          server_url: `YOUR_EXTERNAL_LIQPAY_CALLBACK_ENDPOINT`, // Это будет эндпоинт вашего внешнего бэкенда для колбэков LiqPay
+          server_url: `YOUR_EXTERNAL_LIQPAY_CALLBACK_ENDPOINT`,
         }),
       });
 
@@ -93,7 +101,6 @@ const LiqPayButton = ({
 
       const { data, signature } = await response.json();
 
-      // После получения данных от бэкенда, отправляем форму в LiqPay
       const form = document.createElement("form");
       form.method = "POST";
       form.action = "https://www.liqpay.ua/api/3/checkout";
@@ -114,6 +121,7 @@ const LiqPayButton = ({
       form.submit();
       document.body.removeChild(form);
 
+      if (onSuccess) onSuccess();
     } catch (error) {
       console.error("Error initiating LiqPay payment:", error);
       if (onError) onError();
@@ -122,7 +130,7 @@ const LiqPayButton = ({
 
   return (
     <form onSubmit={handleSubmit} className={styles.liqpayForm}>
-      <button type="submit" className={styles.liqpayButton}>
+      <button type="submit" className={styles.liqpayButton} disabled={disabled}>
         Оплатити через LiqPay
       </button>
     </form>
