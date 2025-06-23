@@ -1,5 +1,4 @@
 import styles from "./SummaryPage.module.scss";
-import SummarySection from "@/components/SummarySection/SummarySection";
 import SummaryForm from "@/components/SummaryForm/SummaryForm";
 import "@/styles/index.scss";
 import type { Metadata } from "next";
@@ -35,7 +34,6 @@ export default function SummaryPage() {
       <div className={styles.summaryPage}>
         <div className={styles.summaryContainer}>
           <SummaryForm />
-          <SummarySection />
         </div>
       </div>
     </section>
