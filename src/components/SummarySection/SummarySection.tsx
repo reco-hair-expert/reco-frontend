@@ -8,6 +8,7 @@ import { useCart } from "@/context/CartContext";
 import styles from "./SummarySection.module.scss";
 import LiqPayButton from "../LiqPayButton/LiqPayButton";
 import SummaryForm from "../SummaryForm/SummaryForm";
+// import LiqPayTestButton from "../Liqtest/LTB";
 
 const SummarySection = () => {
   const { cartItems } = useCart();
@@ -133,6 +134,7 @@ const SummarySection = () => {
       />
 
       <div className={styles.buttonPlaceholder}>
+        {/* <LiqPayTestButton /> */}
         {cartTotal > 0 && (
           <LiqPayButton
             amount={cartTotal}
