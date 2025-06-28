@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./LiqPayButton.module.scss";
 
 interface LiqPayButtonProps {
@@ -15,6 +15,12 @@ interface LiqPayButtonProps {
   onError?: () => void;
 }
 
+declare global {
+  interface Window {
+    LiqPayCheckout?: any;
+  }
+}
+
 const LiqPayButton = ({
   amount,
   description,
@@ -26,114 +32,55 @@ const LiqPayButton = ({
   onSuccess,
   onError,
 }: LiqPayButtonProps) => {
-  const [formData, setFormData] = useState<{
-    data: string;
-    signature: string;
-    url: string;
-  } | null>(null);
+  const liqpayRef = useRef<HTMLDivElement>(null);
 
-  // useEffect(() => {
-  //   // Этот useEffect будет использоваться для получения данных LiqPay
-  //   // от вашего внешнего бэкенда.
-  //   // Когда ваш бэкенд будет готов, раскомментируйте этот блок
-  //   // и замените заглушки реальными вызовами API.
-  //   const fetchLiqPayData = async () => {
-  //     try {
-  //       // TODO: Замените на реальный эндпоинт вашего бэкенда для генерации данных LiqPay
-  //       const response = await fetch("YOUR_EXTERNAL_LIQPAY_API_ENDPOINT", {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({
-  //           amount,
-  //           description,
-  //           orderId,
-  //           result_url: `${window.location.origin}/payment/success`,
-  //           server_url: `${window.location.origin}/api/payment/callback`, // Этот URL должен быть доступен для LiqPay
-  //         }),
-  //       });
+  useEffect(() => {
+    if (typeof window !== "undefined" && liqpayRef.current) {
+      if (!document.getElementById("liqpay-checkout-script")) {
+        const script = document.createElement("script");
+        script.src = "https://static.liqpay.ua/libjs/checkout.js";
+        script.async = true;
+        script.id = "liqpay-checkout-script";
+        document.body.appendChild(script);
+      }
+    }
+  }, []);
 
-  //       if (!response.ok) {
-  //         throw new Error("Failed to fetch LiqPay data from backend");
-  //       }
+  // Пример тестовых data/signature для sandbox (реальные значения должен отдавать backend)
+  const sandboxData = "eyJwdWJsaWNfa2V5Ijoic2FuZGJveF9pNDIyMzk1MDk2OCIsInZlcnNpb24iOjMsImFtb3VudCI6IjEwMCIsImN1cnJlbmN5IjoiVUFIIiwibGFuZ3VhZ2UiOiJ1ayIsInR5cGUiOiJidXkiLCJkZXNjcmlwdGlvbiI6IlRlc3Qgd2l0aCBMSVFQQVkgU0RLIiwib3JkZXJfaWQiOiJURU1QX09SREVSIiwicmVzdWx0X3VybCI6Imh0dHBzOi8vZXhhbXBsZS5jb20vcGF5bWVudC9zdWNjZXNzIiwic2VydmVyX3VybCI6Imh0dHBzOi8vZXhhbXBsZS5jb20vYXBpL3BheW1lbnQvY2FsbGJhY2sifQ==";
+  const sandboxSignature = "test";
 
-  //       const { data, signature } = await response.json();
-  //       setFormData({
-  //         data,
-  //         signature,
-  //         url: "https://www.liqpay.ua/api/3/checkout",
-  //       });
-  //     } catch (error) {
-  //       console.error("Error fetching LiqPay data:", error);
-  //       if (onError) onError();
-  //     }
-  //   };
-
-  //   fetchLiqPayData();
-  // }, [amount, description, orderId, onError]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLiqpayClick = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (disabled) return;
     if (onClick) {
-      const result = await onClick(e);
+      await onClick(e);
       if (e.defaultPrevented) return;
     }
-    try {
-      const response = await fetch("YOUR_EXTERNAL_LIQPAY_API_ENDPOINT", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          amount,
-          description,
-          orderId,
-          deliveryData,
-          cartItems,
-          result_url: `${window.location.origin}/payment/success`,
-          server_url: `YOUR_EXTERNAL_LIQPAY_CALLBACK_ENDPOINT`,
-        }),
+    if (window.LiqPayCheckout) {
+      window.LiqPayCheckout.init({
+        data: sandboxData,
+        signature: sandboxSignature,
+        embedTo: liqpayRef.current,
+        mode: "embed",
+        language: "uk"
       });
-
-      if (!response.ok) {
-        throw new Error("Failed to get LiqPay data from external backend");
-      }
-
-      const { data, signature } = await response.json();
-
-      const form = document.createElement("form");
-      form.method = "POST";
-      form.action = "https://www.liqpay.ua/api/3/checkout";
-
-      const dataInput = document.createElement("input");
-      dataInput.type = "hidden";
-      dataInput.name = "data";
-      dataInput.value = data;
-
-      const signatureInput = document.createElement("input");
-      signatureInput.type = "hidden";
-      signatureInput.name = "signature";
-      signatureInput.value = signature;
-
-      form.appendChild(dataInput);
-      form.appendChild(signatureInput);
-      document.body.appendChild(form);
-      form.submit();
-      document.body.removeChild(form);
-
       if (onSuccess) onSuccess();
-    } catch (error) {
-      console.error("Error initiating LiqPay payment:", error);
+    } else {
+      alert("LiqPay SDK не загружен");
       if (onError) onError();
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.liqpayForm}>
-      <button type="submit" className={styles.liqpayButton} disabled={disabled}>
-        Оплатити через LiqPay
-      </button>
-    </form>
+    <div>
+      <form onSubmit={handleLiqpayClick} className={styles.liqpayForm}>
+        <button type="submit" className={styles.liqpayButton} disabled={disabled}>
+          Оплатити через LiqPay
+        </button>
+      </form>
+      <div ref={liqpayRef} style={{ marginTop: 24 }} />
+    </div>
   );
 };
 

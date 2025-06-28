@@ -1,7 +1,7 @@
 "use client";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
-import { useEffect, useImperativeHandle, forwardRef } from "react";
+import { useEffect, useImperativeHandle, forwardRef, useRef } from "react";
 import styles from "./SummaryForm.module.scss";
 import type { FormInput } from "./types/SummaryForm.types";
 import InputLabel from "../InputLabel/InputLabel";
@@ -21,9 +21,17 @@ const SummaryForm = forwardRef(function SummaryForm({ onFormChange }: SummaryFor
   } = useForm<FormInput>({ mode: "onChange" });
 
   const values = watch();
+  const prev = useRef<{ values: FormInput; isValid: boolean } | null>(null);
 
   useEffect(() => {
-    onFormChange(values, isValid);
+    const changed =
+      !prev.current ||
+      JSON.stringify(prev.current.values) !== JSON.stringify(values) ||
+      prev.current.isValid !== isValid;
+    if (changed) {
+      onFormChange(values, isValid);
+      prev.current = { values, isValid };
+    }
   }, [values, isValid, onFormChange]);
 
   useImperativeHandle(ref, () => ({
@@ -97,11 +105,15 @@ const SummaryForm = forwardRef(function SummaryForm({ onFormChange }: SummaryFor
             minLength: {
               value: 17,
               message: "Введіть повний номер"
+            },
+            pattern: {
+              value: /^\+380 \d{2} \d{3} \d{2} \d{2}$/,
+              message: "Введіть коректний номер у форматі +380 XX XXX XX XX"
             }
           })}
           className={`${styles.inputField} ${errors.phoneNumber ? styles.inputError : ""}`}
-          onChange={(event) => handlePhoneChange(event, setValue)}
-          onFocus={(event) => handlePhoneChange(event, setValue)}
+          onChange={(event) => handlePhoneChange(event, (field, value) => setValue(field, value, { shouldValidate: true }))}
+          onFocus={(event) => handlePhoneChange(event, (field, value) => setValue(field, value, { shouldValidate: true }))}
         />
 
         {errors.phoneNumber && (
