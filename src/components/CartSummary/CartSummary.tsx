@@ -39,10 +39,10 @@ const CartSummary = () => {
       <div className={styles.summaryContainer}>
         <h2 className={styles.summaryHeader}>ПІДСУМОК КОШИКА</h2>
         <div className={styles.totalPrice}>
-          <p>Проміжний підсумок: </p>
-          <p>₴{total}</p>
+          {/* <p>Проміжний підсумок: </p>
+          <p>₴{total}</p> */}
         </div>
-        <div className={styles.summaryDelyvery}>
+        {/* <div className={styles.summaryDelyvery}>
           <h3 className={styles.deliveryHeader}> Доставка</h3>
           <div className={styles.deliveryOptions}>
             <div className={styles.deliveryOption}>
@@ -64,18 +64,22 @@ const CartSummary = () => {
               </label>
             </div>
           </div>
-        </div>
+        </div> */}
         <div className={styles.summaryTotal}>
           <h3>Всього</h3>
           <p>₴{total}</p>
         </div>
       </div>
-      <button
-        className={styles.checkoutButton}
-        onClick={() => router.push("/summary")}
-      >
-        ОФОРМИТИ ЗАМОВЛЕННЯ
-      </button>
+
+      {cartItems.length > 0 && (
+        <button
+          className={styles.checkoutButton}
+          onClick={() => router.push("/summary")}
+        >
+          ОФОРМИТИ ЗАМОВЛЕННЯ
+        </button>
+      )}
+
       <button
         className={styles.continueShoppingButton}
         onClick={handleContinueShopping}

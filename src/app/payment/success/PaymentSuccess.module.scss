@@ -1,0 +1,50 @@
+@use "@/styles/variables" as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 2rem;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: $white-color;
+}
+
+.message {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: $white-color;
+  max-width: 600px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  height: 58px;
+  background-color: $yellow-color;
+  border-radius: 58px;
+  border: 1px solid $yellow-color;
+  color: black;
+  font-weight: bold;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: #fbbc058c;
+    border-color: #fbbc058c;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    max-width: 320px;
+  }
+} 

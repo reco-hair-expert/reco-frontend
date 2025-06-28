@@ -1,15 +1,21 @@
 "use client";
 
-import { useMemo } from "react";
-import { useCart } from "@/context/CartContext";
-import HighlightText from "@/components/HighLightText/HighLightText";
+import { useMemo, useState, useRef } from "react";
 import Image from "next/image";
-import styles from "./SummarySection.module.scss";
 import { useRouter } from "next/navigation";
+import HighlightText from "@/components/HighLightText/HighLightText";
+import { useCart } from "@/context/CartContext";
+import styles from "./SummarySection.module.scss";
+import LiqPayButton from "../LiqPayButton/LiqPayButton";
+import SummaryForm from "../SummaryForm/SummaryForm";
 
 const SummarySection = () => {
   const { cartItems } = useCart();
   const router = useRouter();
+
+  const [formData, setFormData] = useState<any>({});
+  const [formValid, setFormValid] = useState(false);
+  const formRef = useRef<any>(null);
 
   const getItemPrice = (item: any) => {
     if (!item.size || !item.product.sizes) return 0;
@@ -19,18 +25,31 @@ const SummarySection = () => {
       return sizeObj?.price || 0;
     }
 
-    return item.product.sizes[item.size] || 0;
+    return (item.product.sizes as Record<string, number>)[item.size] || 0;
   };
 
   const cartTotal = useMemo(() => {
-    return cartItems.reduce((total, item) => {
+    return cartItems.reduce((acc: number, item: any) => {
       const price = getItemPrice(item);
-      return total + price * (item.quantity || 1);
+      return acc + price * (item.quantity || 1);
     }, 0);
   }, [cartItems]);
 
   const handleContinueShopping = () => {
     router.push("/catalog");
+  };
+
+  const generateOrderId = () => {
+    return `ORDER_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+  };
+
+  // Обработчик для LiqPayButton
+  const handleLiqPayClick = async (e: React.FormEvent) => {
+    if (!formValid && formRef.current) {
+      e.preventDefault();
+      await formRef.current.triggerValidation();
+    }
+    // если форма валидна, LiqPayButton сам обработает submit
   };
 
   return (
@@ -83,7 +102,7 @@ const SummarySection = () => {
         <p>₴{cartTotal}</p>
       </div>
 
-      <div className={styles.deliveryOptions}>
+      {/* <div className={styles.deliveryOptions}>
         <p>Доставка</p>
         <div className={styles.deliveryOption}>
           <input id="delivery-standard" name="delivery" type="radio" />
@@ -103,15 +122,33 @@ const SummarySection = () => {
             Експрес доставка
           </label>
         </div>
-      </div>
+      </div> */}
+
+      <SummaryForm
+        ref={formRef}
+        onFormChange={(data, isValid) => {
+          setFormData(data);
+          setFormValid(isValid);
+        }}
+      />
 
       <div className={styles.buttonPlaceholder}>
-        <button
-          className={styles.checkoutButton}
-          onClick={() => alert("Замовлення підтверджено!")}
-        >
-          Підтвердити замовлення
-        </button>
+        {cartTotal > 0 && (
+          <LiqPayButton
+            amount={cartTotal}
+            description={`Замовлення на суму ${cartTotal} грн`}
+            orderId={generateOrderId()}
+            deliveryData={formData}
+            cartItems={cartItems}
+            onClick={handleLiqPayClick}
+            onSuccess={() => {
+              router.push("/payment/success");
+            }}
+            onError={() => {
+              router.push("/payment/error");
+            }}
+          />
+        )}
         <button
           className={styles.continueShoppingButton}
           onClick={handleContinueShopping}
