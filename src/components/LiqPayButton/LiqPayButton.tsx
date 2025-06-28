@@ -11,6 +11,7 @@ interface LiqPayButtonProps {
   deliveryData: any;
   cartItems: any[];
   disabled?: boolean;
+  isFormValid?: boolean;
   onClick?: (e: React.FormEvent) => void;
   onSuccess?: () => void;
   onError?: () => void;
@@ -31,14 +32,15 @@ const LiqPayButton = ({
   deliveryData,
   cartItems,
   disabled,
+  isFormValid,
   onClick,
   onSuccess,
   onError,
 }: LiqPayButtonProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [formValid, setFormValid] = useState(false);
 
-  // Загружаем SDK один раз
   useEffect(() => {
     if (typeof window !== "undefined" && !document.getElementById("liqpay-checkout-script")) {
       const script = document.createElement("script");
@@ -51,10 +53,11 @@ const LiqPayButton = ({
 
   const handleLiqPay = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (disabled || loading) return;
+    if (disabled || loading || isFormValid === false) return;
     if (onClick) await onClick(e);
 
     try {
+      console.log("isFormValid:", isFormValid, "disabled:", disabled, "loading:", loading);
       setLoading(true);
 
       const res = await fetch(`${API_BASE_URL}/api/payment/create`, {
@@ -83,7 +86,7 @@ const LiqPayButton = ({
             router.push("/payment/success");
           } else {
             if (onError) onError();
-            alert("Платеж не прошёл или отменён.");
+            router.push("/payment/error");
           }
         })
         .on("liqpay.ready", () => {
@@ -94,8 +97,8 @@ const LiqPayButton = ({
         });
     } catch (error) {
       console.error("Ошибка LiqPay:", error);
-      alert("Ошибка при инициализации оплаты");
       if (onError) onError();
+      router.push("/payment/error");
     } finally {
       setLoading(false);
     }
@@ -107,7 +110,7 @@ const LiqPayButton = ({
         <button
           type="button"
           className={styles.liqpayButton}
-          disabled={disabled || loading}
+          disabled={disabled || loading || isFormValid === false}
           onClick={handleLiqPay}
         >
           {loading ? "Загрузка..." : "Оплатити через LiqPay"}

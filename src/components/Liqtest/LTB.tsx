@@ -36,8 +36,6 @@ const LiqPayTestButton = () => {
 
     alertedRef.current = false;
 
-    const order_id = "order-" + Date.now();
-
     const checkout = window.LiqPayCheckout.init({
       data: TEST_DATA,
       signature: TEST_SIGNATURE,

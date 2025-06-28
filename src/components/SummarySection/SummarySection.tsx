@@ -41,7 +41,7 @@ const SummarySection = () => {
   };
 
   const generateOrderId = () => {
-    return `ORDER_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `RECO_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   };
 
   // Обработчик для LiqPayButton
@@ -142,6 +142,7 @@ const SummarySection = () => {
             orderId={generateOrderId()}
             deliveryData={formData}
             cartItems={cartItems}
+            isFormValid={formValid}  
             onClick={handleLiqPayClick}
             onSuccess={() => {
               router.push("/payment/success");
