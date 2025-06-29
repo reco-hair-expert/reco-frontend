@@ -8,7 +8,6 @@ import { useCart } from "@/context/CartContext";
 import styles from "./SummarySection.module.scss";
 import LiqPayButton from "../LiqPayButton/LiqPayButton";
 import SummaryForm from "../SummaryForm/SummaryForm";
-// import LiqPayTestButton from "../Liqtest/LTB";
 
 const SummarySection = () => {
   const { cartItems } = useCart();
@@ -103,28 +102,6 @@ const SummarySection = () => {
         <p>₴{cartTotal}</p>
       </div>
 
-      {/* <div className={styles.deliveryOptions}>
-        <p>Доставка</p>
-        <div className={styles.deliveryOption}>
-          <input id="delivery-standard" name="delivery" type="radio" />
-          <label
-            className={styles.deliveryOptionDescription}
-            htmlFor="delivery-standard"
-          >
-            Стандартна доставка
-          </label>
-        </div>
-        <div className={styles.deliveryOption}>
-          <input id="delivery-express" name="delivery" type="radio" />
-          <label
-            className={styles.deliveryOptionDescription}
-            htmlFor="delivery-express"
-          >
-            Експрес доставка
-          </label>
-        </div>
-      </div> */}
-
       <SummaryForm
         ref={formRef}
         onFormChange={(data, isValid) => {
@@ -138,11 +115,16 @@ const SummarySection = () => {
         {cartTotal > 0 && (
           <LiqPayButton
             amount={cartTotal}
-            description={`Замовлення на суму ${cartTotal} грн`}
+            description={cartItems
+              .map(
+                (item) =>
+                  `${item.product.name}${item.size ? ` (${item.size})` : ""} x${item.quantity} — ${getItemPrice(item) * item.quantity} грн`
+              )
+              .join("; ")}
             orderId={generateOrderId()}
             deliveryData={formData}
             cartItems={cartItems}
-            isFormValid={formValid}  
+            isFormValid={formValid}
             onClick={handleLiqPayClick}
             onSuccess={() => {
               router.push("/payment/success");
