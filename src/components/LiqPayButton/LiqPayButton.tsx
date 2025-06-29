@@ -75,7 +75,6 @@ const LiqPayButton = ({
         data,
         signature,
         embedTo: "#liqpay_checkout",
-        mode: "popup", 
       });
 
       checkout
