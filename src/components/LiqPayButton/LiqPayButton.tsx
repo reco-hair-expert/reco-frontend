@@ -39,7 +39,6 @@ const LiqPayButton = ({
 }: LiqPayButtonProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined" && !document.getElementById("liqpay-checkout-script")) {
@@ -57,10 +56,9 @@ const LiqPayButton = ({
     if (onClick) await onClick(e);
 
     try {
-      console.log("isFormValid:", isFormValid, "disabled:", disabled, "loading:", loading);
       setLoading(true);
 
-      const res = await fetch(`${API_BASE_URL}/api/payment/create`, {
+      const res = await fetch(`${API_BASE_URL}/payments/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount, description, orderId, deliveryData, cartItems }),
