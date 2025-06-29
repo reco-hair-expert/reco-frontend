@@ -120,7 +120,7 @@ const SummarySection = () => {
                 (item) =>
                   `${item.product.name}${item.size ? ` (${item.size})` : ""} x${item.quantity} — ${getItemPrice(item) * item.quantity} грн`
               )
-              .join("; ")}
+              .join("\n")}
             orderId={generateOrderId()}
             deliveryData={formData}
             cartItems={cartItems}
