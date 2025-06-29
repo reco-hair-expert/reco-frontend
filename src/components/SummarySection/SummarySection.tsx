@@ -16,6 +16,7 @@ const SummarySection = () => {
   const [formData, setFormData] = useState<any>({});
   const [formValid, setFormValid] = useState(false);
   const formRef = useRef<any>(null);
+  const [orderId, setOrderId] = useState<string>("");
 
   const getItemPrice = (item: any) => {
     if (!item.size || !item.product.sizes) return 0;
@@ -40,7 +41,9 @@ const SummarySection = () => {
   };
 
   const generateOrderId = () => {
-    return `RECO_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    const id = `RECO_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    setOrderId(id);
+    return id;
   };
 
   // Обработчик для LiqPayButton
@@ -127,7 +130,7 @@ const SummarySection = () => {
             isFormValid={formValid}
             onClick={handleLiqPayClick}
             onSuccess={() => {
-              router.push("/payment/success");
+              router.push(`/payment/success?orderId=${orderId}`);
             }}
             onError={() => {
               router.push("/payment/error");
