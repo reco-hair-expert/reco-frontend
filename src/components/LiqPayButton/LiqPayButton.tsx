@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import styles from "./LiqPayButton.module.scss";
 import { useRouter } from "next/navigation";
+import { useCart } from "@/context/CartContext";
 
 interface LiqPayButtonProps {
   amount: number;
@@ -38,6 +39,7 @@ const LiqPayButton = ({
   onError,
 }: LiqPayButtonProps) => {
   const router = useRouter();
+  const { clearCart } = useCart();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -81,6 +83,7 @@ const LiqPayButton = ({
           console.log("Payment status:", data.status);
           if (data.status === "success" || data.status === "sandbox") {
             if (onSuccess) onSuccess();
+            clearCart();
             router.push("/payment/success");
           } else {
             if (onError) onError();
