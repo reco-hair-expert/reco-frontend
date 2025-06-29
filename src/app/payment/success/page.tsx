@@ -1,16 +1,14 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import styles from "./PaymentSuccess.module.scss";
-import { Suspense } from "react";
 
-function PaymentSuccessContent() {
+export default function PaymentSuccess() {
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const orderId = searchParams.get("orderId");
 
   useEffect(() => {
+    // Clear cart after successful payment
     localStorage.removeItem("cart");
   }, []);
 
@@ -20,9 +18,6 @@ function PaymentSuccessContent() {
       <p className={styles.message}>
         Ваше замовлення успішно оплачено. Ми надіслали підтвердження на вашу електронну пошту.
       </p>
-      {orderId && (
-        <p className={styles.orderId}>Номер замовлення: <b>{orderId}</b></p>
-      )}
       <button
         className={styles.button}
         onClick={() => router.push("/catalog")}
@@ -30,13 +25,5 @@ function PaymentSuccessContent() {
         Повернутися до каталогу
       </button>
     </div>
-  );
-}
-
-export default function PaymentSuccess() {
-  return (
-    <Suspense>
-      <PaymentSuccessContent />
-    </Suspense>
   );
 } 
