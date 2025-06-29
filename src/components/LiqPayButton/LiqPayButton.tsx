@@ -57,7 +57,6 @@ const LiqPayButton = ({
     if (onClick) await onClick(e);
 
     try {
-      console.log("isFormValid:", isFormValid, "disabled:", disabled, "loading:", loading);
       setLoading(true);
 
       const res = await fetch(`${API_BASE_URL}/payments/create`, {
