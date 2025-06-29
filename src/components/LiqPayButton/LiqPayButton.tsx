@@ -60,7 +60,7 @@ const LiqPayButton = ({
       console.log("isFormValid:", isFormValid, "disabled:", disabled, "loading:", loading);
       setLoading(true);
 
-      const res = await fetch(`${API_BASE_URL}/api/payments/create`, {
+      const res = await fetch(`${API_BASE_URL}/payments/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ amount, description, orderId, deliveryData, cartItems }),
