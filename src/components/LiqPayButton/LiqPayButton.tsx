@@ -39,7 +39,6 @@ const LiqPayButton = ({
 }: LiqPayButtonProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [formValid, setFormValid] = useState(false);
 
   useEffect(() => {
     if (typeof window !== "undefined" && !document.getElementById("liqpay-checkout-script")) {
