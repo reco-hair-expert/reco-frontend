@@ -114,7 +114,6 @@ const SummarySection = () => {
       />
 
       <div className={styles.buttonPlaceholder}>
-        {/* <LiqPayTestButton /> */}
         {cartTotal > 0 && (
           <LiqPayButton
             amount={cartTotal}
