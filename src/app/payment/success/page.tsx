@@ -3,14 +3,14 @@
 import { useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import styles from "./PaymentSuccess.module.scss";
+import { Suspense } from "react";
 
-export default function PaymentSuccess() {
+function PaymentSuccessContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const orderId = searchParams.get("orderId");
 
   useEffect(() => {
-    // Clear cart after successful payment
     localStorage.removeItem("cart");
   }, []);
 
@@ -30,5 +30,13 @@ export default function PaymentSuccess() {
         Повернутися до каталогу
       </button>
     </div>
+  );
+}
+
+export default function PaymentSuccess() {
+  return (
+    <Suspense>
+      <PaymentSuccessContent />
+    </Suspense>
   );
 } 
