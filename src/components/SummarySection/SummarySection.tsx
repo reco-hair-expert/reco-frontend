@@ -39,9 +39,6 @@ const SummarySection = () => {
     router.push("/catalog");
   };
 
-  const generateOrderId = () => {
-    return `RECO_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  };
 
   // Обработчик для LiqPayButton
   const handleLiqPayClick = async (e: React.FormEvent) => {
@@ -121,7 +118,6 @@ const SummarySection = () => {
                   `${item.product.name}${item.size ? ` (${item.size})` : ""} x${item.quantity} — ${getItemPrice(item) * item.quantity} грн`
               )
               .join("\n")}
-            orderId={generateOrderId()}
             deliveryData={formData}
             cartItems={cartItems}
             isFormValid={formValid}

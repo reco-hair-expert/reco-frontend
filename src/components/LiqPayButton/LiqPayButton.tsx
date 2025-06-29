@@ -8,7 +8,6 @@ import { useCart } from "@/context/CartContext";
 interface LiqPayButtonProps {
   amount: number;
   description: string;
-  orderId: string;
   deliveryData: any;
   cartItems: any[];
   disabled?: boolean;
@@ -29,21 +28,23 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 const LiqPayButton = ({
   amount,
   description,
-  orderId,
   deliveryData,
   cartItems,
   disabled,
   isFormValid,
   onClick,
   onSuccess,
-  onError,
+  onError
 }: LiqPayButtonProps) => {
   const router = useRouter();
   const { clearCart } = useCart();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined" && !document.getElementById("liqpay-checkout-script")) {
+    if (
+      typeof window !== "undefined" &&
+      !document.getElementById("liqpay-checkout-script")
+    ) {
       const script = document.createElement("script");
       script.src = "https://static.liqpay.ua/libjs/checkout.js";
       script.async = true;
@@ -60,10 +61,21 @@ const LiqPayButton = ({
     try {
       setLoading(true);
 
+      console.log("LiqPay payload:", {
+        amount,
+        description,
+        deliveryData,
+        cartItems
+      });
       const res = await fetch(`${API_BASE_URL}/payments/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ amount, description, orderId, deliveryData, cartItems }),
+        body: JSON.stringify({
+          amount,
+          description,
+          deliveryData,
+          cartItems
+        })
       });
 
       if (!res.ok) throw new Error(`Ошибка запроса: ${res.status}`);
@@ -75,6 +87,7 @@ const LiqPayButton = ({
         data,
         signature,
         embedTo: "#liqpay_checkout",
+        mode: "popup"
       });
 
       checkout
