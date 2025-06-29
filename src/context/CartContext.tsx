@@ -13,6 +13,7 @@ interface CartContextValue {
   ) => void;
   cartTotal: number;
   cartCount: number;
+  clearCart: () => void;
 }
 
 export const CartContext = createContext<CartContextValue | undefined>(
@@ -99,6 +100,10 @@ export const CartProvider = ({ children }: Props) => {
     );
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   const total = cartItems.reduce((total, item) => {
     const sizePrice = item.size
       ? item.product.sizes.find((s) => s.size === item.size)?.price || 0
@@ -115,7 +120,8 @@ export const CartProvider = ({ children }: Props) => {
         removeFromCart,
         updateCartItemQuantity,
         cartTotal: total,
-        cartCount
+        cartCount,
+        clearCart
       }}
     >
       {children}
