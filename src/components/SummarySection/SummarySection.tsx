@@ -8,6 +8,7 @@ import { useCart } from "@/context/CartContext";
 import styles from "./SummarySection.module.scss";
 import LiqPayButton from "../LiqPayButton/LiqPayButton";
 import SummaryForm from "../SummaryForm/SummaryForm";
+// import LiqPayTestButton from "../Liqtest/LTB";
 
 const SummarySection = () => {
   const { cartItems } = useCart();
@@ -40,7 +41,7 @@ const SummarySection = () => {
   };
 
   const generateOrderId = () => {
-    return `ORDER_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+    return `RECO_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   };
 
   // Обработчик для LiqPayButton
@@ -133,6 +134,7 @@ const SummarySection = () => {
       />
 
       <div className={styles.buttonPlaceholder}>
+        {/* <LiqPayTestButton /> */}
         {cartTotal > 0 && (
           <LiqPayButton
             amount={cartTotal}
@@ -140,6 +142,7 @@ const SummarySection = () => {
             orderId={generateOrderId()}
             deliveryData={formData}
             cartItems={cartItems}
+            isFormValid={formValid}  
             onClick={handleLiqPayClick}
             onSuccess={() => {
               router.push("/payment/success");

@@ -11,8 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 500px;
+  width: 480px;
   height: 58px;
   background-color: $yellow-color;
   border-radius: 58px;
@@ -29,6 +28,12 @@
   }
 
   @media (max-width: $breakpoint-mobile) {
-    max-width: 320px;
+    width: 320px;
   }
 } 
+.liqpayButton:disabled,
+.liqpayButton.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
