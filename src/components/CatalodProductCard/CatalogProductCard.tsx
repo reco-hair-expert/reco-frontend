@@ -24,13 +24,16 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
   );
   const [offsetRadius, setOffsetRadius] = useState(2);
   const { addToCart } = useCartContext();
+  const [addedImpact, setAddedImpact] = useState(false);
 
-  const currentProduct = products[currentIndex];
+  const newProducts = useMemo(() => products.filter(p => p.isNewProduct), [products]);
+
+  const currentProduct = newProducts[currentIndex] || {};
 
   useEffect(() => {
-    const defaultSize = products[currentIndex]?.sizes?.[0]?.size ?? null;
+    const defaultSize = newProducts[currentIndex]?.sizes?.[0]?.size ?? null;
     setSelectedSize(defaultSize);
-  }, [currentIndex, products]);
+  }, [currentIndex, newProducts]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,15 +51,15 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
   }, []);
 
   const handleNext = () =>
-    setCurrentIndex((prev) => (prev + 1) % products.length);
+    setCurrentIndex((prev) => (prev + 1) % newProducts.length);
   const handlePrev = () =>
-    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
+    setCurrentIndex((prev) => (prev - 1 + newProducts.length) % newProducts.length);
 
   const handleAddToCart = useCallback(() => {
     if (!selectedSize || !currentProduct.sizes) {
       return alert("Будь ласка, виберіть розмір!");
     }
-    if (!products?.length) return;
+    if (!newProducts?.length) return;
 
     const selectedSizeObj = currentProduct.sizes.find(
       (s) => s.size === selectedSize
@@ -74,7 +77,9 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(currentProduct, selectedSize);
-  }, [selectedSize, currentProduct, addToCart, products?.length]);
+    setAddedImpact(true);
+    setTimeout(() => setAddedImpact(false), 1200);
+  }, [selectedSize, currentProduct, addToCart, newProducts?.length]);
 
   const renderDescription = () => (
     <div className={styles.descriptionContainer}>
@@ -97,7 +102,7 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
 
   const slides = useMemo(
     () =>
-      products.map((product, index) => ({
+      newProducts.map((product, index) => ({
         key: product.id,
         content: (
           <div
@@ -121,10 +126,8 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
             </div>
             <Image
               alt={product.name}
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD..."
               className={styles.productImage}
               height={300}
-              placeholder="blur"
               quality={80}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               src={product.photo}
@@ -134,20 +137,21 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
             {index === currentIndex && isMobile && (
               <div className={styles.buttonPlace}>
                 <Button
-                  className={styles.addToCart}
-                  disabled={!selectedSize}
+                  className={`addToCart${addedImpact ? ' added' : ''}`}
+                  disabled={!selectedSize || addedImpact}
                   size="m"
                   variant="primary"
                   onClick={handleAddToCart}
+                  style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
                 >
-                  ДОДАТИ В КОШИК
+                  {addedImpact ? 'Додано!' : 'ДОДАТИ В КОШИК'}
                 </Button>
               </div>
             )}
           </div>
         )
       })),
-    [products, currentIndex, selectedSize, isMobile, handleAddToCart]
+    [newProducts, currentIndex, selectedSize, isMobile, handleAddToCart, addedImpact]
   );
 
   const swipeHandlers = useSwipeable({
@@ -209,11 +213,12 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
 
           {!isMobile && (
             <Button
-              className={styles.addToCart}
-              disabled={!selectedSize}
+              className={`addToCart${addedImpact ? ' added' : ''}`}
+              disabled={!selectedSize || addedImpact}
               size="pr"
               variant="primary"
               onClick={handleAddToCart}
+              style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
             >
               <div className={styles.iconContainer}>
                 <Icon
@@ -223,7 +228,7 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
                   stroke="none"
                 />
               </div>
-              ДОДАТИ В КОШИК
+              {addedImpact ? 'Додано!' : 'ДОДАТИ В КОШИК'}
             </Button>
           )}
         </div>

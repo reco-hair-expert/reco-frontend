@@ -204,34 +204,6 @@
     flex-direction: column;
     align-items: center;
     position: relative;
-
-    .addToCart {
-      margin-top: 10px;
-      width: 100%;
-      text-align: left;
-      background-color: yellow;
-      color: black;
-      font-weight: bold;
-      visibility: visible;
-      opacity: 1;
-      cursor: pointer;
-      box-sizing: border-box;
-
-      @include mobile {
-        width: 90%;
-        margin: 10px auto;
-      }
-
-      &:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      @include mobile {
-        font-size: 14px;
-        padding: 8px;
-      }
-    }
   }
 
   .arrowLeft,
@@ -471,5 +443,52 @@
       width 0.3s ease,
       left 0.3s ease;
     border-radius: 9999px;
+  }
+}
+
+@keyframes impactAdded {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #3ecf4a44;
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 16px 4px #3ecf4a88;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #3ecf4a00;
+  }
+}
+
+// Глобальный стиль для кнопки добавления в корзину
+.addToCart {
+  margin-top: 10px;
+  width: 100%;
+  text-align: left;
+  background-color: yellow;
+  color: black;
+  font-weight: bold;
+  visibility: visible;
+  opacity: 1;
+  cursor: pointer;
+  box-sizing: border-box;
+
+  @include mobile {
+    width: 90%;
+    margin: 10px auto;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &.added {
+    background-color: #3ecf4a !important;
+    color: #fff !important;
+    animation: impactAdded 0.8s;
   }
 }

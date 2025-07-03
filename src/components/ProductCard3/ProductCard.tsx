@@ -25,6 +25,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
   );
   const [offsetRadius, setOffsetRadius] = useState(2);
   const { addToCart } = useCartContext();
+  const [addedImpact, setAddedImpact] = useState(false);
 
   const currentProduct = products[currentIndex];
   useEffect(() => {
@@ -74,6 +75,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
     const cart = JSON.parse(localStorage.getItem("cart") || "[]");
     localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(currentProduct, selectedSize);
+    setAddedImpact(true);
+    setTimeout(() => setAddedImpact(false), 1200);
   }, [selectedSize, currentProduct, addToCart, products?.length]);
 
   const renderDescription = () => (
@@ -122,7 +125,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
 
             <Image
               alt={product.name}
-              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCD/2wBDARUXFy4eHhs4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OD/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCD/2wBDARUXFy4eHhs4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OD/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
               className={styles.productImage}
               height={300}
               placeholder="blur"
@@ -136,13 +139,14 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
               <div className={styles.buttonPlace}>
                 {isMobile ? (
                   <Button
-                    className={styles.addToCart}
-                    disabled={!selectedSize}
+                    className={`addToCart${addedImpact ? ' added' : ''}`}
+                    disabled={!selectedSize || addedImpact}
                     size="m"
                     variant="primary"
                     onClick={handleAddToCart}
+                    style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
                   >
-                    ДОДАТИ В КОШИК
+                    {addedImpact ? 'Додано!' : 'ДОДАТИ В КОШИК'}
                   </Button>
                 ) : (
                   <Link href={`/catalog`}>
@@ -168,7 +172,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
       selectedSize,
       isMobile,
       handleAddToCart,
-      showButton
+      showButton,
+      addedImpact
     ]
   );
 
@@ -233,11 +238,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
 
           {!isMobile && (
             <Button
-              className={styles.addToCart}
-              disabled={!selectedSize}
+              className={`addToCart${addedImpact ? ' added' : ''}`}
+              disabled={!selectedSize || addedImpact}
               size="pr"
               variant="primary"
               onClick={handleAddToCart}
+              style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
             >
               <div className={styles.iconContainer}>
                 <Icon
@@ -247,7 +253,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
                   stroke="none"
                 />
               </div>
-              ДОДАТИ В КОШИК
+              {addedImpact ? 'Додано!' : 'ДОДАТИ В КОШИК'}
             </Button>
           )}
         </div>
