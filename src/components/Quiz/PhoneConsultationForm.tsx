@@ -33,7 +33,7 @@ const PhoneConsultationForm: React.FC = () => {
   };
 
   const onSubmit = (data: FormData) => {
-    console.log("Номер телефону:", data.phoneNumber);
+    // ... existing code ...
   };
 
   return (
