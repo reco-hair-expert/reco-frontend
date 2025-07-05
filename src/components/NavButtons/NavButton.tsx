@@ -10,7 +10,7 @@ const NavButtons: FC<NavButtonsProps> = ({ buttons, className }) => {
     : styles.navBtns;
 
   return (
-    <div className={combinedClass}>
+    <div className={combinedClass} suppressHydrationWarning>
       {buttons.map(({ title, link }) => (
         <Link key={title} href={link}>
           <Button size="m" variant="black">

@@ -55,10 +55,17 @@ export default function ContactsPage() {
           </div>
 
           <div className={styles.contactCard}>
-            📷{" "}
+          <div className={styles.imgContainer}>
+              <img
+                src="/icon/C_insta.svg"
+                alt="Phone Icon"
+                className={styles.icon}
+              />
+            </div>
             <a
               href={CONTACTS.instagramHref}
               className={styles.link}
+              
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -66,7 +73,13 @@ export default function ContactsPage() {
             </a>
           </div>
           <div className={styles.contactCard}>
-            💬{" "}
+          <div className={styles.imgContainer}>
+              <img
+                src="/icon/C_tele.svg"
+                alt="Phone Icon"
+                className={styles.icon}
+              />
+            </div>
             <a
               href={CONTACTS.telegramHref}
               className={styles.link}

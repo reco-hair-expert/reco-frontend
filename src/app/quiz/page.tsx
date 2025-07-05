@@ -22,7 +22,7 @@ function QuizContent() {
   const handleQuizComplete = (results: {
     recommendedProducts: { name: string; score: number }[];
   }) => {
-    console.log("Рекомендовані продукти:", results.recommendedProducts);
+    // ... existing code ...
   };
 
   useEffect(() => {

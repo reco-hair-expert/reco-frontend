@@ -5,8 +5,8 @@ import type { CartButtonProps } from "./types/CartButton.types";
 import styles from "./CartButton.module.scss";
 import classNames from "classnames";
 import Icon from "@/components/Icon/Icon";
-import { useContext, useMemo, useCallback } from "react";
-import { CartContext } from "@/context/CartContext";
+import { useMemo, useCallback } from "react";
+import { useCart } from "@/context/CartContext";
 import type { CartItem } from "@/types/types";
 
 const CartButton = ({
@@ -14,9 +14,7 @@ const CartButton = ({
   onClick,
   "aria-label": ariaLabel
 }: CartButtonProps) => {
-  const cartContext = useContext(CartContext);
-
-  const cartItems = useMemo(() => cartContext?.cartItems ?? [], [cartContext]);
+  const { cartItems } = useCart();
 
   const totalItems = useMemo(
     () =>

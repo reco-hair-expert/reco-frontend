@@ -12,19 +12,12 @@ import Icon from "../Icon/Icon";
 import useDeviceDetection from "@/context/useDeviceDetection";
 import type { Product } from "@/types/types";
 import { useRouter } from "next/navigation";
-import { useCartContext } from "@/hooks/useCartContext";
+import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import SuccessBlock from "./SuccessBlock";
 import PhoneConsultationForm from "./PhoneConsultationForm";
 
-type CartItem = {
-  id: number;
-  name: string;
-  size: string;
-  price: number;
-  photo: string | StaticImageData;
-  quantity: number;
-};
+
 
 const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
@@ -32,13 +25,14 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const { isMobile, isTablet } = useDeviceDetection();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const { addToCart } = useCartContext();
+  const { addToCart } = useCart();
   const [selectedSizes, setSelectedSizes] = useState<Record<number, string>>(
     {}
   );
   const [showSizeWarning, setShowSizeWarning] = useState(false);
   const [showAddToCartSuccess, setShowAddToCartSuccess] = useState(false);
   const [addedProductName, setAddedProductName] = useState("");
+  const [addedImpact, setAddedImpact] = useState<Record<number, boolean>>({});
 
   const toggleCardFlip = (productId: number) => {
     setFlippedCards((prev) => ({
@@ -57,6 +51,20 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   const { questions } = data;
   const { currentQuestionIndex, answers, showResults, recommendedProducts } =
     state;
+
+    useEffect(() => {
+      if (showResults && recommendedProducts.length > 0) {
+        setSelectedSizes((prev) => {
+          const updated = { ...prev };
+          recommendedProducts.forEach((product) => {
+            if (!updated[product.id] && product.sizes?.length) {
+              updated[product.id] = product.sizes[0].size;
+            }
+          });
+          return updated;
+        });
+      }
+    }, [showResults, recommendedProducts]);
 
   useEffect(() => {
     const loadProducts = async () => {
@@ -271,19 +279,17 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
       return;
     }
 
-    const itemToAdd: CartItem = {
-      id: product.id,
-      name: product.name,
-      size: sizeObj.size,
-      price: sizeObj.price,
-      photo: product.photo,
-      quantity: 1
-    };
-
-    addToCart(itemToAdd as unknown as Product);
+    // Используем правильный размер для добавления в корзину
+    const sizeToAdd = selectedSize || sizeObj.size;
+    
+    addToCart(product, sizeToAdd);
     setAddedProductName(product.name);
     setShowAddToCartSuccess(true);
-    setTimeout(() => setShowAddToCartSuccess(false), 3000);
+    setAddedImpact((prev) => ({ ...prev, [product.id]: true }));
+    setTimeout(() => {
+      setShowAddToCartSuccess(false);
+      setAddedImpact((prev) => ({ ...prev, [product.id]: false }));
+    }, 1200);
   };
 
   if (isLoading) {
@@ -370,13 +376,14 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                   </form>
                   <div className={styles.buttonContainer}>
                     <Button
-                      className={styles.buyButton}
+                      className={`${styles.buyButton} ${addedImpact[product.id] ? styles.added : ''}`}
                       size={isMobile ? "l" : isTablet ? "l" : "xl"}
                       variant="primary"
                       onClick={() => handleAddToCart(product)}
+                      disabled={addedImpact[product.id]}
                     >
                       <span className={styles.textButton}>
-                        ДОДАТИ ДО КОШИКА
+                        {addedImpact[product.id] ? "Додано!" : "ДОДАТИ ДО КОШИКА"}
                       </span>
                     </Button>
                   </div>
