@@ -162,7 +162,7 @@
       border: none;
       border-radius: 8px;
 
-      background-color: rgba(255, 247, 0, 0.3);
+      background-color: rgba(72, 72, 57, 0.3);
       color: $white-color;
       font-size: 14px;
       cursor: pointer;
@@ -216,6 +216,11 @@
         cursor: not-allowed;
       }
 
+      &.added {
+        color: #fff;
+        animation: impactAdded 0.8s;
+      }
+
       @media (max-width: $breakpoint-mobile) {
         min-width: 120px;
         font-size: 12px;
@@ -255,5 +260,20 @@
   to {
     transform: translate(-50%, 0);
     opacity: 1;
+  }
+}
+
+@keyframes impactAdded {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #3ecf4a44;
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 16px 4px #3ecf4a88;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #3ecf4a00;
   }
 }

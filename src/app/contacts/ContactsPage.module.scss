@@ -7,17 +7,15 @@
 }
 
 .contacts {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0 auto;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
-  @media( max-width:$breakpoint-mobile){
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  margin: 0 auto;
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
     gap: 20px;
+    justify-items: center;
   }
 }
 
