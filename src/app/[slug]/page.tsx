@@ -27,7 +27,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         }
         setProduct(data);
       } catch (error) {
-        console.error("Error loading product:", error);
         setError(true);
       } finally {
         setLoading(false);

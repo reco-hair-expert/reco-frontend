@@ -3,7 +3,7 @@ import type { ButtonProps } from "./types/Button.types";
 import classNames from "classnames";
 import "./Button.scss";
 
-const Button = ({
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({
   size = "m",
   disabled = false,
   variant = "primary",
@@ -13,7 +13,7 @@ const Button = ({
   icon,
   className,
   style
-}: ButtonProps) => {
+}, ref) => {
   const classes = classNames("button", {
     [`button--${size}`]: size,
     [`button--${variant}`]: variant,
@@ -25,6 +25,7 @@ const Button = ({
 
   return (
     <button
+      ref={ref}
       className={classes}
       disabled={disabled}
       onClick={!disabled ? onClick : undefined}
@@ -37,6 +38,8 @@ const Button = ({
       {disabled}
     </button>
   );
-};
+});
+
+Button.displayName = "Button";
 
 export default Button;

@@ -61,12 +61,6 @@ const LiqPayButton = ({
     try {
       setLoading(true);
 
-      console.log("LiqPay payload:", {
-        amount,
-        description,
-        deliveryData,
-        cartItems
-      });
       const res = await fetch(`${API_BASE_URL}/payments/create`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -92,7 +86,6 @@ const LiqPayButton = ({
 
       checkout
         .on("liqpay.callback", (data: any) => {
-          console.log("Payment status:", data.status);
           if (data.status === "success" || data.status === "sandbox") {
             if (onSuccess) onSuccess();
             clearCart();
@@ -103,13 +96,10 @@ const LiqPayButton = ({
           }
         })
         .on("liqpay.ready", () => {
-          console.log("LiqPay готов");
         })
         .on("liqpay.close", () => {
-          console.log("Окно оплаты закрыто");
         });
     } catch (error) {
-      console.error("Ошибка LiqPay:", error);
       if (onError) onError();
       router.push("/payment/error");
     } finally {

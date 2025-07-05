@@ -48,7 +48,6 @@ const Footer = ({ className }: FooterProps) => {
             <div className={styles.socialHub}>
               <SocialMediaHub>
                 <SocialMediaLinks platform={"instagram"} />
-                <SocialMediaLinks platform={"viber"} />
                 <SocialMediaLinks platform={"telegram"} />
               </SocialMediaHub>
             </div>
@@ -61,6 +60,7 @@ const Footer = ({ className }: FooterProps) => {
               height={PAYMENT_ICON.height}
               src={PAYMENT_ICON.src}
               width={PAYMENT_ICON.width}
+              style={{ width: "auto" }}
             />
           </div>
         </div>
