@@ -10,7 +10,9 @@ const Button = ({
   state = "default",
   onClick,
   children,
-  icon
+  icon,
+  className,
+  style
 }: ButtonProps) => {
   const classes = classNames("button", {
     [`button--${size}`]: size,
@@ -19,13 +21,14 @@ const Button = ({
     [`button--${variant}--focus`]: state === "focus",
     [`button--${variant}--pressed`]: state === "pressed",
     "button--disabled": disabled || state === "disabled"
-  });
+  }, className);
 
   return (
     <button
       className={classes}
       disabled={disabled}
       onClick={!disabled ? onClick : undefined}
+      style={style}
     >
       <span className="button__text">{children}</span>
       {typeof icon === "string" && (

@@ -2,9 +2,10 @@
 
 .popupOverlay {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
   background-color: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
@@ -13,13 +14,56 @@
   opacity: 0;
   visibility: hidden;
   transition: all 0.3s ease-out;
-  height: 100vh;
-  width: 100vw;
   overflow: hidden;
 
   &.visible {
     opacity: 1;
     visibility: visible;
+  }
+}
+
+.popupContainer {
+  position: relative;
+  background: linear-gradient(
+    135deg,
+    rgba(26, 26, 26, 0.9) 0%,
+    rgba(45, 45, 45, 0.5) 100%
+  );
+  border-radius: 24px;
+  padding: 40px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  border: 1px solid rgba($yellow-color, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+  // Центрирование + анимация появления из центра
+  transform: scale(0.95);
+  opacity: 0;
+  transition:
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    opacity 0.3s ease;
+
+  .visible & {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  @media (max-width: $breakpoint-tablet) {
+    padding: 30px;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    padding: 24px 16px;
+    width: 95%;
   }
 }
 
@@ -73,6 +117,7 @@
     right: 0px;
   }
 }
+
 .button__text {
   padding: 1rem;
   color: $black-color;
@@ -80,6 +125,7 @@
   font-size: 16px;
   text-decoration: none;
   text-align: center;
+
   @media (max-width: $breakpoint-tablet) {
     padding: 2rem;
     font-size: 14px;
@@ -96,49 +142,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-}
-
-.popupContainer {
-  position: relative;
-  background: linear-gradient(
-    135deg,
-    rgba(26, 26, 26, 0.9) 0%,
-    rgba(45, 45, 45, 0.5) 100%
-  );
-  border-radius: 24px;
-  padding: 40px;
-  max-width: 800px;
-  width: 90%;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  transform: translateY(20px);
-  transition:
-    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-    opacity 0.3s ease;
-  opacity: 0;
-  border: 1px solid rgba($yellow-color, 0.2);
-  max-height: 90vh;
-  overflow-y: auto;
-
-  .visible & {
-    transform: translateY(0);
-    opacity: 1;
-  }
-
-  .buttonWrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 20px;
-  }
-
-  @media (max-width: $breakpoint-tablet) {
-    padding: 30px;
-  }
-
-  @media (max-width: $breakpoint-mobile) {
-    padding: 24px 16px;
-    width: 95%;
   }
 }
 
@@ -160,7 +163,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  z-index: 10; // Забезпечує перекриття інших елементів
+  z-index: 10;
 
   &:hover,
   &:focus {
@@ -184,7 +187,6 @@
     top: 0px;
     right: 8px;
 
-    // Для кращої доступності на сенсорних пристроях
     &:active {
       background: rgba(255, 255, 255, 0.2);
     }

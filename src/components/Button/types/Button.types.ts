@@ -26,4 +26,5 @@ export interface ButtonProps {
   children: React.ReactNode;
   icon?: ReactElement | string;
   className?: string;
+  style?: React.CSSProperties;
 }

@@ -1,4 +1,4 @@
-import FeedbackSection from "@/components/FeedbackSection/FeedbackSection";
+// import FeedbackSection from "@/components/FeedbackSection/FeedbackSection";
 import styles from "./ContactsPage.module.scss";
 import { CONTACTS } from "@/constants/contacts";
 
@@ -79,7 +79,7 @@ export default function ContactsPage() {
         </div>
       </div>
 
-      <FeedbackSection />
+      {/* <FeedbackSection /> */}
     </div>
   );
 }

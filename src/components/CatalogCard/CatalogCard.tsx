@@ -14,6 +14,7 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
   );
 
   const [showSizeWarning, setShowSizeWarning] = useState(false);
+  const [addedImpact, setAddedImpact] = useState(false);
   const { addToCart } = useCart();
 
   const handleSizeChange = useCallback(
@@ -31,6 +32,8 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
     }
 
     addToCart(product, selectedSize);
+    setAddedImpact(true);
+    setTimeout(() => setAddedImpact(false), 1200);
   }, [selectedSize, addToCart, product]);
 
   const getSelectedSizePrice = useCallback(() => {
@@ -67,10 +70,8 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
       <div className={styles.imageContainer}>
         <Image
           alt={product.name}
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSEkLzYvLy0vLi44QjY4OEI4Li8vQUVFRkZFRUVFRUVFRUVFRUVFRUX/2wBDAR0XFyAeIBogHiAeIBUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUVFRUX/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
           height={300}
           loading="lazy"
-          placeholder="blur"
           quality={75}
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           src={product.photo || "/fallback-image.jpg"}
@@ -105,15 +106,17 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
           <form className={styles.productSizeForm}>{renderSizes()}</form>
           <div className={styles.productBtnContainer}>
             <button
-              className={styles.buyBtn}
+              className={styles.buyBtn + (addedImpact ? ' ' + styles.added : '')}
               type="button"
               onClick={handleBuyClick}
+              disabled={addedImpact}
+              style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
             >
-              {getSelectedSizePrice() ? (
-                <>Купити за {getSelectedSizePrice()} грн</>
-              ) : (
-                "Оберіть розмір"
-              )}
+              {addedImpact
+                ? 'Додано!'
+                : getSelectedSizePrice()
+                  ? <>Купити за {getSelectedSizePrice()} грн</>
+                  : "Оберіть розмір"}
             </button>
           </div>
         </div>
