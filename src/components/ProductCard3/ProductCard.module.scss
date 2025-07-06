@@ -188,12 +188,11 @@
 
   img {
     width: 100%;
-    height: auto;
-    object-fit: cover;
+    height: 68%;
 
     @include mobile {
       width: 100%;
-      height: auto;
+      height: 68%;
       position: relative;
       top: -40px;
     }
@@ -255,6 +254,7 @@
   position: absolute;
   top: 3px;
   right: 3px;
+  z-index: 2;
 
   @include mobile {
     margin: 0 auto;
