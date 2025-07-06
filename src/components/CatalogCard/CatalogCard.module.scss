@@ -89,6 +89,7 @@
   border-radius: 50%;
   transition: background-color $transition-speed $transition-style;
   pointer-events: auto;
+  z-index: 2;
 
   &:hover {
     box-shadow: 0 0 2px 1px rgba(255, 255, 0, 0.6);
