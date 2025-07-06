@@ -43,9 +43,9 @@ export default function DashboardLayout({
   return (
     <html lang="en">
       <head>
-        {/* Google Analytics */}
+        {/* Google Analytics (gtag.js) */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-THP60L3CLT"
+          src="https://www.googletagmanager.com/gtag/js?id=G-CH59DFVHN7"
           strategy="afterInteractive"
         />
         <Script id="google-analytics" strategy="afterInteractive">
@@ -53,7 +53,7 @@ export default function DashboardLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-THP60L3CLT');
+            gtag('config', 'G-CH59DFVHN7');
           `}
         </Script>
       </head>
