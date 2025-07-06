@@ -2,6 +2,7 @@ import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
 import { CartProvider } from "@/context/CartContext";
 import { Noto_Sans } from "next/font/google";
+import Script from "next/script";
 import "@/styles/reset.scss";
 import type { Metadata, Viewport } from "next";
 
@@ -41,6 +42,21 @@ export default function DashboardLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-THP60L3CLT"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-THP60L3CLT');
+          `}
+        </Script>
+      </head>
       <body className={notoSans.className}>
         <CartProvider>
           <Header />
