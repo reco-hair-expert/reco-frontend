@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/home-og.jpg",
+        url: "/images/sections/hero/hero-desc-1x.png",
         width: 1200,
         height: 630,
         alt: "RECO - Косметика майбутнього"
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     title: "RECO - Косметика майбутнього",
     description:
       "RECO - Косметика майбутнього. Натуральні компоненти, ефективні формули, доступні ціни.",
-    images: ["/images/home-og.jpg"]
+    images: ["/images/sections/hero/hero-desc-1x.png"]
   }
 };
 
