@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useMemo, useEffect, useCallback } from "react";
-import type { StaticImageData } from "next/image";
+// import type { StaticImageData } from "next/image";
 import Image from "next/image";
 import QuizProgress from "./QuizProgress";
 import styles from "./quiz.module.scss";
@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import SuccessBlock from "./SuccessBlock";
-import PhoneConsultationForm from "./PhoneConsultationForm";
+// import PhoneConsultationForm from "./PhoneConsultationForm";
 
 
 
@@ -442,7 +442,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
           </Button>
         </div>
         <SuccessBlock />
-        <PhoneConsultationForm />
+        {/* <PhoneConsultationForm /> */}
       </div>
     );
   }
