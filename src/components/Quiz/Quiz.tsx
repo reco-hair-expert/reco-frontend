@@ -20,21 +20,19 @@ import SuccessBlock from "./SuccessBlock";
 
 
 const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
-  const [flippedCards, setFlippedCards] = useState<Record<number, boolean>>({});
+  const [flippedCards, setFlippedCards] = useState<Record<string | number, boolean>>({});
   const router = useRouter();
   const { isMobile, isTablet } = useDeviceDetection();
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const { addToCart } = useCart();
-  const [selectedSizes, setSelectedSizes] = useState<Record<number, string>>(
-    {}
-  );
+  const [selectedSizes, setSelectedSizes] = useState<Record<string | number, string>>({});
   const [showSizeWarning, setShowSizeWarning] = useState(false);
   const [showAddToCartSuccess, setShowAddToCartSuccess] = useState(false);
   const [addedProductName, setAddedProductName] = useState("");
-  const [addedImpact, setAddedImpact] = useState<Record<number, boolean>>({});
+  const [addedImpact, setAddedImpact] = useState<Record<string | number, boolean>>({});
 
-  const toggleCardFlip = (productId: number) => {
+  const toggleCardFlip = (productId: string | number) => {
     setFlippedCards((prev) => ({
       ...prev,
       [productId]: !prev[productId]
@@ -57,8 +55,9 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
         setSelectedSizes((prev) => {
           const updated = { ...prev };
           recommendedProducts.forEach((product) => {
-            if (!updated[product.id] && product.sizes?.length) {
-              updated[product.id] = product.sizes[0].size;
+            const key = String(product.id);
+            if (!updated[key] && product.sizes?.length) {
+              updated[key] = product.sizes[0].size;
             }
           });
           return updated;
@@ -86,10 +85,10 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     return "l";
   };
 
-  const handleSizeChange = useCallback((productId: number, size: string) => {
+  const handleSizeChange = useCallback((productId: string | number, size: string) => {
     setSelectedSizes((prev) => ({
       ...prev,
-      [productId]: size
+      [String(productId)]: size
     }));
   }, []);
 
@@ -99,7 +98,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
         {product.sizes?.length ? (
           <select
             className={styles.sizeSelect}
-            value={selectedSizes[product.id] || ""}
+            value={selectedSizes[String(product.id)] || ""}
             onChange={(e) => handleSizeChange(product.id, e.target.value)}
           >
             <option value="">Оберіть розмір</option>
@@ -263,7 +262,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
   };
 
   const handleAddToCart = (product: RecommendedProduct) => {
-    const selectedSize = selectedSizes[product.id];
+    const selectedSize = selectedSizes[String(product.id)];
 
     if (!selectedSize && product.sizes?.length) {
       setShowSizeWarning(true);
@@ -285,10 +284,10 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
     addToCart(product, sizeToAdd);
     setAddedProductName(product.name);
     setShowAddToCartSuccess(true);
-    setAddedImpact((prev) => ({ ...prev, [product.id]: true }));
+    setAddedImpact((prev) => ({ ...prev, [String(product.id)]: true }));
     setTimeout(() => {
       setShowAddToCartSuccess(false);
-      setAddedImpact((prev) => ({ ...prev, [product.id]: false }));
+      setAddedImpact((prev) => ({ ...prev, [String(product.id)]: false }));
     }, 1200);
   };
 
@@ -317,7 +316,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
           {recommendedProducts.map((product) => (
             <div
               key={product.id}
-              className={`${styles.productCard} ${flippedCards[product.id] ? styles.flipped : ""}`}
+              className={`${styles.productCard} ${flippedCards[String(product.id)] ? styles.flipped : ""}`}
             >
               <div className={styles.cardInner}>
                 {/* Передня частина картки */}
@@ -344,7 +343,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
-                        toggleCardFlip(product.id);
+                        toggleCardFlip(String(product.id));
                       }}
                     >
                       <Icon
@@ -361,7 +360,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                   <h3 className={styles.productName}>{product.name}</h3>
                   <p className={styles.productType}>{product.type}</p>
                   {(() => {
-                    const selectedSize = selectedSizes[product.id];
+                    const selectedSize = selectedSizes[String(product.id)];
                     const sizeObj = product.sizes?.find(
                       (s) => s.size === selectedSize
                     );
@@ -376,14 +375,14 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                   </form>
                   <div className={styles.buttonContainer}>
                     <Button
-                      className={`${styles.buyButton} ${addedImpact[product.id] ? styles.added : ''}`}
+                      className={`${styles.buyButton} ${addedImpact[String(product.id)] ? styles.added : ''}`}
                       size={isMobile ? "l" : isTablet ? "l" : "xl"}
                       variant="primary"
                       onClick={() => handleAddToCart(product)}
-                      disabled={addedImpact[product.id]}
+                      disabled={addedImpact[String(product.id)]}
                     >
                       <span className={styles.textButton}>
-                        {addedImpact[product.id] ? "Додано!" : "ДОДАТИ ДО КОШИКА"}
+                        {addedImpact[String(product.id)] ? "Додано!" : "ДОДАТИ ДО КОШИКА"}
                       </span>
                     </Button>
                   </div>
@@ -416,7 +415,7 @@ const Quiz: React.FC<QuizProps> = ({ data, onComplete }) => {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      toggleCardFlip(product.id);
+                      toggleCardFlip(String(product.id));
                     }}
                   >
                     <Icon
