@@ -56,6 +56,13 @@ export default function DashboardLayout({
             gtag('config', 'AW-585954066');
           `}
         </Script>
+        <Script id="google-analytics-event" strategy="afterInteractive">
+          {`
+            gtag('event', 'ads_conversion___1', {
+              // <event_parameters>
+            });
+          `}
+        </Script>
       </head>
       <body className={notoSans.className}>
         <CartProvider>
