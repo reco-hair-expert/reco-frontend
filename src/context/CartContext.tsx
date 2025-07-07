@@ -5,9 +5,9 @@ import type { CartItem, Product } from "@/types/types";
 interface CartContextValue {
   cartItems: CartItem[];
   addToCart: (product: Product, size?: string) => void;
-  removeFromCart: (productId: number, size?: string) => void;
+  removeFromCart: (productId: string | number, size?: string) => void;
   updateCartItemQuantity: (
-    productId: number,
+    productId: string | number,
     quantity: number,
     size?: string
   ) => void;
@@ -78,7 +78,7 @@ export const CartProvider = ({ children }: Props) => {
     });
   };
 
-  const removeFromCart = (productId: number, size: string = "") => {
+  const removeFromCart = (productId: string | number, size: string = "") => {
     setCartItems((prevCart) =>
       prevCart.filter(
         (item) => item.product.id !== productId || item.size !== size
@@ -87,7 +87,7 @@ export const CartProvider = ({ children }: Props) => {
   };
 
   const updateCartItemQuantity = (
-    productId: number,
+    productId: string | number,
     quantity: number,
     size: string = ""
   ) => {
