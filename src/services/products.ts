@@ -109,7 +109,7 @@ export const fetchProductById = async (id: string): Promise<Product | null> => {
     const product = data.data;
 
     return {
-      id: Number(id),
+      id: isNaN(Number(id)) ? id : Number(id),
       _id: product._id,
       name: product.name,
       photo: product.pictures.mainPicture || reco,
