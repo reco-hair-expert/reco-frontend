@@ -1,7 +1,7 @@
 import type { StaticImageData } from "next/image";
 
 export type Product = {
-  id: number;
+  id: string | number;
   _id: string;
   name: string;
   photo: StaticImageData | string;

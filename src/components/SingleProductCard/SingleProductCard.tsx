@@ -17,8 +17,15 @@ interface SingleProductCardProps {
 
 const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [addedImpact, setAddedImpact] = useState(false);
   const { addToCart } = useCartContext();
   const { isMobile, isTablet } = useDeviceDetection();
+
+  React.useEffect(() => {
+    if (!selectedSize && product.sizes && product.sizes.length > 0) {
+      setSelectedSize(product.sizes[0].size);
+    }
+  }, [product.sizes, selectedSize]);
 
   const getButtonSize = () => {
     if (isMobile) return "s";
@@ -36,17 +43,9 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
     const selectedSizeObj = product.sizes.find((s) => s.size === selectedSize);
     if (!selectedSizeObj) return;
 
-    const newItem = {
-      id: product.id,
-      name: product.name,
-      size: selectedSize,
-      price: selectedSizeObj.price,
-      photo: product.photo
-    };
-
-    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
-    localStorage.setItem("cart", JSON.stringify([...cart, newItem]));
     addToCart(product, selectedSize);
+    setAddedImpact(true);
+    setTimeout(() => setAddedImpact(false), 1000);
   };
 
   const renderAdditionalInfo = () => (
@@ -111,8 +110,13 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
             onSizeChange={handleSizeChange}
           />
           {renderPrice()}
-          <Button size={getButtonSize()} onClick={handleAddToCart}>
-            КУПИТИ
+          <Button
+            size={getButtonSize()}
+            onClick={handleAddToCart}
+            className={addedImpact ? styles.added : ''}
+            disabled={addedImpact}
+          >
+            {addedImpact ? 'Додано!' : 'КУПИТИ'}
           </Button>
         </div>
       </div>
