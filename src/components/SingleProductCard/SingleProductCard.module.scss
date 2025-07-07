@@ -244,3 +244,25 @@
     padding: 0 20px;
   }
 }
+
+.added {
+  background-color: #3ecf4a !important;
+  color: #fff !important;
+  animation: impactAdded 0.8s;
+  transition: background 0.3s, color 0.3s;
+}
+
+@keyframes impactAdded {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #3ecf4a44;
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 16px 4px #3ecf4a88;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 #3ecf4a00;
+  }
+}
