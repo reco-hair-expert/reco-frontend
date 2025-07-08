@@ -102,26 +102,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
     () =>
       products.map((product, index) => ({
         key: product.id,
-        content: (
-          <div
-            key={index}
-            className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
-          >
-            <div>
-              {product.isNewProduct && (
-                <div className={styles.newBadge}>NEW</div>
-              )}
-              <Link href={`/${product._id}`}>
-                <div className={styles.badgeInfo}>
-                  <Icon
-                    fill="none"
-                    name="icon-info"
-                    size={isMobile ? 24 : 28}
-                    stroke={styles.yellowColor}
-                  />
-                </div>
-              </Link>
-            </div>
+        content:
+          index === currentIndex ? (
+            <Link
+              key={index}
+              href={`/${product._id}`}
+              className={`${styles.slide} ${styles.active}`}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+              tabIndex={-1}
+            >
+              <div>
+                {product.isNewProduct && (
+                  <div className={styles.newBadge}>NEW</div>
+                )}
+              </div>
 
             <Image
               alt={product.name}
@@ -163,18 +157,62 @@ const ProductCard: React.FC<ProductCardProps> = ({ products, showButton }) => {
                 )}
               </div>
             )}
+          </Link>
+          ) : (
+            <div
+              key={index}
+              className={styles.slide}
+            >
+              <div>
+                {product.isNewProduct && (
+                  <div className={styles.newBadge}>NEW</div>
+                )}
+              </div>
+
+            <Image
+              alt={product.name}
+              blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABQODxIPDRQSEBIXFRQdHx4eHRoaHSQtJSAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCAkKCD/2wBDARUXFy4eHhs4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OD/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAb/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCdABmX/9k="
+              className={styles.productImage}
+              height={300}
+              placeholder="blur"
+              quality={80}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              src={product.photo}
+              width={300}
+            />
+
+            {index === currentIndex && showButton && (
+              <div className={styles.buttonPlace}>
+                {isMobile ? (
+                  <Button
+                    className={`addToCart${addedImpact ? ' added' : ''}`}
+                    disabled={!selectedSize || addedImpact}
+                    size="m"
+                    variant="primary"
+                    onClick={handleAddToCart}
+                    style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
+                  >
+                    {addedImpact ? 'Додано!' : 'ДОДАТИ В КОШИК'}
+                  </Button>
+                ) : (
+                  <Link href={`/catalog`}>
+                    <Button
+                      className={styles.moreButton}
+                      size="l"
+                      variant="secondary"
+                    >
+                      <span className={styles.moreButtonText}>
+                        БІЛЬШЕ ТОВАРІВ
+                      </span>
+                    </Button>
+                  </Link>
+                )}
+              </div>
+            )}
           </div>
-        )
+          )
       })),
-    [
-      products,
-      currentIndex,
-      selectedSize,
-      isMobile,
-      handleAddToCart,
-      showButton,
-      addedImpact
-    ]
+    [products, currentIndex, selectedSize, isMobile, handleAddToCart, showButton, addedImpact]
   );
 
   const swipeHandlers = useSwipeable({
