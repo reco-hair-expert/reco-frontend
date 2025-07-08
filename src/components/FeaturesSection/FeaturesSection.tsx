@@ -16,10 +16,10 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
 
         <div className={styles.featuresLeftSide}>
           <article className={styles.featuresArticleLeft}>
-            <h3>Ефективність</h3>
+            <h3>Турбота</h3>
             <p className={styles.featuresArticleLeftText}>
-              <HighlightText>Ефективність </HighlightText>
-              навіть для волосся з 5 ступенем пошкодження
+              <HighlightText>Турбота </HighlightText>
+              про волосся навіть у разі сильного пошкодження.
             </p>
           </article>
 
@@ -27,31 +27,32 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
         </div>
 
         <div className={styles.featuresImgContainer}>
-          <Image
-            fill
-            alt="recoil"
-            src="/images/sections/features/recoil.png"
-            style={{ objectFit: "contain" }}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          <div className={styles.imageWrapper}>
+            <Image
+              fill
+              alt="recoil"
+              src="/images/sections/features/reco.png"
+              style={{ objectFit: "contain" }}
+            />
+          </div>
         </div>
 
         <div className={styles.featuresRightSide}>
           <article className={styles.featuresArticleRightTop}>
             <h3>Простота у використанні</h3>
             <p className={styles.featuresArticleRightTopText}>
-              Простота у використанні: ідеально підходить як{" "}
-              <HighlightText>для професійних майстрів</HighlightText>, так і
-              <HighlightText> для домашнього догляду</HighlightText>
+              Ідеальний вибір як{" "}
+              <HighlightText>для професійних майстрів</HighlightText>, так і{" "}
+              <HighlightText>для домашнього догляду</HighlightText>. Зручне та
+              зрозуміле використання без зайвих зусиль.
             </p>
           </article>
 
           <article className={styles.featuresArticleRightBottom}>
-            <h3>Комплексний підхід</h3>
             <p className={styles.featuresArticleRightBottomText}>
-              Комплексний підхід : RECO не лише відновлює, але й забезпечує{" "}
+              Комплексний догляд RECO — це{" "}
               <HighlightText>захист, зволоження та живлення</HighlightText>{" "}
-              завдяки лінійці продуктів
+              волосся щодня.
             </p>
           </article>
         </div>

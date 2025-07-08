@@ -53,7 +53,14 @@ export default function DashboardLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-CH59DFVHN7');
+            gtag('config', 'AW-585954066');
+          `}
+        </Script>
+        <Script id="google-analytics-event" strategy="afterInteractive">
+          {`
+            gtag('event', 'ads_conversion___1', {
+              // <event_parameters>
+            });
           `}
         </Script>
       </head>

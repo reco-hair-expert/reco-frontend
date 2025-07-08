@@ -140,13 +140,16 @@
 
 .featuresImgContainer {
   position: absolute;
-
   aspect-ratio: 383 / 457;
-  left: 17%;
+  left: 35%;
   height: 100%;
+  width: 300px;
+  rotate: -20deg;
 
   @media (max-width: $breakpoint-tablet) {
-    left: 13%;
+    left: 31%;
+    width: 200px;
+    height: 300px;
   }
 
   @media (max-width: $breakpoint-mobile) {
@@ -154,7 +157,8 @@
     left: 30%;
     top: 50%;
     transform: -translateY(50%);
-    height: 400px;
+    width: 150px;
+    height: 200px;
   }
 }
 
@@ -193,7 +197,7 @@
         url(/images/sections/features/top-field-mob-2x.png) type("image/png") 2x
       );
       right: 0;
-      top: 50px;
+      top: 10px;
       width: 290px;
       height: 152px;
     }
