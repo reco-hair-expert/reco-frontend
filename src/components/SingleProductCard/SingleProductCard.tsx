@@ -9,7 +9,6 @@ import Image from "next/image";
 import HighlightText from "../HighLightText/HighLightText";
 import ProductSizeSelector from "../ProductSizeSelector/ProductSizeSelector";
 import useDeviceDetection from "@/context/useDeviceDetection";
-import Collapsible from "react-collapsible";
 
 interface SingleProductCardProps {
   product: Product;
@@ -50,20 +49,10 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
 
   const renderAdditionalInfo = () => (
     <div className={styles.additionalInfo}>
-      <p className={styles.descriptionText}>{product.description}</p>
-      <Collapsible className={styles.collapsibleTrigger} trigger="Застосування">
-        <p className={styles.infoItem}>{product.application}</p>
-      </Collapsible>
-      <Collapsible className={styles.collapsibleTrigger} trigger="Склад">
-        <p className={styles.infoItem}>
-          <strong>Склад:</strong> {product.composition}
-        </p>
-      </Collapsible>
-      <Collapsible className={styles.collapsibleTrigger} trigger="Рекомендації">
-        <p className={styles.infoItem}>
-          <strong>Рекомендації:</strong> {product.recommendation}
-        </p>
-      </Collapsible>
+      <p className={styles.descriptionText}>Опис: {product.description}</p>
+      <p className={styles.infoItem}>Застосування: {product.application}</p>
+      <p className={styles.infoItem}>Склад: {product.composition}</p>
+      <p className={styles.infoItem}>Рекомендації: {product.recommendation}</p>
     </div>
   );
 
@@ -113,10 +102,10 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
           <Button
             size={getButtonSize()}
             onClick={handleAddToCart}
-            className={addedImpact ? styles.added : ''}
+            className={addedImpact ? styles.added : ""}
             disabled={addedImpact}
           >
-            {addedImpact ? 'Додано!' : 'КУПИТИ'}
+            {addedImpact ? "Додано!" : "КУПИТИ"}
           </Button>
         </div>
       </div>
