@@ -8,7 +8,7 @@ export const CONTACTS = {
   telegramName: "Telegram",
   telegramHref: "https://t.me/+380991527918",
   address: "Адреса: м. Днiпро, вул. Виконкомівська 40",
-  time: "Графiк роботи: 10:00 - 20:00 Без вихiдних"
+  time: "Графiк роботи: 09:00 - 20:00 Без вихiдних"
 };
 
 export const {
