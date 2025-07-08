@@ -50,6 +50,8 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
             className={styles.sizeSelect}
             value={selectedSize || ""}
             onChange={handleSizeChange}
+            onMouseDown={e => e.stopPropagation()}
+            onClick={e => { e.preventDefault(); e.stopPropagation(); }}
           >
             {product.sizes.map(({ size }) => (
               <option key={size} value={size}>
@@ -66,7 +68,7 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
   );
 
   return (
-    <div className={styles.card} data-testid="catalog-card">
+    <Link href={`/${product._id}`} className={styles.card} data-testid="catalog-card" style={{ textDecoration: 'none', color: 'inherit' }}>
       <div className={styles.imageContainer}>
         <Image
           alt={product.name}
@@ -92,10 +94,6 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
         {/* <span className={styles.typeBadge}>{product.type}</span> */}
       </div>
 
-      <Link className={styles.infoBtn} href={`/${product._id}`}>
-        <Icon className={styles.infoBtnIcon} name="icon-info" />
-      </Link>
-
       <div className={styles.productDetailsContainer}>
         <header className={styles.infoContainer}>
           <h3 className={styles.productName}>{product.name}</h3>
@@ -108,9 +106,9 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
             <button
               className={styles.buyBtn + (addedImpact ? ' ' + styles.added : '')}
               type="button"
-              onClick={handleBuyClick}
+              onClick={e => { e.preventDefault(); handleBuyClick(); }}
               disabled={addedImpact}
-              style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
+              style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color: 0.3s' } : {}}
             >
               {addedImpact
                 ? 'Додано!'
@@ -121,7 +119,7 @@ const CatalogCard = memo(({ product }: CatalogCardProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 });
 

@@ -8,10 +8,10 @@ import FeaturesSection from "@/components/FeaturesSection/FeaturesSection";
 import styles from "./page.module.scss";
 import Forma from "@/components/Forma/Forma";
 
-// const ProductCard = dynamic(
-//   () => import("@/components/ProductCard3/ProductCard"),
-//   { ssr: false }
-// );
+const ProductCard = dynamic(
+  () => import("@/components/ProductCard3/ProductCard"),
+  { ssr: false }
+);
 
 const Insta = dynamic(() => import("@/components/Insta/Insta"), {
   ssr: false,
@@ -79,7 +79,7 @@ export const MainPageClient = () => {
       <HeroSection />
       <FeaturesSection />
 
-      {/* <ProductCard products={products} showButton={true} /> */}
+      <ProductCard products={products} showButton={true} />
 
       <Forma />
 
