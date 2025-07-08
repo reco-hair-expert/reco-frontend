@@ -104,52 +104,66 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
     () =>
       newProducts.map((product, index) => ({
         key: product.id,
-        content: (
-          <div
-            key={index}
-            className={`${styles.slide} ${index === currentIndex ? styles.active : ""}`}
-          >
-            <div>
-              {product.isNewProduct && (
-                <div className={styles.newBadge}>NEW</div>
-              )}
-              <Link href={`/${product._id}`}>
-                <div className={styles.badgeInfo}>
-                  <Icon
-                    fill="none"
-                    name="icon-info"
-                    size={isMobile ? 24 : 28}
-                    stroke={styles.yellowColor}
-                  />
-                </div>
-              </Link>
-            </div>
-            <Image
-              alt={product.name}
-              className={styles.productImage}
-              height={300}
-              quality={80}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              src={product.photo}
-              width={300}
-            />
-
-            {index === currentIndex && isMobile && (
-              <div className={styles.buttonPlace}>
-                <Button
-                  className={`addToCart${addedImpact ? ' added' : ''}`}
-                  disabled={!selectedSize || addedImpact}
-                  size="m"
-                  variant="primary"
-                  onClick={handleAddToCart}
-                  style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
-                >
-                  {addedImpact ? 'Додано!' : 'ДОДАТИ В КОШИК'}
-                </Button>
+        content:
+          index === currentIndex ? (
+            <Link
+              key={index}
+              href={`/${product._id}`}
+              className={`${styles.slide} ${styles.active}`}
+              style={{ textDecoration: 'none', color: 'inherit' }}
+              tabIndex={-1}
+            >
+              <div>
+                {product.isNewProduct && (
+                  <div className={styles.newBadge}>NEW</div>
+                )}
               </div>
-            )}
-          </div>
-        )
+              <Image
+                alt={product.name}
+                className={styles.productImage}
+                height={300}
+                quality={80}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                src={product.photo}
+                width={300}
+              />
+
+              {isMobile && (
+                <div className={styles.buttonPlace}>
+                  <Button
+                    className={`addToCart${addedImpact ? ' added' : ''}`}
+                    disabled={!selectedSize || addedImpact}
+                    size="m"
+                    variant="primary"
+                    onClick={e => { e.preventDefault(); e.stopPropagation(); handleAddToCart(); }}
+                    style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
+                  >
+                    {addedImpact ? 'Додано!' : 'ДОДАТИ В КОШИК'}
+                  </Button>
+                </div>
+              )}
+            </Link>
+          ) : (
+            <div
+              key={index}
+              className={styles.slide}
+            >
+              <div>
+                {product.isNewProduct && (
+                  <div className={styles.newBadge}>NEW</div>
+                )}
+              </div>
+              <Image
+                alt={product.name}
+                className={styles.productImage}
+                height={300}
+                quality={80}
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                src={product.photo}
+                width={300}
+              />
+            </div>
+          )
       })),
     [newProducts, currentIndex, selectedSize, isMobile, handleAddToCart, addedImpact]
   );
@@ -217,7 +231,7 @@ const CatalogProductCard: React.FC<ProductCardProps> = ({ products }) => {
               disabled={!selectedSize || addedImpact}
               size="pr"
               variant="primary"
-              onClick={handleAddToCart}
+              onClick={e => { e.preventDefault(); e.stopPropagation(); handleAddToCart(); }}
               style={addedImpact ? { backgroundColor: '#3ecf4a', color: '#fff', transition: 'background 0.3s, color 0.3s' } : {}}
             >
               <div className={styles.iconContainer}>

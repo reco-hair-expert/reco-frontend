@@ -51,14 +51,16 @@
     font-size: 0.95rem;
   }
 
-  a {
+  .link {
     font-size: 1.1rem;
     text-decoration: none;
-
-    &:hover {
-      color: #ffd132;
-    }
+    color: $yellow-color !important;
+    transition: color 0.2s;
   }
+  .link:hover {
+    color: #ffd132 !important;
+  }
+
   @media( max-width:$breakpoint-mobile){
     justify-content: center;
     align-items: center;

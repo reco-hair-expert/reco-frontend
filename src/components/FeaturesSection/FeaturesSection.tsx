@@ -27,13 +27,14 @@ const FeaturesSection = ({ className }: FeaturesSectionProps) => {
         </div>
 
         <div className={styles.featuresImgContainer}>
-          <Image
-            fill
-            alt="recoil"
-            src="/images/sections/features/recoil.png"
-            style={{ objectFit: "contain" }}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          />
+          <div className={styles.imageWrapper}>
+            <Image
+              fill
+              alt="recoil"
+              src="/images/sections/features/reco.png"
+              style={{ objectFit: "contain" }}
+            />
+          </div>
         </div>
 
         <div className={styles.featuresRightSide}>
