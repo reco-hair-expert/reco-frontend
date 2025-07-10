@@ -39,7 +39,6 @@ const SummarySection = () => {
     router.push("/catalog");
   };
 
-
   // Обработчик для LiqPayButton
   const handleLiqPayClick = async (e: React.FormEvent) => {
     if (!formValid && formRef.current) {
@@ -121,6 +120,8 @@ const SummarySection = () => {
             deliveryData={formData}
             cartItems={cartItems}
             isFormValid={formValid}
+            label="ПОВНА ОПЛАТА З LIQPAY"
+            isPrepaid={false}
             onClick={handleLiqPayClick}
             onSuccess={() => {
               router.push("/payment/success");
@@ -130,6 +131,24 @@ const SummarySection = () => {
             }}
           />
         )}
+        <p className={styles.prepayd} >Або передоплата 200 грн з післяплатою при доставці</p>
+        <LiqPayButton
+          amount={100}
+          description={`Передоплата за замовлення наложеним платежем. Залишок буде сплачено на Новій Пошті.`}
+          deliveryData={formData}
+          cartItems={cartItems}
+          label="ПЕРЕДОПЛАТА З LIQPAY"
+          isFormValid={formValid}
+          isPrepaid={true}
+          onClick={handleLiqPayClick}
+          onSuccess={() => {
+            router.push("/payment/success");
+          }}
+          onError={() => {
+            router.push("/payment/error");
+          }}
+        />
+
         <button
           className={styles.continueShoppingButton}
           onClick={handleContinueShopping}
