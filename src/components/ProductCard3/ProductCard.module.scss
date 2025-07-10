@@ -135,9 +135,8 @@
     background-color: $black-color;
 
     @include mobile {
-      max-width: 50%;
+      max-width: 100%;
       height: 90px;
-      right: 100px;
     }
   }
 
