@@ -15,6 +15,8 @@ interface LiqPayButtonProps {
   onClick?: (e: React.FormEvent) => void;
   onSuccess?: () => void;
   onError?: () => void;
+  label?: string;
+  isPrepaid?: boolean;
 }
 
 declare global {
@@ -34,7 +36,9 @@ const LiqPayButton = ({
   isFormValid,
   onClick,
   onSuccess,
-  onError
+  onError,
+  label,
+  isPrepaid
 }: LiqPayButtonProps) => {
   const router = useRouter();
   const { clearCart } = useCart();
@@ -68,7 +72,8 @@ const LiqPayButton = ({
           amount,
           description,
           deliveryData,
-          cartItems
+          cartItems,
+          isPrepaid
         })
       });
 
@@ -95,10 +100,8 @@ const LiqPayButton = ({
             router.push("/payment/error");
           }
         })
-        .on("liqpay.ready", () => {
-        })
-        .on("liqpay.close", () => {
-        });
+        .on("liqpay.ready", () => {})
+        .on("liqpay.close", () => {});
     } catch (error) {
       if (onError) onError();
       router.push("/payment/error");
@@ -116,7 +119,7 @@ const LiqPayButton = ({
           disabled={disabled || loading || isFormValid === false}
           onClick={handleLiqPay}
         >
-          {loading ? "Загрузка..." : "Оплатити через LiqPay"}
+          {loading ? "Загрузка..." : label || "Оплатити через LiqPay"}
         </button>
       </div>
       <div id="liqpay_checkout" style={{ marginTop: 24 }} />

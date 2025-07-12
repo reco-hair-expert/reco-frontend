@@ -49,7 +49,7 @@ const SingleProductCard: React.FC<SingleProductCardProps> = ({ product }) => {
 
   const renderAdditionalInfo = () => (
     <div className={styles.additionalInfo}>
-      <p className={styles.descriptionText}>Опис: {product.description}</p>
+      <p className={styles.infoItem}>Опис: {product.description}</p>
       <p className={styles.infoItem}>Застосування: {product.application}</p>
       <p className={styles.infoItem}>Склад: {product.composition}</p>
       <p className={styles.infoItem}>Рекомендації: {product.recommendation}</p>
