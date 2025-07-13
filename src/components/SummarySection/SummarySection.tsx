@@ -134,7 +134,7 @@ const SummarySection = () => {
         <p className={styles.prepayd} >Або передоплата 200 грн з післяплатою при доставці</p>
         <LiqPayButton
           amount={200}
-          description={`Передоплата за замовлення наложеним платежем. Залишок буде сплачено на Новій Пошті.`}
+          description={`Передоплата замовлення наложеним платежем. Залишок буде сплачено на Новій Пошті.`}
           deliveryData={formData}
           cartItems={cartItems}
           label="ПЕРЕДОПЛАТА З LIQPAY"
