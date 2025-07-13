@@ -4,7 +4,7 @@
 .cartItems {
   display: flex;
   flex-direction: column;
-  width: 1200px;
+  width: 100%;
   padding: 20px;
   border: $main-border;
   background-color: $grey-color;
@@ -190,4 +190,14 @@
   .cartItems {
     width: 100%;
   }
+}
+
+// --- Стиль для блока предоплаты ---
+.prepayd {
+  color: $yellow-color;
+  padding: 0 24px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: -30px;
+  text-align: center;
 }
