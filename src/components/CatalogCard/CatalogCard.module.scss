@@ -14,7 +14,9 @@
 
   @media (max-width: $breakpoint-mobile) {
     width: 159px;
-    height: 312px;
+    height: 375px;
+    display: flex;
+    flex-direction: column;
   }
 }
 
@@ -146,9 +148,7 @@
     font-size: 14px;
     height: 36px;
 
-    @media (max-width: $breakpoint-mobile) {
-      display: none;
-    }
+
   }
 
   .productSizeForm {
@@ -182,6 +182,7 @@
       @media (max-width: $breakpoint-mobile) {
         width: 100%;
         padding: 0;
+        margin-top: 15px;
       }
     }
   }
@@ -270,10 +271,12 @@
     transform: scale(1);
     box-shadow: 0 0 0 0 #3ecf4a44;
   }
+
   50% {
     transform: scale(1.08);
     box-shadow: 0 0 16px 4px #3ecf4a88;
   }
+
   100% {
     transform: scale(1);
     box-shadow: 0 0 0 0 #3ecf4a00;
