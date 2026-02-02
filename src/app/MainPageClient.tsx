@@ -1,4 +1,5 @@
 "use client";
+
 import { useEffect, useState, Suspense } from "react";
 import dynamic from "next/dynamic";
 import type { Product } from "@/types/types";
@@ -18,27 +19,17 @@ const Insta = dynamic(() => import("@/components/Insta/Insta"), {
   loading: () => <div className={styles.loading}>Загружаем Insta...</div>
 });
 
-// const FeedbackSection = dynamic(
-//   () => import("@/components/FeedbackSection/FeedbackSection"),
-//   {
-//     ssr: false,
-//     loading: () => <div className={styles.loading}>Отзывы грузятся...</div>
-//   }
-// );
-
 const QuizPopup = dynamic(() => import("@/components/Popup/QuizPopup"), {
   ssr: false
 });
 
 export const MainPageClient = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     const loadProducts = async () => {
       try {
         setLoading(true);
@@ -68,7 +59,7 @@ export const MainPageClient = () => {
     setIsPopupOpen(false);
   };
 
-  if (!mounted || loading) {
+  if (loading) {
     return <div className={styles.loading}>Loading products...</div>;
   }
 
@@ -90,12 +81,6 @@ export const MainPageClient = () => {
       >
         <Insta />
       </Suspense>
-
-      {/* <Suspense
-        fallback={<div className={styles.loading}>Отзывы грузятся...</div>}
-      >
-        <FeedbackSection />
-      </Suspense> */}
 
       {isPopupOpen && (
         <QuizPopup isVisible={isPopupOpen} onClose={handleClosePopup} />
