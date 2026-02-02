@@ -78,7 +78,16 @@ const LiqPayButton = ({
       });
 
       if (!res.ok) throw new Error(`Ошибка запроса: ${res.status}`);
-      const { data, signature } = await res.json();
+      const response = await res.json();
+
+      // Если бэкенд вернул checkoutUrl - используем прямой редирект
+      if (response.checkoutUrl) {
+        window.location.href = response.checkoutUrl;
+        return;
+      }
+
+      // Fallback: используем SDK (для совместимости)
+      const { data, signature } = response;
 
       if (!window.LiqPayCheckout) throw new Error("LiqPay SDK не загружен");
 
