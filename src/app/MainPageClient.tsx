@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense } from "react";
 import dynamic from "next/dynamic";
 import type { Product } from "@/types/types";
 import { fetchProducts } from "@/services/products";
@@ -32,11 +32,13 @@ const QuizPopup = dynamic(() => import("@/components/Popup/QuizPopup"), {
 
 export const MainPageClient = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     const loadProducts = async () => {
       try {
         setLoading(true);
@@ -66,7 +68,7 @@ export const MainPageClient = () => {
     setIsPopupOpen(false);
   };
 
-  if (loading) {
+  if (!mounted || loading) {
     return <div className={styles.loading}>Loading products...</div>;
   }
 
